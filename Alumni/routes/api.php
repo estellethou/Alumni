@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// API JOBS/INTERSHIPS //
+Route::get('/jobs', [App\Http\Controllers\JobController::class, 'index']);
+Route::get('/job/{id}', [App\Http\Controllers\JobController::class, 'show']);
+Route::post('/jobs/post', [App\Http\Controllers\JobController::class, 'store']);
+Route::put('/job/{id}/edit', [App\Http\Controllers\JobController::class, 'update']);
+Route::delete('/job/{id}', [App\Http\Controllers\JobController::class, 'destroy']);
+// Route::resource('jobs', 'App\Http\Controllers\JobController');
+
