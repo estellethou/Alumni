@@ -29,7 +29,15 @@ Route::get('/profile/{profile_id}', [App\Http\Controllers\ProfileController::cla
 Route::patch('/profile/{profile_id}/edit', [App\Http\Controllers\ProfileController::class, 'update']);
 Route::delete('/profile/{profile_id}', [App\Http\Controllers\ProfileController::class, 'destroy']);
 Route::post('/profile', [App\Http\Controllers\ProfileController::class, 'store']);
-
-
 //Route::resource('profile', 'ProfileController'); short way to create route 
+
+
+// API JOBS/INTERSHIPS //
+Route::get('/jobs', [App\Http\Controllers\JobController::class, 'index']);
+Route::get('/job/{id}', [App\Http\Controllers\JobController::class, 'show']);
+Route::post('/jobs/post', [App\Http\Controllers\JobController::class, 'store']);
+Route::put('/job/{id}/edit', [App\Http\Controllers\JobController::class, 'update']);
+Route::delete('/job/{id}', [App\Http\Controllers\JobController::class, 'destroy']);
+// Route::resource('jobs', 'App\Http\Controllers\JobController');
+
 
