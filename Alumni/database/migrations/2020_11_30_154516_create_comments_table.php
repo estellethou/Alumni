@@ -20,7 +20,7 @@ class CreateCommentsTable extends Migration
             $table->foreignId('posts_id')->constrained('posts')->onDelete('cascade');
                 
             //Add the foreignId user_id when user is implemeted//
-            // $table->foreignId('user_id');
+            $table->foreignId('user_id');
         });
     }
 
