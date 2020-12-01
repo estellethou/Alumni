@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 use App\Models\Profile;
 
 
@@ -65,6 +66,36 @@ class ProfileController extends Controller
         $this->authorize('update', $profile);
         //update profile
         $profile->update($request->all());
+
+        $validatedDataProfile = request()->validate([
+            //'user_id',
+            'phone' => '',
+            'description' => '',
+            'url_linkedin' => '',
+            'url_github' => '',
+            'url_website' => '',
+            'image' => '',
+            'resume' => '',
+        ]);
+        //$profile->update($request->all());
+
+        if (request('image')) {
+            $imagePath = request('image')->store('profile', 'public'); #1st param is location where img are stored, 2nd location on your local filesystem");
+            $image = Image::make(public_path("storage/$imagePath"))->fit(1000, 1000); #cut the image to have perfect square -use intervention/image
+            $image->save();
+            $imageArray = ['image' => $imagePath];
+        } 
+
+        if(request('resume')){
+            $resumePath = request('resume')->store('profile', 'public');
+            $resumeArray = ['resume' => $resumePath];
+        }
+
+        $profile->update(array_merge(
+            $validatedDataProfile,
+            $imageArray ?? [], ## if $imageArray exists then the merge takes $imagePath else it returns an empty array
+            $resumeArray ?? [],
+        )); 
         return $profile;
     }
 
