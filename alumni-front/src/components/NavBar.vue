@@ -1,15 +1,15 @@
 <template>
     <div>
-        <h1>Hello from Home</h1>
+        <h1>Hello from navbar</h1> 
     </div>
 </template>
 
 <script>
 export default {
-    name:"Home"
+    name:"NavBar"
 }
 </script>
 
-<style>
+<style scope>
 
 </style>
