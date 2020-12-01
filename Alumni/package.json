@@ -25,6 +25,8 @@
     },
     "dependencies": {
         "vue": "^2.6.12",
-        "vue-popperjs": "^2.3.0"
+        "vue-popperjs": "^2.3.0",
+        "vue-router": "^3.4.9",
+        "vuex": "^3.6.0"
     }
 }
