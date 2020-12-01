@@ -26,6 +26,7 @@ Route::post('auth/login', [AuthController::class, 'login']);
 Route::post('auth/register', [AuthController::class, 'register']);
 Route::post('auth/logout', [AuthController::class, 'logout']);
 Route::get('auth/user', [AuthController::class, 'user']);
+//refresh token
 Route::post('auth/refresh', [AuthController::class, 'refresh']);
 
 //protected routes - needs to be authenticated

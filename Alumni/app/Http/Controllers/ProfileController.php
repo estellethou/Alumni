@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Profile;
 
+
 class ProfileController extends Controller
 {
     /**
@@ -42,7 +43,10 @@ class ProfileController extends Controller
     public function show($id)
     {
         //show a profile
-        return Profile::find($id);
+        $profile = Profile::find($id);
+        //check policy first
+        // $this->authorize('view', $profile);
+        return $profile;
     }
 
     /**
@@ -54,8 +58,12 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //update a profile
+        
+        //Get profile id
         $profile = Profile::find($id);
+        //check policy first
+        $this->authorize('update', $profile);
+        //update profile
         $profile->update($request->all());
         return $profile;
     }
@@ -68,6 +76,10 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
+        //Get profile id
+        $profile = Profile::find($id);
+        //check policy first
+        $this->authorize('delete', $profile);
         //delete profile
         return Profile::destroy($id);
     }
