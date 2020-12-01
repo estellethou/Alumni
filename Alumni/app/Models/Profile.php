@@ -29,7 +29,7 @@ class Profile extends Model
     //];
 
     ## how to match profil with its unique user 
-        //public function user(){
-        //return $this->belongsTo(User::class);
-        //}
+        public function user(){
+        return $this->belongsTo(User::class);
+        }
 }
