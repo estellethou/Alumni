@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Models\Job;
+use App\Models\Post;
 
-class JobController extends Controller
+class PostControllerAdmin extends ControllerAdmin
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class JobController extends Controller
      */
     public function index()
     {
-        // get all jobs
-        return Job::all();
-
+        //GET all the Post//
+        return Post::all();
+        
     }
 
     /**
@@ -27,9 +27,9 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        // create a job
-        // toDo: add validator
-        return Job::create($request->all());
+        //POST a new post
+        return Post::create($request->all());
+
     }
 
     /**
@@ -40,8 +40,8 @@ class JobController extends Controller
      */
     public function show($id)
     {
-        // show a job
-        return Job::find($id);
+        //GET one post
+        return Post::find($id);
     }
 
     /**
@@ -53,12 +53,10 @@ class JobController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // update a job
-        // toDo: add validator
-        $job = Job::find($id);
-        $job -> update($request->all());
-        return $job;
-
+        //UPDATE a post
+        $post = Post::find($id);
+        $post->update($request->all());
+        return $post;
     }
 
     /**
@@ -69,7 +67,7 @@ class JobController extends Controller
      */
     public function destroy($id)
     {
-        // delete a job
-        return Job::destroy($id);
+        //DELETE a post
+        return Post::destroy($id);
     }
 }

@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\UserControllerAdmin;
+use App\Http\Controllers\Admin\JobControllerAdmin;
+use App\Http\Controllers\Admin\PostControllerAdmin;
+use App\Http\Controllers\Admin\CommentControllerAdmin;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +20,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/admin/users', [UserControllerAdmin::class, 'index'])->name('admin.users');
+Route::get('/admin/user/create', function () {
+    return view('admin/user_create');
+})->name('admin.user.create');
+
+Route::post('/admin/user', [UserControllerAdmin::class, 'store'])->name('admin.user.store');
+
+Route::get('/admin/jobs', [JobControllerAdmin::class, 'index'])->name('admin.jobs');
+
+Route::get('/admin/posts', [PostControllerAdmin::class, 'index'])->name('admin.posts');
+
+Route::get('/admin/comments', [CommentControllerAdmin::class, 'index'])->name('admin.comments');

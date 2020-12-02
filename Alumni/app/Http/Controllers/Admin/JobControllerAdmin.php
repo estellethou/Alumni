@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\Job;
 
-class JobController extends Controller
+class JobControllerAdmin extends ControllerAdmin
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,8 @@ class JobController extends Controller
      */
     public function index()
     {
-        // get all jobs
-        return Job::all();
-
+        $jobs = Job::all();
+        return view('admin/jobs', compact('jobs'));
     }
 
     /**

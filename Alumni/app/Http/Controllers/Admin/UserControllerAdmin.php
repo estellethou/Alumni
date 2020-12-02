@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+// use App\Http\Controllers\Admin\ControllerAdmin;
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\Job;
 
-class JobController extends Controller
+class UserControllerAdmin extends ControllerAdmin
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +15,8 @@ class JobController extends Controller
      */
     public function index()
     {
-        // get all jobs
-        return Job::all();
-
+        $users = User::all();
+        return view('admin/users', compact('users'));
     }
 
     /**
@@ -27,9 +27,7 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        // create a job
-        // toDo: add validator
-        return Job::create($request->all());
+        dd($request);
     }
 
     /**
@@ -40,8 +38,18 @@ class JobController extends Controller
      */
     public function show($id)
     {
-        // show a job
-        return Job::find($id);
+        return User::find($id);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
     }
 
     /**
@@ -53,12 +61,7 @@ class JobController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // update a job
-        // toDo: add validator
-        $job = Job::find($id);
-        $job -> update($request->all());
-        return $job;
-
+        //
     }
 
     /**
@@ -69,7 +72,6 @@ class JobController extends Controller
      */
     public function destroy($id)
     {
-        // delete a job
-        return Job::destroy($id);
+        return User::destroy($id);
     }
 }

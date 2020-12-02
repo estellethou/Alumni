@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Models\Job;
+use App\Models\Comment;
 
-class JobController extends Controller
+class CommentControllerAdmin extends ControllerAdmin
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,8 @@ class JobController extends Controller
      */
     public function index()
     {
-        // get all jobs
-        return Job::all();
-
+        //GET all the comment
+        return Comment::all();
     }
 
     /**
@@ -27,9 +26,8 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        // create a job
-        // toDo: add validator
-        return Job::create($request->all());
+        //CREATE a single comment//
+        return Comment::create($request->all());
     }
 
     /**
@@ -40,8 +38,8 @@ class JobController extends Controller
      */
     public function show($id)
     {
-        // show a job
-        return Job::find($id);
+        //GET a single comment//
+        return Comment::find($id);
     }
 
     /**
@@ -53,12 +51,10 @@ class JobController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // update a job
-        // toDo: add validator
-        $job = Job::find($id);
-        $job -> update($request->all());
-        return $job;
-
+        //UPDATE single comment//
+        $comment = Comment::find($id);
+        $comment->update($request->all());
+        return $comment;
     }
 
     /**
@@ -69,7 +65,7 @@ class JobController extends Controller
      */
     public function destroy($id)
     {
-        // delete a job
-        return Job::destroy($id);
+        //DELETE single comment//
+        return Comment::destroy($id);
     }
 }

@@ -53,10 +53,8 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //Find a post
+        //UPDATE a post
         $post = Post::find($id);
-        //Check Policy
-        $this->authorize('update', $post);
         $post->update($request->all());
         return $post;
     }
@@ -69,11 +67,6 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        
-        //Get post id
-        $post = Post::find($id);
-        //check policy first
-        $this->authorize('delete', $post);
         //DELETE a post
         return Post::destroy($id);
     }

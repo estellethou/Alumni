@@ -51,11 +51,8 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //Find a Comment
-        $comment = Comment::find($id);
-        //Check Policy first
-        $this->authorize('update', $comment);
         //UPDATE single comment//
+        $comment = Comment::find($id);
         $comment->update($request->all());
         return $comment;
     }
@@ -68,11 +65,7 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //Get comment id
-        $comment = Comment::find($id);
-        //check policy first
-        $this->authorize('delete', $comment);
-        //DELETE a comment
+        //DELETE single comment//
         return Comment::destroy($id);
     }
 }
