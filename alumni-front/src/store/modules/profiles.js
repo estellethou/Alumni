@@ -27,7 +27,7 @@ const actions = {
         commit("addMyProfile", response.data)
     },
 
-    async deleteProfile({commit}, id){
+    async deleteProfile({commit}, id){ //id profile (not id user)
         await axios.delete(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/profile/${id}`)
         commit("deleteMyProfile", id)
     },

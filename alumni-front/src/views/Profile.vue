@@ -2,66 +2,77 @@
   <div class="profile">
     <h1>Profile Vue</h1>
     <div v-for="profile in getAllProfiles" :key="profile.id">
-      <p>My id is {{profile.id}}</p>
-      <p>{{profile.description}}</p>
-      <p>{{profile.phone}}</p>
-      <p>{{profile.url_linkedin}}</p>
-      <p>{{profile.url_github}}</p>
-       <p>{{profile.url_website}}</p>
-       <p>{{profile.image}}</p>
-       <p>{{profile.resume}}</p>
+      <p>My id is {{ profile.id }}</p>
+      <p>{{ profile.description }}</p>
+      <p>{{ profile.phone }}</p>
+      <p>{{ profile.url_linkedin }}</p>
+      <p>{{ profile.url_github }}</p>
+      <p>{{ profile.url_website }}</p>
+      <p>{{ profile.image }}</p>
+      <p>{{ profile.resume }}</p>
     </div>
 
     <div class="add">
-        <input  v-model="newProfileDescription"
-                v-on:keyup.enter="addProfileOnSubmit(testUser())"
-                class="form-control add-input"
-                placeholder="Add description"
-        >
+      <input
+        v-model="newProfileDescription"
+        v-on:keyup.enter="addProfileOnSubmit(testUser())"
+        class="form-control add-input"
+        placeholder="Add description"
+      />
+    </div>
+
+    <div class="delete">
+    <button
+        type="button"
+        class="btn-delete"
+        @click="deleteMyUserOnSubmit(test2User())" 
+      >  <!-- replace test2User by real user (props) --> 
+        Delete
+    </button>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters,mapActions } from "vuex"
+import { mapGetters, mapActions } from "vuex";
 export default {
-  name: 'Profile',
-
-   data() {
+  name: "Profile",
+  props: ["user"],
+  data() {
     return {
       newProfileDescription: "",
     };
   },
 
-  methods:{
+  methods: {
     //...mapActions(["setAllProfiles", "addProfile", "deleteProfile", "updateProfile"]),
-    ...mapActions(["setAllProfiles", "addProfile", "deleteProfile"]),
+    ...mapActions(["setAllProfiles", "addProfile", "deleteUser"]),
 
-    addProfileOnSubmit(user){
-        var newProfile = {
-            "user_id" : user.id,
-            "description" : this.newProfileDescription,
-        };
-        this.addProfile(newProfile);
-        this.newProfileDescription = "";
+    addProfileOnSubmit(user) {
+      var newProfile = {
+        user_id: user.id,
+        description: this.newProfileDescription,
+      };
+      this.addProfile(newProfile);
+      this.newProfileDescription = "";
     },
 
-    deleteProfileOnSubmit(id){
-        this.deleteProfile(id);
+    deleteMyUserOnSubmit(user) {
+      this.deleteUser(user.id);
     },
 
-    testUser(){
-        var $user = { "id": 2 };
-        return($user);
-    }
+    testUser() {
+      var $user = { id: 2 };
+      return $user;
+    },
   },
 
-  computed:{
-    ...mapGetters(["getAllProfiles", "getOneProfile"])
+  computed: {
+    ...mapGetters(["getAllProfiles", "getOneProfile"]),
   },
 
-  created(){
+  created() {
     this.setAllProfiles();
-  }
-}
+  },
+};
 </script>
