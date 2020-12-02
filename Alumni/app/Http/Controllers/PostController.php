@@ -56,7 +56,7 @@ class PostController extends Controller
         //Find a post
         $post = Post::find($id);
         //Check Policy
-        $this->authorize('update', $post);
+        // $this->authorize('update', $post);
         $post->update($request->all());
         return $post;
     }
@@ -73,7 +73,7 @@ class PostController extends Controller
         //Get post id
         $post = Post::find($id);
         //check policy first
-        $this->authorize('delete', $post);
+        // $this->authorize('delete', $post);
         //DELETE a post
         return Post::destroy($id);
     }
