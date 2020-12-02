@@ -17,7 +17,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(["fetchAllJobs"])
+        ...mapActions(["fetchAllJobs"]),
     }, 
 
     created() {

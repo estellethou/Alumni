@@ -22,6 +22,7 @@ class Job extends Model
         'contract_duration',
         'company_name',
         'sector',
+        'user_id',
     ];
 
 }

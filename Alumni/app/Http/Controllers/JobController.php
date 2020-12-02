@@ -29,6 +29,9 @@ class JobController extends Controller
     {
         // create a job
         // toDo: add validator
+        $request->validate([
+            'user_id' => 'required'
+        ]);
         return Job::create($request->all());
     }
 
