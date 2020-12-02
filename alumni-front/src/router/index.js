@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Job from '../views/Job.vue'
 import Forum from "../views/Forum.vue"
 import DetailsPost from "../views/DetailsPost"
 import Profile from '../views/Profile.vue'
@@ -14,6 +15,14 @@ const routes = [
     name: 'Home',
     component: Home
   },
+
+  {
+    path: '/job',
+    name: 'Job',
+    component: Job
+  },
+
+  
   {
     path: '/forum',
     name: 'Forum',
