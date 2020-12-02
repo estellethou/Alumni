@@ -15,12 +15,14 @@ Route::post('auth/login', [AuthController::class, 'login']);
 Route::post('auth/register', [AuthController::class, 'register']);
 Route::post('auth/logout', [AuthController::class, 'logout']);
 Route::get('auth/user', [AuthController::class, 'user']);
+//refresh token
 Route::post('auth/refresh', [AuthController::class, 'refresh']);
 
 //protected routes - needs to be authenticated
 Route::middleware('auth')->get('user/{id}', [UserController::class, 'show']);
 Route::middleware('auth')->get('users', [UserController::class, 'index']);
 Route::middleware('auth')->delete('user/{id}', [UserController::class, 'destroy']);
+Route::middleware('auth')->put('user/{id}/edit', [UserController::class, 'update']);
 
 //API FOR FORUM POST//
 Route::get('/posts','App\Http\Controllers\PostController@index');
@@ -39,7 +41,7 @@ Route::delete('/comment/{id}','App\Http\Controllers\CommentController@destroy');
 //API FOR PROFILES//
 Route::get('/profiles', [App\Http\Controllers\ProfileController::class, 'index']);
 Route::get('/profile/{profile_id}', [App\Http\Controllers\ProfileController::class, 'show']);
-Route::patch('/profile/{profile_id}/edit', [App\Http\Controllers\ProfileController::class, 'update']);
+Route::put('/profile/{profile_id}/edit', [App\Http\Controllers\ProfileController::class, 'update']);
 Route::delete('/profile/{profile_id}', [App\Http\Controllers\ProfileController::class, 'destroy']);
 Route::post('/profile', [App\Http\Controllers\ProfileController::class, 'store']);
 //Route::resource('profile', 'ProfileController'); short way to create route 

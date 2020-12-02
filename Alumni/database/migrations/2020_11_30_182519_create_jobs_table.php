@@ -27,7 +27,7 @@ class CreateJobsTable extends Migration
             $table->string('contract_duraction')->nullable();
             $table->string('company_name');
             $table->string('sector')->nullable();
-            // $table->foreignId('user_id');
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }
