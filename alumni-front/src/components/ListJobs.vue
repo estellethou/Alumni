@@ -2,6 +2,7 @@
     <div>
         <div v-for="job in getAllJobs" :key="job.id">
             <p> {{ job.title }}</p>
+            <button @click="destroyJob(job.id)">Delete Job/Internship</button>
         </div>
     </div>
 </template>
@@ -17,7 +18,11 @@ export default {
     },
 
     methods: {
-        ...mapActions(["fetchAllJobs"]),
+        ...mapActions(["fetchAllJobs", "deleteJob"]),
+
+        destroyJob(id) {
+            this.deleteJob(id);
+        },
     }, 
 
     created() {

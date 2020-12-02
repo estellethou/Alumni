@@ -15,13 +15,18 @@ const actions = {
     },
 
     async addJob ({ commit }, newJob) {
-        console.log(newJob);
         const response = await axios.post(
             'http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/jobs/post',
             newJob
         );
-        console.log(response.data);
         commit('addNewJob', response.data);
+    },
+
+    async deleteJob({ commit}, id) {
+        await axios.delete(
+            `http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/job/${id}`
+        );
+        commit('removeJob', id);
     },
 
     async updateJob ({ commit }, updJob) {
@@ -39,6 +44,7 @@ const actions = {
 const mutations = {
     setJobs: (state, jobs) => (state.jobs = jobs),
     addNewJob: (state, newJob) => (state.jobs.unshift(newJob)),
+    removeJob: (state, id) => state.jobs = state.jobs.filter(job => job.id != id),
     editJob: () => { return true },
 
 }; 
