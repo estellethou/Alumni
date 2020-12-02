@@ -13,8 +13,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   modules:{
     Comments,
+    Posts, 
     Jobs,
-    Posts,
     Profiles,
     Users
   }

@@ -1,6 +1,6 @@
 <template>
     <div class="container-posts">
-        <div v-for="(post,index) in getAllPosts" :key="index">
+        <div v-for="(post,index) in Posts" :key="index">
             <Posts v-bind:post="post"/>
         </div>
     </div>
@@ -8,24 +8,13 @@
 
 <script>
 import Posts from "./Posts"
-import {mapGetters,mapActions} from "vuex"
 export default {
     name:"ListPosts",
+    props:["Posts"],
 
     components:{
         Posts
     },
-
-    methods:{
-        ...mapActions(["allPosts"])
-    },
-    computed:{
-        ...mapGetters(["getAllPosts"])
-    },
-
-    created(){
-        this.allPosts()
-    }
 }
 </script>
 
