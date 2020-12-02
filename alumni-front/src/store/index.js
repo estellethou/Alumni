@@ -12,7 +12,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   modules:{
     Comments,
-    Posts 
+    Posts,
     Profiles,
   }
 })

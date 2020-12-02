@@ -15,46 +15,25 @@
       </div> 
     </div>
 
-    <div class="add">
-      <input
-        v-model="newProfileDescription"
-        v-on:keyup.enter="addProfileOnSubmit(testUser())"
-        class="form-control add-input"
-        placeholder="Add description"
-      />
-    </div>
-
-    <div class="delete">
-      <button
-        type="button"
-        class="btn-delete"
-        @click="deleteMyProfileOnSubmit(test2User())"
-      >
-        <!-- replace test2User by real user (props) -->
-        Delete
-      </button>
-    </div>
-
-    <!-- <div class="update">
-      <input
-        class="edit-description"
-        type="text"
-        v-model="newDescription"
-        v-on:keyup.enter="onSubmit"
-        :id="`${profile.id}`"
-      />
-    </div> -->
+    <DeleteProfile/>
+    <EditProfile/>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import DeleteProfile from "@/components/ProfileComponents/DeleteProfile";
+import EditProfile from "@/components/ProfileComponents/EditProfile";
 export default {
   name: "Profile",
   props: ["user"],
+  components: {
+    DeleteProfile,
+    EditProfile,
+  },
   data() {
     return {
-      newProfileDescription: "",
+      //newProfileDescription: "",
       //newDescription: this.$store.getters.getOneProfile(this.user.id)
       //  .description,
       //newPhone: this.$store.getters.getOneProfile(this.user.id).phone,
@@ -68,25 +47,15 @@ export default {
 
   methods: {
     //...mapActions(["setAllProfiles", "addProfile", "deleteUser", "updateProfile"]),
-    ...mapActions(["setAllProfiles", "addProfile", "deleteProfile"]),
+    ...mapActions(["setAllProfiles", "addProfile"]),
 
-    addProfileOnSubmit(user) {
-      var newProfile = {
-        user_id: user.id,
-        description: this.newProfileDescription,
-      };
-      this.addProfile(newProfile);
-      this.newProfileDescription = "";
-    },
-
-    deleteMyProfileOnSubmit() {
-      this.deleteProfile(2);
-    },
-
-    // *** For testing, use deleteProfile but for production, use deleteUser and it will delete all data from DB :
-    // *** Jobs, Comment, Post, Profile
-    //deleteMyUserOnSubmit(user) {
-    //  this.deleteUser(user.id);
+    //addProfileOnSubmit(user) {
+    //  var newProfile = {
+    //    user_id: user.id,
+    //    description: this.newProfileDescription,
+    //  };
+    //  this.addProfile(newProfile);
+    //  this.newProfileDescription = "";
     //},
 
     testUser() {

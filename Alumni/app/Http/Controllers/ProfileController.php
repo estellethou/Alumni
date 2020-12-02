@@ -64,9 +64,8 @@ class ProfileController extends Controller
         $profile = Profile::find($id);
         //check policy first
         $this->authorize('update', $profile);
+        
         //update profile
-        $profile->update($request->all());
-
         $validatedDataProfile = request()->validate([
             //'user_id',
             'phone' => '',
@@ -77,7 +76,6 @@ class ProfileController extends Controller
             'image' => '',
             'resume' => '',
         ]);
-        //$profile->update($request->all());
 
         if (request('image')) {
             $imagePath = request('image')->store('profile', 'public'); #1st param is location where img are stored, 2nd location on your local filesystem");
