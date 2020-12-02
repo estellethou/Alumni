@@ -21,10 +21,10 @@ class CreateJobsTable extends Migration
             $table->string('qualifications');
             $table->integer('year_experiences');
             $table->string('street_address');
-            $table->integer('postal_code');
+            $table->string('postal_code');
             $table->string('city');
             $table->string('contract');
-            $table->string('contract_duraction')->nullable();
+            $table->string('contract_duration')->nullable();
             $table->string('company_name');
             $table->string('sector')->nullable();
             $table->foreignId('user_id');

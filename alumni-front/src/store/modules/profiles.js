@@ -6,9 +6,10 @@ const state = {
 
 const getters = {
     getAllProfiles:(state) => state.profiles,
-    getOneProfile:(state) => id => {
+    //return one profile giving user id
+    getOneProfile:(state) => id => { 
         for (var index in state.profiles){
-            if (state.profiles[index].id == id){
+            if (state.profiles[index].user_id == id){
                 return state.profiles[index]
             }
         }
