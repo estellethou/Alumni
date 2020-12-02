@@ -21,6 +21,7 @@ Route::post('auth/refresh', [AuthController::class, 'refresh']);
 Route::middleware('auth')->get('user/{id}', [UserController::class, 'show']);
 Route::middleware('auth')->get('users', [UserController::class, 'index']);
 Route::middleware('auth')->delete('user/{id}', [UserController::class, 'destroy']);
+Route::middleware('auth')->put('user/{id}/edit', [UserController::class, 'update']);
 
 //API FOR FORUM POST//
 Route::get('/posts','App\Http\Controllers\PostController@index');
