@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Forum from "../views/Forum.vue"
+import DetailsPost from "../views/DetailsPost"
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ const routes = [
     path: '/forum',
     name: 'Forum',
     component: Forum
+  },
+  {
+    path: '/post/:id',
+    name: 'DetailPost',
+    component: DetailsPost
   },
 ]
 

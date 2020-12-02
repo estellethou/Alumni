@@ -2,7 +2,8 @@
   <div class="container-posts">
       <div>
           <div class="container-titlePost">
-              <h3>{{post.title}}</h3>  
+              <router-link v-bind:to="`/post/${post.id}`"><h3>{{post.title}}</h3></router-link>
+              <button @click="removePost(post.id)">delete post</button>  
           </div>
           <div class="container-descriptionPost">
               <p>{{post.description}}</p>
@@ -16,6 +17,7 @@
 
 <script>
 import ListComments from "../forumComponents/ListComments"
+import {mapActions} from "vuex"
 export default {
     name:"Posts",
 
@@ -23,6 +25,13 @@ export default {
 
     components:{
           ListComments,
+    },
+
+    methods:{
+        ...mapActions(["deletePost"]),
+        removePost(id){
+            this.deletePost(id)
+        }
     }
 }
 </script>
