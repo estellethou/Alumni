@@ -2,72 +2,71 @@
   <div class="edit">
     <form>
       <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="lastname">{{newLastName}}</label>
-          <input
-            type="text"
-            class="form-control"
-            v-model="newLastName"
-            id="lastname"
-            placeholder="Lastname"
-          />
-        </div>
-        <div class="form-group col-md-6">
-          <label for="firstname">Firstname</label>
-          <input
-            type="text"
-            class="form-control"
-             v-model="newFirstName"
-            id="firstname"
-            placeholder="Firstname"
-          />
-        </div>
+            <div class="form-group col-md-6">
+            <label for="lastname">LastName</label>
+            <input
+                class="form-control"
+                v-model="newLastName"
+                id="lastname"
+                placeholder="Lastname"
+            />
+            </div>
+            <div class="form-group col-md-6">
+            <label for="firstname">Firstname</label>
+            <input
+                type="text"
+                class="form-control"
+                v-model="newFirstName"
+                id="firstname"
+                placeholder="Firstname"
+            />
+            </div>
       </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            class="form-control"
-            v-model="newEmail"
-            id="email"
-            placeholder="Email"
-          />
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              v-model="newEmail"
+              id="email"
+              placeholder="Email"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="phone">Phone</label>
+            <input
+              type="tel"
+              class="form-control"
+              v-model="newPhone"
+              id="phone"
+              placeholder="phone"
+            />
+          </div>
         </div>
-        <div class="form-group col-md-6">
-          <label for="phone">Phone</label>
-          <input
-            type="tel"
-            class="form-control"
-            v-model="newPhone"
-            id="phone"
-            placeholder="phone"
-          />
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              v-model="newPassword"
+              id="password"
+              placeholder="Password"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="confirmepass">Confirm password</label>
+            <input
+              type="password"
+              class="form-control"
+              v-model="confirmPassword"
+              id="confirmepass"
+              placeholder="Confirm Password"
+            />
+          </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            v-model="newPassword"
-            id="password"
-            placeholder="Password"
-          />
-        </div>
-        <div class="form-group col-md-6">
-          <label for="confirmepass">Confirm password</label>
-          <input
-            type="password"
-            class="form-control"
-            v-model="confirmPassword"
-            id="confirmepass"
-            placeholder="Confirm Password"
-          />
-        </div>
-      </div>
-      <div class="form-group">
+        <div class="form-group">
         <label for="description">Description</label>
         <input
           type="text"
@@ -76,6 +75,28 @@
           id="description"
           placeholder="Talk about you and your activity"
         />
+      </div>
+            <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="url-git">URL GitHub</label>
+          <input type="url" class="form-control" id="url-git" />
+        </div>
+        <div class="form-group col-md-4">
+          <label for="url-linkedin">URL LinkedIn</label>
+          <input
+            type="url"
+            class="form-control"
+            id="url-linkedin"
+          />
+        </div>
+          <div class="form-group col-md-4">
+          <label for="url-perso">URL personal website</label>
+          <input
+            type="url"
+            class="form-control"
+            id="url-perso"
+          />
+        </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
@@ -101,36 +122,29 @@
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "EditProfile",
-  props: ["user"],
+  props: ["user", "profile"],
   data() {
     return {
-    //user module
-        newLastName:"",
-        //newLastName: this.user.lastname, METHOD YOANN
-        newFirstName: "",
-        newEmail: "",
-        newPassword: "",
-        confirmPassword: "",
-        //newLastName: this.$store.getters.getOneUser(this.user.id).lastname,
-        //newFirstName: this.$store.getters.getOneUser(this.user.id).firstname,
-        //newEmail: this.$store.getters.getOneUser(this.user.id).email,
-        //newPassword: this.$store.getters.getOneUser(this.user.id).password,
-    //profile module
-        newDescription: "",
-        newPhone: "",
-        newGithub: "",
-        newLinkedin: "",
-        newSite: "",
-        newImage: "",
-        newResume: "",
-        //newDescription: this.$store.getters.getOneProfile(this.user.id)
-        //  .description,
-        //newPhone: this.$store.getters.getOneProfile(this.user.id).phone,
-        //newGithub: this.$store.getters.getOneProfile(this.user.id).url_github,
-        //newLinkedin: this.$store.getters.getOneProfile(this.user.id).url_linkedin,
-        //newSite: this.$store.getters.getOneProfile(this.user.id).url_website,
-        //newImage: this.$store.getters.getOneProfile(this.user.id).image,
-        //newResume: this.$store.getters.getOneProfile(this.user.id).resume,
+        //profile user
+      newLastName: "",
+      newFirstName: "",
+      newEmail: "",
+      newPassword: "",
+      confirmPassword: "",
+      //newLastName: this.user.lastname,
+      //newFirstName: this.user.lastname,
+      //newEmail: this.user.lastname,
+      //newPassword: this.user.lastname,
+      //confirmPassword: "",
+
+        //profile module
+      newDescription: this.profile.description,
+      newPhone: this.profile.phone,
+      newGithub: this.profile.url_github,
+      newLinkedin: this.profile.url_linkedin,
+      newSite: this.profile.url_website,
+      newImage: this.profile.image,
+      newResume: this.profile.resume,
     };
   },
 
@@ -138,28 +152,28 @@ export default {
     ...mapActions(["updateProfile"]),
 
     saveForm(e) {
-        e.preventDefault();
-        var newUser = {
-            "id" : 2,
-            //"id": this.$store.getters.getOneProfile(user.id).id, 
-            "lastname": this.newLastName,
-            "fisrtname": this.newFirstName,
-            "email": this.newFirstName,
-            "password": this.newPassword,
-        }
-        var newProfile = {
-            "id" : 2,
-            //"id": user.id,
-            "description": this.newDescription,
-            "phone": this.newPhone,
-            "url_github": this.newGithub,
-            "url_linkedin": this.newLinkedin,
-            "url_website": this.newSite,
-            "image": this.newImage,
-            "resume": this.newResume
-        };
-        this.updateProfile(newProfile);
-        this.updateUser(newUser);
+      e.preventDefault();
+          var newUser = {
+              "id" : 2,
+              //"id": user.id,
+              "lastname": this.newLastName,
+              "fisrtname": this.newFirstName,
+              "email": this.newFirstName,
+              "password": this.newPassword,
+          }
+          var newProfile = {
+              "id" : 2,
+              //"id": profile.id,
+              "description": this.newDescription,
+              "phone": this.newPhone,
+              "url_github": this.newGithub,
+              "url_linkedin": this.newLinkedin,
+              "url_website": this.newSite,
+              "image": this.newImage,
+              "resume": this.newResume
+          };
+          this.updateProfile(newProfile);
+          this.updateUser(newUser);
     },
     testUser() {
       var $user = { id: 2 };
