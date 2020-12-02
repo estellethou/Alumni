@@ -78,7 +78,7 @@ class JobController extends Controller
         //Get job id
         $job = Job::find($id);
         //check policy first
-        $this->authorize('delete', $job);
+        // $this->authorize('delete', $job);
         //DELETE a job
         return Job::destroy($id);
     }
