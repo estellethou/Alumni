@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->text('description');
             //add the foreign key when userProfile is done//
-            // $table->foreignId('user_id');        
+            $table->foreignId('user_id');        
         });
     }
 

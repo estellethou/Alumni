@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Forum from "../views/Forum.vue"
 import DetailsPost from "../views/DetailsPost"
+import Profile from '../views/Profile.vue'
+
 
 Vue.use(VueRouter)
 
@@ -20,7 +22,12 @@ const routes = [
   {
     path: '/post/:id',
     name: 'DetailPost',
-    component: DetailsPost
+    component: DetailsPost,
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
   },
 ]
 
