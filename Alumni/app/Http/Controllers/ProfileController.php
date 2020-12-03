@@ -59,41 +59,56 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
         //Get profile id
         $profile = Profile::find($id);
         //check policy first
-        $this->authorize('update', $profile);
-        
+        //$this->authorize('update', $profile);
+        $profile -> update($request->all());
         //update profile
-        $validatedDataProfile = request()->validate([
-            //'user_id',
-            'phone' => '',
-            'description' => '',
-            'url_linkedin' => '',
-            'url_github' => '',
-            'url_website' => '',
-            'image' => '',
-            'resume' => '',
-        ]);
+        //$validatedDataProfile = request()->validate([
+        //    //'user_id',
+        //    'phone' => '',
+        //    'description' => '',
+        //    'url_linkedin' => '',
+        //    'url_github' => '',
+        //    'url_website' => '',
+        //    'image' => '',
+        //    //'resume' => '',
+        //]);
 
-        if (request('image')) {
-            $imagePath = request('image')->store('profile', 'public'); #1st param is location where img are stored, 2nd location on your local filesystem");
-            $image = Image::make(public_path("storage/$imagePath"))->fit(1000, 1000); #cut the image to have perfect square -use intervention/image
-            $image->save();
-            $imageArray = ['image' => $imagePath];
-        } 
+        //if (request('image')) {
+        //    $exploded = explode(',', $request->image);
+//
+        //    $decoded = base64_decode($exploded[1]);
+        //    
+        //    if(str_contains($exploded[0], 'jpeg')){
+        //        $extension = 'jpg';
+        //    }
+//
+        //    elseif (str_contains($exploded[0], 'png')){
+        //        $extension = 'png';
+        //    }
+//
+        //    $filename = str_random().'.'.$extension;
+        //    $imagePath = public_path().'/'.$filename;
+        //    file_put_contents($path, $decoded); //save the decoded image to the path
+//
+        //    //$imagePath = request('image')->store('profile', 'public'); #1st param is location where img are stored, 2nd location on your local filesystem");
+        //    //$image = Image::make(public_path("storage/$imagePath"))->fit(1000, 1000); #cut the image to have perfect square -use intervention/image
+        //    //$image->save();
+        //    $imageArray = ['image' => $imagePath];
+        //} 
+//
+        //if(request('resume')){
+        //    $resumePath = request('resume')->store('profile', 'public');
+        //    $resumeArray = ['resume' => $resumePath];
+        //}
 
-        if(request('resume')){
-            $resumePath = request('resume')->store('profile', 'public');
-            $resumeArray = ['resume' => $resumePath];
-        }
-
-        $profile->update(array_merge(
-            $validatedDataProfile,
-            $imageArray ?? [], ## if $imageArray exists then the merge takes $imagePath else it returns an empty array
-            $resumeArray ?? [],
-        )); 
+        //$profile->update(array_merge(
+        //    $validatedDataProfile,
+        //    //$imageArray ?? [], ## if $imageArray exists then the merge takes $imagePath else it returns an empty array
+        //    //$resumeArray ?? [],
+        //)); 
         return $profile;
     }
 

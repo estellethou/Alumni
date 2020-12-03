@@ -34,6 +34,7 @@ const actions = {
     },
 
     async updateProfile({commit}, newProfile){
+        console.log(newProfile);
         var response = await axios.put(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/profile/${newProfile.id}/edit`, newProfile)
         commit("updateMyProfile", response.data)
     },

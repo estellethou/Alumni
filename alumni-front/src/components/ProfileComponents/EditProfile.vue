@@ -2,71 +2,71 @@
   <div class="edit">
     <form>
       <div class="form-row">
-            <div class="form-group col-md-6">
-            <label for="lastname">LastName</label>
-            <input
-                class="form-control"
-                v-model="newLastName"
-                id="lastname"
-                placeholder="Lastname"
-            />
-            </div>
-            <div class="form-group col-md-6">
-            <label for="firstname">Firstname</label>
-            <input
-                type="text"
-                class="form-control"
-                v-model="newFirstName"
-                id="firstname"
-                placeholder="Firstname"
-            />
-            </div>
+        <div class="form-group col-md-6">
+          <label for="lastname">LastName</label>
+          <input
+            class="form-control"
+            v-model="newLastName"
+            id="lastname"
+            placeholder="Lastname"
+          />
+        </div>
+        <div class="form-group col-md-6">
+          <label for="firstname">Firstname</label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="newFirstName"
+            id="firstname"
+            placeholder="Firstname"
+          />
+        </div>
       </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="email">Email</label>
-            <input
-              type="email"
-              class="form-control"
-              v-model="newEmail"
-              id="email"
-              placeholder="Email"
-            />
-          </div>
-          <div class="form-group col-md-6">
-            <label for="phone">Phone</label>
-            <input
-              type="tel"
-              class="form-control"
-              v-model="newPhone"
-              id="phone"
-              placeholder="phone"
-            />
-          </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            v-model="newEmail"
+            id="email"
+            placeholder="Email"
+          />
         </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              v-model="newPassword"
-              id="password"
-              placeholder="Password"
-            />
-          </div>
-          <div class="form-group col-md-6">
-            <label for="confirmepass">Confirm password</label>
-            <input
-              type="password"
-              class="form-control"
-              v-model="confirmPassword"
-              id="confirmepass"
-              placeholder="Confirm Password"
-            />
-          </div>
+        <div class="form-group col-md-6">
+          <label for="phone">Phone</label>
+          <input
+            type="tel"
+            class="form-control"
+            v-model="newPhone"
+            id="phone"
+            placeholder="phone"
+          />
         </div>
-        <div class="form-group">
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            v-model="newPassword"
+            id="password"
+            placeholder="Password"
+          />
+        </div>
+        <div class="form-group col-md-6">
+          <label for="confirmepass">Confirm password</label>
+          <input
+            type="password"
+            class="form-control"
+            v-model="confirmPassword"
+            id="confirmepass"
+            placeholder="Confirm Password"
+          />
+        </div>
+      </div>
+      <div class="form-group">
         <label for="description">Description</label>
         <input
           type="text"
@@ -76,41 +76,57 @@
           placeholder="Talk about you and your activity"
         />
       </div>
-            <div class="form-row">
+      <div class="form-row">
         <div class="form-group col-md-4">
           <label for="url-git">URL GitHub</label>
-          <input type="url" class="form-control" id="url-git" />
+          <input
+            type="url"
+            class="form-control"
+            v-model="newGithub"
+            id="url-git"
+          />
         </div>
         <div class="form-group col-md-4">
           <label for="url-linkedin">URL LinkedIn</label>
           <input
             type="url"
             class="form-control"
+            v-model="newLinkedin"
             id="url-linkedin"
           />
         </div>
-          <div class="form-group col-md-4">
+        <div class="form-group col-md-4">
           <label for="url-perso">URL personal website</label>
           <input
             type="url"
             class="form-control"
+            v-model="newSite"
             id="url-perso"
           />
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="image">Profile image</label>
-          <input type="file" class="form-control" id="image" />
-        </div>
-        <div class="form-group col-md-6">
-          <label for="resume">Resume</label>
           <input
             type="file"
             class="form-control"
-            id="resume"
-            placeholder="Download your resume (.pdf)"
+            id="image"
+            @change="imageChanged"
+            ref="fileImage"
           />
+          <!-- <button class="btn btn-outline-primary btn-sm" @click="$refs.fileImage.click()">Pick your profile image</button>
+          <button class="btn btn-outline-secondary btn-sm" @click="onUploadImage">Upload Image</button> -->
+        </div>
+        <div class="form-group col-md-6">
+          <input
+            style="display: none"
+            type="file"
+            class="form-control"
+            id="resume"
+            ref="fileResume"
+          />
+          <!-- <button class="btn btn-outline-primary btn-sm" @click="$refs.fileResume.click()">Pick your resume</button>
+          <button class="btn btn-outline-secondary btn-sm" @click="onUploadResume">Upload Resume</button> -->
         </div>
       </div>
     </form>
@@ -120,12 +136,13 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: "EditProfile",
   props: ["user", "profile"],
   data() {
     return {
-        //profile user
+      //profile user
       newLastName: "",
       newFirstName: "",
       newEmail: "",
@@ -137,7 +154,7 @@ export default {
       //newPassword: this.user.lastname,
       //confirmPassword: "",
 
-        //profile module
+      //profile module
       newDescription: this.profile.description,
       newPhone: this.profile.phone,
       newGithub: this.profile.url_github,
@@ -145,6 +162,10 @@ export default {
       newSite: this.profile.url_website,
       newImage: this.profile.image,
       newResume: this.profile.resume,
+
+      //upload files
+      image: null,
+      selectedResume: null,
     };
   },
 
@@ -153,40 +174,70 @@ export default {
 
     saveForm(e) {
       e.preventDefault();
-          var newUser = {
-              "id" : 2,
-              //"id": user.id,
-              "lastname": this.newLastName,
-              "fisrtname": this.newFirstName,
-              "email": this.newFirstName,
-              "password": this.newPassword,
-          }
-          var newProfile = {
-              "id" : 2,
-              //"id": profile.id,
-              "description": this.newDescription,
-              "phone": this.newPhone,
-              "url_github": this.newGithub,
-              "url_linkedin": this.newLinkedin,
-              "url_website": this.newSite,
-              "image": this.newImage,
-              "resume": this.newResume
-          };
-          this.updateProfile(newProfile);
-          this.updateUser(newUser);
+      //var newUser = {
+      //  id: 2,
+      //  //"id": user.id,
+      //  lastname: this.newLastName,
+      //  fisrtname: this.newFirstName,
+      //  email: this.newFirstName,
+      //  password: this.newPassword,
+      //};
+      var newProfile = {
+        id: 2,
+        //"id": profile.id,
+        description: this.newDescription,
+        phone: this.newPhone,
+        url_github: this.newGithub,
+        url_linkedin: this.newLinkedin,
+        url_website: this.newSite,
+        image: this.profile.image,
+      };
+      this.updateProfile(newProfile);
+      //this.updateUser(newUser);
     },
-    testUser() {
-      var $user = { id: 2 };
-      return $user;
-    },
-    test2User() {
-      var $user = { id: 22 };
-      return $user;
+    imageChanged(e) {
+      var fileReader = new FileReader();
+      fileReader.readAsDataURL(e.target.files[0]);
+      fileReader.onload = (e) => {
+       // delete onload or not
+        this.profile.image = e.target.result; 
+        return (this.profile.image)
+      };
     },
   },
-
   computed: {
     ...mapGetters(["getAllProfiles", "getOneProfile", "getOneUser"]),
   },
 };
+
+//testUser() {
+//      var $user = { id: 2 };
+//      return $user;
+//    },
+//    test2User() {
+//      var $user = { id: 22 };
+//      return $user;
+//    },
+
+//onImageSelected(event) {
+//   this.selectedImage = event.target.file[0]
+//},
+//onUploadImage() {
+//  const fd = new FormData();
+//  fd.append(this.selectedImage)
+//  var newProfile = {id:2, image: fd}
+//  axios.put(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/profile/${newProfile.id}/edit`, newProfile)
+//},
+//onResumeSelected(event) {
+//   this.selectedResume = event.target.file[0]
+//},
+//onUploadResume() {
+//  const fd = new FormData();
+//  fd.append('resume', this.selectedResume, this.selectedResume.name)
+//  axios.post('sdfsdf', fd)
+//  .then(res => {
+//    console.log(res)
+//  })
+//},
 </script>
+
