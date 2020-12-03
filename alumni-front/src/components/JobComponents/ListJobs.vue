@@ -1,7 +1,8 @@
 <template>
     <div>
-        <div v-for="job in getAllJobs" :key="job.id">
-            <p> {{ job.title }}</p>
+        <div v-for="job in filteredJob" :key="job.id">
+            <h1> {{ job.title }}</h1>
+            <p>{{ job.content }}</p>
             
             <ListJobsEdit v-bind:job="job" />
             
@@ -12,30 +13,24 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 import ListJobsEdit from '@/components/JobComponents/ListJobsEdit.vue';
 
 
 export default {
+    props:["filteredJob"],
+
     name: 'ListJobs',
 
     components: { ListJobsEdit },
 
-    computed: {
-        ...mapGetters(["getAllJobs"]),
-    },
-
     methods: {
-        ...mapActions(["fetchAllJobs", "deleteJob"]),
+        ...mapActions(["deleteJob"]),
 
         destroyJob(id) {
             this.deleteJob(id);
         },
     }, 
-
-    created() {
-        this.fetchAllJobs();
-    },
 
 }
 </script>
