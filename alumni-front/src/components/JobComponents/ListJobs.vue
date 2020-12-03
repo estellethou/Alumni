@@ -2,7 +2,10 @@
     <div>
         <div v-for="job in getAllJobs" :key="job.id">
             <p> {{ job.title }}</p>
-            <router-link v-bind:to="`/job/edit/${job.id}`" v-bind:job="job"><button>Edit Job</button></router-link>
+            
+            <ListJobsEdit v-bind:job="job" />
+            
+            <!-- <router-link :to="`/job/edit/${job.id}/${JSON.stringify(job)}`" ><button>Edit Job</button></router-link> -->
             <button @click="destroyJob(job.id)">Delete Job/Internship</button>
         </div>
     </div>
@@ -10,9 +13,13 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import ListJobsEdit from '@/components/JobComponents/ListJobsEdit.vue';
+
 
 export default {
     name: 'ListJobs',
+
+    components: { ListJobsEdit },
 
     computed: {
         ...mapGetters(["getAllJobs"]),
