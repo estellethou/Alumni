@@ -30,25 +30,9 @@
             <li>
                 <router-link
                     :to="{
-                        name:'SignIn'
-                        }">
-                    Sign in
-                </router-link>
-            </li>
-            <li>
-                <router-link
-                    :to="{
-                        name:'Register'
-                        }">
-                    Register
-                </router-link>
-            </li>
-            <li>
-                <router-link
-                    :to="{
                         name:'Login'
                         }">
-                    Login test Vuetify
+                    Login / Register
                 </router-link>
             </li>
         </template>
