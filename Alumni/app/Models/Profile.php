@@ -9,24 +9,24 @@ class Profile extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    //protected $guarded = [];
 
     #add default img for profile
-    public function profileImage(){
-    $imagePath = ($this->image) ? $this->image : 'profile/logo.png';
-    return '/storage/' . $imagePath ;
-    }
+    //public function profileImage(){
+    //$imagePath = ($this->image) ? $this->image : 'profile/logo.png';
+    //return '/storage/' . $imagePath ;
+    //}
     
-    //protected $fillable = [
-    //    'user_id',
-    //    'phone',
-    //    'description',
-    //    'url_linkedin',
-    //    'url_github',
-    //    'url_website',
-    //    'image',
-    //    'resume'
-    //];
+    protected $fillable = [
+        'user_id',
+        'phone',
+        'description',
+        'url_linkedin',
+        'url_github',
+        'url_website',
+        'image',
+        'resume',
+    ];
 
     ## how to match profil with its unique user 
         public function user(){

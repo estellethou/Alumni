@@ -12,11 +12,10 @@
         <p>My personal website {{ profile.url_website }}</p>
         <p>My image {{ profile.image }}</p>
         <p>My resume{{ profile.resume }}</p>
+        <DeleteProfile v-bind:user="user"/>
+        <EditProfile v-bind:user="user" v-bind:profile="profile"/>
       </div> 
     </div>
-
-    <DeleteProfile/>
-    <EditProfile/>
   </div>
 </template>
 
@@ -33,21 +32,12 @@ export default {
   },
   data() {
     return {
-      //newProfileDescription: "",
-      //newDescription: this.$store.getters.getOneProfile(this.user.id)
-      //  .description,
-      //newPhone: this.$store.getters.getOneProfile(this.user.id).phone,
-      //newGithub: this.$store.getters.getOneProfile(this.user.id).url_github,
-      //newLinkedin: this.$store.getters.getOneProfile(this.user.id).url_linkedin,
-      //newSite: this.$store.getters.getOneProfile(this.user.id).url_website,
-      //newImage: this.$store.getters.getOneProfile(this.user.id).image,
-      //newResume: this.$store.getters.getOneProfile(this.user.id).resume,
     };
   },
 
   methods: {
     //...mapActions(["setAllProfiles", "addProfile", "deleteUser", "updateProfile"]),
-    ...mapActions(["setAllProfiles", "addProfile"]),
+    ...mapActions(["setAllProfiles"]),
 
     //addProfileOnSubmit(user) {
     //  var newProfile = {
