@@ -26,7 +26,7 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //create a profile 
+        //create a profile
         $request->validate([
             'user_id' => 'required'
         ]);
@@ -54,9 +54,28 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //update a profile
+      $profile->update($request->all()); // ???
+        //Get profile id
         $profile = Profile::find($id);
-        $profile->update($request->all());
+        //check policy first
+        $this->authorize('update', $profile);
+
+        $profile->update($request->except('image'));
+        
+        if (request('image')) {
+            $exploded = explode(',', $request->image);
+            $decoded = base64_decode($exploded[1]);
+            if (str_contains($exploded[0], 'jpeg')) {
+                $extension = 'jpg';
+            } elseif (str_contains($exploded[0], 'png')) {
+                $extension = 'png';
+            }
+            $name = substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(10/strlen($x)))), 1, 10);
+            $filename = $name.'.'.$extension;
+            $path = public_path().'/'.$filename;
+            file_put_contents($path, $decoded); //save the decoded image to the pa
+            $profile->update(['image' => $filename ?? '']);    
+        }
         return $profile;
     }
 

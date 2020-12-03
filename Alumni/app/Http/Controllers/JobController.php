@@ -29,6 +29,9 @@ class JobController extends Controller
     {
         // create a job
         // toDo: add validator
+        $request->validate([
+            'user_id' => 'required'
+        ]);
         return Job::create($request->all());
     }
 
@@ -56,6 +59,9 @@ class JobController extends Controller
         // update a job
         // toDo: add validator
         $job = Job::find($id);
+        //Check Policy first
+        // $this->authorize('update', $job);
+        // update a job
         $job -> update($request->all());
         return $job;
 
@@ -69,7 +75,11 @@ class JobController extends Controller
      */
     public function destroy($id)
     {
-        // delete a job
+        //Get job id
+        $job = Job::find($id);
+        //check policy first
+        // $this->authorize('delete', $job);
+        //DELETE a job
         return Job::destroy($id);
     }
 }
