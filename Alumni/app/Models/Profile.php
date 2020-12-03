@@ -9,8 +9,6 @@ class Profile extends Model
 {
     use HasFactory;
 
-    //protected $guarded = [];
-
     #add default img for profile
     //public function profileImage(){
     //$imagePath = ($this->image) ? $this->image : 'profile/logo.png';

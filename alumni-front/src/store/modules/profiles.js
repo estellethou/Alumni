@@ -34,8 +34,8 @@ const actions = {
     },
 
     async updateProfile({commit}, newProfile){
-        console.log(newProfile);
-        var response = await axios.put(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/profile/${newProfile.id}/edit`, newProfile)
+        let response = await axios.put(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/profile/${newProfile.id}/edit`, newProfile)
+        response = await axios.get(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/profiles`)
         commit("updateMyProfile", response.data)
     },
 }
@@ -43,8 +43,8 @@ const actions = {
 const mutations = {
     setMyAllProfiles:(state, profiles) => (state.profiles = profiles),
     addMyProfile:(state, newProfile) => (state.profiles.push(newProfile)),
-    deleteMyProfile:(state, id) => (state.profiles = state.profiles.filter(profiles => profiles.id !== id)),
-    updateMyProfile:() => {return true} 
+    deleteMyProfile:(state, id) => (state.profiles = state.profiles.filter(profile => profile.id !== id)),
+    updateMyProfile: (state, profiles) => (state.profiles = profiles), //response.data == profiles 
 };
 
 export default{

@@ -161,11 +161,7 @@ export default {
       newLinkedin: this.profile.url_linkedin,
       newSite: this.profile.url_website,
       newImage: this.profile.image,
-      newResume: this.profile.resume,
-
-      //upload files
-      image: null,
-      selectedResume: null,
+      //newResume: this.profile.resume,
     };
   },
 
@@ -183,14 +179,13 @@ export default {
       //  password: this.newPassword,
       //};
       var newProfile = {
-        id: 2,
-        //"id": profile.id,
+        id: this.profile.id,
         description: this.newDescription,
         phone: this.newPhone,
         url_github: this.newGithub,
         url_linkedin: this.newLinkedin,
         url_website: this.newSite,
-        image: this.profile.image,
+        image: this.newImage,
       };
       this.updateProfile(newProfile);
       //this.updateUser(newUser);
@@ -199,9 +194,7 @@ export default {
       var fileReader = new FileReader();
       fileReader.readAsDataURL(e.target.files[0]);
       fileReader.onload = (e) => {
-       // delete onload or not
-        this.profile.image = e.target.result; 
-        return (this.profile.image)
+        this.newImage = e.target.result; 
       };
     },
   },
@@ -209,35 +202,5 @@ export default {
     ...mapGetters(["getAllProfiles", "getOneProfile", "getOneUser"]),
   },
 };
-
-//testUser() {
-//      var $user = { id: 2 };
-//      return $user;
-//    },
-//    test2User() {
-//      var $user = { id: 22 };
-//      return $user;
-//    },
-
-//onImageSelected(event) {
-//   this.selectedImage = event.target.file[0]
-//},
-//onUploadImage() {
-//  const fd = new FormData();
-//  fd.append(this.selectedImage)
-//  var newProfile = {id:2, image: fd}
-//  axios.put(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/profile/${newProfile.id}/edit`, newProfile)
-//},
-//onResumeSelected(event) {
-//   this.selectedResume = event.target.file[0]
-//},
-//onUploadResume() {
-//  const fd = new FormData();
-//  fd.append('resume', this.selectedResume, this.selectedResume.name)
-//  axios.post('sdfsdf', fd)
-//  .then(res => {
-//    console.log(res)
-//  })
-//},
 </script>
 
