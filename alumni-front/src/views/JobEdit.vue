@@ -9,8 +9,6 @@
 import ListJobsEdit from "@/components/JobComponents/ListJobsEdit.vue"
 
 export default {
-    props:['job'],
-
     name: 'JobEdit',
 
     components: {

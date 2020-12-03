@@ -24,9 +24,11 @@ const routes = [
   },
 
   {
+    // path: '/job/edit/:id/:jobData',
     path: '/job/edit/:id',
     name: 'JobEdit',
-    component: JobEdit
+    component: JobEdit,
+    props: true,
   },
 
   
