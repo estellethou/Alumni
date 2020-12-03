@@ -63,7 +63,20 @@ class ProfileController extends Controller
         $profile = Profile::find($id);
         //check policy first
         //$this->authorize('update', $profile);
-        $profile -> update($request->all());
+        $exploded = explode(',', $request->image);
+        
+        $decoded = base64_decode($exploded[1]);
+      
+        if (str_contains($exploded[0], 'jpeg')) {
+            $extension = 'jpg';
+        }
+        elseif (str_contains($exploded[0], 'png')){
+            $extension = 'png';
+        }
+        $filename = str_random().'.'.$extension;
+        $imagePath = public_path().'/'.$filename;
+        file_put_contents($imagePath, $decoded); //save the decoded image to the pa  
+        $profile -> update($request->except('image'));
         //update profile
         //$validatedDataProfile = request()->validate([
         //    //'user_id',
