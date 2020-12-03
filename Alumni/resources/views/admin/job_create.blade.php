@@ -168,9 +168,8 @@
                                 class="col-md-4 col-form-label text-md-right">{{ __('Contract') }}</label>
 
                             <div class=" col-md-6">
-                                <select class="form-control" name="contract"
-                                    value="{{ old('contract') ?? $job->contract }}">
-                                    <option value="CDI">CDI</option>
+                                <select class="form-control" name="contract">
+                                    <option value=" CDI">CDI</option>
                                     <option value="CDD">CDD</option>
                                     <option value="Stage">Stage</option>
                                     <option value="Alternance">Alternance</option>

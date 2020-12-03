@@ -18,7 +18,7 @@
                     <th scope="col" style="width:80px;">Delete</th>
                     <th scope="col">Title</th>
                     <th scope="col">Profile</th>
-                    <th scope="col">Contract duration</th>
+                    <th scope="col">Contract</th>
                     <th scope="col">City</th>
                     <th scope="col">Company</th>
                     <th scope="col">Sector</th>
@@ -47,7 +47,7 @@
                     </td>
                     <td>{{ $job->title }}</td>
                     <td>{{ $job->profile }}</td>
-                    <td>{{ $job->contract_duration . " months" }}</td>
+                    <td>{{ $job->contract }}</td>
                     <td>{{ $job->city }}</td>
                     <td>{{ $job->company_name }}</td>
                     <td>{{ $job->sector }}</td>
