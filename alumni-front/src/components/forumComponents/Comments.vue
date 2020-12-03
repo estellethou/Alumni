@@ -1,15 +1,15 @@
 <template>
   <div class="container-comment">
       <span>{{ timeAgo(Date.parse(comment.created_at)) }}</span>
-      <button @click="toggleCommentInput">edit</button>
+      <v-btn @click="toggleCommentInput">edit</v-btn>
       <div v-if="edit">
         <form @submit="updateComment">
-          <input type="text" v-model="com">
-          <button>submit</button>
+          <v-text-field type="text" v-model="com"></v-text-field>
+          <v-btn type="submit">submit</v-btn>
         </form>
       </div>
       <p v-else>{{comment.comment}}</p>
-      <button id="btnRemove" @click="removeComment(comment.id)">Delete comment</button>
+      <v-btn @click="removeComment(comment.id)">Delete comment</v-btn>
   </div>
 </template>
 
@@ -84,7 +84,4 @@ export default {
 </script>
 
 <style scope>
-#btnRemove{
-    color:red
-}
 </style>

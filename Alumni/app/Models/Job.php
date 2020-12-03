@@ -24,5 +24,4 @@ class Job extends Model
         'sector',
         'user_id',
     ];
-
 }

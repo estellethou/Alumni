@@ -1,10 +1,9 @@
 <template>
     <div class="container-addComment">
-        <form @submit="submitComment">
-            <label>New comment</label>
-            <input type="text" name="comment" id="comment" v-model="newComment">
-            <button>Add new comment</button>
-        </form>
+        <v-form @submit="submitComment">
+            <v-text-field label="New comment" :rules="rules" hide-details="auto" v-model="newComment"></v-text-field>
+            <v-btn class="mt-20" type="submit">Add new comment</v-btn>
+        </v-form>
     </div>
 </template>
 
@@ -16,7 +15,11 @@ export default {
     
     data(){
         return{
-            newComment:""
+            newComment:"",
+            rules: [
+                value => !!value || 'Required.',
+                value => (value && value.length >= 5) || 'Min 5 characters',
+            ],
         }
     },
 

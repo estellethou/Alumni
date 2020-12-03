@@ -1,0 +1,14 @@
+.table {
+    table-layout: fixed;
+}
+th, td {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+th:hover, td:hover {
+    text-overflow: clip;
+    white-space: normal;
+    word-break: break-all;
+}
