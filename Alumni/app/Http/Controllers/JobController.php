@@ -60,7 +60,7 @@ class JobController extends Controller
         // toDo: add validator
         $job = Job::find($id);
         //Check Policy first
-        $this->authorize('update', $job);
+        // $this->authorize('update', $job);
         // update a job
         $job -> update($request->all());
         return $job;

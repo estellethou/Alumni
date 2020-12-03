@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Job from '../views/Job.vue'
+import JobEdit from '../views/JobEdit.vue'
 import Forum from "../views/Forum.vue"
 import DetailsPost from "../views/DetailsPost"
 import Profile from '../views/Profile.vue'
@@ -25,17 +26,27 @@ const routes = [
     component: Job
   },
 
+  {
+    // path: '/job/edit/:id/:jobData',
+    path: '/job/edit/:id',
+    name: 'JobEdit',
+    component: JobEdit,
+    props: true,
+  },
+
   
   {
     path: '/forum',
     name: 'Forum',
     component: Forum
   },
+
   {
     path: '/post/:id',
     name: 'DetailPost',
     component: DetailsPost,
   },
+
   {
     path: '/profile',
     name: 'Profile',
