@@ -21,7 +21,7 @@
                 </router-link>
             </li>
             <li>
-                <a href ="#">
+                <a href ="#" @click.prevent="signOutButton">
                     Sign out
                 </a>
             </li>
@@ -35,19 +35,46 @@
                     Sign in
                 </router-link>
             </li>
+            <li>
+                <router-link
+                    :to="{
+                        name:'Register'
+                        }">
+                    Register
+                </router-link>
+            </li>
+            <li>
+                <router-link
+                    :to="{
+                        name:'Login'
+                        }">
+                    Login test Vuetify
+                </router-link>
+            </li>
         </template>
     </ul>
 </template>
 
 <script>
-import { mapGetters} from 'vuex'
+import { mapGetters, mapActions} from 'vuex'
 
 export default {
     name:"NavBar",
     computed:{
         ...mapGetters(["authenticated", "user"]),
     },
-    
+
+    methods: {
+    ...mapActions(["signOut"]),
+
+    signOutButton() {
+        this.signOut().then(() => {
+            this.$router.replace({
+                name: 'Home'
+            })
+        })
+    }
+    }
 }
 </script>
 
