@@ -56,7 +56,7 @@ class JobController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        // update a job
         // toDo: add validator
         $job = Job::find($id);
         //Check Policy first

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Models\Post;
+use App\Models\Comment;
 
-class PostController extends Controller
+class CommentControllerAdmin extends ControllerAdmin
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //GET all the Post//
-        return Post::all();
-        
+        //GET all the comment
+        return Comment::all();
     }
 
     /**
@@ -27,9 +26,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //POST a new post
-        return Post::create($request->all());
-
+        //CREATE a single comment//
+        return Comment::create($request->all());
     }
 
     /**
@@ -40,8 +38,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //GET one post
-        return Post::find($id);
+        //GET a single comment//
+        return Comment::find($id);
     }
 
     /**
@@ -53,12 +51,10 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //UPDATE a post
-        $post = Post::find($id);
-        //Check Policy
-        // $this->authorize('update', $post);
-        $post->update($request->all());
-        return $post;
+        //UPDATE single comment//
+        $comment = Comment::find($id);
+        $comment->update($request->all());
+        return $comment;
     }
 
     /**
@@ -69,11 +65,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //Get post id
-        $post = Post::find($id);
-        //check policy first
-        // $this->authorize('delete', $post);
-        //DELETE a post
-        return Post::destroy($id);
+        //DELETE single comment//
+        return Comment::destroy($id);
     }
 }

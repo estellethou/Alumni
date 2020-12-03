@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
 use App\Models\Profile;
 
 class ProfileController extends Controller
@@ -43,10 +42,7 @@ class ProfileController extends Controller
     public function show($id)
     {
         //show a profile
-        $profile = Profile::find($id);
-        //check policy first
-        // $this->authorize('view', $profile);
-        return $profile;
+        return Profile::find($id);
     }
 
     /**
@@ -58,6 +54,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
+      $profile->update($request->all()); // ???
         //Get profile id
         $profile = Profile::find($id);
         //check policy first
@@ -79,7 +76,6 @@ class ProfileController extends Controller
             file_put_contents($path, $decoded); //save the decoded image to the pa
             $profile->update(['image' => $filename ?? '']);    
         }
-
         return $profile;
     }
 
@@ -91,10 +87,6 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        //Get profile id
-        $profile = Profile::find($id);
-        //check policy first
-        $this->authorize('delete', $profile);
         //delete profile
         return Profile::destroy($id);
     }
