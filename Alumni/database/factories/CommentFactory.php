@@ -22,8 +22,9 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            "posts_id"=>"34",
+            "posts_id"=>"4",
             "comment" =>$this->faker->sentence(),
+            "user_id"=>"2"
             //
         ];
     }

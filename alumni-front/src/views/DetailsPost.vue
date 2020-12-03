@@ -8,7 +8,7 @@
           <h5>{{detail.description}}</h5>
         </div>
         <div class="detailsPost-comment" v-for="(comment,index) in filterComment" :key="index">
-          <Comments v-bind:comment="comment"/>
+          <Comments v-bind:comment="comment" v-bind:onePost="detail"/>
         </div>
           <AddComment v-bind:detail="detail"/>
         <div>
