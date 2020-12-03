@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\Job;
+use App\Models\User;
+
 
 class JobControllerAdmin extends ControllerAdmin
 {
@@ -14,7 +16,7 @@ class JobControllerAdmin extends ControllerAdmin
      */
     public function index()
     {
-        $jobs = Job::all();
+        $jobs = Job::orderByDesc('created_at')->paginate(20);
         return view('admin/jobs', compact('jobs'));
     }
 
@@ -26,9 +28,23 @@ class JobControllerAdmin extends ControllerAdmin
      */
     public function store(Request $request)
     {
-        // create a job
-        // toDo: add validator
-        return Job::create($request->all());
+        $data = request()->validate([
+            'user_id' => ['required', 'numeric'],
+            'title' => ['required', 'string', 'max:255'],
+            'content' => ['required', 'string', 'max:255'],
+            'profile' => ['required', 'string', 'max:255'],
+            'qualifications'  => ['required', 'string', 'max:255'],
+            'year_experiences' => ['required', 'numeric'],
+            'street_address'  => ['required', 'string', 'max:255'],
+            'postal_code'  => ['required', 'numeric'],
+            'city'  => ['required', 'string', 'max:255'],
+            'contract'  => ['required', 'string', 'max:255'],
+            'contract_duration'  => ['required', 'string', 'max:255'],
+            'company_name'  => ['required', 'string', 'max:255'],
+            'sector'  => ['required', 'string', 'max:255'],
+        ]);
+        $job = Job::create($data);
+        return redirect("/admin/jobs/{$job->id}");
     }
 
     /**
@@ -39,10 +55,15 @@ class JobControllerAdmin extends ControllerAdmin
      */
     public function show($id)
     {
-        // show a job
-        return Job::find($id);
+       $job = Job::find($id);
+        return view("admin/job_show", compact('job'));
     }
-
+    
+    public function edit(Job $job)
+    {   
+        $users = User::all();
+        return view('admin/job_edit', compact('job', 'users'));
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -56,8 +77,7 @@ class JobControllerAdmin extends ControllerAdmin
         // toDo: add validator
         $job = Job::find($id);
         $job -> update($request->all());
-        return $job;
-
+        return redirect("/admin/jobs/{$job->id}");
     }
 
     /**
@@ -69,6 +89,7 @@ class JobControllerAdmin extends ControllerAdmin
     public function destroy($id)
     {
         // delete a job
-        return Job::destroy($id);
+        Job::destroy($id);
+        return redirect("/admin/jobs");
     }
 }

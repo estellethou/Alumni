@@ -19,9 +19,10 @@ class Job extends Model
         'postal_code',
         'city',
         'contract',
-        'contract_duraction',
+        'contract_duration',
         'company_name',
         'sector',
+        'user_id'
     ];
     
 }
