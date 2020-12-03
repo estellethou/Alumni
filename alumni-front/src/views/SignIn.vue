@@ -10,20 +10,14 @@
             v-model="form.email"
             label="Email"
             outlined
-            type="email"
+            required
           ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-        >
+      
           <v-text-field
             v-model="form.password"
-            
             label="Password"
             outlined
-            type="password"
+            type="current-password"
             hint="At least 6 characters"
             counter
           ></v-text-field>
@@ -50,8 +44,7 @@ export default {
             form:{
                 email:'',
                 password:''
-            }
-            
+            },       
         }
     },
 
