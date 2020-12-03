@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'user_id',
         'phone',
@@ -17,7 +16,7 @@ class Profile extends Model
         'url_github',
         'url_website',
         'image',
-        'resume'
+        'resume',
     ];
 
     ## how to match profil with its unique user 

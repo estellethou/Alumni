@@ -59,7 +59,25 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        //check policy first
+        $this->authorize('update', $user);
+
+        $request->validate([
+            'firstname' => '',
+            'lastname' => '',
+            'email' => 'email | unique:users,email,',
+            'password' => ['nullable', 'confirmed'],
+        ]);
+        
+        $user->update($request->only(['firstname', 'lastname', 'email']));
+
+        if ($request->filled('password')) {
+
+            $user->password = bcrypt($request->password);
+        }
+        $user->save();
+        return $user;
     }
 
     /**
@@ -70,6 +88,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        //Find User
+        $user = User::find($id);
+        //check policy first
+        $this->authorize('update', $user);
+        //Delete user
         return User::destroy($id);
     }
 }

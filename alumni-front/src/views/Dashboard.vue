@@ -1,13 +1,17 @@
 <template>
   <div>
-      <h1>Hello World NavBar</h1>
+      Dashboard
   </div>
 </template>
 
 <script>
 export default {
-    name:"NavBar"
+    name: 'Dashboard',
+    components:{
+
+    }
 }
+
 </script>
 
 <style>
