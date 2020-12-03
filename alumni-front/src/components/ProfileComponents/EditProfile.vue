@@ -1,11 +1,10 @@
 <template>
   <div class="edit">
-    <form>
+    <form enctype="multipart/form-data">
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="lastname">{{newLastName}}</label>
+          <label for="lastname">LastName</label>
           <input
-            type="text"
             class="form-control"
             v-model="newLastName"
             id="lastname"
@@ -17,7 +16,7 @@
           <input
             type="text"
             class="form-control"
-             v-model="newFirstName"
+            v-model="newFirstName"
             id="firstname"
             placeholder="Firstname"
           />
@@ -78,19 +77,53 @@
         />
       </div>
       <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="url-git">URL GitHub</label>
+          <input
+            type="url"
+            class="form-control"
+            v-model="newGithub"
+            id="url-git"
+          />
+        </div>
+        <div class="form-group col-md-4">
+          <label for="url-linkedin">URL LinkedIn</label>
+          <input
+            type="url"
+            class="form-control"
+            v-model="newLinkedin"
+            id="url-linkedin"
+          />
+        </div>
+        <div class="form-group col-md-4">
+          <label for="url-perso">URL personal website</label>
+          <input
+            type="url"
+            class="form-control"
+            v-model="newSite"
+            id="url-perso"
+          />
+        </div>
+      </div>
+      <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="image">Profile image</label>
-          <input type="file" class="form-control" id="image" />
+          <label for="image">Select your profile image</label>
+          <input
+            type="file"
+            class="form-control"
+            id="image"
+            @change="imageChanged"
+          />
         </div>
         <div class="form-group col-md-6">
-          <label for="resume">Resume</label>
+            <label for="image">Select your resume</label>
           <input
             type="file"
             class="form-control"
             id="resume"
-            placeholder="Download your resume (.pdf)"
+            @change="resumeChanged"
           />
-        </div>
+        </div> 
       </div>
     </form>
     <button type="submit" v-on:click="saveForm">Save Profile</button>
@@ -99,38 +132,33 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: "EditProfile",
-  props: ["user"],
+  props: ["user", "profile"],
   data() {
     return {
-    //user module
-        newLastName:"",
-        //newLastName: this.user.lastname, METHOD YOANN
-        newFirstName: "",
-        newEmail: "",
-        newPassword: "",
-        confirmPassword: "",
-        //newLastName: this.$store.getters.getOneUser(this.user.id).lastname,
-        //newFirstName: this.$store.getters.getOneUser(this.user.id).firstname,
-        //newEmail: this.$store.getters.getOneUser(this.user.id).email,
-        //newPassword: this.$store.getters.getOneUser(this.user.id).password,
-    //profile module
-        newDescription: "",
-        newPhone: "",
-        newGithub: "",
-        newLinkedin: "",
-        newSite: "",
-        newImage: "",
-        newResume: "",
-        //newDescription: this.$store.getters.getOneProfile(this.user.id)
-        //  .description,
-        //newPhone: this.$store.getters.getOneProfile(this.user.id).phone,
-        //newGithub: this.$store.getters.getOneProfile(this.user.id).url_github,
-        //newLinkedin: this.$store.getters.getOneProfile(this.user.id).url_linkedin,
-        //newSite: this.$store.getters.getOneProfile(this.user.id).url_website,
-        //newImage: this.$store.getters.getOneProfile(this.user.id).image,
-        //newResume: this.$store.getters.getOneProfile(this.user.id).resume,
+      //profile user
+      newLastName: "",
+      newFirstName: "",
+      newEmail: "",
+      newPassword: "",
+      confirmPassword: "",
+      //newLastName: this.user.lastname,
+      //newFirstName: this.user.lastname,
+      //newEmail: this.user.lastname,
+      //newPassword: this.user.lastname,
+      //confirmPassword: "",
+
+      //profile module
+      newDescription: this.profile.description,
+      newPhone: this.profile.phone,
+      newGithub: this.profile.url_github,
+      newLinkedin: this.profile.url_linkedin,
+      newSite: this.profile.url_website,
+      newImage: "",
+      newResume: "",
+      //newResume: this.profile.resume,
     };
   },
 
@@ -138,41 +166,48 @@ export default {
     ...mapActions(["updateProfile"]),
 
     saveForm(e) {
-        e.preventDefault();
-        var newUser = {
-            "id" : 2,
-            //"id": this.$store.getters.getOneProfile(user.id).id, 
-            "lastname": this.newLastName,
-            "fisrtname": this.newFirstName,
-            "email": this.newFirstName,
-            "password": this.newPassword,
-        }
-        var newProfile = {
-            "id" : 2,
-            //"id": user.id,
-            "description": this.newDescription,
-            "phone": this.newPhone,
-            "url_github": this.newGithub,
-            "url_linkedin": this.newLinkedin,
-            "url_website": this.newSite,
-            "image": this.newImage,
-            "resume": this.newResume
-        };
-        this.updateProfile(newProfile);
-        this.updateUser(newUser);
+      e.preventDefault();
+      //var newUser = {
+      //  id: 2,
+      //  //"id": user.id,
+      //  lastname: this.newLastName,
+      //  fisrtname: this.newFirstName,
+      //  email: this.newFirstName,
+      //  password: this.newPassword,
+      //};
+      var newProfile = {
+        id: this.profile.id,
+        description: this.newDescription,
+        phone: this.newPhone,
+        url_github: this.newGithub,
+        url_linkedin: this.newLinkedin,
+        url_website: this.newSite,
+        image: this.newImage,
+        resume: this.newResume
+      };
+      this.updateProfile(newProfile);
+      //this.updateUser(newUser);
     },
-    testUser() {
-      var $user = { id: 2 };
-      return $user;
+    imageChanged(e) {
+      var fileReader = new FileReader();
+      fileReader.readAsDataURL(e.target.files[0]);
+      fileReader.onload = (e) => {
+        this.newImage = e.target.result; 
+        console.log(e.target.result);
+      };
     },
-    test2User() {
-      var $user = { id: 22 };
-      return $user;
-    },
+    resumeChanged(e) {
+    var fileReader = new FileReader();
+    fileReader.readAsDataURL(e.target.files[0]);
+    fileReader.onload = (e) => {
+      this.newResume = e.target.result; 
+      console.log(e.target.result);
+    };
   },
-
+  },
   computed: {
     ...mapGetters(["getAllProfiles", "getOneProfile", "getOneUser"]),
   },
 };
 </script>
+
