@@ -8,13 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
     use HasFactory;
-
-    #add default img for profile
-    //public function profileImage(){
-    //$imagePath = ($this->image) ? $this->image : 'profile/logo.png';
-    //return '/storage/' . $imagePath ;
-    //}
-    
     protected $fillable = [
         'user_id',
         'phone',
@@ -27,7 +20,7 @@ class Profile extends Model
     ];
 
     ## how to match profil with its unique user 
-        public function user(){
-        return $this->belongsTo(User::class);
-        }
+        //public function user(){
+        //return $this->belongsTo(User::class);
+        //}
 }

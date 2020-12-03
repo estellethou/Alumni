@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
 
-class PostController extends Controller
+class PostControllerAdmin extends ControllerAdmin
 {
     /**
      * Display a listing of the resource.
@@ -55,8 +55,6 @@ class PostController extends Controller
     {
         //UPDATE a post
         $post = Post::find($id);
-        //Check Policy
-        // $this->authorize('update', $post);
         $post->update($request->all());
         return $post;
     }
@@ -69,10 +67,6 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //Get post id
-        $post = Post::find($id);
-        //check policy first
-        // $this->authorize('delete', $post);
         //DELETE a post
         return Post::destroy($id);
     }

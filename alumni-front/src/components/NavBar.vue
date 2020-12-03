@@ -21,7 +21,7 @@
                 </router-link>
             </li>
             <li>
-                <a href ="#">
+                <a href ="#" @click.prevent="signOutButton">
                     Sign out
                 </a>
             </li>
@@ -30,9 +30,9 @@
             <li>
                 <router-link
                     :to="{
-                        name:'SignIn'
+                        name:'Login'
                         }">
-                    Sign in
+                    Login / Register
                 </router-link>
             </li>
         </template>
@@ -40,14 +40,25 @@
 </template>
 
 <script>
-import { mapGetters} from 'vuex'
+import { mapGetters, mapActions} from 'vuex'
 
 export default {
     name:"NavBar",
     computed:{
         ...mapGetters(["authenticated", "user"]),
     },
-    
+
+    methods: {
+    ...mapActions(["signOut"]),
+
+    signOutButton() {
+        this.signOut().then(() => {
+            this.$router.replace({
+                name: 'Home'
+            })
+        })
+    }
+    }
 }
 </script>
 
