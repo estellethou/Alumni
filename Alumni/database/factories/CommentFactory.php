@@ -22,7 +22,7 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            "posts_id"=>"1",
+            "posts_id"=>"34",
             "comment" =>$this->faker->sentence(),
             //
         ];
