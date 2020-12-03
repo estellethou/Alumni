@@ -11,11 +11,13 @@ axios.defaults.baseURL = 'http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.th
 
 Vue.config.productionTip = false
 
-store.dispatch('attempt', localStorage.getItem('token'))
+store.dispatch('attempt', localStorage.getItem('token')).then(() =>{
+  new Vue({
+    router,
+    store,
+    vuetify,
+    render: h => h(App)
+  }).$mount('#app')
+})
 
-new Vue({
-  router,
-  store,
-  vuetify,
-  render: h => h(App)
-}).$mount('#app')
+

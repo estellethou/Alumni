@@ -6,6 +6,8 @@ import Forum from "../views/Forum.vue"
 import DetailsPost from "../views/DetailsPost"
 import Profile from '../views/Profile.vue'
 import SignIn from '../views/SignIn.vue'
+import Register from '../views/Register.vue'
+import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
 import store from '../store'
 
@@ -45,6 +47,16 @@ const routes = [
     path: '/signin',
     name: 'SignIn',
     component: SignIn
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
+  },
+  {
+    path: '/testsignup',
+    name: 'Login',
+    component: Login
   },
   {
     path: '/dashboard',
