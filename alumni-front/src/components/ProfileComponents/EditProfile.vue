@@ -30,7 +30,7 @@
             class="form-control"
             v-model="newEmail"
             id="email"
-            placeholder="Email"
+            :placeholder="Email"
           />
         </div>
         <div class="form-group col-md-6">
@@ -44,27 +44,15 @@
           />
         </div>
       </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            v-model="newPassword"
-            id="password"
-            placeholder="Password"
-          />
-        </div>
-        <div class="form-group col-md-6">
-          <label for="confirmepass">Confirm password</label>
-          <input
-            type="password"
-            class="form-control"
-            v-model="confirmPassword"
-            id="confirmepass"
-            placeholder="Confirm Password"
-          />
-        </div>
+      <div class="form-groupe">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          v-model="newPassword"
+          id="password"
+          placeholder="Password"
+        />
       </div>
       <div class="form-group">
         <label for="description">Description</label>
@@ -116,17 +104,20 @@
           />
         </div>
         <div class="form-group col-md-6">
-            <label for="image">Select your resume</label>
+          <label for="image">Select your resume</label>
           <input
             type="file"
             class="form-control"
             id="resume"
+            accept="application/pdf"
             @change="resumeChanged"
           />
-        </div> 
+        </div>
       </div>
     </form>
-    <button type="submit" v-on:click="saveForm">Save Profile</button>
+    <button class="btn btn-primary" type="submit" v-on:click="saveForm">
+      Save Profile
+    </button>
   </div>
 </template>
 
@@ -135,20 +126,15 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "EditProfile",
-  props: ["user", "profile"],
+  props: ["profile", "user"],
   data() {
     return {
       //profile user
-      newLastName: "",
-      newFirstName: "",
+      newLastName: this.user.lastname,
+      newFirstName: this.user.firstname,
+      Email: this.user.email,
       newEmail: "",
       newPassword: "",
-      confirmPassword: "",
-      //newLastName: this.user.lastname,
-      //newFirstName: this.user.lastname,
-      //newEmail: this.user.lastname,
-      //newPassword: this.user.lastname,
-      //confirmPassword: "",
 
       //profile module
       newDescription: this.profile.description,
@@ -158,23 +144,48 @@ export default {
       newSite: this.profile.url_website,
       newImage: "",
       newResume: "",
-      //newResume: this.profile.resume,
     };
   },
 
   methods: {
-    ...mapActions(["updateProfile"]),
+    ...mapActions(["updateProfile", "updateUser"]),
 
     saveForm(e) {
       e.preventDefault();
-      //var newUser = {
-      //  id: 2,
-      //  //"id": user.id,
-      //  lastname: this.newLastName,
-      //  fisrtname: this.newFirstName,
-      //  email: this.newFirstName,
-      //  password: this.newPassword,
-      //};
+      if (this.newPassword !== "") {
+        if (this.Email !== this.newEmail && this.newEmail !== "") {
+          var newUser = {
+            id: this.user.id,
+            lastname: this.newLastName,
+            firstname: this.newFirstName,
+            email: this.newEmail,
+            password: this.newPassword,
+          };
+        } else if (this.newEmail == "") {
+          newUser = {
+            id: this.user.id,
+            lastname: this.newLastName,
+            firstname: this.newFirstName,
+            password: this.newPassword,
+          };
+        }
+      } else if (this.newPassword == "") {
+        if (this.Email !== this.newEmail && this.newEmail !== "") {
+          newUser = {
+            id: this.user.id,
+            lastname: this.newLastName,
+            firstname: this.newFirstName,
+            email: this.newEmail,
+          };
+        } else if (this.newEmail == "") {
+          newUser = {
+            id: this.user.id,
+            lastname: this.newLastName,
+            firstname: this.newFirstName,
+          };
+        }
+      }
+
       var newProfile = {
         id: this.profile.id,
         description: this.newDescription,
@@ -183,30 +194,28 @@ export default {
         url_linkedin: this.newLinkedin,
         url_website: this.newSite,
         image: this.newImage,
-        resume: this.newResume
+        resume: this.newResume,
       };
       this.updateProfile(newProfile);
-      //this.updateUser(newUser);
+      this.updateUser(newUser);
     },
     imageChanged(e) {
       var fileReader = new FileReader();
       fileReader.readAsDataURL(e.target.files[0]);
       fileReader.onload = (e) => {
-        this.newImage = e.target.result; 
-        console.log(e.target.result);
+        this.newImage = e.target.result;
       };
     },
     resumeChanged(e) {
-    var fileReader = new FileReader();
-    fileReader.readAsDataURL(e.target.files[0]);
-    fileReader.onload = (e) => {
-      this.newResume = e.target.result; 
-      console.log(e.target.result);
-    };
-  },
+      var fileReader = new FileReader();
+      fileReader.readAsDataURL(e.target.files[0]);
+      fileReader.onload = (e) => {
+        this.newResume = e.target.result;
+      };
+    },
   },
   computed: {
-    ...mapGetters(["getAllProfiles", "getOneProfile", "getOneUser"]),
+    ...mapGetters(["getOneProfile", "authenticated"]),
   },
 };
 </script>
