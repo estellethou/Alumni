@@ -87,11 +87,15 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
     props: ["job"],
     name: "ListJobsEdit",
+
+    computed: {
+        ...mapGetters(["user"])
+    },
 
     data() {
         return {
@@ -131,7 +135,7 @@ export default {
                 contract_duration: this.contractDuration,
                 company_name: this.company,
                 sector: this.sector,
-                user_id: 1, // toDo: change with user_id
+                user_id: this.user.id,
             };
             this.updateJob(editJob);
         }
