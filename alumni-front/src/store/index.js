@@ -6,11 +6,13 @@ import Posts from "./modules/posts"
 import Profiles from "./modules/profiles"
 import Auth from "./modules/auth"
 import Users from "./modules/users"
+import createPersistedState from "vuex-persistedstate"
 
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  plugins: [createPersistedState()],
   modules:{
     Comments,
     Posts, 
