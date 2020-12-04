@@ -19,7 +19,7 @@
         />
         <p>My resume{{ profile.resume }}</p>
         <DeleteProfile v-bind:user="user" />
-        <EditProfile v-bind:user="user" v-bind:profile="profile" />
+        <EditProfile v-bind:user="user" v-bind:profile="profile" />       
       </div>
     </div>
   </div>
@@ -52,7 +52,16 @@ export default {
       var $user = { id: 22 };
       return $user;
     },
+        resumeChanged(e) {
+    var fileReader = new FileReader();
+    fileReader.readAsDataURL(e.target.files[0]);
+    fileReader.onload = (e) => {
+      this.newResume = e.target.result; 
+      console.log(e.target.result);
+    };
   },
+  },
+
 
   computed: {
     ...mapGetters(["getAllProfiles", "getOneProfile"]),

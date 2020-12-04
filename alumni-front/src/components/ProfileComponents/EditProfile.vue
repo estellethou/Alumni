@@ -1,6 +1,6 @@
 <template>
   <div class="edit">
-    <form>
+    <form enctype="multipart/form-data">
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="lastname">LastName</label>
@@ -107,27 +107,23 @@
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
+          <label for="image">Select your profile image</label>
           <input
             type="file"
             class="form-control"
             id="image"
             @change="imageChanged"
-            ref="fileImage"
           />
-          <!-- <button class="btn btn-outline-primary btn-sm" @click="$refs.fileImage.click()">Pick your profile image</button>
-          <button class="btn btn-outline-secondary btn-sm" @click="onUploadImage">Upload Image</button> -->
         </div>
         <div class="form-group col-md-6">
+            <label for="image">Select your resume</label>
           <input
-            style="display: none"
             type="file"
             class="form-control"
             id="resume"
-            ref="fileResume"
+            @change="resumeChanged"
           />
-          <!-- <button class="btn btn-outline-primary btn-sm" @click="$refs.fileResume.click()">Pick your resume</button>
-          <button class="btn btn-outline-secondary btn-sm" @click="onUploadResume">Upload Resume</button> -->
-        </div>
+        </div> 
       </div>
     </form>
     <button type="submit" v-on:click="saveForm">Save Profile</button>
@@ -160,7 +156,8 @@ export default {
       newGithub: this.profile.url_github,
       newLinkedin: this.profile.url_linkedin,
       newSite: this.profile.url_website,
-      newImage: this.profile.image,
+      newImage: "",
+      newResume: "",
       //newResume: this.profile.resume,
     };
   },
@@ -186,6 +183,7 @@ export default {
         url_linkedin: this.newLinkedin,
         url_website: this.newSite,
         image: this.newImage,
+        resume: this.newResume
       };
       this.updateProfile(newProfile);
       //this.updateUser(newUser);
@@ -195,8 +193,17 @@ export default {
       fileReader.readAsDataURL(e.target.files[0]);
       fileReader.onload = (e) => {
         this.newImage = e.target.result; 
+        console.log(e.target.result);
       };
     },
+    resumeChanged(e) {
+    var fileReader = new FileReader();
+    fileReader.readAsDataURL(e.target.files[0]);
+    fileReader.onload = (e) => {
+      this.newResume = e.target.result; 
+      console.log(e.target.result);
+    };
+  },
   },
   computed: {
     ...mapGetters(["getAllProfiles", "getOneProfile", "getOneUser"]),

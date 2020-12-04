@@ -23,9 +23,12 @@ const actions ={
 
     async addComment({commit},newComment){
         const response = await axios.post("http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/comments/post",newComment)
-        console.log(response)
+        commit("ADD_COMMENT",response.data)
+    },
 
-        commit("ADD_COMMENT",newComment)
+    async editComment({commit},updateComment){
+        let response = await axios.put(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/comment/${updateComment.id}/edit`,updateComment)
+        commit("UPDATE_POST", response.data)
     }
 }
 
@@ -34,7 +37,12 @@ const mutations={
     SET_COMMENTS:(state,comments) => (state.comments = comments),
     REMOVE_COMMENT:(state,id) => state.comments =state.comments.filter((comment) => comment.id != id),
     ADD_COMMENT:(state,newComment) => state.comments.push(newComment),
-
+    UPDATE_POST:(state,updateComment) => {
+        const index = state.comments.findIndex(comment => comment.id === updateComment.id)
+        if(index !== -1){
+            state.comments.splice(index,1,updateComment)
+        }
+    }
 };
 
 export default{

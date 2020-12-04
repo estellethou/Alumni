@@ -1,4 +1,17 @@
 <template>
+
+    <div class="container-navBar">
+        <div class="container-logo">
+            <img src="" alt="">
+        </div>
+        <div class="container-link">
+            <router-link to="/">Home</router-link>
+            <router-link to="/profile">Profile</router-link>
+            <router-link to="/job">Jobs</router-link>
+            <router-link to="/forum">Forum</router-link>
+        </div>
+    </div>
+
     <ul>
         <li>
             <router-link
@@ -30,25 +43,9 @@
             <li>
                 <router-link
                     :to="{
-                        name:'SignIn'
-                        }">
-                    Sign in
-                </router-link>
-            </li>
-            <li>
-                <router-link
-                    :to="{
-                        name:'Register'
-                        }">
-                    Register
-                </router-link>
-            </li>
-            <li>
-                <router-link
-                    :to="{
                         name:'Login'
                         }">
-                    Login test Vuetify
+                    Login / Register
                 </router-link>
             </li>
         </template>

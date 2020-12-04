@@ -1,19 +1,27 @@
 <template>
-    <div class="Job">
-        <h1>Hello from Job</h1>
-        <div>
-            <label class="label">Searching Bar</label>
-            <input :keyup="searchJob" type="text" v-model="search" name="search">
+    <div>
+        <div class="Job">
+            <h1>Hello from Job</h1>
+            <div>
+                <label class="label">Searching Bar</label>
+                <input :keyup="searchJob" type="text" v-model="search" name="search">
+            </div>
+            <!-- <ListJobsAdd /> -->
+            <ListJobs v-bind:filteredJob="searchJob" />
         </div>
-        <ListJobsAdd />
-        <ListJobs v-bind:filteredJob="searchJob" />
+        <div> 
+        <GoogleMap />
+        </div>
     </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex"
 import ListJobs from "@/components/JobComponents/ListJobs.vue"
-import ListJobsAdd from "@/components/JobComponents/ListJobsAdd.vue"
+// import ListJobsAdd from "@/components/JobComponents/ListJobsAdd.vue"
+
+import GoogleMap from "@/components/GoogleMap.vue"
+
 
 
 export default {
@@ -26,8 +34,9 @@ export default {
     },
 
     components: {
-        ListJobsAdd,
+        // ListJobsAdd,
         ListJobs,
+        GoogleMap,
     },
 
     computed: {

@@ -26,10 +26,13 @@ export default {
             event.preventDefault()
             let newComment ={
                 comment:this.newComment,
-                posts_id:this.detail.id
+                posts_id:this.detail.id,
+                 //CHANGE THE USER_ID BY THE USER_ID OF THE PERSONNE CONNECTED
+                user_id:2
+                
             }
             console.log(newComment)
-            this.addComment()
+            this.addComment(newComment)
             this.newComment=""
       }
     }
