@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -56,6 +57,19 @@ class AuthController extends Controller
             $validator->validated(),
             ['password' => bcrypt($request->password)]
         ));
+
+        $profile = Profile::create(
+            [ 
+            'user_id'=> $user->id,
+            'phone' => '',
+            'description' => '',
+            'url_linkedin' => '',
+            'url_github' => '',
+            'url_website' => '',
+            'image' => '',
+            'resume' => '',
+            ]
+        );
         
         return response()->json(['message' => 'User created successfully', 'user' => $user]);
     }

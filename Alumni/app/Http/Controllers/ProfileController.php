@@ -54,13 +54,13 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $profile->update($request->all()); // ???
         //Get profile id
         $profile = Profile::find($id);
         //check policy first
         $this->authorize('update', $profile);
 
         $profile->update($request->except(['image','resume']));
+
             if ($request->image) {
             $exploded = explode(',', $request->image);
             $decoded = base64_decode($exploded[1]);
