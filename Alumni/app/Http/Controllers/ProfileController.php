@@ -54,7 +54,6 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $profile->update($request->all()); // ???
         //Get profile id
         $profile = Profile::find($id);
         //check policy first
