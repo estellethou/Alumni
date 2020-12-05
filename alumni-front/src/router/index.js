@@ -6,9 +6,11 @@ import JobEdit from '../views/JobEdit.vue'
 import Forum from "../views/Forum.vue"
 import DetailsPost from "../views/DetailsPost"
 import Profile from '../views/Profile.vue'
+import OtherProfile from '../views/OtherProfile.vue'
 import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
 import RecruterForm from "../views/RecruterForm"
+import ResetPassword from '../views/ResetPassword.vue'
 import store from '../store'
 
 
@@ -40,6 +42,11 @@ const routes = [
     props: true,
   },
 
+  {
+    path: '/resetpassword',
+    name: 'ResetPassword',
+    component: ResetPassword
+  },
   
   {
     path: '/forum',
@@ -55,9 +62,15 @@ const routes = [
   },
 
   {
-    path: '/profile',
+    path: '/profile', //profile of user connected 
     name: 'Profile',
     component: Profile,
+  },
+  {
+    path: '/profile/:profileId/:userId',
+    name: 'OtherProfile',
+    component: OtherProfile,
+    props: true
   },
   {
     path: '/signin',
@@ -69,8 +82,6 @@ const routes = [
     name: 'Dashboard',
     component: Dashboard,
     beforeEnter: (to, from, next) => {
-      // console.log(store.getters['authenticated'])
-      // console.log(next)
       if (!store.getters['authenticated']){
         return next({
           name:'Login'

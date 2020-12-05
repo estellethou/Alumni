@@ -1,13 +1,15 @@
 <template>
     <div class="delete">
+      <router-link :to="`/`">
       <button
         type="button"
-        class="btn-delete"
+        class="btn btn-danger btn-delete"
         @click="deleteMyUserOnSubmit(user)"
       >
-        <!-- replace test2User by real user (props) -->
-        Delete
+        Delete Profile
       </button>
+      </router-link>
+      <router-view></router-view>
   </div>
 </template>
 
@@ -21,20 +23,13 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["setAllProfiles", "deleteProfile", "deleteUser"]),
-    
-    //deleteMyProfileOnSubmit(user){
-    //  this.deleteProfile(user.id);
-    //},
-    // *** For testing, use deleteProfile but for production, use deleteUser and it will delete all data from DB :
-    // *** Jobs, Comment, Post, Profile
-    deleteMyUserOnSubmit(user) {
-      this.deleteUser(user.id);
-    },
+    ...mapActions(["setAllProfiles", "deleteUser", "signOut"]),
 
-    testUser() {
-      var $user = { id: 2 };
-      return $user;
+    deleteMyUserOnSubmit(user) {
+      if (confirm("Are you sure you want to delete your profile ?")){
+        this.deleteUser(user.id);
+        this.signOut();
+      }
     },
   },
 
@@ -47,3 +42,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.btn-delete {
+  color: white !important;
+}
+</style>

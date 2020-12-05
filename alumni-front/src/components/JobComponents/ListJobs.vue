@@ -4,16 +4,16 @@
             <h1> {{ job.title }}</h1>
             <p>{{ job.content }}</p>
             
-            <ListJobsEdit v-bind:job="job" />
+            <ListJobsEdit v-bind:job="job" v-if="job.user_id == user.id" />
             
             <!-- <router-link :to="`/job/edit/${job.id}/${JSON.stringify(job)}`" ><button>Edit Job</button></router-link> -->
-            <button @click="destroyJob(job.id)">Delete Job/Internship</button>
+            <button @click="destroyJob(job.id)" v-if="job.user_id == user.id">Delete Job/Internship</button>
         </div>
     </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import ListJobsEdit from '@/components/JobComponents/ListJobsEdit.vue';
 
 
@@ -30,7 +30,11 @@ export default {
         destroyJob(id) {
             this.deleteJob(id);
         },
-    }, 
+    },
+
+    computed: {
+        ...mapGetters(["user"])
+    }
 
 }
 </script>

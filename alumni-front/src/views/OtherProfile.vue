@@ -1,18 +1,17 @@
 <template>
   <div class="profile container">
-    <div v-for="profile in filteredProfile" :key="profile.id">
-      <div class="background">
-        <img
+    <div class="background">
+         <img
           class="profile-img"
           width="150"
           height="150"
           :src="
             'http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/' +
-            profile.image
+            getOneProfile.image
           "
           alt="profile-image"
-        />
-        <div class="side-img">
+        /> 
+       <div class="side-img">
           <img
             class="logo"
             width="180"
@@ -21,89 +20,76 @@
             alt="logo"
           />
 
-          <h2 class="username">{{ user.firstname }} {{ user.lastname }}</h2>
-        </div>
+          <h2 class="username">{{ getOneUser.firstname }} {{ getOneUser.lastname }}</h2>
+        </div> 
       </div>
-      <div class="description">
-        <p>{{ profile.description }}</p>
-      </div>
+<div class="description">
+        <p>{{  getOneProfile.description }}</p>
+      </div> 
       <v-card class="mx-auto container">
-        <p>
+   <p>
           <img
             width="2%"
             src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/phone.png"
             alt="logo"
           />
-          {{ profile.phone }}
-        </p>
-        <a :href="profile.url_linkedin"
+          {{ getOneProfile.phone }}
+        </p> 
+      <a :href="getOneProfile.url_linkedin"
           ><img
             src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/linkedin.png"
             width="2%"
             alt="logo-linkedin"
         /></a>
-        <a :href="profile.url_github"
+        <a :href="getOneProfile.url_github"
           ><img
             src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/git.jpg"
             width="2%"
             alt="logo-github"
         /></a>
-        <a :href="profile.url_website"
+        <a :href="getOneProfile.url_website"
           ><img
             src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/web.png"
             width="2%"
             alt="logo-web"
-        /></a>
+        /></a> 
       </v-card>
-      <embed
+      <div class="resume">
+        <embed
         :src="
           'http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/' +
-          profile.resume
+          getOneProfile.resume
         "
         type="application/pdf"
-        width="100%"
+        width="70%"
         height="800"
-      />
-<div class="d-flex justify-content-between">
- <DeleteProfile v-bind:user="user" />
-      <EditProfile v-bind:profile="profile" v-bind:user="user"> </EditProfile> 
-</div>
-     
+      /> 
+      </div> 
     </div>
-  </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import DeleteProfile from "@/components/ProfileComponents/DeleteProfile";
-import EditProfile from "@/components/ProfileComponents/EditProfile";
 export default {
-  name: "Profile",
+  props: ["profileId", "userId"],
+  name: "OtherProfile",
   components: {
-    DeleteProfile,
-    EditProfile,
   },
   data() {
     return {};
   },
 
   methods: {
-    ...mapActions(["setAllProfiles"]),
+    ...mapActions(["setProfile", "setUser"]),
   },
-  
-
 
   computed: {
-    ...mapGetters(["getAllProfiles", "authenticated", "user"]),
-    filteredProfile() {
-      return this.getAllProfiles.filter((profile) => {
-        if (profile.user_id == this.user.id) return profile;
-      });
-    },
+    ...mapGetters(["getOneProfile", "getOneUser"]),
   },
 
   created() {
-    this.setAllProfiles();
+    this.setProfile(this.profileId);
+    this.setUser(this.userId);
   },
 };
 </script>
@@ -123,6 +109,10 @@ export default {
   position: relative;
   top: 70%;
   left: 45%;
+}
+
+.resume{
+  width: 100%;
 }
 
 .side-img {
