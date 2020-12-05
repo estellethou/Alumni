@@ -44,7 +44,7 @@ class JobControllerAdmin extends ControllerAdmin
             'sector'  => ['required', 'string', 'max:255'],
         ]);
         $job = Job::create($data);
-        return redirect("/admin/jobs/{$job->id}");
+        return redirect("/admin/jobs/{$job->id}")->with('success','Job offer successfully edited created.');
     }
 
     /**
@@ -77,7 +77,7 @@ class JobControllerAdmin extends ControllerAdmin
         // toDo: add validator
         $job = Job::find($id);
         $job -> update($request->all());
-        return redirect("/admin/jobs/{$job->id}");
+        return redirect("/admin/jobs/{$job->id}")->with('success','Job offer successfully edited.');
     }
 
     /**
@@ -90,6 +90,6 @@ class JobControllerAdmin extends ControllerAdmin
     {
         // delete a job
         Job::destroy($id);
-        return redirect("/admin/jobs");
+        return redirect("/admin/jobs")->with('success','Job offer successfully deleted.');
     }
 }

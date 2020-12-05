@@ -6,9 +6,12 @@ import JobEdit from '../views/JobEdit.vue'
 import Forum from "../views/Forum.vue"
 import DetailsPost from "../views/DetailsPost"
 import Profile from '../views/Profile.vue'
+import OtherProfile from '../views/OtherProfile.vue'
 import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
+import RecruterForm from "../views/RecruterForm"
 import ResetPassword from '../views/ResetPassword.vue'
+import Directory from '../views/Directory.vue'
 import store from '../store'
 
 
@@ -19,6 +22,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/recruter',
+    name: 'RecruterForm',
+    component: RecruterForm
   },
 
   {
@@ -55,9 +63,21 @@ const routes = [
   },
 
   {
-    path: '/profile',
+    path: '/profile', //profile of user connected 
     name: 'Profile',
     component: Profile,
+  },
+  {
+    path: '/directory',
+    name: 'Directory',
+    component: Directory,
+  },
+  {
+    path: '/profile/:profileId/:userId',
+    name: 'OtherProfile',
+    component: OtherProfile,
+    props: true
+
   },
   {
     path: '/signin',

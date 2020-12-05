@@ -4,11 +4,9 @@
         <button @click="closeModal">Close modal</button>
         <div>
             <form @submit="submitPost">
-                <label>Title</label>
-                <input type="text" name="title" id="title" v-model="title" >
-                <label>Description</label>
-                <input type="text" name="description" id="description" v-model="description" >
-                <button>Submit</button>
+                <v-text-field label="Title" v-model="title" ></v-text-field>
+                <v-text-field  label="Description"  v-model="description" ></v-text-field>
+                <v-btn type="submit">Submit</v-btn>
             </form>
         </div>
     </div>
