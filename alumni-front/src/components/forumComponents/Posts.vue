@@ -1,6 +1,5 @@
 <template>
-  <div class="container-posts">
-      <div>
+      <v-card>
           <div class="container-titlePost">
               <router-link v-bind:to="`/post/${post.id}`"><h3>{{post.title}}</h3><span>{{ timeAgo(Date.parse(post.created_at)) }}</span></router-link>
               <button @click="openEditModalPost">Edit</button>
@@ -16,8 +15,7 @@
               <p>comment number<span></span></p>
               <button @click="countComment">duxbchbds</button> 
           </div>
-      </div>
-  </div>
+      </v-card>
 </template>
 
 <script>
@@ -102,5 +100,6 @@ export default {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 1;
 }
 </style>
