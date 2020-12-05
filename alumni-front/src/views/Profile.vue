@@ -17,7 +17,7 @@
             class="logo"
             width="180"
             height="80"
-            src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/logo.png"
+            src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/logo.png"
             alt="logo"
           />
 
@@ -28,47 +28,65 @@
         <p>{{ profile.description }}</p>
       </div>
       <v-card class="mx-auto container">
-        <p>
-          <img
-            width="2%"
-            src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/phone.png"
-            alt="logo"
-          />
-          {{ profile.phone }}
-        </p>
-        <a :href="profile.url_linkedin"
+        <div class="d-flex justify-content-between">
+          <div class="col-4">
+            <img
+              width="10%"
+              src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/telephone.png"
+              alt="logo"
+            />
+            {{ profile.phone }}
+          </div>
+          <div class="col-4">
+            <img
+              width="10%"
+              src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/email.png"
+              alt="logo"
+            />
+            {{ user.email }}
+          </div>
+
+          <div class="col-4">
+   <a :href="profile.url_linkedin" class="icon-url col-4"
           ><img
-            src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/linkedin.png"
-            width="2%"
+            src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/blo.png"
+            width="7%"
             alt="logo-linkedin"
         /></a>
-        <a :href="profile.url_github"
+        <a :href="profile.url_github" class="icon-url col-4"
           ><img
-            src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/git.jpg"
-            width="2%"
+            src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/git.jpg"
+            width="8%"
             alt="logo-github"
         /></a>
-        <a :href="profile.url_website"
+        <a :href="profile.url_website" class="icon-url col-4"
           ><img
-            src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/web.png"
-            width="2%"
+            src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/web.png"
+            width="8%"
             alt="logo-web"
         /></a>
-      </v-card>
-      <embed
-        :src="
-          'http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/' +
-          profile.resume
-        "
-        type="application/pdf"
-        width="100%"
-        height="800"
-      />
-<div class="d-flex justify-content-between">
- <DeleteProfile v-bind:user="user" />
-      <EditProfile v-bind:profile="profile" v-bind:user="user"> </EditProfile> 
+
 </div>
-     
+        </div>
+
+       
+      </v-card>
+      <div class="resume">
+        <embed
+          :src="
+            'http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/' +
+            profile.resume
+          "
+          type="application/pdf"
+          width="58%"
+          height="800"
+        />
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <DeleteProfile v-bind:user="user" />
+        <EditProfile v-bind:profile="profile" v-bind:user="user"> </EditProfile>
+      </div>
     </div>
   </div>
 </template>
@@ -90,8 +108,6 @@ export default {
   methods: {
     ...mapActions(["setAllProfiles"]),
   },
-  
-
 
   computed: {
     ...mapGetters(["getAllProfiles", "authenticated", "user"]),
@@ -114,15 +130,22 @@ export default {
   margin: auto;
 }
 .background {
-  background-image: url("http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/background.jpg");
+  background-image: url("http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/background.jpg");
   background-size: 100% 300px;
   height: 240px;
 }
+
+
 .profile-img {
   border-radius: 50%;
   position: relative;
   top: 70%;
   left: 45%;
+}
+
+.resume {
+  display: flex;
+  justify-content: center;
 }
 
 .side-img {
