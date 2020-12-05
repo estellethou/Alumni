@@ -8,6 +8,7 @@ import DetailsPost from "../views/DetailsPost"
 import Profile from '../views/Profile.vue'
 import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
+import RecruterForm from "../views/RecruterForm"
 import store from '../store'
 
 
@@ -18,6 +19,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/recruter',
+    name: 'RecruterForm',
+    component: RecruterForm
   },
 
   {
