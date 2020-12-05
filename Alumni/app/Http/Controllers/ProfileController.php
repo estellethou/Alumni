@@ -60,7 +60,6 @@ class ProfileController extends Controller
         $this->authorize('update', $profile);
 
         $profile->update($request->except(['image','resume']));
-
             if ($request->image) {
             $exploded = explode(',', $request->image);
             $decoded = base64_decode($exploded[1]);

@@ -90,6 +90,8 @@ export default {
   methods: {
     ...mapActions(["setAllProfiles"]),
   },
+  },
+
 
   computed: {
     ...mapGetters(["getAllProfiles", "authenticated", "user"]),

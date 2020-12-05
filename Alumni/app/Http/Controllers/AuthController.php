@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use App\Mail\ResetPasswordMailable;
+use App\Models\PasswordReset;
 
 class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'sendToken', 'validateToken', 'resetPassword']]);
     }
 
     public function login(Request $request)
@@ -100,5 +104,56 @@ class AuthController extends Controller
 
     protected function guard() {
         return Auth::guard();
+    }
+
+    public function sendToken(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+
+        if (!isset($user->id))
+        {
+            return response()->json(['error' => 'User does not exist'], 401);
+        }
+
+        if(isset($user->id))
+        {
+            $passwordReset = PasswordReset::where('email', $request->email)->first();
+            if(isset($passwordReset)){
+                $passwordReset->delete();
+            }
+        }
+
+        $token = Str::random(32);
+
+        Mail::to($user)->send(new ResetPasswordMailable($token));
+
+        $passwordReset = new PasswordReset();
+        $passwordReset->email = $user->email;
+        $passwordReset->token = $token;
+        $passwordReset->save();
+
+        // return response()->json(['success' => 'Email sent'], 200);
+    }
+    
+    public function validateToken(Request $request)
+    {
+        $passwordReset = PasswordReset::where('token', $request->token)->first();
+
+        if (!isset($passwordReset->email))
+        {
+            return response()->json(['error' => 'Invalid token'], 401);
+        }
+
+        $user = User::where('email', $passwordReset->email)->first();
+        return response()->json($user, 200);
+    }
+    public function resetPassword(Request $request)
+    {
+        $user = User::find($request->user_id);
+        $passwordReset = PasswordReset::where('email', $user->email)->first();
+        $passwordReset->delete();
+
+        $user->password = bcrypt($request->password);
+        $user->save();
     }
 }

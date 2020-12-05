@@ -234,6 +234,14 @@ export default {
         this.newResume = e.target.result;
       };
     },
+    resumeChanged(e) {
+    var fileReader = new FileReader();
+    fileReader.readAsDataURL(e.target.files[0]);
+    fileReader.onload = (e) => {
+      this.newResume = e.target.result; 
+      console.log(e.target.result);
+    };
+  },
   },
 
   computed: {

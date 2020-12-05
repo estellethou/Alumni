@@ -8,6 +8,7 @@ import DetailsPost from "../views/DetailsPost"
 import Profile from '../views/Profile.vue'
 import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
+import ResetPassword from '../views/ResetPassword.vue'
 import store from '../store'
 
 
@@ -34,6 +35,11 @@ const routes = [
     props: true,
   },
 
+  {
+    path: '/resetpassword',
+    name: 'ResetPassword',
+    component: ResetPassword
+  },
   
   {
     path: '/forum',
@@ -63,8 +69,6 @@ const routes = [
     name: 'Dashboard',
     component: Dashboard,
     beforeEnter: (to, from, next) => {
-      // console.log(store.getters['authenticated'])
-      // console.log(next)
       if (!store.getters['authenticated']){
         return next({
           name:'Login'
