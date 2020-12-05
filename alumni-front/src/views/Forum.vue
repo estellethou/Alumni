@@ -2,8 +2,8 @@
   <div class="container-forum">
       <h1>Hello from Forum</h1>
       <input :keyup="searchInput" type="text" v-model="search" name="search" id="search">
-      <div>
-          <button @click="toggleModalPost">Add a post</button>
+      <div class="container-btnModal">
+          <v-btn @click="toggleModalPost">Add a post</v-btn>
           <div v-if="isOpen" class="container-AddPostModal">
                  <AddPostModal v-on:close="updateParent(false)"/>
           </div>
@@ -70,6 +70,10 @@ export default {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 1;
 
+}
+.container-btnModal{
+    margin-bottom: 25px;
 }
 </style>

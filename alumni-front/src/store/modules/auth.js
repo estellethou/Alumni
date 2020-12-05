@@ -54,7 +54,23 @@ export default{
         async register(_, userinfo){
             let response = await axios.post('auth/register', userinfo)
             return response.data.message
+        },
+
+        async sendToken(_, userinfo){
+            let response = await axios.post('send-token', userinfo)
+            return response.data
+        },
+
+        async validateToken(_, token){
+            let response = await axios.post('validate-token', token)
+            return response
+        },
+
+        async changePassword(_, userinfo){
+            let response = await axios.post('reset-password', userinfo)
+            return response
         }
+
     },
     
 

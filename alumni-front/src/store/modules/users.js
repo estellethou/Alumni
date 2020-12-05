@@ -1,25 +1,26 @@
 import axios from "axios"
 
 const state = {
-    users:[]
+    users:[],
+    oneUser:[],
 }
 
 const getters = {
     getAllUsers:(state) => state.users,
-    //return one user giving user id
-    getOneUser:(state) => id => { 
-        for (var index in state.users){
-            if (state.users[index].id == id){
-                return state.users[index]
-            }
-        }
-    }
-};
+    
+    //return one user
+    getOneUser:(state) => state.oneUser,
+}
 
 const actions = {
     async setAllUsers({commit}){
         var response = await axios.get("http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/users")
         commit("setMyAllUsers", response.data)
+    },
+
+    async setUser({commit}, userId){
+        var response = await axios.get(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/user/${userId}`)
+        commit("setMyUser", response.data)
     },
 
     //async addUser({commit}, newUser){
@@ -40,6 +41,7 @@ const actions = {
 }
 
 const mutations = {
+    setMyUser:(state, oneUser) => (state.oneUser = oneUser),
     setMyAllUsers:(state, users) => (state.users = users),
     addMyUser:(state, newUser) => (state.users.push(newUser)),
     deleteMyUser:(state, id) => (state.users = state.users.filter(users => users.id !== id)),
