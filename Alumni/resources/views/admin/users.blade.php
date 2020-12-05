@@ -20,6 +20,7 @@
                     <th scope="col">Lastname</th>
                     <th scope="col">Email</th>
                     <th scope="col">Admin</th>
+                    <th scope="col">LinkedIn</th>
                 </tr>
             </thead>
             <tbody>
@@ -55,5 +56,8 @@
         </div>
     </div>
 </body>
+<script>
+
+</script>
 
 @endsection

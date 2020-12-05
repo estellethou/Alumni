@@ -1,13 +1,15 @@
 <template>
     <div class="delete">
+      <router-link :to="`/`">
       <button
         type="button"
-        class="btn btn-warning btn-delete"
+        class="btn btn-danger btn-delete"
         @click="deleteMyUserOnSubmit(user)"
       >
-        <!-- replace test2User by real user (props) -->
-        Delete
+        Delete Profile
       </button>
+      </router-link>
+      <router-view></router-view>
   </div>
 </template>
 
@@ -21,10 +23,13 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["setAllProfiles", "deleteUser"]),
+    ...mapActions(["setAllProfiles", "deleteUser", "signOut"]),
 
     deleteMyUserOnSubmit(user) {
-      this.deleteUser(user.id);
+      if (confirm("Are you sure you want to delete your profile ?")){
+        this.deleteUser(user.id);
+        this.signOut();
+      }
     },
   },
 
@@ -37,3 +42,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.btn-delete {
+  color: white !important;
+}
+</style>

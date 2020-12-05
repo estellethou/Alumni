@@ -15,7 +15,8 @@ class PostControllerAdmin extends ControllerAdmin
     public function index()
     {
         //GET all the Post//
-        return Post::all();
+         $posts = Post::latest()->paginate(20);
+        return view('admin/posts', compact('posts'));
         
     }
 
@@ -28,7 +29,8 @@ class PostControllerAdmin extends ControllerAdmin
     public function store(Request $request)
     {
         //POST a new post
-        return Post::create($request->all());
+        $post = Post::create($request->all());
+        return view("admin/post_show", compact('post'))->with('success','Post successfully added.');
 
     }
 
@@ -40,8 +42,19 @@ class PostControllerAdmin extends ControllerAdmin
      */
     public function show($id)
     {
-        //GET one post
-        return Post::find($id);
+        $post = Post::find($id);
+        return view("admin/post_show", compact('post'));
+    }
+
+     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Post $post)
+    {   
+        return view('admin/post_edit', compact('post'));
     }
 
     /**
@@ -56,7 +69,7 @@ class PostControllerAdmin extends ControllerAdmin
         //UPDATE a post
         $post = Post::find($id);
         $post->update($request->all());
-        return $post;
+        return redirect("/admin/posts/{$post->id}")->with('success','Post successfully edited.');
     }
 
     /**
@@ -68,6 +81,7 @@ class PostControllerAdmin extends ControllerAdmin
     public function destroy($id)
     {
         //DELETE a post
-        return Post::destroy($id);
+        Post::destroy($id);
+        return redirect("/admin/posts/")->with('success','Post successfully deleted.');
     }
 }
