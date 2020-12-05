@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\UserProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,4 +69,4 @@ Route::put('/job/{id}/edit', [App\Http\Controllers\JobController::class, 'update
 Route::delete('/job/{id}', [App\Http\Controllers\JobController::class, 'destroy']);
 // Route::resource('jobs', 'App\Http\Controllers\JobController');
 
-
+Route::get('/userprofiles', [UserProfileController::class, 'index']);

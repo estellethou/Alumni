@@ -11,6 +11,7 @@ import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
 import RecruterForm from "../views/RecruterForm"
 import ResetPassword from '../views/ResetPassword.vue'
+import Directory from '../views/Directory.vue'
 import store from '../store'
 
 
@@ -67,10 +68,16 @@ const routes = [
     component: Profile,
   },
   {
+    path: '/directory',
+    name: 'Directory',
+    component: Directory,
+  },
+  {
     path: '/profile/:profileId/:userId',
     name: 'OtherProfile',
     component: OtherProfile,
     props: true
+
   },
   {
     path: '/signin',
