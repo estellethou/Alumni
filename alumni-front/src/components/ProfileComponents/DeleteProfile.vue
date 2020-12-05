@@ -23,11 +23,12 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["setAllProfiles", "deleteUser"]),
+    ...mapActions(["setAllProfiles", "deleteUser", "signOut"]),
 
     deleteMyUserOnSubmit(user) {
       if (confirm("Are you sure you want to delete your profile ?")){
         this.deleteUser(user.id);
+        this.signOut();
       }
     },
   },
