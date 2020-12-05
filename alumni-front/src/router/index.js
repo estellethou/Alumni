@@ -9,6 +9,7 @@ import Profile from '../views/Profile.vue'
 import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
 import ResetPassword from '../views/ResetPassword.vue'
+import Directory from '../views/Directory.vue'
 import store from '../store'
 
 
@@ -58,6 +59,11 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile,
+  },
+  {
+    path: '/directory',
+    name: 'Directory',
+    component: Directory,
   },
   {
     path: '/signin',
