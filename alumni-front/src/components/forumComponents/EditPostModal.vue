@@ -6,11 +6,9 @@
       </div>
       <div>
           <form @submit="submitEditPost">
-            <label>Title</label>
-            <input type="text" v-model="title">
-            <label>Description</label>
-            <input type="text" v-model="description">
-            <button>Submit</button>
+            <v-text-field type="text" label="Title" v-model="title"></v-text-field>
+            <v-text-field type="text" label="Description" v-model="description"></v-text-field>
+            <v-btn type="submit">Submit</v-btn>
           </form>
       </div>
   </div>
