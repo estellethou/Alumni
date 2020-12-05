@@ -6,6 +6,7 @@ import JobEdit from '../views/JobEdit.vue'
 import Forum from "../views/Forum.vue"
 import DetailsPost from "../views/DetailsPost"
 import Profile from '../views/Profile.vue'
+import OtherProfile from '../views/OtherProfile.vue'
 import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
 import store from '../store'
@@ -49,9 +50,15 @@ const routes = [
   },
 
   {
-    path: '/profile',
+    path: '/profile', //profile of user connected 
     name: 'Profile',
     component: Profile,
+  },
+  {
+    path: '/profile/:profileId/:userId',
+    name: 'OtherProfile',
+    component: OtherProfile,
+    props: true
   },
   {
     path: '/signin',
