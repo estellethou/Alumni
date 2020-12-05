@@ -54,6 +54,7 @@
                         Login
                       </v-btn>
                     </v-col>
+                    <span>Forgot your password ?  Reset it <router-link to="/resetpassword">here</router-link></span>
                   </v-row>
                 </v-form>
               </v-card-text>
