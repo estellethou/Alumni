@@ -54,15 +54,17 @@
             alt="logo-web"
         /></a> 
       </v-card>
-   <embed
+      <div class="resume">
+        <embed
         :src="
           'http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/' +
           getOneProfile.resume
         "
         type="application/pdf"
-        width="100%"
+        width="70%"
         height="800"
-      />  
+      /> 
+      </div> 
     </div>
 </template>
 
@@ -107,6 +109,10 @@ export default {
   position: relative;
   top: 70%;
   left: 45%;
+}
+
+.resume{
+  width: 100%;
 }
 
 .side-img {
