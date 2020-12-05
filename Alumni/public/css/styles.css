@@ -12,3 +12,12 @@ th:hover, td:hover {
     white-space: normal;
     word-break: break-all;
 }
+
+.active{
+    background-color: white;
+    color: black !important;
+}
+
+ul.navbar-nav.flex-sm-column{
+    width: 100%;
+}
