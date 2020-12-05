@@ -2,18 +2,14 @@
       <v-card>
           <div class="container-titlePost">
               <router-link v-bind:to="`/post/${post.id}`"><h3>{{post.title}}</h3><span>{{ timeAgo(Date.parse(post.created_at)) }}</span></router-link>
-              <button @click="openEditModalPost">Edit</button>
+              <v-btn @click="openEditModalPost">Edit</v-btn>
               <div class="container-modalEditPost" v-if="isOpen">
                   <EditPostModal v-bind:singlePost="post" v-on:close="updateParentProps(false)"/>
               </div>
-              <button @click="removePost(post.id)">delete post</button>  
+              <v-btn @click="removePost(post.id)">delete post</v-btn>  
           </div>
           <div class="container-descriptionPost">
               <p>{{post.description}}</p>
-          </div>
-          <div>
-              <p>comment number<span></span></p>
-              <button @click="countComment">duxbchbds</button> 
           </div>
       </v-card>
 </template>
