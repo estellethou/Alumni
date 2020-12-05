@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="container">
+        <div class="container" v-if="user.role == 'alumni'">
             <h1>Create a new Job/Internship</h1>
 
             <!-- new job/intership form ===================== -->
@@ -87,10 +87,15 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
     name: 'ListJobsAdd',
+
+    computed: {
+        ...mapGetters(["user"])
+    },
+    
 
     data() {
         return {
@@ -127,7 +132,7 @@ export default {
                 contract_duration: this.contractDuration,
                 company_name: this.company,
                 sector: this.sector,
-                user_id: 1, // toDo: change with user_id
+                user_id: this.user.id,
             };
             this.addJob(newJob);
             this.jobTitle = "";
