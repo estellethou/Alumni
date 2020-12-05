@@ -3,7 +3,7 @@
     <v-row justify="center">
       <v-dialog v-model="dialog" persistent max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn color="primary" dark v-bind="attrs" v-on="on">
+          <v-btn depressed class="btn-modal" v-bind="attrs" v-on="on">
             Edit profile
           </v-btn>
         </template>
@@ -243,6 +243,9 @@ export default {
 </script>
 
 <style>
-
+.btn-modal{
+  color: white !important;
+  background-color: rgb(0, 118, 253) !important
+}
 </style>
 
