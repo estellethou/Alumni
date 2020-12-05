@@ -63,6 +63,7 @@
         type="application/pdf"
         width="70%"
         height="800"
+        class="resume-content"
       /> 
       </div> 
     </div>
@@ -113,6 +114,10 @@ export default {
 
 .resume{
   width: 100%;
+}
+
+.resume-content{
+  justify-content: space-between;
 }
 
 .side-img {
