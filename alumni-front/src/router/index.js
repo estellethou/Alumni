@@ -6,8 +6,11 @@ import JobEdit from '../views/JobEdit.vue'
 import Forum from "../views/Forum.vue"
 import DetailsPost from "../views/DetailsPost"
 import Profile from '../views/Profile.vue'
-import SignIn from '../views/SignIn.vue'
+import OtherProfile from '../views/OtherProfile.vue'
+import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
+import RecruterForm from "../views/RecruterForm"
+import ResetPassword from '../views/ResetPassword.vue'
 import store from '../store'
 
 
@@ -18,6 +21,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/recruter',
+    name: 'RecruterForm',
+    component: RecruterForm
   },
 
   {
@@ -34,6 +42,11 @@ const routes = [
     props: true,
   },
 
+  {
+    path: '/resetpassword',
+    name: 'ResetPassword',
+    component: ResetPassword
+  },
   
   {
     path: '/forum',
@@ -45,28 +58,33 @@ const routes = [
     path: '/post/:id',
     name: 'DetailPost',
     component: DetailsPost,
+    props:true,
   },
 
   {
-    path: '/profile',
+    path: '/profile', //profile of user connected 
     name: 'Profile',
     component: Profile,
   },
   {
+    path: '/profile/:profileId/:userId',
+    name: 'OtherProfile',
+    component: OtherProfile,
+    props: true
+  },
+  {
     path: '/signin',
-    name: 'SignIn',
-    component: SignIn
+    name: 'Login',
+    component: Login
   },
   {
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
     beforeEnter: (to, from, next) => {
-      // console.log(store.getters['authenticated'])
-      // console.log(next)
       if (!store.getters['authenticated']){
         return next({
-          name:'SignIn'
+          name:'Login'
         })
       }
       next()

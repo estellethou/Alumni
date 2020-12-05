@@ -54,15 +54,13 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $profile->update($request->all()); // ???
         //Get profile id
         $profile = Profile::find($id);
         //check policy first
         $this->authorize('update', $profile);
 
-        $profile->update($request->except('image'));
-        
-        if (request('image')) {
+        $profile->update($request->except(['image','resume']));
+            if ($request->image) {
             $exploded = explode(',', $request->image);
             $decoded = base64_decode($exploded[1]);
             if (str_contains($exploded[0], 'jpeg')) {
@@ -73,12 +71,24 @@ class ProfileController extends Controller
             $name = substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(10/strlen($x)))), 1, 10);
             $filename = $name.'.'.$extension;
             $path = public_path().'/'.$filename;
-            file_put_contents($path, $decoded); //save the decoded image to the pa
+            file_put_contents($path, $decoded); //save the decoded image to the path
             $profile->update(['image' => $filename ?? '']);    
+        }
+        if ($request->resume) {
+            $exploded = explode(',', $request->resume);
+            $decoded = base64_decode($exploded[1]);
+            if (str_contains($exploded[0], 'pdf')) {
+                $extension = 'pdf';
+            }
+            $name = substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(10/strlen($x)))), 1, 10);
+            $filename = $name.'.'.$extension;
+            $path = public_path().'/'.$filename;
+            file_put_contents($path, $decoded); //save the decoded resume to the pa
+            $profile->update(['resume' => $filename ?? '']);    
         }
         return $profile;
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *

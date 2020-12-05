@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Profile;
+use App\Models\Post;
+use App\Models\Job;
+use App\Models\Comment;
 
 use Illuminate\Http\Request;
 
@@ -93,6 +97,10 @@ class UserController extends Controller
         //check policy first
         $this->authorize('update', $user);
         //Delete user
+        Profile::destroy($id);
+        Comment::destroy($id);
+        Job::destroy($id);
+        Post::destroy($id);
         return User::destroy($id);
     }
 }

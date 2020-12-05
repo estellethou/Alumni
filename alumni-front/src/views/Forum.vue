@@ -2,11 +2,18 @@
   <div class="container-forum">
       <h1>Hello from Forum</h1>
       <input :keyup="searchInput" type="text" v-model="search" name="search" id="search">
-      <ListPosts v-bind:Posts="searchInput"/>
+      <div class="container-btnModal">
+          <v-btn @click="toggleModalPost">Add a post</v-btn>
+          <div v-if="isOpen" class="container-AddPostModal">
+                 <AddPostModal v-on:close="updateParent(false)"/>
+          </div>
+      </div>
+      <ListPosts v-bind:Posts="searchInput"/>   
   </div>
 </template>
 
 <script>
+import AddPostModal from "../components/forumComponents/AddPostModal"
 import ListPosts from "../components/forumComponents/ListPosts"
 import {mapGetters,mapActions} from "vuex"
 export default {
@@ -14,12 +21,14 @@ export default {
 
     data(){
         return{
-            search:""
+            search:"",
+            isOpen:false
         }
     },
 
     components:{
-        ListPosts
+        ListPosts,
+        AddPostModal
     },
 
     computed:{
@@ -27,7 +36,7 @@ export default {
 
         searchInput(){
             return this.getAllPosts.filter(post =>{
-                let lowerCase = post.title.toLowerCase()
+                let lowerCase = post.title.toLowerCase()+post.description.toLowerCase()
                 let search = this.search.toLowerCase()
                 return lowerCase.match(search)
             })
@@ -35,7 +44,14 @@ export default {
     },
 
     methods:{
-        ...mapActions(["allPosts"])
+        ...mapActions(["allPosts"]),
+
+        updateParent(bol){
+            this.isOpen = bol
+        },
+        toggleModalPost(){
+            this.isOpen = true
+        }
     },
 
     created(){
@@ -45,6 +61,19 @@ export default {
 }
 </script>
 
-<style>
+<style scope >
+.container-AddPostModal{
+    position:fixed;
+    background-color:beige;
+    height: 300px;
+    width: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
 
+}
+.container-btnModal{
+    margin-bottom: 25px;
+}
 </style>

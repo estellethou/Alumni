@@ -32,12 +32,9 @@ export default{
             if (token){
                 commit('set_token', token)
             }
-
             if(!state.token) {
                 return
             }
-            
-
             try{
                 let response = await axios.get('auth/user')
                 commit('set_user', response.data)
@@ -45,7 +42,35 @@ export default{
                 commit('set_token', null)
                 commit('set_user', null)
             }
+        },
+
+        signOut ({ commit }){
+            return axios.post('auth/logout').then(() => {
+                commit('set_token', null)
+                commit('set_user', null)
+            })
+        },
+
+        async register(_, userinfo){
+            let response = await axios.post('auth/register', userinfo)
+            return response.data.message
+        },
+
+        async sendToken(_, userinfo){
+            let response = await axios.post('send-token', userinfo)
+            return response.data
+        },
+
+        async validateToken(_, token){
+            let response = await axios.post('validate-token', token)
+            return response
+        },
+
+        async changePassword(_, userinfo){
+            let response = await axios.post('reset-password', userinfo)
+            return response
         }
+
     },
     
 
