@@ -1,18 +1,20 @@
 <template>
   <div class="home">
         <Header/> 
-        <h1>Hello from HOME</h1>
+        <Grid/>
   </div>
 </template>
 
 
 <script>
 import Header from "./../components/Header"
+import Grid from "./../components/Grid"
 export default {
   name:"Home",
   
   components:{
    Header,
+   Grid,
   }
 }
 </script>

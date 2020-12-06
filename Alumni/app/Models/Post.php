@@ -20,12 +20,9 @@ class Post extends Model
     }
 
     
-    public function user()
-    {
+    public function user(){
         return $this->belongsTo(User::class); 
     }
-}
-
 
     public function postUser(){
         return $this->belongTo('App/Model/User');

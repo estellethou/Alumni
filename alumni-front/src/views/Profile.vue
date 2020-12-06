@@ -138,7 +138,6 @@ export default {
   height: 240px;
 }
 
-
 .profile-img {
   border-radius: 50%;
   position: relative;
