@@ -21,7 +21,7 @@ export default {
 
 <style>
 .background-home {
-  background-image: url("http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/home.jpg");
+  background-image: url("https://alumni-coding.herokuapp.com/icons/home.jpg");
   background-size: 100% 300px;
   height: 300px;
 }

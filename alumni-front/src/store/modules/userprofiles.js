@@ -10,7 +10,7 @@ const getters = {
 
 const actions = {
     async setAllUserProfiles({commit}){
-        var response = await axios.get("http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/userprofiles")
+        var response = await axios.get("/userprofiles")
         commit("setMyAllUserProfiles", response.data)
     },
 }

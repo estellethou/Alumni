@@ -4,7 +4,7 @@
       <!----- MENU BUTTON (Left) ----->
       <div class="dropdown menu1">
         <img
-          src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/menu.png"
+          src="https://alumni-coding.herokuapp.com/icons/menu.png"
           alt="menu"
           width="2%"
           data-toggle="dropdown"
@@ -15,7 +15,7 @@
         <!----- EXIT BUTTON (Right) ----->
         <a href="#" @click.prevent="signOutButton">
           <img
-            src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/log-out.png"
+            src="https://alumni-coding.herokuapp.com/icons/log-out.png"
             alt="logout"
             width="40px"
             height="40px"

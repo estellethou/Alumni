@@ -9,14 +9,14 @@ const getters = {
 const actions = {
     async fetchAllJobs ({ commit }) {
         const response = await axios.get(
-            'http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/jobs'
+            '/jobs'
         );
         commit('setJobs', response.data);
     },
 
     async addJob ({ commit }, newJob) {
         const response = await axios.post(
-            'http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/jobs/post',
+            '/jobs/post',
             newJob
         );
         commit('addNewJob', response.data);
@@ -24,7 +24,7 @@ const actions = {
 
     async deleteJob({ commit}, id) {
         await axios.delete(
-            `http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/job/${id}`
+            `/job/${id}`
         );
         commit('removeJob', id);
     },
@@ -32,7 +32,7 @@ const actions = {
     async updateJob ({ commit }, updJob) {
         console.log(updJob);
         const response = await axios.put(
-            `http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/job/${updJob.id}/edit`,
+            `/job/${updJob.id}/edit`,
             updJob
         );
         console.log(response.data);

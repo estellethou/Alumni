@@ -14,28 +14,28 @@ const getters = {
 
 const actions = {
     async setAllUsers({commit}){
-        var response = await axios.get("http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/users")
+        var response = await axios.get("/users")
         commit("setMyAllUsers", response.data)
     },
 
     async setUser({commit}, userId){
-        var response = await axios.get(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/user/${userId}`)
+        var response = await axios.get(`/user/${userId}`)
         commit("setMyUser", response.data)
     },
 
     //async addUser({commit}, newUser){
-    //    var response = await axios.post("http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/auth/register", newUser)
-    //    response = await axios.get(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/auth/user`)
+    //    var response = await axios.post("/auth/register", newUser)
+    //    response = await axios.get(`/auth/user`)
     //    commit("addMyUser", response.data)
     //},
 
     async deleteUser({commit}, id){
-        await axios.delete(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/user/${id}`)
+        await axios.delete(`/user/${id}`)
         commit("deleteMyUser", id)
     },
 
     async updateUser({commit}, newUser){
-        var response = await axios.put(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/user/${newUser.id}/edit`, newUser)
+        var response = await axios.put(`/user/${newUser.id}/edit`, newUser)
         commit("updateMyUser", response.data)
     },
 }

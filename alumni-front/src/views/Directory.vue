@@ -14,7 +14,7 @@
         </thead>
         <tbody>
           <tr v-for="userprofile in getAllUserProfiles"  :key="userprofile.id" @click="goToProfile(userprofile.id, userprofile.user_id)">
-            <td v-if="userprofile.image !== null"><v-avatar size="30"><img v-bind:src="'http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/'+ userprofile.image" alt="Avatar"/></v-avatar> {{ userprofile.firstname }} {{ userprofile.lastname }}
+            <td v-if="userprofile.image !== null"><v-avatar size="30"><img v-bind:src="'https://alumni-coding.herokuapp.com/'+ userprofile.image" alt="Avatar"/></v-avatar> {{ userprofile.firstname }} {{ userprofile.lastname }}
             <td v-else><v-avatar color="light-blue darken-4" size="50"><v-icon dark>mdi-account-circle</v-icon></v-avatar>>{{ userprofile.firstname }} {{ userprofile.lastname }}</td>
             <td>{{ userprofile.email }}</td>
             <td>{{ userprofile.phone }}</td>

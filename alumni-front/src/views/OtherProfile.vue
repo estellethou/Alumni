@@ -7,7 +7,7 @@
         width="150"
         height="150"
         :src="
-          'http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/' +
+          'https://alumni-coding.herokuapp.com/' +
           getOneProfile.image
         "
         alt="profile-image"
@@ -17,7 +17,7 @@
           class="logo"
           width="180"
           height="80"
-          src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/logo.png"
+          src="https://alumni-coding.herokuapp.com/icons/logo.png"
           alt="logo"
         />
 
@@ -34,7 +34,7 @@
           <div class="col-4">
             <img
               width="10%"
-              src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/telephone.png"
+              src="https://alumni-coding.herokuapp.com/icons/telephone.png"
               alt="logo"
             />
         {{ getOneProfile.phone }}
@@ -42,7 +42,7 @@
         <div class="col-4">
             <img
               width="10%"
-              src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/email.png"
+              src="https://alumni-coding.herokuapp.com/icons/email.png"
               alt="logo"
             />
         {{ getOneUser.email }}
@@ -50,19 +50,19 @@
              <div class="col-4">
       <a :href="getOneProfile.url_linkedin" class="icon-url col-4"
         ><img
-          src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/blo.png"
+          src="https://alumni-coding.herokuapp.com/icons/blo.png"
           width="8%"
           alt="logo-linkedin"
       /></a>
       <a :href="getOneProfile.url_github" class="icon-url col-4"
         ><img
-          src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/git.jpg"
+          src="https://alumni-coding.herokuapp.com/icons/git.jpg"
           width="8%"
           alt="logo-github"
       /></a>
       <a :href="getOneProfile.url_website" class="icon-url col-4"
         ><img
-          src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/web.png"
+          src="https://alumni-coding.herokuapp.com/icons/web.png"
           width="8%"
           alt="logo-web"
       /></a>
@@ -73,7 +73,7 @@
     <div class="resume">
       <embed
         :src="
-          'http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/' +
+          'https://alumni-coding.herokuapp.com/' +
           getOneProfile.resume
         "
         type="application/pdf"
@@ -116,7 +116,7 @@ export default {
   margin: auto;
 }
 .background {
-  background-image: url("http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/background.jpg");
+  background-image: url("https://alumni-coding.herokuapp.com/icons/background.jpg");
   background-size: 100% 300px;
   height: 240px;
 }

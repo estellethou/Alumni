@@ -14,31 +14,31 @@ const getters = {
 
 const actions = {
     async setAllProfiles({commit}){
-        var response = await axios.get("http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/profiles")
+        var response = await axios.get("/profiles")
         commit("setMyAllProfiles", response.data)
     },
 
     async setProfile({commit}, profileId){ //id profile
-        var response = await axios.get(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/profile/${profileId}`)
+        var response = await axios.get(`/profile/${profileId}`)
         //console.log(response.data);
         commit("setMyProfile", response.data)
     },
 
 
     //async addProfile({commit}, newProfile){
-    //    var response = await axios.post("http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/profile", newProfile)
-    //    response = await axios.get(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/profile/${response.data.id}`)
+    //    var response = await axios.post("/profile", newProfile)
+    //    response = await axios.get(`/profile/${response.data.id}`)
     //    commit("addMyProfile", response.data)
     //},
 
     async deleteProfile({commit}, id){ //id profile (not id user)
-        await axios.delete(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/profile/${id}`)
+        await axios.delete(`/profile/${id}`)
         commit("deleteMyProfile", id)
     },
 
     async updateProfile({commit}, newProfile){
-        let response = await axios.patch(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/profile/${newProfile.id}/edit`, newProfile)
-        response = await axios.get(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/profiles`)
+        let response = await axios.patch(`/profile/${newProfile.id}/edit`, newProfile)
+        response = await axios.get(`/profiles`)
         commit("updateMyProfile", response.data)
     },
 }
