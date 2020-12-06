@@ -3,7 +3,7 @@
           <div class="container-titlePost">
               <v-container class="d-flex justify-space-between">
                    <router-link v-bind:to="`/post/${post.id}`">
-                    <div class="container-headerPost" v-if="getImageOfUser[0].image != ''">
+                    <div class="container-headerPost" v-if="getImageOfUser[0].image !== ''">
                         <v-avatar size="50"><img v-bind:src="'http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/'+ getImageOfUser[0].image" alt="Avatar"/></v-avatar>
                         <p>{{ timeAgo(Date.parse(post.created_at)) }}</p>
                       </div>
@@ -59,7 +59,7 @@ export default {
     }
     },
     methods:{
-        ...mapActions(["deletePost"]),
+        ...mapActions(["deletePost","setAllProfiles"]),
         removePost(id){
             this.deletePost(id)
         },
@@ -99,6 +99,9 @@ export default {
         },
         
     },
+      created(){
+    this.setAllProfiles()
+  }
 }
 
 </script>
