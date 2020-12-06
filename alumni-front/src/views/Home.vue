@@ -1,55 +1,20 @@
 <template>
   <div class="home">
-    <v-toolbar
-      extended
-      extension-height="100"
-      dark
-      prominent
-      src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/home.jpg"
-    >
-      <div class="dropdown menu1">
-        <img
-          src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/menu.png"
-          alt="menu"
-          width="8%"
-          data-toggle="dropdown"
-        />
-
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <router-link :to="`/profile`" class="dropdown-item">
-            Profile
-          </router-link>
-          <router-link :to="`/job`" class="dropdown-item">
-            Job / Internship
-          </router-link>
-          <router-link :to="`/forum`" class="dropdown-item">
-            Forum
-          </router-link>
-          <router-link :to="`/directory`" class="dropdown-item">
-            Directory
-          </router-link>
-          <router-link :to="`/directory`" class="dropdown-item">
-            Profile
-          </router-link>
-        </div>
-      </div>
-
-      <v-toolbar-title>Coding Academy - ALUMNI</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
-      <v-btn icon>
-        <v-icon>mdi-export</v-icon>
-      </v-btn>
-    </v-toolbar>
-    <router-view></router-view>
+        <Header/> 
+        <h1>Hello from HOME</h1>
   </div>
 </template>
 
+
 <script>
+import Header from "./../components/Header"
 export default {
-  name: "Home",
-};
+  name:"Home",
+  
+  components:{
+   Header,
+  }
+}
 </script>
 
 <style>
