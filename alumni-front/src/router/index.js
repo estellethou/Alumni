@@ -10,11 +10,8 @@ import OtherProfile from '../views/OtherProfile.vue'
 import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
 import RecruterForm from "../views/RecruterForm"
-<<<<<<< HEAD
 import PaymentForm from "../views/PaymentForm"
-=======
 import ResetPassword from '../views/ResetPassword.vue'
->>>>>>> f4c57f1c13bd995d7119cb2628910dba5730fc82
 import store from '../store'
 
 
