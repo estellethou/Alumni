@@ -3,7 +3,7 @@
     <h1>Form Recruter to post new job offer </h1>
     <v-container>
         <v-form @submit="submitRecruterForm">
-            <v-text-field label="Job title" v-model="jobTitle"></v-text-field>
+            <v-text-field outlined color="primary" label="Job title" v-model="jobTitle"></v-text-field>
             <v-text-field label="Description" v-model="description"></v-text-field>
             <v-text-field label="Profile" v-model="profile"></v-text-field>
             <v-text-field label="Qualification" v-model="qualifications"></v-text-field>
@@ -15,8 +15,9 @@
             <v-text-field label="Contract duration" v-model="contractDuration"></v-text-field>
             <v-text-field label="Compagny" v-model="company"></v-text-field>
             <v-text-field label="Sector" v-model="sector"></v-text-field>
-            <v-btn type="submit">Submit</v-btn>
+            <router-link to="/recruter/payment"><v-btn type="submit">Submit</v-btn></router-link>
         </v-form>
+
       </v-container>
 </div>
 </template>
@@ -25,6 +26,7 @@
 import {mapActions} from "vuex"
 export default {
     name:"RecruterForm",
+
     data(){
         return{
             jobTitle:"",
@@ -39,6 +41,9 @@ export default {
             contractDuration:"",
             company:"",
             sector:"",
+
+            clicked:false,
+            res:0
         }
     },
 
@@ -62,7 +67,6 @@ export default {
                 sector: this.sector,
                 user_id: 1, //NEED TO CHECK THE USER_ID
             }
-            this.addJob(newJobOffer)
             this.jobTitle=""
             this.description=""
             this.profile="",
@@ -75,7 +79,12 @@ export default {
             this.contractDuration=""
             this.company=""
             this.sector=""
-        }
+
+            if(this.res > 1){
+                 this.addJob(newJobOffer)
+            }
+        },
+    
     }
 }
 </script>
