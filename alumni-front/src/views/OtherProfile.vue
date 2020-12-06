@@ -1,5 +1,6 @@
 <template>
   <div class="profile container">
+    <HeaderProfile/>
     <div class="background">
       <img
         class="profile-img"
@@ -29,40 +30,45 @@
       <p>{{ getOneProfile.description }}</p>
     </div>
     <v-card class="mx-auto container">
-      <p>
-        <img
-          width="2%"
-          src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/telephone.png"
-          alt="logo"
-        />
+         <div class="d-flex justify-content-between">
+          <div class="col-4">
+            <img
+              width="10%"
+              src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/telephone.png"
+              alt="logo"
+            />
         {{ getOneProfile.phone }}
-      </p>
-      <p>
-        <img
-          width="2%"
-          src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/email.png"
-          alt="logo"
-        />
+      </div>
+        <div class="col-4">
+            <img
+              width="10%"
+              src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/email.png"
+              alt="logo"
+            />
         {{ getOneUser.email }}
-      </p>
-      <a :href="getOneProfile.url_linkedin"
+          </div>
+             <div class="col-4">
+      <a :href="getOneProfile.url_linkedin" class="icon-url col-4"
         ><img
           src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/blo.png"
-          width="2%"
+          width="8%"
           alt="logo-linkedin"
       /></a>
-      <a :href="getOneProfile.url_github"
+      <a :href="getOneProfile.url_github" class="icon-url col-4"
         ><img
           src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/git.jpg"
-          width="2%"
+          width="8%"
           alt="logo-github"
       /></a>
-      <a :href="getOneProfile.url_website"
+      <a :href="getOneProfile.url_website" class="icon-url col-4"
         ><img
           src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/web.png"
-          width="2%"
+          width="8%"
           alt="logo-web"
       /></a>
+
+</div>
+        </div>
     </v-card>
     <div class="resume">
       <embed
@@ -80,10 +86,11 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import HeaderProfile from "@/components/ProfileComponents/HeaderProfile";
 export default {
   props: ["profileId", "userId"],
   name: "OtherProfile",
-  components: {},
+  components: {HeaderProfile},
   data() {
     return {};
   },

@@ -8,7 +8,7 @@ import DetailsPost from "../views/DetailsPost"
 import Profile from '../views/Profile.vue'
 import OtherProfile from '../views/OtherProfile.vue'
 import Login from '../views/Login.vue'
-import Dashboard from '../views/Dashboard.vue'
+//import Dashboard from '../views/Dashboard.vue'
 import RecruterForm from "../views/RecruterForm"
 import ResetPassword from '../views/ResetPassword.vue'
 import Directory from '../views/Directory.vue'
@@ -21,7 +21,15 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    beforeEnter: (to, from, next) => {
+      if (!store.getters['authenticated']){
+        return next({
+          name:'Login'
+        })
+      }
+      next()
+      }
   },
   {
     path: '/recruter',
@@ -84,19 +92,6 @@ const routes = [
     name: 'Login',
     component: Login
   },
-  {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: Dashboard,
-    beforeEnter: (to, from, next) => {
-      if (!store.getters['authenticated']){
-        return next({
-          name:'Login'
-        })
-      }
-      next()
-      }
-    },
 ]
 
 const router = new VueRouter({
