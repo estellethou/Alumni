@@ -13,6 +13,7 @@ import RecruterForm from "../views/RecruterForm"
 import PaymentForm from "../views/PaymentForm"
 import ResetPassword from '../views/ResetPassword.vue'
 import Directory from '../views/Directory.vue'
+import Event from '../views/Event.vue'
 import store from '../store'
 
 
@@ -55,6 +56,14 @@ const routes = [
     path: '/job/edit/:id',
     name: 'JobEdit',
     component: JobEdit,
+    beforeEnter: (to, from, next) => {
+      if (!store.getters['authenticated']){
+        return next({
+          name:'Login'
+        })
+      }
+      next()
+      },
     props: true,
   },
 
@@ -67,7 +76,15 @@ const routes = [
   {
     path: '/forum',
     name: 'Forum',
-    component: Forum
+    component: Forum,
+    beforeEnter: (to, from, next) => {
+      if (!store.getters['authenticated']){
+        return next({
+          name:'Login'
+        })
+      }
+      next()
+      }
   },
 
   {
@@ -75,29 +92,66 @@ const routes = [
     name: 'DetailPost',
     component: DetailsPost,
     props:true,
+    beforeEnter: (to, from, next) => {
+      if (!store.getters['authenticated']){
+        return next({
+          name:'Login'
+        })
+      }
+      next()
+      }
   },
 
   {
     path: '/profile', //profile of user connected 
     name: 'Profile',
     component: Profile,
+    beforeEnter: (to, from, next) => {
+      if (!store.getters['authenticated']){
+        return next({
+          name:'Login'
+        })
+      }
+      next()
+      }
   },
   {
     path: '/directory',
     name: 'Directory',
     component: Directory,
+    beforeEnter: (to, from, next) => {
+      if (!store.getters['authenticated']){
+        return next({
+          name:'Login'
+        })
+      }
+      next()
+      }
   },
   {
     path: '/profile/:profileId/:userId',
     name: 'OtherProfile',
     component: OtherProfile,
-    props: true
+    props: true,
+    beforeEnter: (to, from, next) => {
+      if (!store.getters['authenticated']){
+        return next({
+          name:'Login'
+        })
+      }
+      next()
+      }
 
   },
   {
     path: '/signin',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/event',
+    name: 'Event',
+    component: Event
   },
 ]
 
