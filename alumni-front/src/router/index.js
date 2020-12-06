@@ -10,6 +10,7 @@ import OtherProfile from '../views/OtherProfile.vue'
 import Login from '../views/Login.vue'
 //import Dashboard from '../views/Dashboard.vue'
 import RecruterForm from "../views/RecruterForm"
+import PaymentForm from "../views/PaymentForm"
 import ResetPassword from '../views/ResetPassword.vue'
 import Directory from '../views/Directory.vue'
 import store from '../store'
@@ -22,6 +23,23 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+  },
+  {
+    path: '/recruter',
+    name: 'RecruterForm',
+    component: RecruterForm
+  },
+  {
+    path: '/recruter/payment',
+    name: 'PaymentForm',
+    component: PaymentForm
+  },
+  
+  {
+    path: '/job',
+    name: 'Job',
+    component: Job,
+     // USED TO PROTECT ROUTE
     beforeEnter: (to, from, next) => {
       if (!store.getters['authenticated']){
         return next({
@@ -31,18 +49,7 @@ const routes = [
       next()
       }
   },
-  {
-    path: '/recruter',
-    name: 'RecruterForm',
-    component: RecruterForm
-  },
-
-  {
-    path: '/job',
-    name: 'Job',
-    component: Job
-  },
-
+  
   {
     // path: '/job/edit/:id/:jobData',
     path: '/job/edit/:id',

@@ -1,14 +1,20 @@
 <template>
-    <div class="container-addComment">
-        <v-form @submit="submitComment">
-            <v-text-field label="New comment" :rules="rules" hide-details="auto" v-model="newComment"></v-text-field>
-            <v-btn class="mt-20" type="submit">Add new comment</v-btn>
+    <v-container class="container-addComment">
+        <v-card>
+            <v-card-text>
+                <v-form @submit="submitComment">
+                    <v-text-field label="New comment" v-model="newComment"></v-text-field>
+                    <div class="container-btnNewComment">
+                        <v-btn color="primary" type="submit">Add new comment</v-btn>
+                    </div>
         </v-form>
-    </div>
+            </v-card-text>
+        </v-card>
+    </v-container>
 </template>
 
 <script>
-import {mapActions} from "vuex"
+import {mapActions,mapGetters} from "vuex"
 export default {
     props:["detail"],
     name:"AddComment",
@@ -16,10 +22,6 @@ export default {
     data(){
         return{
             newComment:"",
-            rules: [
-                value => !!value || 'Required.',
-                value => (value && value.length >= 5) || 'Min 5 characters',
-            ],
         }
     },
 
@@ -30,18 +32,24 @@ export default {
             let newComment ={
                 comment:this.newComment,
                 posts_id:this.detail.id,
-                 //CHANGE THE USER_ID BY THE USER_ID OF THE PERSONNE CONNECTED
-                user_id:2
+                user_id:this.user.id
                 
             }
             console.log(newComment)
             this.addComment(newComment)
             this.newComment=""
       }
+    },
+
+    computed:{
+        ...mapGetters(["user"])
     }
 }
 </script>
 
-<style>
-
+<style scope>
+.container-btnNewComment{
+    display:flex;
+    justify-content: flex-end;
+}
 </style>

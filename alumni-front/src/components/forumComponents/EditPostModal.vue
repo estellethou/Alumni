@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import {mapActions} from "vuex"
+import {mapActions,mapGetters} from "vuex"
 export default {
     name:"EditPostModal",
     props:["singlePost"],
@@ -35,7 +35,7 @@ export default {
                 id:this.singlePost.id,
                 title:this.title,
                 description:this.description,
-                user_id:2
+                user_id:this.user.id
             }
             this.editPost(updatePost)
             this.title=""
@@ -46,6 +46,9 @@ export default {
         closeEditModalPost(){
             this.$emit("close",false)
         }
+    },
+    computed:{
+        ...mapGetters(["user"])
     }
 }
 </script>
