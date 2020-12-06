@@ -2,7 +2,7 @@
   <v-container>
     <v-card>
       <v-card-title class="justify-space-between">
-        <div class="sideByside" v-if="getImageOfUser[0].image != ''">
+        <div class="sideByside" v-if="getImageOfUser[0].image !== ''">
           <v-avatar size="50"><img v-bind:src="'http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/'+ getImageOfUser[0].image" alt="Avatar"/></v-avatar>
               <p>{{ timeAgo(Date.parse(comment.created_at)) }}</p>
         </div>
@@ -48,7 +48,7 @@ export default {
     },
 
     methods:{
-        ...mapActions(["deleteComment","editComment"]),
+        ...mapActions(["deleteComment","editComment","setAllProfiles"]),
 
         updateComment(){
           event.preventDefault()
@@ -65,7 +65,6 @@ export default {
         },
 
         removeComment(id){
-          console.log(this.getImageOfUser)
             this.deleteComment(id)
         },
 
@@ -122,6 +121,9 @@ export default {
       })
     }
   },
+  created(){
+    this.setAllProfiles()
+  }
 
 }
 </script>

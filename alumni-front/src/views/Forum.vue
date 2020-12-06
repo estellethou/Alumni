@@ -60,9 +60,11 @@ export default {
         },
         toggleModalPost(){
             this.isOpen = true
+        },
+        hideModalPost(){
+            this.isOpen = false
         }
     },
-
     created(){
         this.allPosts()
     }
