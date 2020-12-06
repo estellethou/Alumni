@@ -1,10 +1,10 @@
 <template>
 <div>
    <Header/> 
-    <v-simple-table dark>
+    <v-simple-table>
       <template v-slot:default>
         <thead>
-          <tr >
+          <tr blue>
             <th class="text-left">Name</th>
             <th class="text-left">Email</th>
             <th class="text-left">Phone</th>
@@ -13,7 +13,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="userprofile in getAllUserProfiles"  :key="userprofile.id">
+          <tr v-for="userprofile in getAllUserProfiles"  :key="userprofile.id" @click="goToProfile(userprofile.id, userprofile.user_id)">
             <td>{{ userprofile.firstname }} {{ userprofile.lastname }}</td>
             <td>{{ userprofile.email }}</td>
             <td>{{ userprofile.phone }}</td>
@@ -35,6 +35,9 @@ export default {
   name: "Directory",
   methods: {
     ...mapActions(["setAllUserProfiles"]),
+    goToProfile(profileid, userid){
+      this.$router.push(`/profile/${profileid}/${userid}`)
+    }
   },
   components:{
    Header,

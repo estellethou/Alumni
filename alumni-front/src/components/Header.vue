@@ -69,7 +69,9 @@ export default {
     signOutButton() {
       this.signOut()
       .then(() => {
-        if(this.$router.path == ('/')) this.$router.push('/')
+        if(this.$router.path !== ('/')){
+          this.$router.push('/')
+        } 
       })
     },
   },
