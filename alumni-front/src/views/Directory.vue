@@ -14,8 +14,8 @@
         </thead>
         <tbody>
           <tr v-for="userprofile in getAllUserProfiles"  :key="userprofile.id" @click="goToProfile(userprofile.id, userprofile.user_id)">
-            <td v-if="userprofile.image !== null"><v-avatar size="30"><img v-bind:src="'https://coding-academy-alumni.herokuapp.com/'+ userprofile.image" alt="Avatar"/></v-avatar> {{ userprofile.firstname }} {{ userprofile.lastname }}
-            <td v-else><v-avatar color="light-blue darken-4" size="50"><v-icon dark>mdi-account-circle</v-icon></v-avatar>>{{ userprofile.firstname }} {{ userprofile.lastname }}</td>
+            <td v-if="userprofile.image !== ''"><v-avatar size="30"><img v-bind:src="'https://coding-academy-alumni.herokuapp.com/'+ userprofile.image" alt="Avatar"/></v-avatar> {{ userprofile.firstname }} {{ userprofile.lastname }}
+            <td v-else><v-avatar color="light-blue darken-4" size="50"><v-icon dark>mdi-account-circle</v-icon></v-avatar>{{ userprofile.firstname }} {{ userprofile.lastname }}</td>
             <td>{{ userprofile.email }}</td>
             <td>{{ userprofile.phone }}</td>
             <td>{{ userprofile.description }}</td>
@@ -46,6 +46,7 @@ export default {
 
   computed: {
     ...mapGetters(["getAllUserProfiles", "authenticated"]),
+
   },
 
   created() {
