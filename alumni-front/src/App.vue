@@ -1,20 +1,23 @@
 <template>
-  <div id="app">
+  <v-app>
     <NavBar/>
-    <router-view/>
-  </div>
+    <v-main>
+      <router-view></router-view>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
 import NavBar from "./components/NavBar"
 export default {
-  name:"App",
-  
-  components:{
-    NavBar,
-  }
-}
-</script>
+  name: 'App',
 
-<style>
-</style>
+  components: {
+    NavBar
+  },
+
+  data: () => ({
+    //
+  }),
+};
+</script>

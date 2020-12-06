@@ -64,3 +64,8 @@ Route::delete('/job/{id}', [App\Http\Controllers\JobController::class, 'destroy'
 // Route::resource('jobs', 'App\Http\Controllers\JobController');
 
 
+//API PAYMENT //
+Route::post('/checkout','App\Http\Controllers\CheckoutController@store');
+
+
+
