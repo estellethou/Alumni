@@ -156,7 +156,7 @@ export default {
       if (this.$refs.loginForm.validate()) {
         this.signIn({ email: this.loginEmail, password: this.loginPassword })
           .then(() => {
-            this.$router.push('/'),
+            this.$router.push('/')
             this.$swal({
               title: "User Sign in",
               text: "Welcome back",

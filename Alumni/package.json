@@ -22,5 +22,7 @@
         "sass-loader": "^8.0.0",
         "vue-template-compiler": "^2.6.10"
     },
-    "dependencies": {}
+    "dependencies": {
+        "mdi-vue": "^1.8.1"
+    }
 }
