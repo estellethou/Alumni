@@ -11,7 +11,8 @@
                  <AddPostModal v-on:close="updateParent(false)"/>
           </div>
       </div>
-      <ListPosts v-bind:Posts="searchInput"/>   
+      <ListPosts v-bind:Posts="searchInput"/>
+    </div> 
   </v-container>
 </template>
 
