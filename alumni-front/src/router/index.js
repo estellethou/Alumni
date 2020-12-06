@@ -8,10 +8,11 @@ import DetailsPost from "../views/DetailsPost"
 import Profile from '../views/Profile.vue'
 import OtherProfile from '../views/OtherProfile.vue'
 import Login from '../views/Login.vue'
-import Dashboard from '../views/Dashboard.vue'
+//import Dashboard from '../views/Dashboard.vue'
 import RecruterForm from "../views/RecruterForm"
 import PaymentForm from "../views/PaymentForm"
 import ResetPassword from '../views/ResetPassword.vue'
+import Directory from '../views/Directory.vue'
 import store from '../store'
 
 
@@ -21,7 +22,15 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    beforeEnter: (to, from, next) => {
+      if (!store.getters['authenticated']){
+        return next({
+          name:'Login'
+        })
+      }
+      next()
+      }
   },
   {
     path: '/recruter',
@@ -73,29 +82,22 @@ const routes = [
     component: Profile,
   },
   {
+    path: '/directory',
+    name: 'Directory',
+    component: Directory,
+  },
+  {
     path: '/profile/:profileId/:userId',
     name: 'OtherProfile',
     component: OtherProfile,
     props: true
+
   },
   {
     path: '/signin',
     name: 'Login',
     component: Login
   },
-  {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: Dashboard,
-    beforeEnter: (to, from, next) => {
-      if (!store.getters['authenticated']){
-        return next({
-          name:'Login'
-        })
-      }
-      next()
-      }
-    },
 ]
 
 const router = new VueRouter({

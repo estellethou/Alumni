@@ -1,5 +1,8 @@
 <template>
   <v-container class="container-forum">
+  <div class="container-forum">
+         <Header/>
+
       <h1>Hello from Forum</h1>
       <v-text-field :keyup="searchInput" outlined type="text" v-model="search" label="Search"></v-text-field>
       <div class="container-btnModal">
@@ -16,6 +19,7 @@
 import AddPostModal from "../components/forumComponents/AddPostModal"
 import ListPosts from "../components/forumComponents/ListPosts"
 import {mapGetters,mapActions} from "vuex"
+import Header from "./../components/Header"
 export default {
     name:"Forum",
 
@@ -28,7 +32,8 @@ export default {
 
     components:{
         ListPosts,
-        AddPostModal
+        AddPostModal,
+        Header
     },
 
     computed:{

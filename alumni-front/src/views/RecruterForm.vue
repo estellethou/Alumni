@@ -1,5 +1,6 @@
 <template>
 <div>
+     <Header/>
     <h1>Form Recruter to post new job offer </h1>
     <v-container>
         <v-form @submit="submitRecruterForm">
@@ -24,9 +25,13 @@
 
 <script>
 import {mapActions} from "vuex"
+import Header from "./../components/Header"
 export default {
     name:"RecruterForm",
 
+     components:{
+   Header,
+  },
     data(){
         return{
             jobTitle:"",

@@ -1,5 +1,6 @@
 <template>
     <div>
+         <Header/>
         <div class="Job">
             <h1>Hello from Job</h1>
             <div>
@@ -19,7 +20,7 @@
 import { mapActions, mapGetters } from "vuex"
 import ListJobs from "@/components/JobComponents/ListJobs.vue"
 import ListJobsAdd from "@/components/JobComponents/ListJobsAdd.vue"
-
+import Header from "./../components/Header"
 import GoogleMap from "@/components/GoogleMap.vue"
 
 
@@ -37,6 +38,7 @@ export default {
         ListJobsAdd,
         ListJobs,
         GoogleMap,
+        Header
     },
 
     computed: {
