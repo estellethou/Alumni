@@ -1,5 +1,5 @@
 <template>
-  <div class="container-details">
+  <v-container>
     <div v-for="(detail,index) in List" :key="index">
         <div class="detailsPost-title">
           <h1>{{detail.title}}</h1>
@@ -14,7 +14,7 @@
         <div>
         </div>
     </div>
-  </div>
+  </v-container>
 </template>
 
 <script>

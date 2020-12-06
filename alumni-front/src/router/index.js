@@ -10,6 +10,7 @@ import OtherProfile from '../views/OtherProfile.vue'
 import Login from '../views/Login.vue'
 //import Dashboard from '../views/Dashboard.vue'
 import RecruterForm from "../views/RecruterForm"
+import PaymentForm from "../views/PaymentForm"
 import ResetPassword from '../views/ResetPassword.vue'
 import Directory from '../views/Directory.vue'
 import store from '../store'
@@ -28,7 +29,12 @@ const routes = [
     name: 'RecruterForm',
     component: RecruterForm
   },
-
+  {
+    path: '/recruter/payment',
+    name: 'PaymentForm',
+    component: PaymentForm
+  },
+  
   {
     path: '/job',
     name: 'Job',
@@ -43,7 +49,7 @@ const routes = [
       next()
       }
   },
-
+  
   {
     // path: '/job/edit/:id/:jobData',
     path: '/job/edit/:id',

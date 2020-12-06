@@ -1,10 +1,16 @@
 <template>
-    <div class="container-addComment">
-        <v-form @submit="submitComment">
-            <v-text-field label="New comment" :rules="rules" hide-details="auto" v-model="newComment"></v-text-field>
-            <v-btn class="mt-20" type="submit">Add new comment</v-btn>
+    <v-container class="container-addComment">
+        <v-card>
+            <v-card-text>
+                <v-form @submit="submitComment">
+                    <v-text-field label="New comment" v-model="newComment"></v-text-field>
+                    <div class="container-btnNewComment">
+                        <v-btn color="primary" type="submit">Add new comment</v-btn>
+                    </div>
         </v-form>
-    </div>
+            </v-card-text>
+        </v-card>
+    </v-container>
 </template>
 
 <script>
@@ -16,10 +22,6 @@ export default {
     data(){
         return{
             newComment:"",
-            rules: [
-                value => !!value || 'Required.',
-                value => (value && value.length >= 5) || 'Min 5 characters',
-            ],
         }
     },
 
@@ -42,6 +44,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scope>
+.container-btnNewComment{
+    display:flex;
+    justify-content: flex-end;
+}
 </style>
