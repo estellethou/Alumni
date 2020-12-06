@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import {mapActions} from "vuex"
+import {mapActions,mapGetters} from "vuex"
 export default {
     props:["detail"],
     name:"AddComment",
@@ -32,14 +32,17 @@ export default {
             let newComment ={
                 comment:this.newComment,
                 posts_id:this.detail.id,
-                 //CHANGE THE USER_ID BY THE USER_ID OF THE PERSONNE CONNECTED
-                user_id:2
+                user_id:this.user.id
                 
             }
             console.log(newComment)
             this.addComment(newComment)
             this.newComment=""
       }
+    },
+
+    computed:{
+        ...mapGetters(["user"])
     }
 }
 </script>

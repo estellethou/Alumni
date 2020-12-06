@@ -2,8 +2,14 @@
   <v-container>
     <v-card>
       <v-card-title class="justify-space-between">
-              <v-avatar  color="primary" class="text--white" size="40"><v-icon dark>mdi-account-circle</v-icon></v-avatar>
+        <div class="sideByside" v-if="getImageOfUser[0].image != ''">
+          <v-avatar size="50"><img v-bind:src="'http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/'+ getImageOfUser[0].image" alt="Avatar"/></v-avatar>
               <p>{{ timeAgo(Date.parse(comment.created_at)) }}</p>
+        </div>
+        <div class="sideByside" v-else>
+          <v-avatar color="light-blue darken-4" size="50"><v-icon dark>mdi-account-circle</v-icon></v-avatar>
+          <p>{{ timeAgo(Date.parse(comment.created_at)) }}</p>
+        </div>
       </v-card-title>
       <v-card-text>
         <div  v-if="edit">
@@ -15,18 +21,18 @@
         </div>
         <div class="containerShowComment" v-else>
           <p>{{comment.comment}}</p>
-          <v-btn @click="toggleCommentInput" icon><v-icon>{{icons.mdiPencil}}</v-icon></v-btn>
+          <v-btn v-if="this.user.id == comment.user_id" @click="toggleCommentInput" icon><v-icon>{{icons.mdiPencil}}</v-icon></v-btn>
         </div>
       </v-card-text>
       <v-card-text>
-        <v-btn @click="removeComment(comment.id)" color="red lighten-1">Delete comment</v-btn>
+        <v-btn v-if="this.user.id == comment.user_id" @click="removeComment(comment.id)" color="error" depressed>Delete comment</v-btn>
       </v-card-text>
     </v-card>
     </v-container>
 </template>
 <script>
 import {mapActions,mapGetters} from "vuex"
-import { mdiPencil,mdiClose } from '@mdi/js';
+import { mdiPencil,mdiClose} from '@mdi/js';
 import ClickOutside from "vue-click-outside";
 export default {
     name:"Comment",
@@ -46,7 +52,6 @@ export default {
 
         updateComment(){
           event.preventDefault()
-          console.log(this.onePost.id)
 
           let updateComment ={
             id:this.comment.id,
@@ -60,6 +65,7 @@ export default {
         },
 
         removeComment(id){
+          console.log(this.getImageOfUser)
             this.deleteComment(id)
         },
 
@@ -68,6 +74,10 @@ export default {
         },
         closeToggleInput(){
           this.edit = false
+        },
+
+        getFirstLetter(){
+
         },
         
         timeAgo: (date) => {
@@ -104,8 +114,15 @@ export default {
   },
 
   computed:{
-    ...mapGetters([""])
-  }
+    ...mapGetters(["user","getAllProfiles"]),
+
+    getImageOfUser(){
+      return this.getAllProfiles.filter(profile =>{
+        return profile.user_id == this.comment.user_id
+      })
+    }
+  },
+
 }
 </script>
 
@@ -121,5 +138,13 @@ export default {
 .containerShowComment{
   display:flex;
   justify-content: space-between;
+}
+.sideByside{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.containerShowComment p{
+  font-size:20px
 }
 </style>

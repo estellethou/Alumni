@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <Header/>
     <div v-for="(detail,index) in List" :key="index">
         <div class="detailsPost-title">
           <h1>{{detail.title}}</h1>
@@ -18,6 +19,7 @@
 </template>
 
 <script>
+import Header from "../components/Header"
 import Comments from "../components/forumComponents/Comments"
 import AddComment from "../components/forumComponents/AddComment"
 import {mapGetters,mapActions} from "vuex"
@@ -26,7 +28,8 @@ export default {
 
     components:{
       Comments,
-      AddComment
+      AddComment,
+      Header
     },
     methods:{
       ...mapActions(["allComments"]),
@@ -53,5 +56,12 @@ export default {
 </script>
 
 <style>
-
+.detailsPost-title{
+  display: flex;
+  justify-content: center;
+}
+.detailsPost-description{
+    display: flex;
+  justify-content: center;
+}
 </style>

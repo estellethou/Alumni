@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import {mapActions} from  "vuex"
+import {mapActions,mapGetters} from  "vuex"
 export default {
 
     data(){
@@ -29,8 +29,7 @@ export default {
             const newPost ={
                 title:this.title,
                 description:this.description,
-                //NEED TO CHANGE THE USER_ID FOR THE USER_ID OF THE LOG IN PERSONNE//
-                user_id:2
+                user_id:this.user.id
             }
             this.addPost(newPost)
             this.title=""
@@ -41,6 +40,10 @@ export default {
         closeModal(){
             this.$emit("close",false)
         }
+    },
+
+    computed:{
+        ...mapGetters(["user"])
     }
 }
 </script>
