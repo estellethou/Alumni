@@ -1,5 +1,6 @@
 <template>
 <div>
+   <Header/> 
     <v-simple-table dark>
       <template v-slot:default>
         <thead>
@@ -28,11 +29,15 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import Header from "./../components/Header"
 
 export default {
   name: "Directory",
   methods: {
     ...mapActions(["setAllUserProfiles"]),
+  },
+  components:{
+   Header,
   },
 
   computed: {
