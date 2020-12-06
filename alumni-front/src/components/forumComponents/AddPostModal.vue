@@ -44,6 +44,7 @@ export default {
 
     computed:{
         ...mapGetters(["user"])
+
     },
 
 }
