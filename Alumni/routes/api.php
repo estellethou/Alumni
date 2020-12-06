@@ -69,4 +69,5 @@ Route::put('/job/{id}/edit', [App\Http\Controllers\JobController::class, 'update
 Route::delete('/job/{id}', [App\Http\Controllers\JobController::class, 'destroy']);
 // Route::resource('jobs', 'App\Http\Controllers\JobController');
 
+//Route to get all users and profiles information at the same place
 Route::get('/userprofiles', [UserProfileController::class, 'index']);
