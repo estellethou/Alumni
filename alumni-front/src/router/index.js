@@ -23,14 +23,6 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-    beforeEnter: (to, from, next) => {
-      if (!store.getters['authenticated']){
-        return next({
-          name:'Login'
-        })
-      }
-      next()
-      }
   },
   {
     path: '/recruter',
@@ -42,13 +34,21 @@ const routes = [
     name: 'PaymentForm',
     component: PaymentForm
   },
-
+  
   {
     path: '/job',
     name: 'Job',
-    component: Job
+    component: Job,
+      beforeEnter: (to, from, next) => {
+        if (!store.getters['authenticated']){
+          return next({
+            name:'Login'
+          })
+        }
+        next()
+        }
   },
-
+  
   {
     // path: '/job/edit/:id/:jobData',
     path: '/job/edit/:id',
