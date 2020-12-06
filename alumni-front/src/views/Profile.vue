@@ -1,5 +1,6 @@
 <template>
   <div class="profile container">
+    <HeaderProfile/>
     <div v-for="profile in filteredProfile" :key="profile.id">
       <div class="background">
         <img
@@ -95,11 +96,13 @@
 import { mapGetters, mapActions } from "vuex";
 import DeleteProfile from "@/components/ProfileComponents/DeleteProfile";
 import EditProfile from "@/components/ProfileComponents/EditProfile";
+import HeaderProfile from "@/components/ProfileComponents/HeaderProfile";
 export default {
   name: "Profile",
   components: {
     DeleteProfile,
     EditProfile,
+    HeaderProfile
   },
   data() {
     return {};
