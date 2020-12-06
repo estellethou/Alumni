@@ -5,7 +5,7 @@
         <div class="col-4 item">
           <div class="container-img">
             <img
-              src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/profile.png"
+              src="https://coding-academy-alumni.herokuapp.com/icons/profile.png"
               alt="profile"
               width="100%"
               height="85%"
@@ -25,7 +25,7 @@
         <div class="col-4 item">
           <div class="container-img">
             <img
-              src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/recruiters.jpg"
+              src="https://coding-academy-alumni.herokuapp.com/icons/recruiters.jpg"
               alt="recruiter"
               width="100%"
               height="85%"
@@ -43,7 +43,7 @@
         <div class="col-4 item">
           <div class="container-img">
             <img
-              src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/directory.png"
+              src="https://coding-academy-alumni.herokuapp.com/icons/directory.png"
               alt="directory"
               width="100%"
               height="85%"
@@ -67,7 +67,7 @@
         
           <div class="container-img">
             <img
-              src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/jobs.png"
+              src="https://coding-academy-alumni.herokuapp.com/icons/jobs.png"
               alt="job"
               width="100%"
               height="85%"
@@ -88,7 +88,7 @@
         
           <div class="container-img">
             <img
-              src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/forum.png"
+              src="https://coding-academy-alumni.herokuapp.com/icons/forum.png"
               alt="job"
               width="100%"
               height="85%"
@@ -109,7 +109,7 @@
          
           <div class="container-img">
             <img
-              src="http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/event.png"
+              src="https://coding-academy-alumni.herokuapp.com/icons/event.png"
               alt="event"
               width="100%"
               height="85%"

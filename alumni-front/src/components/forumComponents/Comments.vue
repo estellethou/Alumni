@@ -5,7 +5,7 @@
 
         <div class="sideByside" v-if="getImageOfUser[0].image !== ''">
 
-          <v-avatar size="50"><img v-bind:src="'https://alumni-coding.herokuapp.com/'+ getImageOfUser[0].image" alt="Avatar"/></v-avatar>
+          <v-avatar size="50"><img v-bind:src="'https://coding-academy-alumni.herokuapp.com/'+ getImageOfUser[0].image" alt="Avatar"/></v-avatar>
               <p>{{ timeAgo(Date.parse(comment.created_at)) }}</p>
         </div>
         <div class="sideByside" v-else>

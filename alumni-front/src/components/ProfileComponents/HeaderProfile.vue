@@ -4,7 +4,7 @@
       <!----- MENU BUTTON (Left) ----->
       <div class="dropdown menu1">
         <img
-          src="https://alumni-coding.herokuapp.com/icons/menu.png"
+          src="https://coding-academy-alumni.herokuapp.com/icons/menu.png"
           alt="menu"
           width="2%"
           data-toggle="dropdown"
@@ -15,7 +15,7 @@
         <!----- EXIT BUTTON (Right) ----->
         <a href="#" @click.prevent="signOutButton">
           <img
-            src="https://alumni-coding.herokuapp.com/icons/log-out.png"
+            src="https://coding-academy-alumni.herokuapp.com/icons/log-out.png"
             alt="logout"
             width="40px"
             height="40px"

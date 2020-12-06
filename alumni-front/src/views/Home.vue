@@ -21,7 +21,7 @@ export default {
 
 <style>
 .background-home {
-  background-image: url("https://alumni-coding.herokuapp.com/icons/home.jpg");
+  background-image: url("https://coding-academy-alumni.herokuapp.com/icons/home.jpg");
   background-size: 100% 300px;
   height: 300px;
 }

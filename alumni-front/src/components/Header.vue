@@ -4,7 +4,7 @@
       <!----- MENU BUTTON (Left) ----->
       <div class="dropdown menu1">
         <img
-          src="https://alumni-coding.herokuapp.com/icons/menu.png"
+          src="https://coding-academy-alumni.herokuapp.com/icons/menu.png"
           alt="menu"
           width="2%"
           data-toggle="dropdown"
@@ -15,7 +15,7 @@
         <!----- EXIT BUTTON (Right) ----->
         <a href="#" @click.prevent="signOutButton">
           <img
-            src="https://alumni-coding.herokuapp.com/icons/log-out.png"
+            src="https://coding-academy-alumni.herokuapp.com/icons/log-out.png"
             alt="logout"
             width="40px"
             height="40px"
@@ -81,7 +81,7 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap");
 .background-home {
-  background-image: url("https://alumni-coding.herokuapp.com/icons/home.jpg");
+  background-image: url("https://coding-academy-alumni.herokuapp.com/icons/home.jpg");
   background-size: 100% 300px;
   height: 300px;
 }
@@ -95,7 +95,7 @@ export default {
 
 .header {
   height: 280px;
-  background-image: url("https://alumni-coding.herokuapp.com/icons/home.jpg");
+  background-image: url("https://coding-academy-alumni.herokuapp.com/icons/home.jpg");
 }
 
 .hamburger {
