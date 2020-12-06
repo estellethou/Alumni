@@ -53,9 +53,7 @@ export default {
 
     signOutButton() {
         this.signOut().then(() => {
-            this.$router.replace({
-                name: 'Home'
-            })
+            this.$router.push('/')
         })
     }
     }

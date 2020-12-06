@@ -191,7 +191,7 @@ export default {
               confirmButtonText: "Ok",
             });
             this.signIn({ email: this.email, password: this.password });
-             this.$router.push('/')
+            this.$router.push('/');
           })
           .catch(() => {
             this.$swal({

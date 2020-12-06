@@ -67,11 +67,10 @@ export default {
     ...mapActions(["signOut"]),
 
     signOutButton() {
-      this.signOut().then(() => {
-        this.$router.replace({
-          name: "Home",
-        });
-      });
+      this.signOut()
+      .then(() => {
+        if(this.$router.path == ('/')) this.$router.push('/')
+      })
     },
   },
 };

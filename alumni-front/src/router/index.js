@@ -39,14 +39,15 @@ const routes = [
     path: '/job',
     name: 'Job',
     component: Job,
-      beforeEnter: (to, from, next) => {
-        if (!store.getters['authenticated']){
-          return next({
-            name:'Login'
-          })
-        }
-        next()
-        }
+     // USED TO PROTECT ROUTE
+    beforeEnter: (to, from, next) => {
+      if (!store.getters['authenticated']){
+        return next({
+          name:'Login'
+        })
+      }
+      next()
+      }
   },
   
   {
