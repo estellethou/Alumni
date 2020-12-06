@@ -72,6 +72,6 @@ Route::delete('/job/{id}', [App\Http\Controllers\JobController::class, 'destroy'
 //API PAYMENT //
 Route::post('/checkout','App\Http\Controllers\CheckoutController@store');
 
-//API Directory //
+//API Directory Route to get all users and profiles information at the same place
 Route::get('/userprofiles', [UserProfileController::class, 'index']);
 

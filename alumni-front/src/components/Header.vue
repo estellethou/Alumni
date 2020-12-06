@@ -23,6 +23,8 @@
           />
         </a>
 
+        <h1 class="title">CODING ACADEMY - ALUMNI</h1>
+
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <router-link :to="`/`" class="dropdown-item"> Home </router-link>
           <router-link :to="`/recruter`" class="dropdown-item">
@@ -43,11 +45,9 @@
             </router-link>
           </template>
           <template v-else>
-
               <router-link :to="{name: 'Login'}" class="dropdown-item">
                 Login / Register
               </router-link>
-
           </template>
         </div>
       </div>
@@ -67,21 +67,28 @@ export default {
     ...mapActions(["signOut"]),
 
     signOutButton() {
-      this.signOut().then(() => {
-        this.$router.replace({
-          name: "Home",
-        });
-      });
+      this.signOut()
+      .then(() => {
+        if(this.$router.path == ('/')) this.$router.push('/')
+      })
     },
   },
 };
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap");
 .background-home {
   background-image: url("http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/icons/home.jpg");
   background-size: 100% 300px;
   height: 300px;
+}
+
+.title{
+  font-family: "Nunito", sans-serif;
+  color: white;
+  margin-top: 1%;
+  text-align: center;
 }
 
 .header {

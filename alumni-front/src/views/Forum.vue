@@ -2,7 +2,6 @@
   <v-container class="container-forum">
   <div class="container-forum">
          <Header/>
-
       <h1>Hello from Forum</h1>
       <v-text-field :keyup="searchInput" outlined type="text" v-model="search" label="Search"></v-text-field>
       <div class="container-btnModal">
