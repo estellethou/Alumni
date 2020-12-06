@@ -10,6 +10,7 @@ import OtherProfile from '../views/OtherProfile.vue'
 import Login from '../views/Login.vue'
 //import Dashboard from '../views/Dashboard.vue'
 import RecruterForm from "../views/RecruterForm"
+import PaymentForm from "../views/PaymentForm"
 import ResetPassword from '../views/ResetPassword.vue'
 import Directory from '../views/Directory.vue'
 import store from '../store'
@@ -35,6 +36,11 @@ const routes = [
     path: '/recruter',
     name: 'RecruterForm',
     component: RecruterForm
+  },
+  {
+    path: '/recruter/payment',
+    name: 'PaymentForm',
+    component: PaymentForm
   },
 
   {

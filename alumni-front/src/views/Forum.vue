@@ -1,8 +1,10 @@
 <template>
+  <v-container class="container-forum">
   <div class="container-forum">
          <Header/>
+
       <h1>Hello from Forum</h1>
-      <input :keyup="searchInput" type="text" v-model="search" name="search" id="search">
+      <v-text-field :keyup="searchInput" outlined type="text" v-model="search" label="Search"></v-text-field>
       <div class="container-btnModal">
           <v-btn @click="toggleModalPost">Add a post</v-btn>
           <div v-if="isOpen" class="container-AddPostModal">
@@ -10,7 +12,7 @@
           </div>
       </div>
       <ListPosts v-bind:Posts="searchInput"/>   
-  </div>
+  </v-container>
 </template>
 
 <script>
