@@ -20,6 +20,12 @@ use App\Http\Controllers\AuthController;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
+//reset password routes
+Route::post('/send-token', [AuthController::class, 'sendToken']);
+Route::post('/validate-token', [AuthController::class, 'validateToken']);
+Route::post('/reset-password', [AuthController::class, 'resetPassword']);
+
 //auth route to login, register...
 Route::post('auth/login', [AuthController::class, 'login']);
 Route::post('auth/register', [AuthController::class, 'register']);
