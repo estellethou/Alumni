@@ -25,8 +25,8 @@
                       <p>{{post.description}}</p>
                   </div>
                   <div class="container-actionOnPost">
-                    <v-btn v-if="this.user.id == post.user_id" @click="removePost(post.id)" color="error">delete post</v-btn>
                     <router-link v-bind:to="`/post/${post.id}`"><v-btn icon><v-icon>{{icons.mdiCommentAccountOutline}}</v-icon><span>{{mapArrayNumberOfComment(getNumberOfComment)}}</span></v-btn></router-link>
+                    <v-btn v-if="this.user.id == post.user_id" @click="removePost(post.id)" color="error">delete post</v-btn>
                     <v-btn v-if="this.user.id == post.user_id" @click="openEditModalPost" color="primary">Edit</v-btn>
                     <div class="container-modalEditPost" v-if="isOpen">
                     <EditPostModal v-bind:singlePost="post" v-on:close="updateParentProps(false)"/> 
@@ -72,7 +72,6 @@ export default {
         },
         getNumberOfComment(){
             return this.getAllComments.filter(comment =>{
-                console.log(comment)
                 return comment.posts_id == this.post.id
             })
         }
@@ -148,7 +147,7 @@ export default {
     transform: translate(-50%, -50%);
     z-index: 1;
 }
-a{
+a span{
     text-decoration: none;
 }
 .container-headerPost{
