@@ -10,7 +10,11 @@
                 <div class="card-header">{{ 'Edit Profile' }}</div>
 
                 <div class="card-body">
-                    <form action="" id="edit_profile">
+                    <form action="{{ route('admin.user.profile.update',  [ $user->id ])}}" enctype="multipart/form-data"
+                        method="POST">
+                        @method('PATCH')
+                        @csrf
+
 
                         <div class="form-group row">
                             <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
@@ -102,7 +106,7 @@
                                 class="col-md-4 col-form-label text-md-right">{{ __('Pofile Image') }}</label>
                             <div class="col-md-6">
                                 <input id="image" type="file" class="form-control @error('image') is-invalid @enderror"
-                                    name="image" value="{{ old('image') ?? $user->profile->image }}" required
+                                    name="image" value="{{ old('image') ?? $user->profile->image }}"
                                     autocomplete="image" style="border:none">
 
                                 @error('image')
@@ -115,7 +119,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary" name="profile_edit_submit">
+                                <button type="submit" class="btn btn-primary">
                                     {{ 'Save Changes' }}
                                 </button>
                             </div>
