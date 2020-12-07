@@ -59,7 +59,7 @@
                 {{ $users->links() }}
             </div>
             <div>
-                <a href="{{ route('admin.users') }}" class="btn btn-primary">Reset View</a>
+                <a href="{{ route('admin.users') }}" class="btn btn-dark">Reset View</a>
             </div>
         </div>
     </div>
