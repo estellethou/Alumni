@@ -30,6 +30,6 @@ class ResetPasswordMailable extends Mailable
      */
     public function build()
     {
-        return $this->subject('Password Reset From Alumni-Coding')->view('reset-password');
+        return $this->subject('Password Reset From Alumni Coding Academy')->view('reset-password');
     }
 }

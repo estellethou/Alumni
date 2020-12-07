@@ -1,28 +1,31 @@
 <template>
-  <div>
-      <div>
-          <h1>Hello from EditModalPost</h1>
-          <button @click="closeEditModalPost">close</button>
+  <v-container>
+      <div class="title-modalEditPost">
+          <v-btn @click="closeEditModalPost" icon><v-icon>{{icons.mdiClose}}</v-icon></v-btn>
       </div>
       <div>
           <form @submit="submitEditPost">
             <v-text-field type="text" label="Title" v-model="title"></v-text-field>
             <v-text-field type="text" label="Description" v-model="description"></v-text-field>
-            <v-btn type="submit">Submit</v-btn>
+            <div class="btnSubmit-newPost">
+                 <v-btn type="submit" color="primary">Edit post</v-btn> 
+            </div>
           </form>
       </div>
-  </div>
+  </v-container>
 </template>
 
 <script>
 import {mapActions,mapGetters} from "vuex"
+import { mdiClose } from '@mdi/js';
 export default {
     name:"EditPostModal",
     props:["singlePost"],
     data(){
         return{
             title:this.singlePost.title,
-            description:this.singlePost.description
+            description:this.singlePost.description,
+            icons:{mdiClose}
         }
     },
 
@@ -53,6 +56,11 @@ export default {
 }
 </script>
 
-<style>
+<style scope>
+
+.title-modalEditPost{
+    display: flex;
+    justify-content: flex-end;
+}
 
 </style>

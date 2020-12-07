@@ -8,7 +8,6 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ 'Edit Profile' }}</div>
-
                 <div class="card-body">
                     <form action="{{ route('admin.user.profile.update',  [ $user->id ])}}" enctype="multipart/form-data"
                         method="POST">

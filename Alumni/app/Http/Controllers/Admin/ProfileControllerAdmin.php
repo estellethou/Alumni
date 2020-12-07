@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 
 class ProfileControllerAdmin extends ControllerAdmin
@@ -67,6 +68,7 @@ class ProfileControllerAdmin extends ControllerAdmin
      */
     public function update(Request $request, User $user)
     {
+        dd(request()->file('image'));
         $data = request()->validate([
             'phone' => ['string', 'digits_between:10,12', 'starts_with:0,+'],
             'description' => ['string'],
@@ -78,7 +80,9 @@ class ProfileControllerAdmin extends ControllerAdmin
 
         $imageName = time().'.'.request()->image->getClientOriginalExtension();
         $data['image'] = $imageName;
-        request()->image->move(public_path(''), $imageName);
+        request()->image->store('/images', 's3');
+        // request()->image->move(public_path(''), $imageName);
+        $image = Storage::disk('s3')->response('/images', $imageName);
         $user->profile->update($data);
         
         //$profile->update($request->all()); // ???
