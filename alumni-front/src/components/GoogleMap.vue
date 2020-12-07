@@ -14,6 +14,7 @@
             ></gmap-marker>
             </gmap-map>
         </div>
+        <div>{{ markers }}</div>
     </div>
 </template>
 
@@ -28,18 +29,13 @@ export default {
         return {
             // default to Paris
             center: { lat: 48.866667, lng: 2.333333 },
-            markers: [ {position: { lat:48.883831, lng: 2.336790}} ],
-            convertedJobAddress: []
+            markers: [],
         };
     },
 
     mounted() {
         this.geolocate();
     },
-
-    // unmounted () {
-    //     this.geocode();
-    // },
 
     created() {
         this.fetchAllJobs();
@@ -78,6 +74,7 @@ export default {
                     if(response.data.results.length !== 0 && Array.isArray(response.data.results)) {
                         const addressCoord = response.data.results[0].geometry.location;
                         const marker = { position: addressCoord };
+                        console.log(marker);
                         this.markers.push(marker);
                     }
                 })

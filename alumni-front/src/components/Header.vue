@@ -1,0 +1,109 @@
+<template>
+  <div class="home">
+    <div class="header">
+      <!----- MENU BUTTON (Left) ----->
+      <div class="dropdown menu1">
+        <img
+          src="https://coding-academy-alumni.herokuapp.com/icons/menu.png"
+          alt="menu"
+          width="2%"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          class="hamburger"
+        />
+        <!----- EXIT BUTTON (Right) ----->
+        <a href="#" @click.prevent="signOutButton">
+          <img
+            src="https://coding-academy-alumni.herokuapp.com/icons/log-out.png"
+            alt="logout"
+            width="40px"
+            height="40px"
+            class="logout"
+          />
+        </a>
+
+        <h1 class="title">CODING ACADEMY - ALUMNI</h1>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <router-link :to="`/`" class="dropdown-item"> Home </router-link>
+          <router-link :to="`/recruter`" class="dropdown-item">
+            Buisiness Section
+          </router-link>
+          <template v-if="authenticated">
+            <router-link :to="`/directory`" class="dropdown-item">
+              Directory
+            </router-link>
+            <router-link :to="`/profile`" class="dropdown-item">
+              Profile
+            </router-link>
+            <router-link :to="`/job`" class="dropdown-item">
+              Job / Internship
+            </router-link>
+            <router-link :to="`/forum`" class="dropdown-item">
+              Forum
+            </router-link>
+          </template>
+          <template v-else>
+              <router-link :to="{name: 'Login'}" class="dropdown-item">
+                Login / Register
+              </router-link>
+          </template>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapGetters, mapActions } from "vuex";
+export default {
+  name: "Header",
+  computed: {
+    ...mapGetters(["authenticated", "user"]),
+  },
+
+  methods: {
+    ...mapActions(["signOut"]),
+
+    signOutButton() {
+      this.signOut()
+      .then(() => {
+        if(this.$router.path !== ('/')){
+          this.$router.push('/')
+        } 
+      })
+    },
+  },
+};
+</script>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap");
+.background-home {
+  background-image: url("https://coding-academy-alumni.herokuapp.com/icons/home.jpg");
+  background-size: 100% 300px;
+  height: 300px;
+}
+
+.title{
+  font-family: "Nunito", sans-serif;
+  color: white;
+  margin-top: 1%;
+  text-align: center;
+}
+
+.header {
+  height: 280px;
+  background-image: url("https://coding-academy-alumni.herokuapp.com/icons/home.jpg");
+}
+
+.hamburger {
+  margin: 2%;
+}
+
+.logout {
+  margin: 2%;
+  float: right;
+}
+</style>

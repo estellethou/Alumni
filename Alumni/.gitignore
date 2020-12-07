@@ -1,3 +1,5 @@
+/public/.DS_Store
+.DS_Store
 /node_modules
 /public/hot
 /public/storage
@@ -6,6 +8,7 @@
 .env
 .env.backup
 .phpunit.result.cache
+.DS_Store
 Homestead.json
 Homestead.yaml
 npm-debug.log

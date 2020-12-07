@@ -54,6 +54,7 @@
                         Login
                       </v-btn>
                     </v-col>
+                    <span>Forgot your password ?  Reset it <router-link to="/resetpassword">here</router-link></span>
                   </v-row>
                 </v-form>
               </v-card-text>
@@ -155,9 +156,7 @@ export default {
       if (this.$refs.loginForm.validate()) {
         this.signIn({ email: this.loginEmail, password: this.loginPassword })
           .then(() => {
-            this.$router.replace({
-              name: "Dashboard",
-            }),
+            this.$router.push('/')
             this.$swal({
               title: "User Sign in",
               text: "Welcome back",
@@ -192,9 +191,7 @@ export default {
               confirmButtonText: "Ok",
             });
             this.signIn({ email: this.email, password: this.password });
-            this.$router.replace({
-              name: "Home",
-            });
+            this.$router.push('/');
           })
           .catch(() => {
             this.$swal({

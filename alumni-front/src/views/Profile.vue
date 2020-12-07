@@ -1,25 +1,92 @@
 <template>
-  <div class="profile">
-    <h1>Profile Vue</h1>
-    <div v-for="profile in getAllProfiles" :key="profile.id">
-      <!-- <div v-if="user.id == profile.user_id"> -->
-      <div v-if="5 == profile.user_id">
-        <p>My id is {{ profile.id }}</p>
-        <p>My description is {{ profile.description }}</p>
-        <p>My Phone {{ profile.phone }}</p>
-        <p>My LinkedIn {{ profile.url_linkedin }}</p>
-        <p>My GitHub {{ profile.url_github }}</p>
-        <p>My personal website {{ profile.url_website }}</p>
+  <div class="profile container">
+    <HeaderProfile/>
+    <div v-for="profile in filteredProfile" :key="profile.id">
+      <div class="background">
         <img
+          class="profile-img"
+          width="150"
+          height="150"
           :src="
-            'http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/' +
+            'https://coding-academy-alumni.herokuapp.com/' +
             profile.image
           "
-          alt="test"
+          alt="profile-image"
         />
-        <p>My resume{{ profile.resume }}</p>
+        <div class="side-img">
+          <img
+            class="logo"
+            width="180"
+            height="80"
+            src="https://coding-academy-alumni.herokuapp.com/icons/logo.png"
+            alt="logo"
+          />
+
+          <h2 class="username">{{ user.firstname }} {{ user.lastname }}</h2>
+        </div>
+      </div>
+      <div class="description">
+        <p>{{ profile.description }}</p>
+      </div>
+      <v-card class="mx-auto container">
+        <div class="d-flex justify-content-between">
+          <div class="col-4">
+            <img
+              width="10%"
+              src="https://coding-academy-alumni.herokuapp.com/icons/telephone.png"
+              alt="logo"
+            />
+            {{ profile.phone }}
+          </div>
+          <div class="col-4">
+            <img
+              width="10%"
+              src="https://coding-academy-alumni.herokuapp.com/icons/email.png"
+              alt="logo"
+            />
+            {{ user.email }}
+          </div>
+
+          <div class="col-4">
+   <a :href="profile.url_linkedin" class="icon-url col-4"
+          ><img
+            src="https://coding-academy-alumni.herokuapp.com/icons/blo.png"
+            width="7%"
+            alt="logo-linkedin"
+        /></a>
+        <a :href="profile.url_github" class="icon-url col-4"
+          ><img
+            src="https://coding-academy-alumni.herokuapp.com/icons/git.jpg"
+            width="8%"
+            alt="logo-github"
+        /></a>
+        <a :href="profile.url_website" class="icon-url col-4"
+          ><img
+            src="https://coding-academy-alumni.herokuapp.com/icons/web.png"
+            width="8%"
+            alt="logo-web"
+        /></a>
+
+</div>
+        </div>
+
+       
+      </v-card>
+      <div class="resume">
+        <embed
+          :src="
+            'https://coding-academy-alumni.herokuapp.com/' +
+            profile.resume
+          "
+          type="application/pdf"
+          width="58%"
+          height="800"
+        />
+      </div>
+
+      <div class="d-flex justify-content-between">
         <DeleteProfile v-bind:user="user" />
-        <EditProfile v-bind:user="user" v-bind:profile="profile" />       
+        <EditProfile v-bind:profile="profile" v-bind:user="user"> </EditProfile>
       </div>
     </div>
   </div>
@@ -29,12 +96,13 @@
 import { mapGetters, mapActions } from "vuex";
 import DeleteProfile from "@/components/ProfileComponents/DeleteProfile";
 import EditProfile from "@/components/ProfileComponents/EditProfile";
+import HeaderProfile from "@/components/ProfileComponents/HeaderProfile";
 export default {
   name: "Profile",
-  props: ["user"],
   components: {
     DeleteProfile,
     EditProfile,
+    HeaderProfile
   },
   data() {
     return {};
@@ -42,29 +110,15 @@ export default {
 
   methods: {
     ...mapActions(["setAllProfiles"]),
-
-    testUser() {
-      var $user = { id: 2 };
-      return $user;
-    },
-
-    test2User() {
-      var $user = { id: 22 };
-      return $user;
-    },
-        resumeChanged(e) {
-    var fileReader = new FileReader();
-    fileReader.readAsDataURL(e.target.files[0]);
-    fileReader.onload = (e) => {
-      this.newResume = e.target.result; 
-      console.log(e.target.result);
-    };
   },
-  },
-
 
   computed: {
-    ...mapGetters(["getAllProfiles", "getOneProfile"]),
+    ...mapGetters(["getAllProfiles", "authenticated", "user"]),
+    filteredProfile() {
+      return this.getAllProfiles.filter((profile) => {
+        if (profile.user_id == this.user.id) return profile;
+      });
+    },
   },
 
   created() {
@@ -72,3 +126,50 @@ export default {
   },
 };
 </script>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap");
+.profile {
+  margin: auto;
+}
+.background {
+  background-image: url("https://coding-academy-alumni.herokuapp.com/icons/background.jpg");
+  background-size: 100% 300px;
+  height: 240px;
+}
+
+.profile-img {
+  border-radius: 50%;
+  position: relative;
+  top: 70%;
+  left: 45%;
+}
+
+.resume {
+  display: flex;
+  justify-content: center;
+}
+
+.side-img {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.logo {
+  margin-left: 2%;
+}
+.username {
+  color: white;
+  margin-top: 1.5%;
+  margin-right: 2%;
+  font-family: "Nunito", sans-serif;
+  font-weight: bold;
+}
+
+.description {
+  position: relative;
+  margin-top: 6rem;
+  font-size: x-large;
+  font-family: "Nunito", sans-serif;
+}
+</style>

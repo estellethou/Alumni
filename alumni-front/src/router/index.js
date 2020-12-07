@@ -6,8 +6,14 @@ import JobEdit from '../views/JobEdit.vue'
 import Forum from "../views/Forum.vue"
 import DetailsPost from "../views/DetailsPost"
 import Profile from '../views/Profile.vue'
+import OtherProfile from '../views/OtherProfile.vue'
 import Login from '../views/Login.vue'
-import Dashboard from '../views/Dashboard.vue'
+//import Dashboard from '../views/Dashboard.vue'
+import RecruterForm from "../views/RecruterForm"
+import PaymentForm from "../views/PaymentForm"
+import ResetPassword from '../views/ResetPassword.vue'
+import Directory from '../views/Directory.vue'
+import Event from '../views/Event.vue'
 import store from '../store'
 
 
@@ -17,54 +23,25 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
   },
-
+  {
+    path: '/recruter',
+    name: 'RecruterForm',
+    component: RecruterForm
+  },
+  {
+    path: '/recruter/payment',
+    name: 'PaymentForm',
+    component: PaymentForm
+  },
+  
   {
     path: '/job',
     name: 'Job',
-    component: Job
-  },
-
-  {
-    // path: '/job/edit/:id/:jobData',
-    path: '/job/edit/:id',
-    name: 'JobEdit',
-    component: JobEdit,
-    props: true,
-  },
-
-  
-  {
-    path: '/forum',
-    name: 'Forum',
-    component: Forum
-  },
-
-  {
-    path: '/post/:id',
-    name: 'DetailPost',
-    component: DetailsPost,
-    props:true,
-  },
-
-  {
-    path: '/profile',
-    name: 'Profile',
-    component: Profile,
-  },
-  {
-    path: '/signin',
-    name: 'Login',
-    component: Login
-  },
-  {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: Dashboard,
+    component: Job,
+     // USED TO PROTECT ROUTE
     beforeEnter: (to, from, next) => {
-      // console.log(store.getters['authenticated'])
-      // console.log(next)
       if (!store.getters['authenticated']){
         return next({
           name:'Login'
@@ -72,7 +49,110 @@ const routes = [
       }
       next()
       }
-    },
+  },
+  
+  {
+    // path: '/job/edit/:id/:jobData',
+    path: '/job/edit/:id',
+    name: 'JobEdit',
+    component: JobEdit,
+    beforeEnter: (to, from, next) => {
+      if (!store.getters['authenticated']){
+        return next({
+          name:'Login'
+        })
+      }
+      next()
+      },
+    props: true,
+  },
+
+  {
+    path: '/resetpassword',
+    name: 'ResetPassword',
+    component: ResetPassword
+  },
+  
+  {
+    path: '/forum',
+    name: 'Forum',
+    component: Forum,
+    beforeEnter: (to, from, next) => {
+      if (!store.getters['authenticated']){
+        return next({
+          name:'Login'
+        })
+      }
+      next()
+      }
+  },
+
+  {
+    path: '/post/:id',
+    name: 'DetailPost',
+    component: DetailsPost,
+    props:true,
+    beforeEnter: (to, from, next) => {
+      if (!store.getters['authenticated']){
+        return next({
+          name:'Login'
+        })
+      }
+      next()
+      }
+  },
+
+  {
+    path: '/profile', //profile of user connected 
+    name: 'Profile',
+    component: Profile,
+    beforeEnter: (to, from, next) => {
+      if (!store.getters['authenticated']){
+        return next({
+          name:'Login'
+        })
+      }
+      next()
+      }
+  },
+  {
+    path: '/directory',
+    name: 'Directory',
+    component: Directory,
+    beforeEnter: (to, from, next) => {
+      if (!store.getters['authenticated']){
+        return next({
+          name:'Login'
+        })
+      }
+      next()
+      }
+  },
+  {
+    path: '/profile/:profileId/:userId',
+    name: 'OtherProfile',
+    component: OtherProfile,
+    props: true,
+    beforeEnter: (to, from, next) => {
+      if (!store.getters['authenticated']){
+        return next({
+          name:'Login'
+        })
+      }
+      next()
+      }
+
+  },
+  {
+    path: '/signin',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/event',
+    name: 'Event',
+    component: Event
+  },
 ]
 
 const router = new VueRouter({

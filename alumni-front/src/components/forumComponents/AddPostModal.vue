@@ -4,18 +4,16 @@
         <button @click="closeModal">Close modal</button>
         <div>
             <form @submit="submitPost">
-                <label>Title</label>
-                <input type="text" name="title" id="title" v-model="title" >
-                <label>Description</label>
-                <input type="text" name="description" id="description" v-model="description" >
-                <button>Submit</button>
+                <v-text-field label="Title" v-model="title" ></v-text-field>
+                <v-text-field  label="Description"  v-model="description" ></v-text-field>
+                <v-btn type="submit">Submit</v-btn>
             </form>
         </div>
     </div>
 </template>
 
 <script>
-import {mapActions} from  "vuex"
+import {mapActions,mapGetters} from  "vuex"
 export default {
 
     data(){
@@ -31,8 +29,7 @@ export default {
             const newPost ={
                 title:this.title,
                 description:this.description,
-                //NEED TO CHANGE THE USER_ID FOR THE USER_ID OF THE LOG IN PERSONNE//
-                user_id:2
+                user_id:this.user.id
             }
             this.addPost(newPost)
             this.title=""
@@ -43,7 +40,13 @@ export default {
         closeModal(){
             this.$emit("close",false)
         }
-    }
+    },
+
+    computed:{
+        ...mapGetters(["user"])
+
+    },
+
 }
 </script>
 

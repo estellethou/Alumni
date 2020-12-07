@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 // use App\Http\Controllers\Admin\ControllerAdmin;
 use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
@@ -41,7 +42,8 @@ class UserControllerAdmin extends ControllerAdmin
         ]);
         $data['password'] = Hash::make($data['password']);
         $user = User::create($data);
-        return redirect("/admin/users/{$user->id}");
+        $user->profile()->save(new Profile);
+        return redirect("/admin/users/{$user->id}")->with('success','User successfully created.');
     }
 
     /**
@@ -54,6 +56,16 @@ class UserControllerAdmin extends ControllerAdmin
     {
         $user = User::find($id);
         return view("admin/user_show", compact('user'));
+    }
+
+    public function searchUsers(Request $request) {
+        $data = request()->validate([
+            'search-users' => 'required',
+        ]);
+         $users = User::where('firstname', 'like', '%'.$data['search-users'].'%')
+            ->orWhere('lastname', 'like', '%' . $data['search-users'] . '%')
+            ->orWhere('email', 'like', '%' . $data['search-users'] . '%')->paginate(20);
+        return view('admin/users', compact('users'));
     }
 
     /**
@@ -91,7 +103,7 @@ class UserControllerAdmin extends ControllerAdmin
             $data['password'] = Hash::make($data['newPassword']);
         }
         $user->update($data);
-        return redirect("/admin/users/{$user->id}");
+        return redirect("/admin/users/{$user->id}")->with('success','User successfully edited.');
     }
 
     /**
@@ -103,6 +115,6 @@ class UserControllerAdmin extends ControllerAdmin
     public function destroy($id)
     {
         User::destroy($id);
-        return redirect("/admin/users");
+        return redirect("/admin/users")->with('success','Post successfully deleted.');
     }
 }

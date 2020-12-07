@@ -21,7 +21,7 @@ class UserFactory extends Factory
      * @return array
      */
     public function definition()
-    {
+    {   
         return [
             'firstname' => $this->faker->firstname,
             'lastname' => $this->faker->lastname,

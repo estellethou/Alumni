@@ -6,18 +6,16 @@
       </div>
       <div>
           <form @submit="submitEditPost">
-            <label>Title</label>
-            <input type="text" v-model="title">
-            <label>Description</label>
-            <input type="text" v-model="description">
-            <button>Submit</button>
+            <v-text-field type="text" label="Title" v-model="title"></v-text-field>
+            <v-text-field type="text" label="Description" v-model="description"></v-text-field>
+            <v-btn type="submit">Submit</v-btn>
           </form>
       </div>
   </div>
 </template>
 
 <script>
-import {mapActions} from "vuex"
+import {mapActions,mapGetters} from "vuex"
 export default {
     name:"EditPostModal",
     props:["singlePost"],
@@ -37,7 +35,7 @@ export default {
                 id:this.singlePost.id,
                 title:this.title,
                 description:this.description,
-                user_id:2
+                user_id:this.user.id
             }
             this.editPost(updatePost)
             this.title=""
@@ -48,6 +46,9 @@ export default {
         closeEditModalPost(){
             this.$emit("close",false)
         }
+    },
+    computed:{
+        ...mapGetters(["user"])
     }
 }
 </script>

@@ -11,23 +11,23 @@ const getters ={
 const actions ={
 
     async allComments({commit}){
-        const response = await axios.get("http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/comments")
+        const response = await axios.get("/comments")
         commit("SET_COMMENTS",response.data)
 
     },
 
     async deleteComment({commit},id){
-        await axios.delete(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/comment/${id}`)
+        await axios.delete(`/comment/${id}`)
         commit("REMOVE_COMMENT",id)
     },
 
     async addComment({commit},newComment){
-        const response = await axios.post("http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/comments/post",newComment)
+        const response = await axios.post("/comments/post",newComment)
         commit("ADD_COMMENT",response.data)
     },
 
     async editComment({commit},updateComment){
-        let response = await axios.put(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/comment/${updateComment.id}/edit`,updateComment)
+        let response = await axios.put(`/comment/${updateComment.id}/edit`,updateComment)
         commit("UPDATE_POST", response.data)
     }
 }

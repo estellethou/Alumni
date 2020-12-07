@@ -1,46 +1,50 @@
 import axios from "axios"
 
 const state = {
-    profiles:[]
+    profiles:[],
+    oneProfile:[]
 }
 
 const getters = {
     getAllProfiles:(state) => state.profiles,
-    //return one profile giving user id
-    getOneProfile:(state) => id => { 
-        for (var index in state.profiles){
-            if (state.profiles[index].user_id == id){
-                return state.profiles[index]
-            }
-        }
-    }
+    
+    //return one profile 
+    getOneProfile:(state) => state.oneProfile,
 };
 
 const actions = {
     async setAllProfiles({commit}){
-        var response = await axios.get("http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/profiles")
+        var response = await axios.get("/profiles")
         commit("setMyAllProfiles", response.data)
     },
 
-    async addProfile({commit}, newProfile){
-        var response = await axios.post("http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/profile", newProfile)
-        response = await axios.get(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/profile/${response.data.id}`)
-        commit("addMyProfile", response.data)
+    async setProfile({commit}, profileId){ //id profile
+        var response = await axios.get(`/profile/${profileId}`)
+        //console.log(response.data);
+        commit("setMyProfile", response.data)
     },
 
+
+    //async addProfile({commit}, newProfile){
+    //    var response = await axios.post("/profile", newProfile)
+    //    response = await axios.get(`/profile/${response.data.id}`)
+    //    commit("addMyProfile", response.data)
+    //},
+
     async deleteProfile({commit}, id){ //id profile (not id user)
-        await axios.delete(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/profile/${id}`)
+        await axios.delete(`/profile/${id}`)
         commit("deleteMyProfile", id)
     },
 
     async updateProfile({commit}, newProfile){
-        let response = await axios.put(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/profile/${newProfile.id}/edit`, newProfile)
-        response = await axios.get(`http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/profiles`)
+        let response = await axios.patch(`/profile/${newProfile.id}/edit`, newProfile)
+        response = await axios.get(`/profiles`)
         commit("updateMyProfile", response.data)
     },
 }
 
 const mutations = {
+    setMyProfile:(state, oneProfile) => (state.oneProfile = oneProfile),
     setMyAllProfiles:(state, profiles) => (state.profiles = profiles),
     addMyProfile:(state, newProfile) => (state.profiles.push(newProfile)),
     deleteMyProfile:(state, id) => (state.profiles = state.profiles.filter(profile => profile.id !== id)),

@@ -1,23 +1,38 @@
 <template>
-  <div class="container-posts">
-      <div>
+      <v-card>
           <div class="container-titlePost">
-              <router-link v-bind:to="`/post/${post.id}`"><h3>{{post.title}}</h3><span>{{ timeAgo(Date.parse(post.created_at)) }}</span></router-link>
-              <button @click="openEditModalPost">Edit</button>
-              <div class="container-modalEditPost" v-if="isOpen">
-                  <EditPostModal v-bind:singlePost="post" v-on:close="updateParentProps(false)"/>
+              <v-container class="d-flex justify-space-between">
+                   <router-link v-bind:to="`/post/${post.id}`">
+
+                    <div class="container-headerPost" v-if="getImageOfUser[0].image !== ''">
+
+                        <v-avatar size="50"><img v-bind:src="'https://coding-academy-alumni.herokuapp.com/'+ getImageOfUser[0].image" alt="Avatar"/></v-avatar>
+                        <p>{{ timeAgo(Date.parse(post.created_at)) }}</p>
+                      </div>
+                      <div class="container-headerPost" v-else>
+                          <v-avatar color="primary" size="50"><v-icon dark>mdi-account-circle</v-icon></v-avatar>
+                          <p>{{ timeAgo(Date.parse(post.created_at)) }}</p>
+                    </div>
+                    </router-link>
+              </v-container>
+              <v-container>
+                  <div class="d-flex justify-center">
+                      <h3>{{post.title}}</h3>
+                  </div>
+                  <div class="container-descriptionPost">
+                      <p>{{post.description}}</p>
+                  </div>
+                  <div class="container-actionOnPost">
+                    <v-btn v-if="this.user.id == post.user_id" @click="removePost(post.id)" color="error">delete post</v-btn> 
+                    <v-btn v-if="this.user.id == post.user_id" @click="openEditModalPost" color="primary">Edit</v-btn>
+                    <div class="container-modalEditPost" v-if="isOpen">
+                    <EditPostModal v-bind:singlePost="post" v-on:close="updateParentProps(false)"/> 
+                  </div>
               </div>
-              <button @click="removePost(post.id)">delete post</button>  
+              </v-container>
           </div>
-          <div class="container-descriptionPost">
-              <p>{{post.description}}</p>
-          </div>
-          <div>
-              <p>comment number<span></span></p>
-              <button @click="countComment">duxbchbds</button> 
-          </div>
-      </div>
-  </div>
+      </v-card>
+
 </template>
 
 <script>
@@ -37,10 +52,16 @@ export default {
         EditPostModal
     },
     computed:{
-        ...mapGetters(["getAllComments"]),
+        ...mapGetters(["getAllComments","user","getAllProfiles"]),
+        
+        getImageOfUser(){
+            return this.getAllProfiles.filter(profile =>{
+                return profile.user_id == this.post.user_id
+      })
+    }
     },
     methods:{
-        ...mapActions(["deletePost"]),
+        ...mapActions(["deletePost","setAllProfiles"]),
         removePost(id){
             this.deletePost(id)
         },
@@ -79,16 +100,10 @@ export default {
         else return "few seconds ago";
         },
         
-        countComment(){
-        let count = 0
-        this.getAllComments.filter(comment=>{
-                if(comment.posts_id == this.post.id){
-                    count++
-                    console.log(count) 
-                }
-            })
-        }
     },
+      created(){
+    this.setAllProfiles()
+  }
 }
 
 </script>
@@ -102,5 +117,23 @@ export default {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 1;
+}
+a{
+    text-decoration: none;
+    width: 100%;
+}
+.container-headerPost{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.container-descriptionPost{
+    display:flex;
+    justify-content: center;
+}
+.container-actionOnPost{
+    display:flex;
+    justify-content: space-between;
 }
 </style>
