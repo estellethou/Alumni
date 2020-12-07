@@ -59,7 +59,6 @@ class ProfileController extends Controller
         $profile = Profile::find($id);
         //check policy first
         $this->authorize('update', $profile);
-<<<<<<< HEAD
 
         $data = request()->validate([
             'phone' => ['nullable'],
@@ -72,13 +71,7 @@ class ProfileController extends Controller
             ]);
            
         //$profile->update($request->except(['image','resume']));
-        if ($request->image) {
-=======
-        
-        $profile->update($request->except(['image','resume']));
             if ($request->image) {
-            //dd($path);
->>>>>>> d3dc4408f5ede9573e9ceb962023e0bd8ea16b9e
             $exploded = explode(',', $request->image);
             $decoded = base64_decode($exploded[1]);
             if (str_contains($exploded[0], 'jpeg')) {
