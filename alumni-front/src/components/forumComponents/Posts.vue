@@ -148,7 +148,7 @@ export default {
     transform: translate(-50%, -50%);
     z-index: 1;
 }
-a{
+a span{
     text-decoration: none;
 }
 .container-headerPost{
