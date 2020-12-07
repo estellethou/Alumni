@@ -58,7 +58,7 @@ class ProfileController extends Controller
         $profile = Profile::find($id);
         //check policy first
         $this->authorize('update', $profile);
-
+        
         $profile->update($request->except(['image','resume']));
             if ($request->image) {
             $exploded = explode(',', $request->image);
