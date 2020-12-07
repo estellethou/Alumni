@@ -67,29 +67,41 @@ class ProfileControllerAdmin extends ControllerAdmin
      */
     public function update(Request $request, User $user)
     {
-    //   $profile->update($request->all()); // ???
-        //Get profile id
-        $profile = $user->profile;
+        $data = request()->validate([
+            'phone' => ['string', 'digits_between:10,12', 'starts_with:0,+'],
+            'description' => ['string'],
+            'url_linkedin' =>  ['url'],
+            'url_github' => ['url'],
+            'url_website' => ['url'],
+            'image' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+        ]);
+
+        $imageName = time().'.'.request()->image->getClientOriginalExtension();
+        $data['image'] = $imageName;
+        request()->image->move(public_path(''), $imageName);
+        $user->profile->update($data);
+        
+        //$profile->update($request->all()); // ???
         //check policy first
         // $this->authorize('update', $profile);
 
-        $profile->update($request->except('image'));
+        // $profile->update(request()->all()->except('image'));
         
-        if (request('image')) {
-            $exploded = explode(',', $request->image);
-            $decoded = base64_decode($exploded[1]);
-            if (str_contains($exploded[0], 'jpeg')) {
-                $extension = 'jpg';
-            } elseif (str_contains($exploded[0], 'png')) {
-                $extension = 'png';
-            }
-            $name = substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(10/strlen($x)))), 1, 10);
-            $filename = $name.'.'.$extension;
-            $path = public_path().'/'.$filename;
-            file_put_contents($path, $decoded); //save the decoded image to the pa
-            $profile->update(['image' => $filename ?? '']);    
-        }
-        // return redirect("/admin/users/{$user->id}")->with('success','User profile successfully edited.');
+        // if (request('image')) {
+        //     $exploded = explode(',', $request->image);
+        //     $decoded = base64_decode($exploded[1]);
+        //     if (str_contains($exploded[0], 'jpeg')) {
+        //         $extension = 'jpg';
+        //     } elseif (str_contains($exploded[0], 'png')) {
+        //         $extension = 'png';
+        //     }
+        //     $name = substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(10/strlen($x)))), 1, 10);
+        //     $filename = $name.'.'.$extension;
+        //     $path = public_path().'/'.$filename;
+        //     file_put_contents($path, $decoded); //save the decoded image to the pa
+        //     $profile->update(['image' => $filename ?? '']);    
+        // }
+        
         return redirect("/admin/users/{$user->id}")->with('success','User profile successfully edited.');
     }
 
