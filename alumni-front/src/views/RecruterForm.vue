@@ -16,7 +16,8 @@
             <v-text-field label="Contract duration" v-model="contractDuration"></v-text-field>
             <v-text-field label="Compagny" v-model="company"></v-text-field>
             <v-text-field label="Sector" v-model="sector"></v-text-field>
-            <router-link to="/recruter/payment"><v-btn type="submit">Submit</v-btn></router-link>
+            <!-- <router-link to="/recruter/payment"><v-btn type="submit">Submit</v-btn></router-link> -->
+            <v-btn type="submit">Submit</v-btn>
         </v-form>
 
       </v-container>
@@ -84,10 +85,9 @@ export default {
             this.contractDuration=""
             this.company=""
             this.sector=""
-
-            if(this.res > 1){
-                 this.addJob(newJobOffer)
-            }
+            
+            this.addJob(newJobOffer)
+            
         },
     
     }
