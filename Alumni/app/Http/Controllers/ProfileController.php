@@ -70,7 +70,7 @@ class ProfileController extends Controller
             }
             $name = substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(10/strlen($x)))), 1, 10);
             $filename = $name.'.'.$extension;
-            $path = $filename->store('images', 's3');
+            $path = $filename->store('public', 's3');
             //$path = public_path().'/'.$filename;
             //file_put_contents($path, $decoded); //save the decoded image to the path
             $profile->update(['image' => $filename ?? '']);    
