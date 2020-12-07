@@ -13,7 +13,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="userprofile in getAllUserProfiles"  :key="userprofile.id" @click="goToProfile(userprofile.id, userprofile.user_id)">
+          <tr class="pointerClick" v-for="userprofile in getAllUserProfiles"  :key="userprofile.id" @click="goToProfile(userprofile.id, userprofile.user_id)">
             <td v-if="userprofile.image !== ''"><v-avatar size="30"><img v-bind:src="'https://coding-academy-alumni.herokuapp.com/'+ userprofile.image" alt="Avatar"/></v-avatar> {{ userprofile.firstname }} {{ userprofile.lastname }}
             <td v-else><v-avatar color="light-blue darken-4" size="50"><v-icon dark>mdi-account-circle</v-icon></v-avatar>{{ userprofile.firstname }} {{ userprofile.lastname }}</td>
             <td>{{ userprofile.email }}</td>
@@ -37,7 +37,11 @@ export default {
   methods: {
     ...mapActions(["setAllUserProfiles"]),
     goToProfile(profileid, userid){
-      this.$router.push(`/profile/${profileid}/${userid}`)
+      if(this.user.id == userid){
+        this.$router.push("/profile")
+            }else{
+              this.$router.push(`/profile/${profileid}/${userid}`)
+            }
     }
   },
   components:{
@@ -45,7 +49,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["getAllUserProfiles", "authenticated"]),
+    ...mapGetters(["getAllUserProfiles", "authenticated","user"]),
 
   },
 
@@ -56,5 +60,7 @@ export default {
 </script>
 
 <style scoped>
-
+.pointerClick{
+  cursor: pointer;
+}
 </style>

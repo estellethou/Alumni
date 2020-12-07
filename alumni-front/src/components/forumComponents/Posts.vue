@@ -2,18 +2,20 @@
       <v-card>
           <div class="container-titlePost">
               <v-container class="d-flex justify-space-between">
-                   <router-link v-bind:to="`/post/${post.id}`">
-
                     <div class="container-headerPost" v-if="getImageOfUser[0].image !== ''">
-
-                        <v-avatar size="50"><img v-bind:src="'https://coding-academy-alumni.herokuapp.com/'+ getImageOfUser[0].image" alt="Avatar"/></v-avatar>
+                        <div class="userProfile-display" @click="redirectToProfile(getImageOfUser[0])">
+                            <v-avatar size="50" class="mr-7"><img v-bind:src="'https://coding-academy-alumni.herokuapp.com/'+ getImageOfUser[0].image" alt="Avatar"/></v-avatar>
+                            <p>{{getNameUser[0].firstname +" "+ getNameUser[0].lastname}}</p>
+                        </div>
                         <p>{{ timeAgo(Date.parse(post.created_at)) }}</p>
                       </div>
                       <div class="container-headerPost" v-else>
-                          <v-avatar color="primary" size="50"><v-icon dark>mdi-account-circle</v-icon></v-avatar>
+                          <div>
+                              <v-avatar color="primary" class="mr-7" size="50"><v-icon dark>mdi-account-circle</v-icon></v-avatar>
+                              <p>{{getNameUser[0].firstname +" "+ getNameUser[0].lastname}}</p>
+                          </div>
                           <p>{{ timeAgo(Date.parse(post.created_at)) }}</p>
                     </div>
-                    </router-link>
               </v-container>
               <v-container>
                   <div class="d-flex justify-center">
@@ -23,7 +25,8 @@
                       <p>{{post.description}}</p>
                   </div>
                   <div class="container-actionOnPost">
-                    <v-btn v-if="this.user.id == post.user_id" @click="removePost(post.id)" color="error">delete post</v-btn> 
+                    <v-btn v-if="this.user.id == post.user_id" @click="removePost(post.id)" color="error">delete post</v-btn>
+                    <router-link v-bind:to="`/post/${post.id}`"><v-btn icon><v-icon>{{icons.mdiCommentAccountOutline}}</v-icon><span>{{mapArrayNumberOfComment(getNumberOfComment)}}</span></v-btn></router-link>
                     <v-btn v-if="this.user.id == post.user_id" @click="openEditModalPost" color="primary">Edit</v-btn>
                     <div class="container-modalEditPost" v-if="isOpen">
                     <EditPostModal v-bind:singlePost="post" v-on:close="updateParentProps(false)"/> 
@@ -37,13 +40,15 @@
 
 <script>
 import EditPostModal from "../forumComponents/EditPostModal"
+import { mdiCommentAccountOutline } from '@mdi/js';
 import {mapActions,mapGetters} from "vuex"
 export default {
     name:"Posts",
      props:["post"],
     data(){
         return{
-            isOpen:false
+            isOpen:false,
+            icons:{mdiCommentAccountOutline}
 
         }
     },
@@ -52,16 +57,32 @@ export default {
         EditPostModal
     },
     computed:{
-        ...mapGetters(["getAllComments","user","getAllProfiles"]),
+        ...mapGetters(["getAllComments","user","getAllProfiles","getAllUsers","user"]),
         
         getImageOfUser(){
             return this.getAllProfiles.filter(profile =>{
                 return profile.user_id == this.post.user_id
-      })
-    }
+            })
+        },
+
+        getNameUser(){
+            return this.getAllUsers.filter(user =>{
+                return user.id == this.post.user_id
+            })
+        },
+        getNumberOfComment(){
+            return this.getAllComments.filter(comment =>{
+                console.log(comment)
+                return comment.posts_id == this.post.id
+            })
+        }
     },
     methods:{
-        ...mapActions(["deletePost","setAllProfiles"]),
+        ...mapActions(["deletePost","setAllProfiles","setAllUsers"]),
+
+        mapArrayNumberOfComment(array){
+            return array.length
+        },
         removePost(id){
             this.deletePost(id)
         },
@@ -99,10 +120,18 @@ export default {
         if (Math.floor(seconds) < 30) return "just now";
         else return "few seconds ago";
         },
+        redirectToProfile(profile){
+            if(this.user.id == profile.user_id){
+                this.$router.push("/profile")
+            }else{
+                this.$router.push(`/profile/${profile.id}/${profile.user_id}`)
+            }
+        }
         
     },
       created(){
     this.setAllProfiles()
+    this.setAllUsers()
   }
 }
 
@@ -121,12 +150,12 @@ export default {
 }
 a{
     text-decoration: none;
-    width: 100%;
 }
 .container-headerPost{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 .container-descriptionPost{
     display:flex;
@@ -135,5 +164,11 @@ a{
 .container-actionOnPost{
     display:flex;
     justify-content: space-between;
+}
+.userProfile-display{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
 }
 </style>
