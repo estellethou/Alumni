@@ -1,18 +1,22 @@
 <template>
   <v-container>
     <v-card>
-      <v-card-title class="justify-space-between">
-
+      <v-container class="justify-space-between">
         <div class="sideByside" v-if="getImageOfUser[0].image !== ''">
-
-          <v-avatar size="50"><img v-bind:src="'https://coding-academy-alumni.herokuapp.com/'+ getImageOfUser[0].image" alt="Avatar"/></v-avatar>
+          <div class="userProfile-display" @click="redirectToProfile(getImageOfUser[0])">
+            <v-avatar class="mr-7" size="50"><img v-bind:src="'https://coding-academy-alumni.herokuapp.com/'+ getImageOfUser[0].image" alt="Avatar"/></v-avatar>
+             <p>{{getNameUser[0].firstname +" "+ getNameUser[0].lastname}}</p>
+          </div>
               <p>{{ timeAgo(Date.parse(comment.created_at)) }}</p>
         </div>
         <div class="sideByside" v-else>
-          <v-avatar color="light-blue darken-4" size="50"><v-icon dark>mdi-account-circle</v-icon></v-avatar>
+          <div class="userProfile-display">
+            <v-avatar class="mr-7" color="light-blue darken-4" size="50"><v-icon dark>mdi-account-circle</v-icon></v-avatar>
+             <p>{{getNameUser[0].firstname +" "+ getNameUser[0].lastname}}</p>
+          </div>
           <p>{{ timeAgo(Date.parse(comment.created_at)) }}</p>
         </div>
-      </v-card-title>
+      </v-container>
       <v-card-text>
         <div  v-if="edit">
           <form class="formEditComment"  @submit="updateComment">
@@ -50,7 +54,7 @@ export default {
     },
 
     methods:{
-        ...mapActions(["deleteComment","editComment","setAllProfiles"]),
+        ...mapActions(["deleteComment","editComment","setAllProfiles","setAllUsers"]),
 
         updateComment(){
           event.preventDefault()
@@ -107,7 +111,15 @@ export default {
         }
         if (Math.floor(seconds) < 30) return "just now";
         else return "few seconds ago";
-    },
+        },
+        
+        redirectToProfile(profile){
+            if(this.user.id == profile.user_id){
+                this.$router.push("/profile")
+            }else{
+                this.$router.push(`/profile/${profile.id}/${profile.user_id}`)
+            }
+        }
         
     },
 
@@ -116,17 +128,24 @@ export default {
   },
 
   computed:{
-    ...mapGetters(["user","getAllProfiles"]),
+    ...mapGetters(["user","getAllProfiles","getAllUsers","user"]),
 
     getImageOfUser(){
       return this.getAllProfiles.filter(profile =>{
         return profile.user_id == this.comment.user_id
       })
-    }
+    },
+    
+    getNameUser(){
+            return this.getAllUsers.filter(user =>{
+                return user.id == this.comment.user_id
+            })
+        }
   },
 
   created(){
     this.setAllProfiles()
+    this.setAllUsers()
   }
 
 }
@@ -150,7 +169,9 @@ export default {
   justify-content: space-between;
   width: 100%;
 }
-.containerShowComment p{
-  font-size:20px
+.sideByside p{
+  font-weight: none;
+  font-size: none;
 }
+
 </style>
