@@ -18,16 +18,15 @@
                     </div>
               </v-container>
               <v-container>
-                  <router-link v-bind:to="`/post/${post.id}`">
                   <div class="d-flex justify-center">
                       <h3>{{post.title}}</h3>
                   </div>
                   <div class="container-descriptionPost">
                       <p>{{post.description}}</p>
                   </div>
-                  </router-link>
                   <div class="container-actionOnPost">
-                    <v-btn v-if="this.user.id == post.user_id" @click="removePost(post.id)" color="error">delete post</v-btn> 
+                    <v-btn v-if="this.user.id == post.user_id" @click="removePost(post.id)" color="error">delete post</v-btn>
+                    <router-link v-bind:to="`/post/${post.id}`"><v-btn icon><v-icon>{{icons.mdiCommentAccountOutline}}</v-icon><span>{{mapArrayNumberOfComment(getNumberOfComment)}}</span></v-btn></router-link>
                     <v-btn v-if="this.user.id == post.user_id" @click="openEditModalPost" color="primary">Edit</v-btn>
                     <div class="container-modalEditPost" v-if="isOpen">
                     <EditPostModal v-bind:singlePost="post" v-on:close="updateParentProps(false)"/> 
@@ -41,13 +40,15 @@
 
 <script>
 import EditPostModal from "../forumComponents/EditPostModal"
+import { mdiCommentAccountOutline } from '@mdi/js';
 import {mapActions,mapGetters} from "vuex"
 export default {
     name:"Posts",
      props:["post"],
     data(){
         return{
-            isOpen:false
+            isOpen:false,
+            icons:{mdiCommentAccountOutline}
 
         }
     },
@@ -68,10 +69,20 @@ export default {
             return this.getAllUsers.filter(user =>{
                 return user.id == this.post.user_id
             })
+        },
+        getNumberOfComment(){
+            return this.getAllComments.filter(comment =>{
+                console.log(comment)
+                return comment.posts_id == this.post.id
+            })
         }
     },
     methods:{
         ...mapActions(["deletePost","setAllProfiles","setAllUsers"]),
+
+        mapArrayNumberOfComment(array){
+            return array.length
+        },
         removePost(id){
             this.deletePost(id)
         },
@@ -158,5 +169,6 @@ a{
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer;
 }
 </style>
