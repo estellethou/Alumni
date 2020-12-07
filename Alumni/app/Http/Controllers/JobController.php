@@ -28,11 +28,45 @@ class JobController extends Controller
     public function store(Request $request)
     {
         // create a job
-        // toDo: add validator
-        $request->validate([
-            'user_id' => 'required'
+        $job = new Job;
+
+        // validate Job datas input when creating a new job/internship add
+        $validate = $request->validate([
+            'title' => 'required | string | min:3 | max:255',
+            'content' => 'required | string | min:10 | max:4,294,967,295',
+            'profile' => 'required | string',
+            'qualifications' => 'required | string',
+            'yearExperiences' => 'required',
+            'streetAddress' => 'required | string',
+            'postalCode' => 'required | string | min:5 | max:5', // add pagackage https://github.com/axlon/laravel-postal-code-validation
+            'city' => 'required | string',
+            'contract' => 'required',
+            'contractDuration' => 'nullable',
+            'companyName' => 'required | string',
+            'sector' => 'nullable',
+            'userId' => 'nullable | required',
         ]);
-        return Job::create($request->all());
+
+        if ($validate) {
+            $job->title = $request['title'];
+            $job->content = $request['content'];
+            $job->profile = $request['profile'];
+            $job->qualifications = $request['qualifications'];
+            $job->year_experiences = $request['yearExperiences'];
+            $job->street_address = $request['streetAddress'];
+            $job->postal_code = $request['postalCode'];
+            $job->city = $request['city'];
+            $job->contract = $request['contract'];
+            $job->contract_duration = $request['contractDuration'];
+            $job->company_name = $request['companyName'];
+            $job->sector = $request['sector'];
+            $job->user_id = $request['userId'];
+            $job->save();
+        }
+
+        return response()->json(['message' => 'Job/Internship was edited successfully', 'job' => $job]);
+
+        // return Job::create($request->all());
     }
 
     /**
@@ -57,8 +91,50 @@ class JobController extends Controller
     public function update(Request $request, $id)
     {
         // update a job
-        // toDo: add validator
         $job = Job::find($id);
+
+        // validate Job datas input when editing a job/internship add
+        $validate = $request->validate([
+            'title' => 'required | string | min:3 | max:255',
+            'content' => 'required | string | min:10 | max:4,294,967,295',
+            'profile' => 'required | string',
+            'qualifications' => 'required | string',
+            'yearExperiences' => 'required',
+            'streetAddress' => 'required | string',
+            'postalCode' => 'required | string | min:5 | max:5', // add pagackage https://github.com/axlon/laravel-postal-code-validation
+            'city' => 'required | string',
+            'contract' => 'required',
+            'contractDuration' => 'nullable',
+            'companyName' => 'required | string',
+            'sector' => 'nullable',
+            'userId' => 'nullable | required',
+        ]);
+
+        if ($validate) {
+            $job->title = $request['title'];
+            $job->content = $request['content'];
+            $job->profile = $request['profile'];
+            $job->qualifications = $request['qualifications'];
+            $job->year_experiences = $request['yearExperiences'];
+            $job->street_address = $request['streetAddress'];
+            $job->postal_code = $request['postalCode'];
+            $job->city = $request['city'];
+            $job->contract = $request['contract'];
+            $job->contract_duration = $request['contractDuration'];
+            $job->company_name = $request['companyName'];
+            $job->sector = $request['sector'];
+            $job->user_id = $request['userId'];
+            $job->save();
+        }
+
+        return response()->json(['message' => 'Job/Internship created successfully', 'job' => $job]);
+
+        if ($job) {
+            $validate = null;
+
+        }
+
+
         //Check Policy first
         $this->authorize('update', $job);
         // update a job
