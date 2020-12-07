@@ -225,6 +225,7 @@ export default {
       fileReader.readAsDataURL(e.target.files[0]);
       fileReader.onload = (e) => {
         this.newImage = e.target.result;
+        console.log(e.target.result);
       };
     },
     resumeChanged(e) {
