@@ -1,25 +1,32 @@
 <template>
-    <div class="container-addPostModal">
-        <h1>Hello from addModalPost</h1>
-        <button @click="closeModal">Close modal</button>
+    <v-container>
+        <div class="title-modalAddPost">
+            <v-btn @click="closeModal" icon><v-icon color="black">{{icons.mdiClose}}</v-icon></v-btn>
+        </div>
         <div>
             <form @submit="submitPost">
-                <v-text-field label="Title" v-model="title" ></v-text-field>
-                <v-text-field  label="Description"  v-model="description" ></v-text-field>
-                <v-btn type="submit">Submit</v-btn>
+                <div>
+                    <v-text-field label="Title" v-model="title" ></v-text-field>
+                    <v-text-field  label="Description"  v-model="description" ></v-text-field>
+                </div>
+                <div class="btnSubmit-newPost">
+                    <v-btn type="submit" color="primary">Add a post</v-btn>
+                </div>
             </form>
         </div>
-    </div>
+    </v-container>
 </template>
 
 <script>
 import {mapActions,mapGetters} from  "vuex"
+import { mdiClose } from '@mdi/js';
 export default {
 
     data(){
         return{
             title:"",
             description:"",
+            icons:{mdiClose}
         }
     },
     methods:{
@@ -50,6 +57,14 @@ export default {
 }
 </script>
 
-<style>
-
+<style scope>
+.title-modalAddPost{
+    display: flex;
+    justify-content: flex-end;
+}
+.btnSubmit-newPost{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
 </style>
