@@ -30,7 +30,8 @@
                     <v-btn v-if="this.user.id == post.user_id" @click="openEditModalPost" color="primary">Edit</v-btn>
                     <div class="container-modalEditPost" v-if="isOpen">
                     <EditPostModal v-bind:singlePost="post" v-on:close="updateParentProps(false)"/> 
-                  </div>
+                    </div>
+                    <div class="overlay" v-if="isOpen"></div>
               </div>
               </v-container>
           </div>
@@ -139,13 +140,14 @@ export default {
 <style scope>
 .container-modalEditPost{
     position:fixed;
-    background-color:beige;
+    background-color:white;
     height: 300px;
-    width: 400px;
+    width: 600px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1;
+    z-index: 1010;
+    border-radius:15px
 }
 a span{
     text-decoration: none;
