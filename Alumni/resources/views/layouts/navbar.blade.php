@@ -29,23 +29,29 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            @guest
+            @else
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button"
                             aria-haspopup="true">Admin</a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item" href="{{ route('admin.logout') }}">Logout</a>
                         </div>
                     </li>
                 </ul>
             </div>
+            @endguest
         </nav>
         <div class="row flex-fill flex-column flex-sm-row bg-secondary mr-0" style="height:1200px;">
             <!-- sidebar content -->
+            @guest
+            @else
             <div id="sidebar" class="col-sm-3 col-md-2 sidebar bg-dark pr-0 shadow h-100">
                 @include('layouts/sidebar')
             </div>
+            @endguest
             <div id="content" class="col-md-10 h-100 w-100 pt-4 px-4">
                 @include('flash-message')
                 @yield('content')
@@ -61,7 +67,7 @@
     var newImage = "";
     $(document).ready(function() {
         $('li.active').removeClass('active');
-        $('a[href="http://localhost:8899' + location.pathname + '"]').addClass('active');
+        $('li > a[href="http://localhost:8899' + location.pathname + '"]').addClass('active');
     });
     </script>
 
