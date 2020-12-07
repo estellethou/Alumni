@@ -44,7 +44,7 @@ class JobController extends Controller
             'contractDuration' => 'nullable',
             'companyName' => 'required | string',
             'sector' => 'nullable',
-            'userId' => 'nullable | required',
+            'userId' => 'nullable',
         ]);
 
         if ($validate) {
@@ -107,7 +107,7 @@ class JobController extends Controller
             'contractDuration' => 'nullable',
             'companyName' => 'required | string',
             'sector' => 'nullable',
-            'userId' => 'nullable | required',
+            'userId' => 'nullable',
         ]);
 
         if ($validate) {
@@ -127,13 +127,7 @@ class JobController extends Controller
             $job->save();
         }
 
-        return response()->json(['message' => 'Job/Internship created successfully', 'job' => $job]);
-
-        if ($job) {
-            $validate = null;
-
-        }
-
+        // return response()->json(['message' => 'Job/Internship created successfully', 'job' => $job]);
 
         //Check Policy first
         $this->authorize('update', $job);
