@@ -28,4 +28,3 @@ class Post extends Model
         return $this->belongTo('App/Model/User');
     }
 }
-

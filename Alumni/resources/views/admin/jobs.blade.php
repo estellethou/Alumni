@@ -5,9 +5,9 @@
 <body>
     <div class="d-flex justify-content-between mb-3">
         <a href="{{ route('admin.job.create') }}" class="btn btn-dark">Add Job Offer</a>
-        <div class="md-form">
+        <!-- <div class="md-form">
             <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="search">
-        </div>
+        </div> -->
     </div>
     <div class="table-responsive-xl">
         <table class="table table-sm table-light table-striped table-hover shadow rounded">

@@ -63,38 +63,6 @@
         $('li.active').removeClass('active');
         $('a[href="http://localhost:8899' + location.pathname + '"]').addClass('active');
     });
-    $(document).ready(function() {
-        $('input[name="image"]').change(function(e) {
-            var fileReader = new FileReader();
-            fileReader.readAsDataURL(e.target.files[0]);
-            fileReader.onload = (e) => {
-                newImage = e.target.result;
-            }
-        });
-    });
-    $(document).ready(function() {
-        $('#edit_profile').submit(function(e) {
-            e.preventDefault();
-            $.ajax({
-                method: 'POST',
-                url: "{{ route('admin.user.profile.update',  [ $user->id ])}}",
-                data: {
-                    _token: '{{csrf_token()}}',
-                    _method: "PATCH",
-                    image: newImage,
-                    phone: $('input[name="phone"]').val(),
-                    description: $('input[name="description"]').val(),
-                    url_linkedin: $('input[name="url_linkedin"]').val(),
-                    url_github: $('input[name="url_github"]').val(),
-                    url_website: $('input[name="url_website"]').val(),
-                },
-                success: function(response) {
-                    window.location.href =
-                        "{{ route('admin.user.show',  [ $user->id ])}}";
-                },
-            });
-        });
-    });
     </script>
 
 </body>
