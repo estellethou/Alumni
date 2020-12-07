@@ -61,6 +61,7 @@ class ProfileController extends Controller
 
         $profile->update($request->except(['image','resume']));
             if ($request->image) {
+            //dd($path);
             $exploded = explode(',', $request->image);
             $decoded = base64_decode($exploded[1]);
             if (str_contains($exploded[0], 'jpeg')) {
