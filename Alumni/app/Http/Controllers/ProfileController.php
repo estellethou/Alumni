@@ -58,9 +58,8 @@ class ProfileController extends Controller
         $profile = Profile::find($id);
         //check policy first
         $this->authorize('update', $profile);
-
         $profile->update($request->except(['image','resume']));
-            if ($request->image) {
+        if ($request->image) {
             $exploded = explode(',', $request->image);
             $decoded = base64_decode($exploded[1]);
             if (str_contains($exploded[0], 'jpeg')) {
@@ -70,9 +69,10 @@ class ProfileController extends Controller
             }
             $name = substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(10/strlen($x)))), 1, 10);
             $filename = $name.'.'.$extension;
-            $path = public_path().'/'.$filename;
-            file_put_contents($path, $decoded); //save the decoded image to the path
-            $profile->update(['image' => $filename ?? '']);    
+            $newPath = public_path().'/'.$filename;
+            //$newPath = $request->image->store('/', 's3');
+            file_put_contents($newPath, $decoded); //save the decoded image to the path
+            $profile->update(['image' => $filename ?? '']);
         }
         if ($request->resume) {
             $exploded = explode(',', $request->resume);
