@@ -36,15 +36,15 @@ class JobController extends Controller
             'content' => 'required | string | min:10 | max:4,294,967,295',
             'profile' => 'required | string',
             'qualifications' => 'required | string',
-            'yearExperiences' => 'required',
-            'streetAddress' => 'required | string',
-            'postalCode' => 'required | string | min:5 | max:5', // add pagackage https://github.com/axlon/laravel-postal-code-validation
+            'year_experiences' => 'required',
+            'street_address' => 'required | string',
+            'postal_code' => 'required | string | min:5 | max:5', // add pagackage https://github.com/axlon/laravel-postal-code-validation
             'city' => 'required | string',
             'contract' => 'required',
-            'contractDuration' => 'nullable',
-            'companyName' => 'required | string',
+            'contract_duration' => 'nullable',
+            'company_name' => 'required | string',
             'sector' => 'nullable',
-            'userId' => 'nullable',
+            'user_id' => 'nullable',
         ]);
 
         if ($validate) {
@@ -52,19 +52,19 @@ class JobController extends Controller
             $job->content = $request['content'];
             $job->profile = $request['profile'];
             $job->qualifications = $request['qualifications'];
-            $job->year_experiences = $request['yearExperiences'];
-            $job->street_address = $request['streetAddress'];
-            $job->postal_code = $request['postalCode'];
+            $job->year_experiences = $request['year_experiences'];
+            $job->street_address = $request['street_address'];
+            $job->postal_code = $request['postal_code'];
             $job->city = $request['city'];
             $job->contract = $request['contract'];
-            $job->contract_duration = $request['contractDuration'];
-            $job->company_name = $request['companyName'];
+            $job->contract_duration = $request['contract_duration'];
+            $job->company_name = $request['company_name'];
             $job->sector = $request['sector'];
-            $job->user_id = $request['userId'];
+            $job->user_id = $request['user_id'];
             $job->save();
         }
 
-        return response()->json(['message' => 'Job/Internship was edited successfully', 'job' => $job]);
+        return response()->json(['message' => 'Job/Internship was created successfully', 'job' => $job]);
 
         // return Job::create($request->all());
     }
@@ -93,46 +93,48 @@ class JobController extends Controller
         // update a job
         $job = Job::find($id);
 
+        //Check Policy first
+        $this->authorize('update', $job);
+
         // validate Job datas input when editing a job/internship add
         $validate = $request->validate([
             'title' => 'required | string | min:3 | max:255',
             'content' => 'required | string | min:10 | max:4,294,967,295',
             'profile' => 'required | string',
             'qualifications' => 'required | string',
-            'yearExperiences' => 'required',
-            'streetAddress' => 'required | string',
-            'postalCode' => 'required | string | min:5 | max:5', // add pagackage https://github.com/axlon/laravel-postal-code-validation
+            'year_experiences' => 'required',
+            'street_address' => 'required | string',
+            'postal_code' => 'required | string | min:5 | max:5', // add pagackage https://github.com/axlon/laravel-postal-code-validation
             'city' => 'required | string',
             'contract' => 'required',
-            'contractDuration' => 'nullable',
-            'companyName' => 'required | string',
+            'contract_duration' => 'nullable',
+            'company_name' => 'required | string',
             'sector' => 'nullable',
-            'userId' => 'nullable',
+            'user_id' => 'nullable',
         ]);
+        dd(request()->all());
 
         if ($validate) {
             $job->title = $request['title'];
             $job->content = $request['content'];
             $job->profile = $request['profile'];
             $job->qualifications = $request['qualifications'];
-            $job->year_experiences = $request['yearExperiences'];
-            $job->street_address = $request['streetAddress'];
-            $job->postal_code = $request['postalCode'];
+            $job->year_experiences = $request['year_experiences'];
+            $job->street_address = $request['street_address'];
+            $job->postal_code = $request['postal_code'];
             $job->city = $request['city'];
             $job->contract = $request['contract'];
-            $job->contract_duration = $request['contractDuration'];
-            $job->company_name = $request['companyName'];
+            $job->contract_duration = $request['contract_duration'];
+            $job->company_name = $request['company_name'];
             $job->sector = $request['sector'];
-            $job->user_id = $request['userId'];
+            $job->user_id = $request['user_id'];
             $job->save();
         }
 
         // return response()->json(['message' => 'Job/Internship created successfully', 'job' => $job]);
 
-        //Check Policy first
-        $this->authorize('update', $job);
         // update a job
-        $job -> update($request->all());
+        // $job -> update($request->all());
         return $job;
 
     }
