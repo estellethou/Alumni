@@ -19,14 +19,14 @@ class CreateJobsTable extends Migration
             $table->longText('content');
             $table->string('profile');
             $table->string('qualifications');
-            $table->set('year_experiences', ['Beginner (less than 1 year)', 'First Experience (1-2 years)', 'Experienced (2-5 years)', 'Confirmed (5 years and more)']);
+            $table->string('year_experiences');
             $table->string('street_address');
             $table->string('postal_code');
             $table->string('city');
             $table->string('contract');
             $table->string('contract_duration')->nullable();
             $table->string('company_name');
-            $table->set('sector',['Banking', 'Engineering / Consultancy', 'Finance', 'Industry', 'IT'])->nullable();
+            $table->string('sector')->nullable();
             $table->foreignId('user_id')->nullable();
             $table->timestamps();
         });
