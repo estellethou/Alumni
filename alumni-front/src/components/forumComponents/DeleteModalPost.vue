@@ -32,6 +32,7 @@ export default {
         
         removePost(id){
             this.deletePost(id)
+            this.$emit("closeDelete",false)
         },
 
         closeModalDeletePost(){

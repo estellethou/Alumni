@@ -9,8 +9,12 @@
                         </div>
                         <p class="timeColor">{{ timeAgo(Date.parse(post.created_at)) }}</p>
                         <div v-if="this.user.id == post.user_id" class="mdiClose">
-                            <v-btn  @click="removePost(post.id)" icon><v-icon>{{icons.mdiClose}}</v-icon></v-btn>
+                            <v-btn  @click="openModalDeletePost" icon><v-icon>{{icons.mdiClose}}</v-icon></v-btn>
                         </div>
+                        <div class="container-modalDeletePost" v-if="isDelete">
+                            <DeleteModalPost v-bind:id="post.id" v-on:closeDelete="updateIsDelete(false)" />
+                          </div>
+                          <div class="overlay" v-if="isDelete"></div>
                       </div>
                       <div class="container-headerPost" v-else>
                           <div class="userProfile-display" @click="redirectToProfile(getImageOfUser[0])">
