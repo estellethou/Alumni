@@ -120,7 +120,7 @@ export default {
       var lastnameLetter = this.user.lastname.charAt(0);
       var initales = firstnameLetter + lastnameLetter;
       return initales.toUpperCase();
-    }
+    },
   },
   
   computed: {
