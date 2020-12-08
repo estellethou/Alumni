@@ -13,6 +13,7 @@
           <div v-if="isOpen" class="container-AddPostModal">
                  <AddPostModal v-on:close="updateParent(false)"/>
           </div>
+          <div class="overlay" v-if="isOpen"></div>
       </div>
       <ListPosts v-bind:Posts="searchInput"/>
     </div> 
@@ -75,13 +76,14 @@ export default {
 <style scope >
 .container-AddPostModal{
     position:fixed;
-    background-color:beige;
+    background-color:white;
     height: 300px;
-    width: 400px;
+    width: 600px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1;
+    z-index: 1010;
+    border-radius:15px
 
 }
 .container-btnModal{
@@ -96,5 +98,15 @@ export default {
 .container-btnAddNewPost{
     display: flex;
     justify-content: center;
+}
+.overlay{
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.4;
 }
 </style>
