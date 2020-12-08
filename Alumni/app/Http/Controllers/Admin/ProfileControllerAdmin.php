@@ -78,7 +78,6 @@ class ProfileControllerAdmin extends ControllerAdmin
         ]);
         
         $imagePath = request()->image->store('/images', 's3');
-        dd($imagePath);
         $data['image'] = $imagePath;
         $user->profile->update($data);
         
