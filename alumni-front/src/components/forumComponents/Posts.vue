@@ -167,7 +167,7 @@ export default {
 .container-modalDeletePost{
     position:fixed;
     background-color:white;
-    height: 300px;
+    height: 150px;
     width: 600px;
     top: 50%;
     left: 50%;
