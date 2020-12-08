@@ -19,14 +19,14 @@ class CreateJobsTable extends Migration
             $table->longText('content');
             $table->string('profile');
             $table->string('qualifications');
-            $table->string('year_experiences');
+            $table->array('year_experiences');
             $table->string('street_address');
             $table->string('postal_code');
             $table->string('city');
             $table->string('contract');
             $table->string('contract_duration')->nullable();
             $table->string('company_name');
-            $table->string('sector')->nullable();
+            $table->array('sector')->nullable();
             $table->foreignId('user_id')->nullable();
             $table->timestamps();
         });
