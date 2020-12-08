@@ -227,17 +227,17 @@ export default {
                 content: this.description,
                 profile: this.profile,
                 qualifications: this.qualifications,
-                year_experiences: this.exp.join(', '),
+                year_experiences: JSON.stringify(this.exp.join(', ')),
                 street_address: this.address,
                 postal_code: this.postalCode,
                 city: this.city,
                 contract: this.contract,
                 contract_duration: this.contractDuration,
                 company_name: this.company,
-                sector: this.sector.join(', '),
+                sector: JSON.stringify(this.sector.join(', ')),
                 user_id: this.user.id,
             };
-            console.log(newJob)
+            console.log(newJob);
             this.addJob(newJob);
             this.jobTitle = "";
             this.description = "";
@@ -252,16 +252,6 @@ export default {
             this.company = "";
             this.sector = "";
         },
-
-        // arrayToString(arr, sep = ', ') {
-        //     let str = '';
-        //     arr.forEach (val =>{
-        //         str = str + implode(sep, val);
-        //         str = str + sep; // add separator between sub-arrays
-        //     });
-        //     str = rtrim(str, sep); // remove last separator
-        //     return str;
-        // }, 
     }
 
 }
