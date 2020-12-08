@@ -227,7 +227,7 @@ export default {
                 content: this.description,
                 profile: this.profile,
                 qualifications: this.qualifications,
-                year_experiences: JSON.stringify(this.exp),
+                year_experiences: this.exp.join(', '),
                 street_address: this.address,
                 postal_code: this.postalCode,
                 city: this.city,
