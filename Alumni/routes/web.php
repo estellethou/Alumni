@@ -33,6 +33,9 @@ Route::group(['prefix' => 'admin'], function() {
 });
 // Route::middleware('auth:web')->get('users', [UserControllerAdmin::class, 'index'])->name('admin.users');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:web'], function () {
+    Route::get('/', function () {
+        return view('admin/admin');
+    });
     Route::get('logout', [LoginControllerAdmin::class, 'logout'])->name('admin.logout');
     Route::get('users', [UserControllerAdmin::class, 'index'])->name('admin.users');
     Route::get('users/create', function () {
