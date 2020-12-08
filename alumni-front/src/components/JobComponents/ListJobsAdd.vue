@@ -157,6 +157,7 @@
                                             :items="itemsSector"
                                         ></v-select>
                                     </v-col>
+                                </v-card-text>
 
                                 <v-card-actions>
                                     <v-spacer></v-spacer>
@@ -176,7 +177,6 @@
                                         Create
                                     </v-btn>
                                 </v-card-actions>
-                            </v-card-text>
                         </v-card>
                     </v-form>
                 </div>
