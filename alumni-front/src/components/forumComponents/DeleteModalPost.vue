@@ -54,4 +54,10 @@ export default {
     justify-content: center;
 }
 
+.centerWarningMessage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 </style>
