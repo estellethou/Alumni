@@ -47,6 +47,7 @@
           <template v-else>
               <router-link :to="{name: 'Login'}" class="dropdown-item">
                 Login / Register
+                <Hello/>
               </router-link>
           </template>
         </div>
