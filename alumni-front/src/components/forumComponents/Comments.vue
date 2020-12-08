@@ -3,14 +3,14 @@
     <v-card>
       <v-container class="justify-space-between">
         <div class="sideByside" v-if="getImageOfUser[0].image !== ''">
-          <div class="userProfile-display" @click="redirectToProfile(getImageOfUser[0])">
+          <div class="userProfile-displayComment" @click="redirectToProfile(getImageOfUser[0])">
             <v-avatar class="mr-7" size="50"><img v-bind:src="'https://coding-academy-alumni.herokuapp.com/'+ getImageOfUser[0].image" alt="Avatar"/></v-avatar>
              <p>{{getNameUser[0].firstname +" "+ getNameUser[0].lastname}}</p>
           </div>
               <p>{{ timeAgo(Date.parse(comment.created_at)) }}</p>
         </div>
         <div class="sideByside" v-else>
-          <div class="userProfile-display">
+          <div class="userProfile-displayComment">
             <v-avatar class="mr-7" color="light-blue darken-4" size="50"><v-icon dark>mdi-account-circle</v-icon></v-avatar>
              <p>{{getNameUser[0].firstname +" "+ getNameUser[0].lastname}}</p>
           </div>
@@ -163,10 +163,16 @@ export default {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  align-items: center;
 }
 .sideByside p{
   font-weight: none;
   font-size: none;
+}
+.userProfile-displayComment{
+    display: flex;
+    cursor: pointer;
+    align-items: center;
 }
 
 </style>
