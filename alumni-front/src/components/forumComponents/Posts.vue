@@ -4,7 +4,7 @@
               <v-container class="d-flex justify-space-between">
                     <div class="container-headerPost" v-if="getImageOfUser[0].image !== ''">
                         <div class="userProfile-display" @click="redirectToProfile(getImageOfUser[0])">
-                            <v-avatar size="40" class="mr-7"><img v-bind:src="'https://coding-academy-alumni.herokuapp.com/'+ getImageOfUser[0].image" alt="Avatar"/></v-avatar>
+                            <v-avatar size="40" class="mr-7"><img v-bind:src="'https://coding-alumni-bucket.s3.eu-west-3.amazonaws.com/images/'+ getImageOfUser[0].image" alt="Avatar"/></v-avatar>
                             <p>{{getNameUser[0].firstname +" "+ getNameUser[0].lastname}}</p>
                         </div>
                         <p class="timeColor">{{ timeAgo(Date.parse(post.created_at)) }}</p>
