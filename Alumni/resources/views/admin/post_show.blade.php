@@ -19,6 +19,10 @@
                 <td>{{ $post->user->firstname . " " . $post->user->lastname }}</td>
             </tr>
             <tr>
+                <th>Number of Comments</th>
+                <td>{{ $post->comments->count() }}</td>
+            </tr>
+            <tr>
                 <th>Created At</th>
                 <td>{{ $post->created_at }}</td>
             </tr>

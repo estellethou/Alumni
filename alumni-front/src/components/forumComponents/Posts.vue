@@ -94,7 +94,7 @@ export default {
         }
     },
     methods:{
-        ...mapActions(["setAllProfiles","setAllUsers"]),
+        ...mapActions(["setAllProfiles","setAllUsers","allComments"]),
 
         mapArrayNumberOfComment(array){
             return array.length
@@ -151,6 +151,7 @@ export default {
       created(){
     this.setAllProfiles()
     this.setAllUsers()
+    this.allComments()
   }
 }
 
@@ -171,7 +172,7 @@ export default {
 .container-modalDeletePost{
     position:fixed;
     background-color:white;
-    height: 150px;
+    height: 200px;
     width: 600px;
     top: 50%;
     left: 50%;
