@@ -6,7 +6,7 @@
           <h5 class="title-card">MY PROFILE</h5>
           <div class="container-img">
             <img
-              src="https://coding-academy-alumni.herokuapp.com/icons/profile.png"
+              src="https://coding-academy-alumni.herokuapp.com/icons/prof.png"
               alt="profile"
               width="100%"
               height="85%"
