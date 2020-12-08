@@ -60,7 +60,7 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Header",
   computed: {
-    ...mapGetters(["authenticated", "user"]),
+    ...mapGetters(["authenticated"]),
   },
 
   methods: {
@@ -69,9 +69,16 @@ export default {
     signOutButton() {
       this.signOut()
       .then(() => {
-        if(this.$router.path !== ('/')){
+        if(this.$route.path !== ('/')){
           this.$router.push('/')
-        } 
+          
+        }
+        this.$swal({
+              title: "User Logout",
+              text: "See you soon",
+              icon: "success",
+              confirmButtonText: "Ok",
+            });
       })
     },
   },
