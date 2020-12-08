@@ -111,47 +111,4 @@ export default {
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap");
-.profile {
-  margin: auto;
-}
-.background {
-  background-image: url("https://coding-academy-alumni.herokuapp.com/icons/background.jpg");
-  background-size: 100% 300px;
-  height: 240px;
-}
-.profile-img {
-  border-radius: 50%;
-  position: relative;
-  top: 70%;
-  left: 45%;
-}
-
-.resume {
-  display: flex;
-  justify-content: center;
-}
-
-.side-img {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.logo {
-  margin-left: 2%;
-}
-.username {
-  color: white;
-  margin-top: 1.5%;
-  margin-right: 2%;
-  font-family: "Nunito", sans-serif;
-  font-weight: bold;
-}
-
-.description {
-  position: relative;
-  margin-top: 6rem;
-  font-size: x-large;
-  font-family: "Nunito", sans-serif;
-}
 </style>

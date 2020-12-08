@@ -6,8 +6,8 @@
         <div class="side-img">
           <img
             class="logo"
-            width="180"
-            height="80"
+            width="12%"
+            height="50%"
             src="https://coding-academy-alumni.herokuapp.com/icons/logo.png"
             alt="logo"
           />
@@ -17,8 +17,8 @@
         <div class="position-img" v-if="profile.image !== ''">
         <img
           class="profile-img"
-          width="150"
-          height="150"
+          width="190rem"
+          height="190rem"
           :src="
           'https://coding-alumni-bucket.s3.eu-west-3.amazonaws.com/images/'
           +
@@ -143,13 +143,14 @@ export default {
   background-size: 100% 300px;
   height: 240px;
 }
-.position-img{
-  position: relative;
-  top: 30%;
-}
-
 .profile-img {
   border-radius: 50%;
+  position: relative;
+  left: 45%;
+}
+.position-img{
+  position: relative;
+  top: 3rem;
 }
 
 .resume {
@@ -162,9 +163,7 @@ export default {
   flex-direction: row;
   justify-content: space-between;
 }
-.logo {
-  margin-left: 2%;
-}
+
 .username {
   color: white;
   margin-top: 1.5%;
@@ -179,4 +178,11 @@ export default {
   font-size: x-large;
   font-family: "Nunito", sans-serif;
 }
+
+
+.logo {
+  margin-left: 2%;
+  margin-top: 1%;
+}
+
 </style>
