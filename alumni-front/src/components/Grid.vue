@@ -140,7 +140,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 
 .caption a {
      text-decoration: none;

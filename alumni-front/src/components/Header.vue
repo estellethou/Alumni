@@ -12,6 +12,7 @@
           aria-expanded="false"
           class="hamburger"
         />
+        <template v-if="authenticated">
         <!----- EXIT BUTTON (Right) ----->
         <a href="#" @click.prevent="signOutButton">
           <img
@@ -22,7 +23,7 @@
             class="logout"
           />
         </a>
-
+        </template>
         <h1 class="title">CODING ACADEMY - ALUMNI</h1>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -74,7 +75,7 @@ export default {
           
         }
         this.$swal({
-              title: "User Logout",
+              title: "You have successfully logged out",
               text: "See you soon",
               icon: "success",
               confirmButtonText: "Ok",
