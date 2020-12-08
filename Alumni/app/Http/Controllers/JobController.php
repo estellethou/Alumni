@@ -36,14 +36,14 @@ class JobController extends Controller
             'content' => 'required | string | min:10 | max:4294967295',
             'profile' => 'required | string',
             'qualifications' => 'required | string',
-            'year_experiences' => 'required | array',
+            'year_experiences' => 'required | string',
             'street_address' => 'required | string',
             'postal_code' => 'required | string | min:5 | max:5', // add pagackage https://github.com/axlon/laravel-postal-code-validation
             'city' => 'required | string',
             'contract' => 'required',
             'contract_duration' => 'nullable',
             'company_name' => 'required | string',
-            'sector' => 'nullable',
+            'sector' => 'nullable | string',
             'user_id' => 'nullable',
         ]);
 
@@ -64,7 +64,7 @@ class JobController extends Controller
             $job->save();
         };
 
-        return $job;
+        // return $job;
 
         // return response()->json(['message' => 'Job/Internship was created successfully', 'job' => $job]);
 
@@ -104,14 +104,14 @@ class JobController extends Controller
             'content' => 'required | string | min:10 | max:4294967295',
             'profile' => 'required | string',
             'qualifications' => 'required | string',
-            'year_experiences' => 'required | array',
+            'year_experiences' => 'required | string',
             'street_address' => 'required | string',
             'postal_code' => 'required | string | min:5 | max:5', // add pagackage https://github.com/axlon/laravel-postal-code-validation
             'city' => 'required | string',
             'contract' => 'required',
             'contract_duration' => 'nullable',
             'company_name' => 'required | string',
-            'sector' => 'nullable',
+            'sector' => 'nullable | string',
             'user_id' => 'nullable',
         ]);
 
