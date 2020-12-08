@@ -19,7 +19,7 @@ class CreateJobsTable extends Migration
             $table->longText('content');
             $table->string('profile');
             $table->string('qualifications');
-            $table->integer('year_experiences');
+            $table->string('year_experiences');
             $table->string('street_address');
             $table->string('postal_code');
             $table->string('city');
