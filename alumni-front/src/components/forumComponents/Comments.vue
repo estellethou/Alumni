@@ -4,14 +4,14 @@
       <v-container class="justify-space-between">
         <div class="sideByside" v-if="getImageOfUser[0].image !== ''">
           <div class="userProfile-displayComment" @click="redirectToProfile(getImageOfUser[0])">
-            <v-avatar class="mr-7" size="50"><img v-bind:src="'https://coding-academy-alumni.herokuapp.com/'+ getImageOfUser[0].image" alt="Avatar"/></v-avatar>
+            <v-avatar class="mr-7" size="50"><img v-bind:src="'https://coding-alumni-bucket.s3.eu-west-3.amazonaws.com/images/'+ getImageOfUser[0].image" alt="Avatar"/></v-avatar>
              <p>{{getNameUser[0].firstname +" "+ getNameUser[0].lastname}}</p>
           </div>
               <p>{{ timeAgo(Date.parse(comment.created_at)) }}</p>
         </div>
         <div class="sideByside" v-else>
           <div class="userProfile-displayComment">
-            <v-avatar class="mr-7" color="light-blue darken-4" size="50"><v-icon dark>mdi-account-circle</v-icon></v-avatar>
+            <v-avatar color="primary" class="mr-7" size="45"><v-icon dark>mdi-account-circle</v-icon></v-avatar>
              <p>{{getNameUser[0].firstname +" "+ getNameUser[0].lastname}}</p>
           </div>
           <p>{{ timeAgo(Date.parse(comment.created_at)) }}</p>
@@ -146,7 +146,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 
 .inputComment{
   width:70%
@@ -173,6 +173,9 @@ export default {
     display: flex;
     cursor: pointer;
     align-items: center;
+}
+p{
+  margin-bottom: 0px;
 }
 
 </style>
