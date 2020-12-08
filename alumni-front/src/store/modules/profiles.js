@@ -37,6 +37,7 @@ const actions = {
     },
 
     async updateProfile({commit}, newProfile){
+        console.log(newProfile)
         let response = await axios.patch(`/profile/${newProfile.id}/edit`, newProfile)
         response = await axios.get(`/profiles`)
         commit("updateMyProfile", response.data)
