@@ -1,13 +1,17 @@
 <template>
     <div>
-        <div v-for="job in filteredJob" :key="job.id">
-            <h1> {{ job.title }}</h1>
-            <p>{{ job.content }}</p>
+        <div class="container-link" v-for="job in filteredJob" :key="job.id">
+            <router-link v-bind:to="`/job/${job.id}`">
+                <h1> {{ job.title }}</h1>
+                <p>{{ job.content }}</p>
+            </router-link>
             
-            <ListJobsEdit v-bind:job="job" v-if="job.user_id == user.id" />
-            
-            <!-- <router-link :to="`/job/edit/${job.id}/${JSON.stringify(job)}`" ><button>Edit Job</button></router-link> -->
-            <button @click="destroyJob(job.id)" v-if="job.user_id == user.id">Delete Job/Internship</button>
+            <div class="d-flex">
+                <ListJobsEdit v-bind:job="job" v-if="job.user_id == user.id" />
+                
+                <!-- <router-link :to="`/job/edit/${job.id}/${JSON.stringify(job)}`" ><button>Edit Job</button></router-link> -->
+                <v-btn class="error m-3" elevation="12" small @click="destroyJob(job.id)" v-if="job.user_id == user.id">Delete</v-btn>
+            </div>
         </div>
     </div>
 </template>
@@ -40,5 +44,17 @@ export default {
 </script>
 
 <style>
+
+.container-link a {
+    text-decoration: none;
+}
+
+.container-link h1 {
+    color: black;
+}
+
+.container-link p {
+    color: black;
+}
 
 </style>
