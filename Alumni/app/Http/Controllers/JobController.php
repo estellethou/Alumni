@@ -36,7 +36,7 @@ class JobController extends Controller
             'content' => 'required | string | min:10 | max:4294967295',
             'profile' => 'required | string',
             'qualifications' => 'required | string',
-            'year_experiences' => 'required',
+            'year_experiences' => 'required | array',
             'street_address' => 'required | string',
             'postal_code' => 'required | string | min:5 | max:5', // add pagackage https://github.com/axlon/laravel-postal-code-validation
             'city' => 'required | string',
@@ -62,9 +62,11 @@ class JobController extends Controller
             $job->sector = $request['sector'];
             $job->user_id = $request['user_id'];
             $job->save();
-        }
+        };
 
-        return response()->json(['message' => 'Job/Internship was created successfully', 'job' => $job]);
+        return $job;
+
+        // return response()->json(['message' => 'Job/Internship was created successfully', 'job' => $job]);
 
         // return Job::create($request->all());
     }
@@ -102,7 +104,7 @@ class JobController extends Controller
             'content' => 'required | string | min:10 | max:4294967295',
             'profile' => 'required | string',
             'qualifications' => 'required | string',
-            'year_experiences' => 'required',
+            'year_experiences' => 'required | array',
             'street_address' => 'required | string',
             'postal_code' => 'required | string | min:5 | max:5', // add pagackage https://github.com/axlon/laravel-postal-code-validation
             'city' => 'required | string',
