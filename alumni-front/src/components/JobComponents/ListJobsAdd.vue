@@ -35,7 +35,9 @@
                                         label="Title *"
                                         id="title"
                                         name="title"
+                                        required
                                         v-model="jobTitle"
+                                        :rules="titleRules"
                                     ></v-text-field>
                                 <!-- </v-col> -->
                             
@@ -45,11 +47,13 @@
                                     <v-textarea
                                         auto-grow
                                         clearable
-                                        count
+                                        counter
                                         label="Job Description *"
                                         id="content"
                                         name="content"
+                                        required
                                         v-model="description"
+                                        :rules="descriptionRules"
                                     ></v-textarea>
 
                                 <!-- Profile -->
@@ -57,7 +61,9 @@
                                         label="Candidate Profile *"
                                         id="profile"
                                         name="profile"
+                                        required
                                         v-model="profile"
+                                        :rules="generalRules"
                                     ></v-text-field>
 
                                 <!-- Qualifications -->
@@ -65,7 +71,9 @@
                                         label="Qualifications/Skills *"
                                         id="qualifications"
                                         name="qualifications"
+                                        required
                                         v-model="qualifications"
+                                        :rules="generalRules"
                                     ></v-text-field>
 
                                 <!-- Experience -->
@@ -81,7 +89,9 @@
                                             name="year_experiences"
                                             multiple
                                             v-model="exp"
+                                            required
                                             :items="itemsExp"
+                                            :rules="generalRules"
                                         ></v-select>
                                     </v-col>
 
@@ -90,7 +100,9 @@
                                         label="Address *"
                                         id="street_address"
                                         name="street_address"
+                                        required
                                         v-model="address"
+                                        :rules="generalRules"
                                     ></v-text-field>
 
                                 <!-- Postal Code -->
@@ -98,7 +110,9 @@
                                         label="Postal Code *"
                                         id="postal_code"
                                         name="postal_code"
+                                        required
                                         v-model="postalCode"
+                                        :rules="postalCodeRules"
                                     ></v-text-field>
 
                                 <!-- City -->
@@ -106,7 +120,9 @@
                                         label="City *"
                                         id="city"
                                         name="city"
+                                        required
                                         v-model="city"
+                                        :rules="generalRules"
                                     ></v-text-field>
 
                                 <!-- Contract -->
@@ -121,7 +137,9 @@
                                             id="contract"
                                             name="contract"
                                             v-model="contract"
+                                            required
                                             :items="itemsContract"
+                                            :rules="generalRules"
                                         ></v-select>
                                     </v-col>
 
@@ -130,6 +148,7 @@
                                         label="Duraction of Contract (optional)"
                                         id="contract_duration"
                                         name="contract_duration"
+                                        required
                                         v-model="contractDuration"
                                     ></v-text-field>
 
@@ -138,7 +157,9 @@
                                         label="Company Name *"
                                         id="company_name"
                                         name="company_name"
+                                        required
                                         v-model="company"
+                                        :rules="generalRules"
                                     ></v-text-field>
 
                                 <!-- Sector -->
@@ -147,12 +168,13 @@
                                         md="10"
                                     >
                                         <v-select
-                                            label="Sector"
+                                            label="Sector (optional)"
                                             attach
                                             chips
                                             id="sector"
                                             name="sector"
                                             multiple
+                                            required
                                             v-model="sector"
                                             :items="itemsSector"
                                         ></v-select>
@@ -214,6 +236,23 @@ export default {
             contractDuration: "",
             company: "",
             sector: "",
+            titleRules: [
+                v => !!v || 'Title is required',
+                v => 3 <= v.length || 'Title must be at least 3 characters.',
+            ],
+            descriptionRules: [
+                v => !!v || 'Description is required',
+                v => 10 <= v.length || 'Description must be at least 10 characters.',
+            ],
+            postalCodeRules: [
+                v => !!v || 'Postal Code is required and must be numbers',
+                v => 5 <= v.length || 'Postal must be exactly 5 characters.',
+                v => v.length <= 5 || 'Postal must be exactly 5 characters.',
+                // v => v.number || 'Postal code must be digits.', does not work
+            ],
+            generalRules: [
+                v => !!v || 'Field is required',
+            ],
         };
     },
 
@@ -237,7 +276,6 @@ export default {
                 sector: JSON.stringify(this.sector),
                 user_id: this.user.id,
             };
-            console.log(newJob);
             this.addJob(newJob);
             this.jobTitle = "";
             this.description = "";
