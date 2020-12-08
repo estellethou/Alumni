@@ -33,7 +33,7 @@ class JobController extends Controller
         // validate Job datas input when creating a new job/internship add
         $validate = $request->validate([
             'title' => 'required | string | min:3 | max:255',
-            'content' => 'required | string | min:10 | max:4,294,967,295',
+            'content' => 'required | string | min:10 | max:4294967295',
             'profile' => 'required | string',
             'qualifications' => 'required | string',
             'year_experiences' => 'required',
@@ -99,7 +99,7 @@ class JobController extends Controller
         // validate Job datas input when editing a job/internship add
         $validate = $request->validate([
             'title' => 'required | string | min:3 | max:255',
-            'content' => 'required | string | min:10 | max:4,294,967,295',
+            'content' => 'required | string | min:10 | max:4294967295',
             'profile' => 'required | string',
             'qualifications' => 'required | string',
             'year_experiences' => 'required',
@@ -112,7 +112,6 @@ class JobController extends Controller
             'sector' => 'nullable',
             'user_id' => 'nullable',
         ]);
-        dd(request()->all());
 
         if ($validate) {
             $job->title = $request['title'];
