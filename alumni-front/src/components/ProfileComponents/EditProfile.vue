@@ -169,6 +169,14 @@ export default {
   },
 
   methods: {
+    //selectFile(event) {
+    //         // `files` is always an array because the file input may be in multiple mode
+    //        this.newImage = event.target.files[0];
+    //        let data = new FormData();
+    //        data.append('image', this.newImage);
+    //        return data
+    //    }, 
+
     ...mapActions(["updateProfile", "updateUser"]),
 
     saveForm(e) {
@@ -225,6 +233,7 @@ export default {
       fileReader.readAsDataURL(e.target.files[0]);
       fileReader.onload = (e) => {
         this.newImage = e.target.result;
+        console.log(e.target.result);
       };
     },
     resumeChanged(e) {
@@ -232,6 +241,7 @@ export default {
       fileReader.readAsDataURL(e.target.files[0]);
       fileReader.onload = (e) => {
         this.newResume = e.target.result;
+        console.log(e.target.result);
       };
     },
   },
