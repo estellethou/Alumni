@@ -227,14 +227,14 @@ export default {
                 content: this.description,
                 profile: this.profile,
                 qualifications: this.qualifications,
-                year_experiences: JSON.stringify(this.exp.join(', ')),
+                year_experiences: JSON.stringify(this.exp),
                 street_address: this.address,
                 postal_code: this.postalCode,
                 city: this.city,
                 contract: this.contract,
                 contract_duration: this.contractDuration,
                 company_name: this.company,
-                sector: JSON.stringify(this.sector.join(', ')),
+                sector: JSON.stringify(this.sector),
                 user_id: this.user.id,
             };
             console.log(newJob);
