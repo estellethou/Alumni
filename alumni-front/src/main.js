@@ -6,28 +6,29 @@ import vuetify from './plugins/vuetify'
 import axios from 'axios'
 import VueSweetalert2 from 'vue-sweetalert2';
 
-//NEE WEB PACK OR CLI3
+// NEED WEB PACK OR CLI3
 
-// //NEW WAY TO IMPORT COMPONENT//
+//NEW WAY TO IMPORT COMPONENT//
 
-// import UpperFirst from "lodash/upperFirst"
-// import camelCase from "lodash/camelCase"
+import UpperFirst from "lodash/upperFirst"
+import camelCase from "lodash/camelCase"
 
-// //Require in base component context//
+//Require in base component context//
 
-// const requireComponent = require.context('.',false, /base-[w-]+\.vue$/)
+const requireComponent = require.context('.',false, /base-[w-]+\.vue$/)
 
-// requireComponent.key().forEach(fileName => {
-//   //GET COMPONENT CONFIG//
-//   const componentConfig = requireComponent(fileName)
+requireComponent.key().forEach(fileName => {
+  //GET COMPONENT CONFIG//
+  const componentConfig = requireComponent(fileName)
 
-//   //GET PASCAL NAME COMPONENT//
-//   const componentName = UpperFirst(camelCase(fileName.replace(/^\.\//, '').replace(/\.\w+$/, '')))
+  //GET PASCAL NAME COMPONENT//
+  const componentName = UpperFirst(camelCase(fileName.replace(/^\.\//, '').replace(/\.\w+$/, '')))
 
-//   //REGiSTER COMPONENT//
+  //REGiSTER COMPONENT//
 
-//   Vue.component(componentName,componentConfig.defaults || componentConfig)
-// });
+  Vue.component(componentName,componentConfig.defaults || componentConfig)
+});
+
 
 
 

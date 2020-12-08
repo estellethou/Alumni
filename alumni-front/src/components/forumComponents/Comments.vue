@@ -127,6 +127,7 @@ export default {
 
     getImageOfUser(){
       return this.getAllProfiles.filter(profile =>{
+        console.log(profile.image)
         return profile.user_id == this.comment.user_id
       })
     },
