@@ -62,7 +62,7 @@ export default {
           let updateComment ={
             id:this.comment.id,
             comment:this.com,
-            user_id:2,
+            user_id:this.comment.user_id,
             posts_id:this.onePost.id,
           }
 
@@ -71,7 +71,6 @@ export default {
         },
 
         removeComment(id){
-          console.log(this.getImageOfUser)
             this.deleteComment(id)
         },
 
@@ -123,12 +122,12 @@ export default {
   },
 
   computed:{
-    ...mapGetters(["user","getAllProfiles","getAllUsers","user"]),
+    ...mapGetters(["user","getAllProfiles","getAllUsers"]),
 
     getImageOfUser(){
+       console.log(this.comment,"comment")
       return this.getAllProfiles.filter(profile =>{
-        console.log(profile.image)
-        return profile.user_id == this.comment.user_id
+        return profile.user_id === this.comment.user_id
       })
     },
     

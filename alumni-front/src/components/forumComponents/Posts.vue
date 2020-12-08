@@ -94,7 +94,7 @@ export default {
         }
     },
     methods:{
-        ...mapActions(["setAllProfiles","setAllUsers"]),
+        ...mapActions(["setAllProfiles","setAllUsers","allComments"]),
 
         mapArrayNumberOfComment(array){
             return array.length
@@ -151,6 +151,7 @@ export default {
       created(){
     this.setAllProfiles()
     this.setAllUsers()
+    this.allComments()
   }
 }
 
