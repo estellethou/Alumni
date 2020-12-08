@@ -3,6 +3,18 @@
     <HeaderProfile/>
     <div v-for="profile in filteredProfile" :key="profile.id">
       <div class="background">
+        <div class="side-img">
+          <img
+            class="logo"
+            width="180"
+            height="80"
+            src="https://coding-academy-alumni.herokuapp.com/icons/logo.png"
+            alt="logo"
+          />
+
+          <h2 class="username">{{ user.firstname }} {{ user.lastname }}</h2>
+        </div>
+        <div class="position-img" v-if="profile.image !== ''">
         <img
           class="profile-img"
           width="150"
@@ -14,16 +26,9 @@
           "
           alt="profile-image"
         />
-        <div class="side-img">
-          <img
-            class="logo"
-            width="180"
-            height="80"
-            src="https://coding-academy-alumni.herokuapp.com/icons/logo.png"
-            alt="logo"
-          />
-
-          <h2 class="username">{{ user.firstname }} {{ user.lastname }}</h2>
+        </div>
+        <div v-else class="position-img">
+           <v-avatar class="mr-7 profile-img" color="light-blue darken-4" size="100"><v-icon dark>mdi-account-circle</v-icon></v-avatar>
         </div>
       </div>
       <div class="description">
@@ -138,12 +143,13 @@ export default {
   background-size: 100% 300px;
   height: 240px;
 }
+.position-img{
+  position: relative;
+  top: 30%;
+}
 
 .profile-img {
   border-radius: 50%;
-  position: relative;
-  top: 70%;
-  left: 45%;
 }
 
 .resume {
