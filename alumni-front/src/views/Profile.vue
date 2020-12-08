@@ -27,12 +27,19 @@
           />
         </div>
         <div v-else class="position-img">
-          <v-avatar
+          <img
+            class="profile-img"
+            width="180rem"
+            height="180rem"
+            src="https://coding-academy-alumni.herokuapp.com/icons/crown.png"
+            alt="profile-image"
+          />
+          <!-- <v-avatar
             class="mr-7 profile-img"
             color="light-blue darken-4"
             size="100"
             ><v-icon dark>mdi-account-circle</v-icon></v-avatar
-          >
+          > -->
         </div>
       </div>
       <div class="description">
