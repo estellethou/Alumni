@@ -3,6 +3,7 @@
     <div class="container">
       <div class="row justify-content-around">
         <div class="col-4 item">
+          <h5 class="title-card">MY PROFILE</h5>
           <div class="container-img">
             <img
               src="https://coding-academy-alumni.herokuapp.com/icons/profile.png"
@@ -23,6 +24,7 @@
           </div>
         </div>
         <div class="col-4 item">
+          <h5 class="title-card">BUSINESS SECTION</h5>
           <div class="container-img">
             <img
               src="https://coding-academy-alumni.herokuapp.com/icons/recruiters.jpg"
@@ -41,6 +43,7 @@
           </div>
         </div>
         <div class="col-4 item">
+          <h5 class="title-card">DIRECTORY</h5>
           <div class="container-img">
             <img
               src="https://coding-academy-alumni.herokuapp.com/icons/directory.png"
@@ -64,7 +67,7 @@
 
       <div class="row justify-content-around">
         <div class="col-4 item">
-        
+        <h5 class="title-card">JOB & INTERNSHIP</h5>
           <div class="container-img">
             <img
               src="https://coding-academy-alumni.herokuapp.com/icons/jobs.png"
@@ -85,7 +88,7 @@
           </div>
         </div>
         <div class="col-4 item">
-        
+        <h5 class="title-card">FORUM</h5>
           <div class="container-img">
             <img
               src="https://coding-academy-alumni.herokuapp.com/icons/forum.png"
@@ -106,7 +109,7 @@
           </div>
         </div>
         <div class="col-4 item">
-         
+         <h5 class="title-card">EVENT</h5>
           <div class="container-img">
             <img
               src="https://coding-academy-alumni.herokuapp.com/icons/event.png"
@@ -147,6 +150,16 @@ export default {
      color: white
 }
 
+.item:hover .title-card{
+  opacity: 0;
+}
+
+.title-card{
+  text-align: center;
+  transition: 0.5s ease;
+  opacity: 1;
+}
+
 .hoverText {
   position: absolute;
   top: 0;
@@ -156,7 +169,8 @@ export default {
   width: 100%;
   text-align: center;
 }
-.container-img:hover .hoverText {
+
+.container-img:hover .hoverText{
   opacity: 1;
 }
 

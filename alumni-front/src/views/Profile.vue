@@ -90,8 +90,8 @@
       </div>
 
       <div class="d-flex justify-content-between buttons-profile">
-        <DeleteProfile v-bind:user="user" />
         <EditProfile v-bind:profile="profile" v-bind:user="user"> </EditProfile>
+        <DeleteProfile v-bind:user="user" />
       </div>
     </div>
   </div>

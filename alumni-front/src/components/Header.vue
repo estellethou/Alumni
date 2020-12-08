@@ -24,7 +24,7 @@
           />
         </a>
         </template>
-        <h1 class="title">CODING ACADEMY - ALUMNI</h1>
+        <div class="title">CODING ACADEMY - ALUMNI</div>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <router-link :to="`/`" class="dropdown-item"> Home </router-link>
@@ -43,6 +43,9 @@
             </router-link>
             <router-link :to="`/forum`" class="dropdown-item">
               Forum
+            </router-link>
+             <router-link :to="`/event`" class="dropdown-item">
+              Event
             </router-link>
           </template>
           <template v-else>
@@ -99,6 +102,7 @@ export default {
   color: white;
   margin-top: 1%;
   text-align: center;
+  font-size: 30rem;
 }
 
 .header {

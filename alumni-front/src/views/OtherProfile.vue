@@ -78,7 +78,7 @@
 </div>
         </div>
     </v-card>
-    <div v-if="profile.resume !== ''" class="resume">
+    <div v-if="getOneProfile.resume !== ''" class="resume">
       <embed
         :src="
           'https://coding-alumni-bucket.s3.eu-west-3.amazonaws.com/resumes/' +
