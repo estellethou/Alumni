@@ -76,7 +76,7 @@
       <div class="resume">
         <embed
           :src="
-            'https://coding-academy-alumni.herokuapp.com/' +
+            'https://coding-alumni-bucket.s3.eu-west-3.amazonaws.com/resumes/' +
             profile.resume
           "
           type="application/pdf"
