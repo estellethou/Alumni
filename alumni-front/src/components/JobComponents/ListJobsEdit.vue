@@ -1,88 +1,211 @@
 <template>
     <div>
-        <div class="container">
-        <h1>Edit your Job/Internship add</h1>
+        <v-row class="m-3">
+            <v-dialog
+            v-model="dialog"
+            width="500"
+            >
+                <template v-slot:activator="{ on, attrs }" v-if="user.role == 'alumni'">
+                    <v-btn
+                    color="info"
+                    elevation="12"
+                    dark
+                    small
+                    v-bind="attrs"
+                    v-on="on"
+                    >
+                    Edit your add
+                    </v-btn>
+                </template>
 
-            <!-- edit job/intership form ===================== -->
-            <form @submit="submitEditJob"> 
-                <!-- title -->
                 <div>
-                    <label class="label">Job Title</label>
-                    <input v-model="jobTitle" name="jobTitle">
-                </div>
+                    <!-- new job/intership form ===================== -->
+                    <v-form @submit="submitEditJob"> 
+                        <v-card>
 
-                <!-- content -->
-                <div>
-                    <label class="label">Job Description</label>
-                    <textarea v-model="description" name="description"></textarea>
-                </div>
+                            <v-card-title>
+                                <span class="headline"> Add your Job or Internship offer </span>
+                            </v-card-title>
 
-                <!-- Profile -->
-                <div>
-                    <label class="label">Candidate Profile</label>
-                    <input v-model="profile" name="profile">
-                </div>
+                            <v-card-text class="ml-1">
+                                * Mandatory fields
+                            </v-card-text>
 
-                <!-- Qualifications -->
-                <div>
-                    <label class="label">Qualifications</label>
-                    <input v-model="qualifications" name="qualifications">
-                </div>
+                            <v-card-text>
+                                <!-- Title -->
+                                    <v-text-field
+                                        label="Title *"
+                                        id="title"
+                                        name="title"
+                                        required
+                                        v-model="jobTitle"
+                                        :rules="titleRules"
+                                    ></v-text-field>
+                                <!-- </v-col> -->
+                            
+                                
 
-                <!-- Experience -->
-                <div>
-                    <label class="label">Years of Exeperience</label>
-                    <input v-model="exp" name="experiences">
-                </div>
+                                <!-- content -->
+                                    <v-textarea
+                                        auto-grow
+                                        clearable
+                                        counter
+                                        label="Job Description *"
+                                        id="content"
+                                        name="content"
+                                        required
+                                        v-model="description"
+                                        :rules="descriptionRules"
+                                    ></v-textarea>
 
-                <!-- Address -->
-                <div>
-                    <label class="label">Street Address</label>
-                    <input v-model="address" name="address">
-                </div>
+                                <!-- Profile -->
+                                    <v-text-field
+                                        label="Candidate Profile *"
+                                        id="profile"
+                                        name="profile"
+                                        required
+                                        v-model="profile"
+                                        :rules="generalRules"
+                                    ></v-text-field>
 
-                <!-- Postal Code -->
-                <div>
-                    <label class="label">Postal Code</label>
-                    <input v-model="postalCode" name="postalCode">
-                </div>
+                                <!-- Qualifications -->
+                                    <v-text-field
+                                        label="Qualifications/Skills *"
+                                        id="qualifications"
+                                        name="qualifications"
+                                        required
+                                        v-model="qualifications"
+                                        :rules="generalRules"
+                                    ></v-text-field>
 
-                <!-- City -->
-                <div>
-                    <label class="label">City</label>
-                    <input v-model="city" name="city">
-                </div>
+                                <!-- Experience -->
+                                    <v-col
+                                        cols="12"
+                                        md="10"
+                                    >
+                                        <v-select
+                                            label="Years of Experience *"
+                                            attach
+                                            chips
+                                            id="year_experiences"
+                                            name="year_experiences"
+                                            multiple
+                                            v-model="exp"
+                                            required
+                                            :items="itemsExp"
+                                            :rules="generalRules"
+                                        ></v-select>
+                                    </v-col>
 
-                <!-- Contract -->
-                <div>
-                    <label class="label">Type of Contract</label>
-                    <input v-model="contract" name="contract">
-                </div>
+                                <!-- Address -->
+                                    <v-text-field
+                                        label="Address *"
+                                        id="street_address"
+                                        name="street_address"
+                                        required
+                                        v-model="address"
+                                        :rules="generalRules"
+                                    ></v-text-field>
 
-                <!-- Contract Duration -->
-                <div>
-                    <label class="label">Duration of Contract</label>
-                    <input v-model="contractDuration" name="contractDuration">
-                </div>
+                                <!-- Postal Code -->
+                                    <v-text-field
+                                        label="Postal Code *"
+                                        id="postal_code"
+                                        name="postal_code"
+                                        required
+                                        v-model="postalCode"
+                                        :rules="postalCodeRules"
+                                    ></v-text-field>
 
-                <!-- Company Name -->
-                <div>
-                    <label class="label">Company Name</label>
-                    <input v-model="company" name="company">
-                </div>
+                                <!-- City -->
+                                    <v-text-field
+                                        label="City *"
+                                        id="city"
+                                        name="city"
+                                        required
+                                        v-model="city"
+                                        :rules="generalRules"
+                                    ></v-text-field>
 
-                <!-- Sector -->
-                <div class="field">
-                    <label class="label">Sector</label>
-                    <input v-model="sector" name="sector">
-                </div>
+                                <!-- Contract -->
+                                    <v-col
+                                        cols="12"
+                                        md="10"
+                                    >
+                                        <v-select
+                                            label="Type of Contract *"
+                                            attach
+                                            chips
+                                            id="contract"
+                                            name="contract"
+                                            v-model="contract"
+                                            required
+                                            :items="itemsContract"
+                                            :rules="generalRules"
+                                        ></v-select>
+                                    </v-col>
 
-                <!-- submit button -->
-                <div>
-                    <button type="submit">Save</button>
+                                <!-- Contract Duration -->
+                                    <v-text-field
+                                        label="Duraction of Contract (optional)"
+                                        id="contract_duration"
+                                        name="contract_duration"
+                                        required
+                                        v-model="contractDuration"
+                                    ></v-text-field>
+
+                                <!-- Company Name -->
+                                    <v-text-field
+                                        label="Company Name *"
+                                        id="company_name"
+                                        name="company_name"
+                                        required
+                                        v-model="company"
+                                        :rules="generalRules"
+                                    ></v-text-field>
+
+                                <!-- Sector -->
+                                    <v-col
+                                        cols="12"
+                                        md="10"
+                                    >
+                                        <v-select
+                                            label="Sector (optional)"
+                                            attach
+                                            chips
+                                            id="sector"
+                                            name="sector"
+                                            multiple
+                                            required
+                                            v-model="sector"
+                                            :items="itemsSector"
+                                        ></v-select>
+                                    </v-col>
+                                </v-card-text>
+
+                                <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn
+                                        color="blue darken-1"
+                                        text
+                                        @click="dialog = false"
+                                    >
+                                        Close
+                                    </v-btn>
+                                    <v-btn
+                                        color="blue darken-1"
+                                        text
+                                        type="submit"
+                                        @click="dialog = false"
+                                    >
+                                        Edit
+                                    </v-btn>
+                                </v-card-actions>
+                        </v-card>
+                    </v-form>
                 </div>
-            </form>
-        </div>
+            </v-dialog>
+        </v-row>
     </div>
 </template>
 
@@ -101,6 +224,10 @@ export default {
         return {
             // jobDataProps: JSON.parse(this.$route.params.jobData),
             // jobTitle: JSON.parse(this.$route.params.jobData.title),
+            dialog: false,
+            itemsExp: ['Beginner (less than 1 year)', 'First Experience (1-2 years)', 'Experienced (2-5 years)', 'Confirmed (5 years and more)'],
+            itemsContract: ['Permanent Contract', 'Fixed Term Contract /Temporary Contract', 'Contractors/Freelance', 'Internship', 'Work-Study Contract'],
+            itemsSector: ['Banking', 'Engineering / Consultancy', 'Finance', 'Industry', 'IT'],
             jobTitle: this.job.title,
             description: this.job.content,
             profile: this.job.profile,
@@ -113,6 +240,23 @@ export default {
             contractDuration: this.job.contract_duration,
             company: this.job.company_name,
             sector: this.job.sector,
+            titleRules: [
+                v => !!v || 'Title is required',
+                v => 3 <= v.length || 'Title must be at least 3 characters.',
+            ],
+            descriptionRules: [
+                v => !!v || 'Description is required',
+                v => 10 <= v.length || 'Description must be at least 10 characters.',
+            ],
+            postalCodeRules: [
+                v => !!v || 'Postal Code is required and must be numbers',
+                v => 5 <= v.length || 'Postal must be exactly 5 characters.',
+                v => v.length <= 5 || 'Postal must be exactly 5 characters.',
+                // v => v.number || 'Postal code must be digits.', does not work
+            ],
+            generalRules: [
+                v => !!v || 'Field is required',
+            ],
         };
     },
 
