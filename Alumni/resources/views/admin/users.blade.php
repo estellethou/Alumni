@@ -6,15 +6,15 @@
     <div>
         <div class="d-flex justify-content-between mb-3">
             <a href="{{ route('admin.user.create') }}" class="btn btn-dark">Create User</a>
-                <!-- <form class="md-form d-flex" action="{{ route('admin.users.search') }}" method="POST">
-                    @csrf
-                    <input class="form-control mr-2" type="text" placeholder="Search" aria-label="Search" id="search-users" name="search-users">
-                    <button type="submit" class="btn btn-primary">
-                        {{ 'Search' }}
-                    </button>
-                </form> -->
+            <form class="md-form d-flex" action="{{ route('admin.users.search') }}" method="POST">
+                @csrf
+                <input class="form-control mr-2" type="text" placeholder="Search" aria-label="Search" id="search-users" name="search-users">
+                <button type="submit" class="btn btn-primary">
+                    {{ 'Search' }}
+                </button>
+            </form>
         </div>
-        <table class="table table-sm table-light table-striped table-hover shadow rounded" id="dynamic-table">
+        <table class="table table-sm table-light table-striped table-hover shadow rounded">
             <thead class="table-borderless">
                 <tr>
                     <th scope="col" style="width:70px;">View</th>
@@ -26,7 +26,7 @@
                     <th scope="col">Admin</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="dynamic-table">
                 @foreach($users as $user)
                 <tr>
                     <td>
@@ -54,6 +54,14 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="d-flex justify-content-between">
+            <div class="float-none">
+                {{ $users->links() }}
+            </div>
+            <div>
+                <a href="{{ route('admin.users') }}" class="btn btn-dark">Reset View</a>
+            </div>
+        </div>
     </div>
 </body>
 <script>

@@ -79,9 +79,7 @@
             </tr>
             <tr>
                 <th>Profile Image</th>
-                <td>{{ $user->profile->image }}
-                    <img class="avatar float-right" src="{{ Storage::disk('s3')->temporaryUrl($user->profile->image, now()->addMinutes(5)) }}" alt="Profile">
-                </td>
+                <td>{{ $user->profile->image }}</td>
             </tr>
             <tr>
                 <th>Resume</th>

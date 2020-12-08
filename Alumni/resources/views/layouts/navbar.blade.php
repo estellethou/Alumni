@@ -13,19 +13,16 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    
-    <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/styles.css') }}" type="text/css" rel="stylesheet">
+    <link href="../css/styles.css" type="text/css" rel="stylesheet">
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- Styles -->
 </head>
 
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-dark shadow-sm">
-            <a class="navbar-brand text-white" href="{{ url('/admin/users') }}">
+            <a class="navbar-brand text-white" href="{{ url('/') }}">
                 Admin Panel
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -63,20 +60,14 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
-    </script> -->
+    </script>
     <script>
+    var newImage = "";
     $(document).ready(function() {
         $('li.active').removeClass('active');
         $('li > a[href="http://localhost:8899' + location.pathname + '"]').addClass('active');
-    });
-    $(document).ready( function () {
-        $('#dynamic-table').DataTable(
-            {
-                "pageLength": 25
-            }
-        );
     });
     </script>
 

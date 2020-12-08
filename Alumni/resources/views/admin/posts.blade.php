@@ -10,7 +10,7 @@
                 <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="search">
             </div> -->
         </div>
-        <table class="table table-sm table-light table-striped table-hover shadow rounded" id="dynamic-table">
+        <table class="table table-sm table-light table-striped table-hover shadow rounded">
             <thead class="table-borderless">
                 <tr>
                     <th scope="col" style="width:70px;">View</th>
@@ -50,6 +50,9 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="float-none">
+            {{ $posts->links() }}
+        </div>
     </div>
 </body>
 
