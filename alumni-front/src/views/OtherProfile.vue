@@ -28,12 +28,9 @@
       />
       </div>
            <div v-else class="position-img">
-          <v-avatar
-            class="mr-7 profile-img"
-            color="light-blue darken-4"
-            size="100"
-            ><v-icon dark>mdi-account-circle</v-icon></v-avatar
-          >
+            <v-avatar size="150" class="profile-img" color="#2F329F">
+            <span class="white--text headline">{{initial()}}</span>
+          </v-avatar>
         </div>
       </div>
 
@@ -81,7 +78,7 @@
 </div>
         </div>
     </v-card>
-    <div class="resume">
+    <div v-if="profile.resume !== ''" class="resume">
       <embed
         :src="
           'https://coding-alumni-bucket.s3.eu-west-3.amazonaws.com/resumes/' +
@@ -108,6 +105,12 @@ export default {
 
   methods: {
     ...mapActions(["setProfile", "setUser"]),
+    initial(){
+      var firstnameLetter = this.getOneUser.firstname.charAt(0);
+      var lastnameLetter = this.getOneUser.lastname.charAt(0);
+      var initales = firstnameLetter + lastnameLetter;
+      return initales.toUpperCase();
+    }
   },
 
   computed: {

@@ -27,13 +27,16 @@
           />
         </div>
         <div v-else class="position-img">
-          <img
+          <v-avatar size="150" class="profile-img" color="#2F329F">
+            <span class="white--text headline">{{initial()}}</span>
+          </v-avatar>
+          <!-- <img
             class="profile-img"
             width="180rem"
             height="180rem"
             src="https://coding-academy-alumni.herokuapp.com/icons/crown.png"
             alt="profile-image"
-          />
+          /> -->
           <!-- <v-avatar
             class="mr-7 profile-img"
             color="light-blue darken-4"
@@ -125,8 +128,14 @@ export default {
 
   methods: {
     ...mapActions(["setAllProfiles"]),
+    initial(){
+      var firstnameLetter = this.user.firstname.charAt(0);
+      var lastnameLetter = this.user.lastname.charAt(0);
+      var initales = firstnameLetter + lastnameLetter;
+      return initales.toUpperCase();
+    }
   },
-
+  
   computed: {
     ...mapGetters(["getAllProfiles", "authenticated", "user"]),
     filteredProfile() {
