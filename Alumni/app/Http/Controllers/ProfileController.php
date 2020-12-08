@@ -83,8 +83,8 @@ class ProfileController extends Controller
             $imageName = $name.'.'.$extension;
             Storage::disk('s3')->put('/images/' . $imageName, $decoded);
             //$path = public_path().'/'.$filename;
-            //file_put_contents($path, $decoded); //save the decoded resume to the pa
-            //$profile->update(['image' => $filename ?? '']);  
+            //file_put_contents($path, $decoded); //save the decoded resume to the public path 
+            $profile->update(['image' => $imageName ?? '']);
         }
         if ($request->resume) {
             $exploded = explode(',', $request->resume);
@@ -93,10 +93,11 @@ class ProfileController extends Controller
                 $extension = 'pdf';
             }
             $name = substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(10/strlen($x)))), 1, 10);
-            $filename = $name.'.'.$extension;
-            $path = public_path().'/'.$filename;
-            file_put_contents($path, $decoded); //save the decoded resume to the pa
-            //$profile->update(['resume' => $filename ?? '']);    
+            $fileName = $name.'.'.$extension;
+            Storage::disk('s3')->put('/resumes/' . $fileName, $decoded);
+            //$path = public_path().'/'.$filename;
+            //file_put_contents($path, $decoded); //save the decoded resume to the public path 
+            $profile->update(['resume' => $fileName ?? '']);    
         }
 
         $profile->update($data);
