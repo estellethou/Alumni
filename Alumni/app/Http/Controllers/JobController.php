@@ -64,7 +64,7 @@ class JobController extends Controller
             $job->save();
         };
 
-        // return $job;
+        return $job;
 
         // return response()->json(['message' => 'Job/Internship was created successfully', 'job' => $job]);
 
