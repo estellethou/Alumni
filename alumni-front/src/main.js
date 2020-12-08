@@ -6,14 +6,14 @@ import vuetify from './plugins/vuetify'
 import axios from 'axios'
 import VueSweetalert2 from 'vue-sweetalert2';
 
-//NEE WEB PACK OR CLI3
+// NEED WEB PACK OR CLI3
 
-// //NEW WAY TO IMPORT COMPONENT//
+//NEW WAY TO IMPORT COMPONENT//
 
 // import UpperFirst from "lodash/upperFirst"
 // import camelCase from "lodash/camelCase"
 
-// //Require in base component context//
+//Require in base component context//
 
 // const requireComponent = require.context('.',false, /base-[w-]+\.vue$/)
 
@@ -28,6 +28,7 @@ import VueSweetalert2 from 'vue-sweetalert2';
 
 //   Vue.component(componentName,componentConfig.defaults || componentConfig)
 // });
+
 
 
 
