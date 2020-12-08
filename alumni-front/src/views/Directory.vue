@@ -17,7 +17,7 @@
     <v-data-table class="row-pointer" :headers="headers" :search="search" :items="getAllUserProfiles" @click:row="goToProfile">
     <template v-slot:[`item.image`]="{item}">
       <div v-if="item.image !== null">
-   <img :src="'https://coding-alumni-bucket.s3.eu-west-3.amazonaws.com/images/' + item.image" width="50" height="50">
+   <v-avatar size="30"><img :src="'https://coding-alumni-bucket.s3.eu-west-3.amazonaws.com/images/' + item.image" width="50" height="50"></v-avatar>
    </div>
    <div v-else>
      <v-icon dark>mdi-account-circle</v-icon>
