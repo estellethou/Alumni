@@ -2,21 +2,11 @@
   <div class="profile container">
     <HeaderProfile/>
     <div class="background">
-      <img
-        class="profile-img"
-        width="150"
-        height="150"
-        :src="
-          'https://coding-academy-alumni.herokuapp.com/' +
-          getOneProfile.image
-        "
-        alt="profile-image"
-      />
       <div class="side-img">
         <img
           class="logo"
-          width="180"
-          height="80"
+          width="12%"
+          height="50%"
           src="https://coding-academy-alumni.herokuapp.com/icons/logo.png"
           alt="logo"
         />
@@ -25,7 +15,28 @@
           {{ getOneUser.firstname }} {{ getOneUser.lastname }}
         </h2>
       </div>
-    </div>
+      <div class="position-img" v-if="getOneProfile.image !== ''">
+      <img
+        class="profile-img"
+        width="190rem"
+        height="190rem"
+        :src="
+          'https://coding-alumni-bucket.s3.eu-west-3.amazonaws.com/images/' +
+          getOneProfile.image
+        "
+        alt="profile-image"
+      />
+      </div>
+           <div v-else class="position-img">
+          <v-avatar
+            class="mr-7 profile-img"
+            color="light-blue darken-4"
+            size="100"
+            ><v-icon dark>mdi-account-circle</v-icon></v-avatar
+          >
+        </div>
+      </div>
+
     <div class="description">
       <p>{{ getOneProfile.description }}</p>
     </div>
@@ -73,7 +84,7 @@
     <div class="resume">
       <embed
         :src="
-          'https://coding-academy-alumni.herokuapp.com/' +
+          'https://coding-alumni-bucket.s3.eu-west-3.amazonaws.com/resumes/' +
           getOneProfile.resume
         "
         type="application/pdf"

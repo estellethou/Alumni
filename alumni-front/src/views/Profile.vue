@@ -1,6 +1,6 @@
 <template>
   <div class="profile container">
-    <HeaderProfile/>
+    <HeaderProfile />
     <div v-for="profile in filteredProfile" :key="profile.id">
       <div class="background">
         <div class="side-img">
@@ -15,20 +15,24 @@
           <h2 class="username">{{ user.firstname }} {{ user.lastname }}</h2>
         </div>
         <div class="position-img" v-if="profile.image !== ''">
-        <img
-          class="profile-img"
-          width="190rem"
-          height="190rem"
-          :src="
-          'https://coding-alumni-bucket.s3.eu-west-3.amazonaws.com/images/'
-          +
-            profile.image
-          "
-          alt="profile-image"
-        />
+          <img
+            class="profile-img"
+            width="190rem"
+            height="190rem"
+            :src="
+              'https://coding-alumni-bucket.s3.eu-west-3.amazonaws.com/images/' +
+              profile.image
+            "
+            alt="profile-image"
+          />
         </div>
         <div v-else class="position-img">
-           <v-avatar class="mr-7 profile-img" color="light-blue darken-4" size="100"><v-icon dark>mdi-account-circle</v-icon></v-avatar>
+          <v-avatar
+            class="mr-7 profile-img"
+            color="light-blue darken-4"
+            size="100"
+            ><v-icon dark>mdi-account-circle</v-icon></v-avatar
+          >
         </div>
       </div>
       <div class="description">
@@ -54,31 +58,28 @@
           </div>
 
           <div class="col-4">
-   <a :href="profile.url_linkedin" class="icon-url col-4"
-          ><img
-            src="https://coding-academy-alumni.herokuapp.com/icons/blo.png"
-            width="7%"
-            alt="logo-linkedin"
-        /></a>
-        <a :href="profile.url_github" class="icon-url col-4"
-          ><img
-            src="https://coding-academy-alumni.herokuapp.com/icons/git.jpg"
-            width="8%"
-            alt="logo-github"
-        /></a>
-        <a :href="profile.url_website" class="icon-url col-4"
-          ><img
-            src="https://coding-academy-alumni.herokuapp.com/icons/web.png"
-            width="8%"
-            alt="logo-web"
-        /></a>
-
-</div>
+            <a :href="profile.url_linkedin" class="icon-url col-4"
+              ><img
+                src="https://coding-academy-alumni.herokuapp.com/icons/blo.png"
+                width="7%"
+                alt="logo-linkedin"
+            /></a>
+            <a :href="profile.url_github" class="icon-url col-4"
+              ><img
+                src="https://coding-academy-alumni.herokuapp.com/icons/git.jpg"
+                width="8%"
+                alt="logo-github"
+            /></a>
+            <a :href="profile.url_website" class="icon-url col-4"
+              ><img
+                src="https://coding-academy-alumni.herokuapp.com/icons/web.png"
+                width="8%"
+                alt="logo-web"
+            /></a>
+          </div>
         </div>
-
-       
       </v-card>
-      <div class="resume">
+      <div v-if="profile.resume !== ''" class="resume">
         <embed
           :src="
             'https://coding-alumni-bucket.s3.eu-west-3.amazonaws.com/resumes/' +
@@ -88,9 +89,10 @@
           width="58%"
           height="800"
         />
+  
       </div>
 
-      <div class="d-flex justify-content-between">
+      <div class="d-flex justify-content-between buttons-profile">
         <DeleteProfile v-bind:user="user" />
         <EditProfile v-bind:profile="profile" v-bind:user="user"> </EditProfile>
       </div>
@@ -108,7 +110,7 @@ export default {
   components: {
     DeleteProfile,
     EditProfile,
-    HeaderProfile
+    HeaderProfile,
   },
   data() {
     return {};
@@ -148,7 +150,7 @@ export default {
   position: relative;
   left: 45%;
 }
-.position-img{
+.position-img {
   position: relative;
   top: 3rem;
 }
@@ -174,15 +176,17 @@ export default {
 
 .description {
   position: relative;
-  margin-top: 6rem;
+  margin-top: 7rem;
   font-size: x-large;
   font-family: "Nunito", sans-serif;
 }
-
 
 .logo {
   margin-left: 2%;
   margin-top: 1%;
 }
 
+.buttons-profile{
+  margin-top:3%;
+}
 </style>

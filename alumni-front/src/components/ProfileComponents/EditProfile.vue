@@ -126,14 +126,14 @@
               </div>
             </div>
           </form>
-          <button class="btn btn-primary" type="submit" v-on:click="saveForm">
+          <!-- <button class="btn btn-primary" type="submit" v-on:click="saveForm">
             Save Profile
-          </button>
+          </button> -->
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="dialog = false">
             Close
           </v-btn>
-          <v-btn color="blue darken-1" text @click="dialog = false">
+          <v-btn color="blue darken-1" text @click="saveForm">
             Save
           </v-btn>
         </v-card>
@@ -169,14 +169,7 @@ export default {
   },
 
   methods: {
-    //selectFile(event) {
-    //         // `files` is always an array because the file input may be in multiple mode
-    //        this.newImage = event.target.files[0];
-    //        let data = new FormData();
-    //        data.append('image', this.newImage);
-    //        return data
-    //    }, 
-
+ 
     ...mapActions(["updateProfile", "updateUser"]),
 
     saveForm(e) {
