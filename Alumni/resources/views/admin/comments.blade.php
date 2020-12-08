@@ -10,7 +10,7 @@
                 <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="search">
             </div> -->
         </div>
-        <table class="table table-sm table-light table-striped table-hover shadow rounded">
+        <table class="table table-sm table-light table-striped table-hover shadow rounded" id="dynamic-table">
             <thead class="table-borderless">
                 <tr>
                     <th scope="col" style="width:70px;">View</th>
@@ -43,16 +43,13 @@
                         </form>
                     </td>
                     <td>{{ $comment->comment }}</td>
-                    <td>{{ $comment->user->firstname . " " . $comment->user->lastname }}</td>
-                    <td>{{ $comment->post->id . " - " . $comment->post->title }}</td>
+                    <td>{{ $comment->user->firstname ?? '' . " " . $comment->user->lastname ?? 'deleted user' }}</td>
+                    <td>{{ $comment->post->id ?? '' . " - " . $comment->post->title ?? 'deleted user'}}</td>
                     <td>{{ $comment->created_at }}</td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
-        <div class="float-none">
-            {{ $comments->links() }}
-        </div>
     </div>
 </body>
 

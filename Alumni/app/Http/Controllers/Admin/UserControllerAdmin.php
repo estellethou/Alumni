@@ -20,7 +20,8 @@ class UserControllerAdmin extends ControllerAdmin
      */
     public function index()
     {
-        $users = User::paginate(20);
+        // $users = User::paginate(20);
+        $users = User::all();
         return view('admin/users', compact('users'));
     }
 
@@ -58,15 +59,16 @@ class UserControllerAdmin extends ControllerAdmin
         return view("admin/user_show", compact('user'));
     }
 
-    public function searchUsers(Request $request) {
-        $data = request()->validate([
-            'search-users' => 'required',
-        ]);
-         $users = User::where('firstname', 'like', '%'.$data['search-users'].'%')
-            ->orWhere('lastname', 'like', '%' . $data['search-users'] . '%')
-            ->orWhere('email', 'like', '%' . $data['search-users'] . '%')->paginate(20);
-        return view('admin/users', compact('users'));
-    }
+    //manual search, replaced with datatables
+    // public function searchUsers(Request $request) {
+    //     $data = request()->validate([
+    //         'search-users' => 'required',
+    //     ]);
+    //      $users = User::where('firstname', 'like', '%'.$data['search-users'].'%')
+    //         ->orWhere('lastname', 'like', '%' . $data['search-users'] . '%')
+    //         ->orWhere('email', 'like', '%' . $data['search-users'] . '%')->paginate(20);
+    //     return view('admin/users', compact('users'));
+    // }
 
     /**
      * Show the form for editing the specified resource.

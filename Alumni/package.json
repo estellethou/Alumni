@@ -23,6 +23,8 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "datatables.net": "^1.10.22",
+        "datatables.net-bs4": "^1.10.22",
         "mdi-vue": "^1.8.1"
     }
 }
