@@ -70,7 +70,7 @@ class ProfileController extends Controller
             'resume' => ['nullable'],
             ]);
            
-        //$profile->update($request->except(['image','resume']));
+        $profile->update($request->except(['image','resume']));
             if ($request->image) {
             $exploded = explode(',', $request->image);
             $decoded = base64_decode($exploded[1]);
@@ -100,7 +100,7 @@ class ProfileController extends Controller
             $profile->update(['resume' => $fileName ?? '']);    
         }
 
-        $profile->update($data);
+        //$profile->update($data);
         return $profile;
     }
     

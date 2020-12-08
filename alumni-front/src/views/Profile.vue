@@ -8,7 +8,8 @@
           width="150"
           height="150"
           :src="
-            'https://coding-academy-alumni.herokuapp.com/' +
+          'https://coding-alumni-bucket.s3.eu-west-3.amazonaws.com/images/'
+          +
             profile.image
           "
           alt="profile-image"
