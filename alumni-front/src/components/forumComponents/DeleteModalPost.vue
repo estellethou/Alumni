@@ -4,7 +4,7 @@
           <v-btn icon @click="closeModalDeletePost"><v-icon>{{icons.mdiClose}}</v-icon></v-btn>
       </div>
       <div class="centerWarningMessage">
-          <p>Are you sur you want to delete this post ?</p>
+          <p>Are you sure you want to delete this post ?</p>
             <div class="container-btnDeletePost">
               <v-btn @click="removePost(id)" color="error">DELETE POST</v-btn>
             </div>

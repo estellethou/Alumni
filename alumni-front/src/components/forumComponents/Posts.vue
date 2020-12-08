@@ -4,7 +4,7 @@
               <v-container class="d-flex justify-space-between">
                     <div class="container-headerPost" v-if="getImageOfUser[0].image !== ''">
                         <div class="userProfile-display" @click="redirectToProfile(getImageOfUser[0])">
-                            <v-avatar size="40" class="mr-7"><img v-bind:src="'https://coding-alumni-bucket.s3.eu-west-3.amazonaws.com/images/'+ getImageOfUser[0].image" alt="Avatar"/></v-avatar>
+                            <v-avatar size="50" class="mr-7"><img v-bind:src="'https://coding-alumni-bucket.s3.eu-west-3.amazonaws.com/images/'+ getImageOfUser[0].image" alt="Avatar"/></v-avatar>
                             <p>{{getNameUser[0].firstname +" "+ getNameUser[0].lastname}}</p>
                         </div>
                         <p class="timeColor">{{ timeAgo(Date.parse(post.created_at)) }}</p>
@@ -18,7 +18,7 @@
                       </div>
                       <div class="container-headerPost" v-else>
                           <div class="userProfile-display" @click="redirectToProfile(getImageOfUser[0])">
-                              <v-avatar color="primary" class="mr-7" size="40"><v-icon dark>mdi-account-circle</v-icon></v-avatar>
+                              <v-avatar color="primary" class="mr-7" size="45"><v-icon dark>mdi-account-circle</v-icon></v-avatar>
                               <p>{{getNameUser[0].firstname +" "+ getNameUser[0].lastname}}</p>
                           </div>
                           <p class="timeColor">{{ timeAgo(Date.parse(post.created_at)) }}</p>
@@ -156,7 +156,7 @@ export default {
 
 </script>
 
-<style scope>
+<style scoped>
 .container-modalEditPost{
     position:fixed;
     background-color:white;
@@ -185,7 +185,7 @@ a span{
 .container-headerPost{
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
     width: 100%;
 }
 .container-descriptionPost{
@@ -200,10 +200,10 @@ a span{
 .userProfile-display{
     display: flex;
     cursor: pointer;
-    align-items: baseline;
+    align-items: center;
 }
 .mdiClose{
-    align-self: baseline;
+    align-self: auto;
 }
 
 .timeColor{
@@ -213,5 +213,8 @@ a span{
 .editBtn{
     cursor: pointer;
     padding-right: 10px;
+}
+p{
+    margin-bottom: 0px;
 }
 </style>
