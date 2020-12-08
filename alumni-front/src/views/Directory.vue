@@ -1,56 +1,81 @@
 <template>
 <div>
-   <Header/> 
-    <v-simple-table>
-      <template v-slot:default>
-        <thead>
-          <tr blue>
-            <th class="text-left">Name</th>
-            <th class="text-left">Email</th>
-            <th class="text-left">Phone</th>
-            <th class="text-left">Description</th>
-            <th class="text-left">Role</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="pointerClick" v-for="userprofile in getAllUserProfiles"  :key="userprofile.id" @click="goToProfile(userprofile.id, userprofile.user_id)">
-            <td v-if="userprofile.image !== ''"><v-avatar size="30"><img v-bind:src="'https://coding-academy-alumni.herokuapp.com/'+ userprofile.image" alt="Avatar"/></v-avatar> {{ userprofile.firstname }} {{ userprofile.lastname }}
-            <td v-else><v-avatar color="light-blue darken-4" size="50"><v-icon dark>mdi-account-circle</v-icon></v-avatar>{{ userprofile.firstname }} {{ userprofile.lastname }}</td>
-            <td>{{ userprofile.email }}</td>
-            <td>{{ userprofile.phone }}</td>
-            <td>{{ userprofile.description }}</td>
-            <td>{{ userprofile.role }}</td>
-          </tr>
-        </tbody>
-      </template>
-    </v-simple-table>
-  </div>
+<Header></Header>
+<v-container>
+  <v-card>
+    <v-card-title>
+      Directory
+      <v-spacer></v-spacer>
+      <v-text-field
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
+    </v-card-title>
+    <v-data-table class="row-pointer" :headers="headers" :search="search" :items="getAllUserProfiles" @click:row="goToProfile">
+    <template v-slot:[`item.image`]="{item}">
+      <div v-if="item.image !== null">
+   <img :src="'https://coding-alumni-bucket.s3.eu-west-3.amazonaws.com/images/' + item.image" width="50" height="50">
+   </div>
+   <div v-else>
+     <v-icon dark>mdi-account-circle</v-icon>
+   </div>
+    </template>
+    </v-data-table>
+  </v-card>
+</v-container>
+</div>
 </template>
 
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import Header from "./../components/Header"
+import Header from "./../components/Header";
 
 export default {
   name: "Directory",
-  methods: {
-    ...mapActions(["setAllUserProfiles"]),
-    goToProfile(profileid, userid){
-      if(this.user.id == userid){
-        this.$router.push("/profile")
-            }else{
-              this.$router.push(`/profile/${profileid}/${userid}`)
-            }
+  data(){
+    return{
+      // profimage:'https://coding-alumni-bucket.s3.eu-west-3.amazonaws.com/images/' + 'image',
+      search:'',
+      headers:[
+        {
+          value:'image',
+          sortable:false,
+        },
+        {
+            text: 'Firstname',
+            align: 'start',
+            sortable: true,
+            value: 'firstname',
+        },
+        {text: 'Lastname', value:'lastname'},
+        { text: 'Email', value: 'email' },
+        { text: 'Phone', value: 'phone' },
+        { text: 'Role', value: 'role' },
+      ]
     }
   },
-  components:{
-   Header,
+  methods: {
+    ...mapActions(["setAllUserProfiles"]),
+    goToProfile(value) {
+      if(this.user.id !== value.user_id){
+        this.$router.push(`/profile/${value.id}/${value.user_id}`)
+      }else{
+        this.$router.push('/profile')
+      }
+
+      
+    },
+  },
+  components: {
+    Header,
   },
 
   computed: {
-    ...mapGetters(["getAllUserProfiles", "authenticated","user"]),
-
+    ...mapGetters(["getAllUserProfiles", "authenticated", "user"]),
   },
 
   created() {
@@ -60,7 +85,7 @@ export default {
 </script>
 
 <style scoped>
-.pointerClick{
+.row-pointer >>> tbody tr :hover {
   cursor: pointer;
 }
 </style>

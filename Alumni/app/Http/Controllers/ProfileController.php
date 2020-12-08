@@ -84,6 +84,7 @@ class ProfileController extends Controller
             Storage::disk('s3')->put('/images/' . $imageName, $decoded);
             //$path = public_path().'/'.$filename;
             //file_put_contents($path, $decoded); //save the decoded resume to the public path 
+            //$profile->image = Storage::disk('s3')->temporaryUrl($profile->image, now()->addMinutes(5));
             $profile->update(['image' => $imageName ?? '']);
         }
         if ($request->resume) {
