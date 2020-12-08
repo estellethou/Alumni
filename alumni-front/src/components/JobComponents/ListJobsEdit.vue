@@ -127,7 +127,7 @@ export default {
                 content: this.description,
                 profile: this.profile,
                 qualifications: this.qualifications,
-                year_experiences: parseInt(this.exp),
+                year_experiences: this.exp,
                 street_address: this.address,
                 postal_code: this.postalCode,
                 city: this.city,
