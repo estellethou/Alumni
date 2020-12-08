@@ -68,7 +68,6 @@ class ProfileControllerAdmin extends ControllerAdmin
      */
     public function update(Request $request, User $user)
     {
-        dd(request()->file('image'));
         $data = request()->validate([
             'phone' => ['string', 'digits_between:10,12', 'starts_with:0,+'],
             'description' => ['string'],
@@ -77,12 +76,10 @@ class ProfileControllerAdmin extends ControllerAdmin
             'url_website' => ['url'],
             'image' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ]);
-
-        $imageName = time().'.'.request()->image->getClientOriginalExtension();
-        $data['image'] = $imageName;
-        request()->image->store('/images', 's3');
-        // request()->image->move(public_path(''), $imageName);
-        $image = Storage::disk('s3')->response('/images', $imageName);
+        
+        $imagePath = request()->image->store('/images', 's3');
+        dd($imagePath);
+        $data['image'] = $imagePath;
         $user->profile->update($data);
         
         //$profile->update($request->all()); // ???

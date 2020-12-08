@@ -22,8 +22,8 @@ class LoginControllerAdmin extends ControllerAdmin
     public function login(Request $request) {
         $data = request()->all();
         $user = User::where('email', $data['email'])->first();
-        if ($user === null) {
-            $request->session()->flash('error', 'User was not found');
+        if ($user === null || !$user->is_admin) {
+            $request->session()->flash('error', 'Invalid credentials');
             return view('admin/login');
         }
         else if(Hash::make($data['password']) !== $user->password) {
