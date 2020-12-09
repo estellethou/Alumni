@@ -19,6 +19,9 @@
                   class="form-control"
                   v-model="newLastName"
                   id="lastname"
+                  type="text"
+                   min="2"
+                   max="100"
                   placeholder="Lastname"
                 />
               </div>
@@ -26,6 +29,8 @@
                 <label for="firstname">Firstname</label>
                 <input
                   type="text"
+                   min="2"
+                   max="100"
                   class="form-control"
                   v-model="newFirstName"
                   id="firstname"
@@ -111,6 +116,7 @@
                   type="file"
                   class="form-control"
                   id="image"
+                  accept="image/png, image/jpeg"
                   @change="imageChanged"
                 />
               </div>
@@ -126,9 +132,6 @@
               </div>
             </div>
           </form>
-          <!-- <button class="btn btn-primary" type="submit" v-on:click="saveForm">
-            Save Profile
-          </button> -->
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="dialog = false">
             Close

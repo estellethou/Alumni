@@ -61,12 +61,12 @@ class ProfileController extends Controller
         $this->authorize('update', $profile);
 
         $data = request()->validate([
-            'phone' => ['nullable'],
-            'description' => ['nullable'],
-            'url_linkedin' => ['nullable'],
-            'url_github' => ['nullable'],
-            'url_website' => ['nullable'],
-            'image' => ['nullable'],
+            'phone' => ['nullable','string','digits_between:10,12','starts_with:0,+'],
+            'description' => ['nullable','string'],
+            'url_linkedin' => ['nullable','url'],
+            'url_github' => ['nullable','url'],
+            'url_website' => ['nullable','url'],
+            'image' => ['nullable','image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'resume' => ['nullable'],
             ]);
            
@@ -101,8 +101,8 @@ class ProfileController extends Controller
             $profile->update(['resume' => $fileName ?? '']);    
         }
 
-        //$profile->update($data);
-        return $profile;
+        return response()->json(['message' => 'Profile updated successfully', 'profile' => $profile]);
+        //return $profile;
     }
     
     /**
