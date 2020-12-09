@@ -89,7 +89,7 @@
                                             id="year_experiences"
                                             name="year_experiences"
                                             multiple
-                                            v-model="exp"
+                                            v-model="experience"
                                             required
                                             :items="itemsExp"
                                             :rules="generalRules"
