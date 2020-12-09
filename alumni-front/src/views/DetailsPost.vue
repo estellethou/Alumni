@@ -12,8 +12,6 @@
           <Comments v-bind:comment="comment" v-bind:onePost="detail"/>
         </div>
           <AddComment v-bind:detail="detail"/>
-        <div>
-        </div>
     </div>
   </v-container>
 </template>
@@ -33,6 +31,7 @@ export default {
     },
     methods:{
       ...mapActions(["allComments"]),
+
     },
     computed:{
       ...mapGetters(["getAllPosts","getAllComments"]),
