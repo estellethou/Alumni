@@ -8,6 +8,7 @@ use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 
 
@@ -56,6 +57,13 @@ class UserControllerAdmin extends ControllerAdmin
     public function show($id)
     {
         $user = User::find($id);
+        if($user->profile === null) {
+            $user->profile()->save(new Profile);
+        }
+        $profile = $user->profile;
+        if($profile && $user->profile->image !== null) {
+            $user->profile->temporaryUrl = Storage::disk('s3')->temporaryUrl($user->profile->image, now()->addMinutes(5));
+        }
         return view("admin/user_show", compact('user'));
     }
 

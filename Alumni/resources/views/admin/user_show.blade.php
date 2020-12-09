@@ -56,36 +56,37 @@
         <tbody class="table-borderless">
             <tr>
                 <th>Phone</th>
-                <td>{{ $user->profile->phone }}</td>
+                <td>{{ $user->profile->phone ?? '' }}</td>
             </tr>
             <tr>
                 <th>Description</th>
-                <td>{{ $user->profile->description }}</td>
+                <td>{{ $user->profile->description ?? '' }}</td>
             </tr>
             <tr>
                 <th>LinkedIn</th>
                 <td>
-                    <a href='{{ $user->profile->url_linkedin }}' target="_blank">{{ $user->profile->url_linkedin }}</a>
+                    <a href='{{ $user->profile->url_linkedin ?? "" }}' target="_blank">{{ $user->profile->url_linkedin ?? '' }}</a>
                 </td>
             </tr>
             <tr>
                 <th>GitHub</th>
-                <td><a href='{{ $user->profile->url_github }}' target="_blank">{{ $user->profile->url_github }}</a></td>
+                <td><a href='{{ $user->profile->url_github ?? "" }}' target="_blank">{{ $user->profile->url_github ?? '' }}</a></td>
             </tr>
             <tr>
                 <th>Website</th>
-                <td><a href='{{ $user->profile->url_website }}' target="_blank">{{ $user->profile->url_website }}</a>
+                <td><a href='{{ $user->profile->url_website ?? "" }}' target="_blank">{{ $user->profile->url_website ?? '' }}</a>
                 </td>
             </tr>
             <tr>
                 <th>Profile Image</th>
-                <td>{{ $user->profile->image }}
-                    <img class="avatar float-right" src="{{ Storage::disk('s3')->temporaryUrl($user->profile->image, now()->addMinutes(5)) }}" alt="Profile">
+                <td>
+                    <img class="avatar" src="{{ $user->profile->temporaryUrl ?? '' }}" alt="Profile">
+                    {{ $user->profile->image ?? '' }}
                 </td>
             </tr>
             <tr>
                 <th>Resume</th>
-                <td>{{ $user->profile->resume }}</td>
+                <td>{{ $user->profile->resume ?? '' }}</td>
             </tr>
         </tbody>
     </table>

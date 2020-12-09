@@ -66,7 +66,7 @@ class ProfileController extends Controller
             'url_linkedin' => ['nullable','url'],
             'url_github' => ['nullable','url'],
             'url_website' => ['nullable','url'],
-            'image' => ['nullable','image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'image' => ['nullable'],
             'resume' => ['nullable'],
             ]);
            

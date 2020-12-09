@@ -7,68 +7,70 @@
             Edit profile
           </v-btn>
         </template>
-        <v-card >
+        <v-card>
           <v-card-title>
             <span class="headline">My Profile</span>
           </v-card-title>
-          <form enctype="multipart/form-data" class="container">
+          <v-form class="container">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="lastname">LastName</label>
-                <input
-                  class="form-control"
+                <v-text-field
+                  ref="loginForm" 
+                  placeholder="Lastname"
                   v-model="newLastName"
                   id="lastname"
-                  type="text"
-                   min="2"
-                   max="100"
-                  placeholder="Lastname"
-                />
+                  :rules="firstnameRule"
+                  label="Last Name"
+                  maxlength="20"
+                  required
+                ></v-text-field>
               </div>
               <div class="form-group col-md-6">
-                <label for="firstname">Firstname</label>
-                <input
-                  type="text"
-                   min="2"
-                   max="100"
-                  class="form-control"
+                <v-text-field
+                  ref="loginForm" 
+                  placeholder="Firstname"
                   v-model="newFirstName"
                   id="firstname"
-                  placeholder="Firstname"
-                />
+                  :rules="firstnameRule"
+                  label="First Name"
+                  maxlength="20"
+                  required
+                ></v-text-field>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="email">Email</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  v-model="newEmail"
+                <v-text-field
                   id="email"
+                  v-model="newEmail"
+                  :rules="emailRules"
+                  label="E-mail"
+                  required
                   :placeholder="Email"
-                />
+                ></v-text-field>
               </div>
               <div class="form-group col-md-6">
-                <label for="phone">Phone</label>
-                <input
-                  type="tel"
-                  class="form-control"
-                  v-model="newPhone"
+                <v-text-field
                   id="phone"
-                  placeholder="phone"
-                />
+                  v-model="newPhone"
+                  :counter="10"
+                  label="Phone"
+                  :placeholder="newPhone"
+                ></v-text-field>
               </div>
             </div>
             <div class="form-groupe">
-              <label for="password">Password</label>
-              <input
-                type="password"
-                class="form-control"
+              <v-text-field
                 v-model="newPassword"
-                id="password"
-                placeholder="Password"
-              />
+                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                :rules="[rules.minchar]"
+                :type="show1 ? 'text' : 'password'"
+                name="input-10-1"
+                label="Password"
+                hint="At least 6 characters"
+                counter
+                @click:append="show1 = !show1"
+              ></v-text-field>
             </div>
             <div class="form-group">
               <label for="description">Description</label>
@@ -131,12 +133,12 @@
                 />
               </div>
             </div>
-          </form>
+          </v-form>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="dialog = false">
             Close
           </v-btn>
-          <v-btn color="blue darken-1" text @click="saveForm">
+          <v-btn :disabled="!valid" color="success" @click="saveForm">
             Save
           </v-btn>
         </v-card>
@@ -168,11 +170,21 @@ export default {
       newSite: this.profile.url_website,
       newImage: "",
       newResume: "",
+
+      rules: {
+        required: (value) => !!value || "Required.",
+        minchar: (v) => (v && v.length >= 6) || "Min 6 characters",
+        min: (v) => (v && v.length >= 2) || "Min 2 characters",
+        digits: 10,
+      },
+      firstnameRule: [(v) => (v && v.length >= 2) || "Firstname must be valid"],
+      emailRules: [(v) => /.+@.+\..+/.test(v) || "E-mail must be valid"],
+      valid: true,
+      show1: false,
     };
   },
 
   methods: {
- 
     ...mapActions(["updateProfile", "updateUser"]),
 
     saveForm(e) {
@@ -187,6 +199,13 @@ export default {
             password: this.newPassword,
           };
         } else if (this.newEmail == "") {
+          newUser = {
+            id: this.user.id,
+            lastname: this.newLastName,
+            firstname: this.newFirstName,
+            password: this.newPassword,
+          };
+        } else if (this.Email == this.newEmail) {
           newUser = {
             id: this.user.id,
             lastname: this.newLastName,
@@ -208,9 +227,15 @@ export default {
             lastname: this.newLastName,
             firstname: this.newFirstName,
           };
+        } else if (this.Email == this.newEmail) {
+          newUser = {
+            id: this.user.id,
+            lastname: this.newLastName,
+            firstname: this.newFirstName,
+            password: this.newPassword,
+          };
         }
       }
-
       var newProfile = {
         id: this.profile.id,
         description: this.newDescription,
@@ -221,9 +246,28 @@ export default {
         image: this.newImage,
         resume: this.newResume,
       };
-      this.updateProfile(newProfile);
-      this.updateUser(newUser);
+
+      if (this.$refs.loginForm.validate()) {
+        this.updateProfile(newProfile);
+        this.updateUser(newUser)
+          .then(() => {
+            this.$swal({
+              title: "Profile updated",
+              icon: "success",
+              confirmButtonText: "Ok",
+            });
+          })
+          .catch(() => {
+            this.$swal({
+              title: "Profile Error!",
+              text: "Wrong password or email already taken",
+              icon: "error",
+              confirmButtonText: "Retry",
+            });
+          });
+      }
     },
+
     imageChanged(e) {
       var fileReader = new FileReader();
       fileReader.readAsDataURL(e.target.files[0]);
@@ -249,9 +293,9 @@ export default {
 </script>
 
 <style>
-.btn-modal{
+.btn-modal {
   color: white !important;
-  background-color: rgb(0, 118, 253) !important
+  background-color: rgb(0, 118, 253) !important;
 }
 </style>
 

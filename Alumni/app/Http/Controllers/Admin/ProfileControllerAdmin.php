@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 
 class ProfileControllerAdmin extends ControllerAdmin
@@ -69,14 +68,16 @@ class ProfileControllerAdmin extends ControllerAdmin
     public function update(Request $request, User $user)
     {
         $data = request()->validate([
-            'phone' => ['string', 'digits_between:10,12', 'starts_with:0,+'],
-            'description' => ['string'],
-            'url_linkedin' =>  ['url'],
-            'url_github' => ['url'],
-            'url_website' => ['url'],
+            'phone' => ['nullable', 'string', 'digits_between:10,12', 'starts_with:0,+'],
+            'description' => ['nullable', 'string'],
+            'url_linkedin' =>  ['nullable', 'url'],
+            'url_github' => ['nullable', 'url'],
+            'url_website' => ['nullable', 'url'],
             'image' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ]);
-        
+        if($user->profile === null) {
+            $user->profile()->save(new Profile);
+        }
         $imagePath = request()->image->store('/images', 's3');
         $data['image'] = $imagePath;
         $user->profile->update($data);
