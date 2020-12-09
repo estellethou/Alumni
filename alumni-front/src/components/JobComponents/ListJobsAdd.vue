@@ -5,7 +5,7 @@
             v-model="dialog"
             width="500"
             >
-                <template v-slot:activator="{ on, attrs }" v-if="user.role == 'alumni'"> <!-- ToDO: verify where to put the condition -->
+                <template v-slot:activator="{ on, attrs }" v-if="user.role == 'alumni'">
                     <v-btn
                     color="primary"
                     dark
@@ -273,7 +273,7 @@ export default {
                 contract: this.contract,
                 contract_duration: this.contractDuration,
                 company_name: this.company,
-                sector: JSON.stringify(this.sector),
+                sector: this.sector.join(', '),
                 user_id: this.user.id,
             };
             this.addJob(newJob);
