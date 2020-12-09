@@ -32,9 +32,9 @@ class CheckoutController extends Controller
                 'amount' => $request->amount,
                 'currency' => 'EUR',
                 'source' => $request->source,
-                'email' => $request->email,
-                "firstname" => $request->firstname,
-                "lastname" => $request->lastname,
+                //'email' => $request->email,
+                //"firstname" => $request->firstname,
+                //"lastname" => $request->lastname,
                 'description' => 'Description goes here',
                 'metadata' => [
                     'data1' => 'metadata 1',
@@ -45,7 +45,8 @@ class CheckoutController extends Controller
     
             // save this info to your database
             // SUCCESSFUL
-            return back()->with('success_message', 'Thank you! Your payment has been accepted.');
+            return response('successfull', 200);
+            //return back()->with('success_message', 'Thank you! Your payment has been accepted.');
         } catch (CardErrorException $e) {
             // save info to database for failed
             return back()->withErrors('Error! ' . $e->getMessage());
