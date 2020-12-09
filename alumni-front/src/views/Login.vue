@@ -121,7 +121,7 @@
                         v-model="password_confirmation"
                         :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
                         :rules="[rules.required, passwordMatch]"
-                        :type="show1 ? 'text' : 'password'"
+                        :type="show2 ? 'text' : 'password'"
                         name="input-10-1"
                         label="Confirm Password"
                         counter
