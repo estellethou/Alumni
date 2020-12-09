@@ -1,7 +1,14 @@
 <template>
     <div>
+        <Header/>
+        <div>
+            <v-breadcrumbs
+                :items="items"
+                customDivider
+                divider=">"
+            ></v-breadcrumbs>
+        </div>
         <v-container v-for="(detail, index) in filterJob" :key="index">
-            <!-- <div>{{ getId( detail.user_id)}}</div> -->
             <v-card outlined>
                 <v-card-title>
                     {{ detail.title }}
@@ -22,9 +29,10 @@
                                 <v-card-subtitle class="blue--text text-decoration-underline"> THE JOB </v-card-subtitle>
                                 <v-card-text>
                                     <p class="side-info"> {{ detail.title}} </p>
-                                    <p class="side-info"> {{ detail.contract}} </p>
-                                    <p class="side-info"> {{ detail.duration}} </p>
-                                    <p class="side-info"> {{ detail.city}} </p>
+                                    <p class="side-info"><v-icon> mdi-fountain-pen-tip </v-icon> {{ detail.contract}} </p>
+                                    <p class="side-info" v-if="detail.duration"><v-icon> mdi-timer-sand </v-icon> {{ detail.duration}} </p>
+                                    <p class="side-info" v-else><v-icon> mdi-timer-sand </v-icon> Full-time </p>
+                                    <p class="side-info"><v-icon> mdi-map-marker-minus-outline</v-icon> {{ detail.city}} </p>
 
                                 </v-card-text>
                             </div>
@@ -57,6 +65,11 @@
                     </a>
                 </div>
                 
+                <div v-if="detail.id == userDetails.id"> 
+                    <v-btn @click="openModal" class='secondary mt-3'> Button email recruiter does not work... Click here...</v-btn>
+                    <div class="containerModalJob" v-if="isOpen"> <ModalJob v-bind:user="userDetails" v-on:close="updateIsOpen(false)"/> </div>
+                    <div class="overlay" v-if="isOpen"></div>
+                </div>
                 
             </div>
         </v-container>
@@ -64,29 +77,52 @@
 </template>
 
 <script>
+import Header from '../components/Header'
+import ModalJob from '../components/JobComponents/ModalJob'
 import { mapActions, mapGetters } from 'vuex';
+
 
 export default {
     name: "SingleJob",
 
+    components: {
+        Header,
+        ModalJob,
+    },
+
     data () {
         return {
             userId: "",
+            items: [
+                {
+                text: 'Homepage',
+                disabled: false,
+                href: 'http://localhost:8080',
+                },
+                {
+                text: 'Jobs/Interships',
+                disabled: false,
+                href: 'http://localhost:8080/job',
+                },
+            ],
+            isOpen: false,
         }
     },
 
     methods: {
-        ...mapActions(["fetchAllJobs", "setUserDetails"]), // "setUser"
+        ...mapActions(["fetchAllJobs", "setUserDetails"]),
 
-        // getId(id) {
-        //     this.userId = id;
-        //     console.log(this.userId)
-        //     return this.userId;
-        // }
+        openModal() {
+            this.isOpen = true;
+        },
+
+        updateIsOpen(opp) {
+            this.isOpen = opp;
+        },
     },
 
     computed: {
-        ...mapGetters(["getAllJobs", "getUserDetails"]), // "getOneUser"
+        ...mapGetters(["getAllJobs", "getUserDetails"]),
 
         filterJob() {
             return this.getAllJobs.filter(job => {
@@ -98,13 +134,23 @@ export default {
     created() {
         this.setUserDetails()
         // this.setUser(this.userId)
-    }
+    },
 
 }
 </script>
 
-<style>
-
+<style scoped>
+.containerModalJob {
+    position:fixed;
+    background-color:white;
+    height: 350px;
+    width: 600px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1010;
+    border-radius:15px
+}
 .side-info {
     color: #546E7A;
     font-weight: lighter;
