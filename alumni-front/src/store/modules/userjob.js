@@ -11,12 +11,12 @@ const getters = {
 const actions = {
     async setUserDetails({commit}){
         var response = await axios.get("/userdetailsjob")
-        commit("fecthUserDetails", response.data)
+        commit("fetchUserDetails", response.data)
     },
 }
 
     const mutations = {
-        fetechUserDetails:(state, userDetails) => (state.userdetailsjob = userDetails),
+        fetchUserDetails:(state, userDetails) => (state.userdetailsjob = userDetails),
     }
 
     

@@ -49,16 +49,17 @@
                         </v-card>
                 </div>
             </v-card>
-        </v-container>
 
-        <div v-for="(user, index) in getUserDetails" :key="index" >
-            {{ user.email }}
-            {{ user.firstname }}
-            {{ user.lastname }}
-            <a href="`mailto:${detail.title}?subject=Application for ${detail.title} from Coding Alumni Website`">
-                <v-btn class="ml-13" color="info"> Interested </v-btn>
-            </a>
-        </div>
+            <div v-for="(userDetails, index) in getUserDetails" :key="index" >
+                <div v-if="detail.id == userDetails.id">
+                    <a v-bind:href=" `mailto:${userDetails.email}?subject=Application for ${detail.title} from Coding Academy Alumni job portal!` ">
+                        <v-btn class="mt-3" color="info"> Email The Recruiter </v-btn>
+                    </a>
+                </div>
+                
+                
+            </div>
+        </v-container>
     </div>
 </template>
 
