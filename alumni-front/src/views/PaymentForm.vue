@@ -9,22 +9,21 @@
       @loading="loading = $event"
     >
     </stripe-elements>
-    <button @click="submit">Pay ${{amount / 100}}</button>
+    <button @click="submit">Pay ${{amount}}</button>
   </div>
 </template>
-
+ 
 <script>
-import {StripeElements} from "vue-stripe-checkout"
-import axios from "axios"
+import { StripeElements } from 'vue-stripe-checkout';
+import axios from "axios";
 export default {
-    name:"PaymentForm",
-    components:{
-      StripeElements
-    },
-    data: () => ({
+  components: {
+    StripeElements
+  },
+  data: () => ({
     loading: false,
-    amount: 1000,
-    publishableKey:"pk_test_51Hv1eyFhtlvYcgIazUDc3j00yWrIfgjjtoDvEMeEWsMK3b49R0HAGbTlVijw2yv2cd28x8ohYDtJPSk44QPjdPKU00DUe6J3RG", 
+    amount: 10,
+    publishableKey: "pk_test_51HwTLSBi6kcWeMI4Dhz1quF7Ewmu5YJkqOs6jdjSlsZYETAVPVOnn3YtqH4WoAgxh4Khw1cz5T6mtbHpYuHUmnuP00gIIrkx2D", 
     token: null,
     charge: null
   }),
@@ -43,17 +42,10 @@ export default {
       this.sendTokenToServer(this.charge);
     },
     sendTokenToServer (charge) {
-      console.log(charge)
       // Send to charge to your backend server to be processed
       // Documentation here: https://stripe.com/docs/api/charges/create
-
-      const response =axios.post("http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api/checkout")
-      console.log(response)
+      axios.post("/checkout")
     }
   }
 }
-</script>
-
-<style>
-
-</style>
+</script> 

@@ -52,6 +52,7 @@
               <div class="form-group col-md-6">
                 <v-text-field
                   id="phone"
+                  :rules="phoneRule"
                   v-model="newPhone"
                   :counter="10"
                   label="Phone"
@@ -179,6 +180,7 @@ export default {
       },
       firstnameRule: [(v) => (v && v.length >= 2) || "Firstname must be valid"],
       emailRules: [(v) => /.+@.+\..+/.test(v) || "E-mail must be valid"],
+      phoneRule: [(v) => !isNaN(parseFloat(v)) && v >= 0 && v <= 9999999999|| "Phone number must be valid"],
       valid: true,
       show1: false,
     };
@@ -273,7 +275,6 @@ export default {
       fileReader.readAsDataURL(e.target.files[0]);
       fileReader.onload = (e) => {
         this.newImage = e.target.result;
-        console.log(e.target.result);
       };
     },
     resumeChanged(e) {
@@ -281,7 +282,6 @@ export default {
       fileReader.readAsDataURL(e.target.files[0]);
       fileReader.onload = (e) => {
         this.newResume = e.target.result;
-        console.log(e.target.result);
       };
     },
   },

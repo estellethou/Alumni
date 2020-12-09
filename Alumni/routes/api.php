@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\UserJobController;
+use App\Http\Controllers\EventController;
+
 
 
 /*
@@ -77,6 +79,16 @@ Route::post('/checkout','App\Http\Controllers\CheckoutController@store');
 //API Directory Route to get all users and profiles information at the same place
 Route::middleware('auth')->get('/userprofiles', [UserProfileController::class, 'index']);
 
+
 //API SingleJob Route to get needed user information(email/firstname/lastname)
 Route::middleware('auth')->get('/userdetailsjob', [UserJobController::class, 'index']);
+
+//API routes to Events
+Route::middleware('auth')->get('/events', [EventController::class, 'index']);
+Route::middleware('auth')->get('/event/{id}', [EventController::class, 'show']);
+Route::middleware('auth')->post('/events', [EventController::class, 'store']);
+Route::middleware('auth')->put('/event/{id}/edit', [EventController::class, 'update']);
+Route::middleware('auth')->delete('/event/{id}', [EventController::class, 'destroy']);
+
+
 
