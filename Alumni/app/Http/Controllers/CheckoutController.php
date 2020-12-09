@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Session;
-use Stripe;
+use Cartalyst\Stripe\Laravel\Facades\Stripe;
+use Cartalyst\Stripe\Exception\CardErrorException;
 
 class CheckoutController extends Controller
 {
@@ -26,19 +27,28 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        
-        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-            Stripe\Charge::create ([
-                    "amount" => $request->amount,
-                    "currency" => "eu",
-                    "source" => $request->stripeToken,
-                    "description" => $request->description,
+        try {
+            $charge = Stripe::charges()->create([
+                'amount' => 20,
+                'currency' => 'EUR',
+                'source' => $request->stripeToken,
+                'description' => 'Description goes here',
+                'receipt_email' => $request->email,
+                'metadata' => [
+                    'data1' => 'metadata 1',
+                    'data2' => 'metadata 2',
+                    'data3' => 'metadata 3',
+                ],
             ]);
-      
-            Session::flash('success', 'Payment successful!');
-              
-            return back();
-        
+    
+            // save this info to your database
+    
+            // SUCCESSFUL
+            return back()->with('success_message', 'Thank you! Your payment has been accepted.');
+        } catch (CardErrorException $e) {
+            // save info to database for failed
+            return back()->withErrors('Error! ' . $e->getMessage());
+        }
     }
 
     /**

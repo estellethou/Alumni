@@ -71,7 +71,7 @@ class ProfileController extends Controller
             ]);
            
         $profile->update($request->except(['image','resume']));
-            if ($request->image) {
+        if ($request->image) {
             $exploded = explode(',', $request->image);
             $decoded = base64_decode($exploded[1]);
             if (str_contains($exploded[0], 'jpeg')) {
@@ -83,7 +83,7 @@ class ProfileController extends Controller
             $imageName = $name.'.'.$extension;
             Storage::disk('s3')->put('/images/' . $imageName, $decoded);
             //$path = public_path().'/'.$filename;
-            //file_put_contents($path, $decoded); //save the decoded resume to the public path 
+            //file_put_contents($path, $decoded); //save the decoded resume to the public path
             //$profile->image = Storage::disk('s3')->temporaryUrl($profile->image, now()->addMinutes(5));
             $profile->update(['image' => $imageName ?? '']);
         }
@@ -97,8 +97,8 @@ class ProfileController extends Controller
             $fileName = $name.'.'.$extension;
             Storage::disk('s3')->put('/resumes/' . $fileName, $decoded);
             //$path = public_path().'/'.$filename;
-            //file_put_contents($path, $decoded); //save the decoded resume to the public path 
-            $profile->update(['resume' => $fileName ?? '']);    
+            //file_put_contents($path, $decoded); //save the decoded resume to the public path
+            $profile->update(['resume' => $fileName ?? '']);
         }
 
         return response()->json(['message' => 'Profile updated successfully', 'profile' => $profile]);
