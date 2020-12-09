@@ -184,10 +184,10 @@ export default {
               confirmButtonText: "Ok",
             });
           })
-          .catch(() => {
+          .catch(error => {
             this.$swal({
               title: "Login Error!",
-              text: "Wrong email or bad password",
+              text: error.response.data.error + ":Wrong email or bad password",
               icon: "error",
               confirmButtonText: "Retry",
             });
@@ -203,9 +203,9 @@ export default {
           password: this.password,
           password_confirmation: this.password_confirmation,
         })
-          .then(() => {
+          .then(response => {
             this.$swal({
-              title: "User created",
+              title: response,
               text: "Welcome on board" + " " + this.firstname,
               icon: "success",
               confirmButtonText: "Ok",
@@ -213,10 +213,11 @@ export default {
             this.signIn({ email: this.email, password: this.password });
             this.$router.push("/");
           })
-          .catch(() => {
+          .catch(error => {
             this.$swal({
               title: "Register Error!",
-              text: "Email already used",
+              // text: "Email already used",
+              text: error.response.data[0].email,
               icon: "error",
               confirmButtonText: "Retry",
             });
@@ -238,7 +239,7 @@ export default {
       { name: "Register", icon: "mdi-account-outline" },
     ],
     valid: true,
-
+    error: null,
     firstname: "",
     lastname: "",
     email: "",
