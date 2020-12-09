@@ -15,7 +15,8 @@ import Posts from "./Posts"
 export default {
     name:"ListPosts",
     props:["Posts"],
-    
+
+
     data(){
         return{
             pageNumber:0,
@@ -25,6 +26,8 @@ export default {
     },
 
     methods:{
+
+        
         
         previousPage(){
             window.scrollTo(0,0);
@@ -69,5 +72,6 @@ export default {
 .containerPaginationPost{
     display: flex;
     justify-content: center;
+    margin-top: 10px;
 }
 </style>

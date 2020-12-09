@@ -11,7 +11,7 @@
               <v-btn color="primary" @click="toggleModalPost">Add a new post</v-btn>  
           </div>
           <div v-if="isOpen" class="container-AddPostModal">
-                 <AddPostModal v-on:close="updateParent(false)"/>
+                 <AddPostModal v-on:firstPage="getFirstPage(0)" v-on:close="updateParent(false)"/>
           </div>
           <div class="overlay" v-if="isOpen"></div>
       </div>
@@ -31,7 +31,7 @@ export default {
     data(){
         return{
             search:"",
-            isOpen:false
+            isOpen:false,
         }
     },
 
@@ -64,7 +64,7 @@ export default {
         },
         hideModalPost(){
             this.isOpen = false
-        }
+        },
     },
     created(){
         this.allPosts()
