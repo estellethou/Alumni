@@ -2,21 +2,11 @@
   <div class="profile container">
     <HeaderProfile/>
     <div class="background">
-      <img
-        class="profile-img"
-        width="150"
-        height="150"
-        :src="
-          'https://coding-academy-alumni.herokuapp.com/' +
-          getOneProfile.image
-        "
-        alt="profile-image"
-      />
       <div class="side-img">
         <img
           class="logo"
-          width="180"
-          height="80"
+          width="12%"
+          height="50%"
           src="https://coding-academy-alumni.herokuapp.com/icons/logo.png"
           alt="logo"
         />
@@ -25,7 +15,25 @@
           {{ getOneUser.firstname }} {{ getOneUser.lastname }}
         </h2>
       </div>
-    </div>
+      <div class="position-img" v-if="getOneProfile.image !== ''">
+      <img
+        class="profile-img"
+        width="190rem"
+        height="190rem"
+        :src="
+          'https://coding-alumni-bucket.s3.eu-west-3.amazonaws.com/images/' +
+          getOneProfile.image
+        "
+        alt="profile-image"
+      />
+      </div>
+           <div v-else class="position-img">
+            <v-avatar size="150" class="profile-img" color="#2F329F">
+            <span class="white--text headline">{{initial()}}</span>
+          </v-avatar>
+        </div>
+      </div>
+
     <div class="description">
       <p>{{ getOneProfile.description }}</p>
     </div>
@@ -70,10 +78,10 @@
 </div>
         </div>
     </v-card>
-    <div class="resume">
+    <div v-if="getOneProfile.resume !== ''" class="resume">
       <embed
         :src="
-          'https://coding-academy-alumni.herokuapp.com/' +
+          'https://coding-alumni-bucket.s3.eu-west-3.amazonaws.com/resumes/' +
           getOneProfile.resume
         "
         type="application/pdf"
@@ -97,6 +105,12 @@ export default {
 
   methods: {
     ...mapActions(["setProfile", "setUser"]),
+    initial(){
+      var firstnameLetter = this.getOneUser.firstname.charAt(0);
+      var lastnameLetter = this.getOneUser.lastname.charAt(0);
+      var initales = firstnameLetter + lastnameLetter;
+      return initales.toUpperCase();
+    }
   },
 
   computed: {
@@ -111,47 +125,4 @@ export default {
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap");
-.profile {
-  margin: auto;
-}
-.background {
-  background-image: url("https://coding-academy-alumni.herokuapp.com/icons/background.jpg");
-  background-size: 100% 300px;
-  height: 240px;
-}
-.profile-img {
-  border-radius: 50%;
-  position: relative;
-  top: 70%;
-  left: 45%;
-}
-
-.resume {
-  display: flex;
-  justify-content: center;
-}
-
-.side-img {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.logo {
-  margin-left: 2%;
-}
-.username {
-  color: white;
-  margin-top: 1.5%;
-  margin-right: 2%;
-  font-family: "Nunito", sans-serif;
-  font-weight: bold;
-}
-
-.description {
-  position: relative;
-  margin-top: 6rem;
-  font-size: x-large;
-  font-family: "Nunito", sans-serif;
-}
 </style>

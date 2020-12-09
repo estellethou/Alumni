@@ -12,6 +12,7 @@
           aria-expanded="false"
           class="hamburger"
         />
+        <template v-if="authenticated">
         <!----- EXIT BUTTON (Right) ----->
         <a href="#" @click.prevent="signOutButton">
           <img
@@ -22,8 +23,8 @@
             class="logout"
           />
         </a>
-
-        <h1 class="title">CODING ACADEMY - ALUMNI</h1>
+        </template>
+        <div class="title">CODING ACADEMY - ALUMNI</div>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <router-link :to="`/`" class="dropdown-item"> Home </router-link>
@@ -43,6 +44,9 @@
             <router-link :to="`/forum`" class="dropdown-item">
               Forum
             </router-link>
+             <router-link :to="`/event`" class="dropdown-item">
+              Event
+            </router-link>
           </template>
           <template v-else>
               <router-link :to="{name: 'Login'}" class="dropdown-item">
@@ -60,7 +64,7 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Header",
   computed: {
-    ...mapGetters(["authenticated", "user"]),
+    ...mapGetters(["authenticated"]),
   },
 
   methods: {
@@ -69,9 +73,16 @@ export default {
     signOutButton() {
       this.signOut()
       .then(() => {
-        if(this.$router.path !== ('/')){
+        if(this.$route.path !== ('/')){
           this.$router.push('/')
-        } 
+          
+        }
+        this.$swal({
+              title: "You have successfully logged out",
+              text: "See you soon",
+              icon: "success",
+              confirmButtonText: "Ok",
+            });
       })
     },
   },
@@ -91,6 +102,7 @@ export default {
   color: white;
   margin-top: 1%;
   text-align: center;
+  font-size: 30rem;
 }
 
 .header {

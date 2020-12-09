@@ -8,7 +8,6 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ 'Edit Profile' }}</div>
-
                 <div class="card-body">
                     <form action="{{ route('admin.user.profile.update',  [ $user->id ])}}" enctype="multipart/form-data"
                         method="POST">
@@ -21,7 +20,7 @@
 
                             <div class="col-md-6">
                                 <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror"
-                                    name="phone" value="{{ old('phone') ?? $user->profile->phone }}" required
+                                    name="phone" value="{{ old('phone') ?? $user->profile->phone ?? ''}}"
                                     autocomplete="name" autofocus>
 
                                 @error('phone')
@@ -39,7 +38,7 @@
                             <div class="col-md-6">
                                 <input id="description" type="text"
                                     class="form-control @error('description') is-invalid @enderror" name="description"
-                                    value="{{ old('description') ?? $user->profile->description }}" required
+                                    value="{{ old('description') ?? $user->profile->description ?? ''}}"
                                     autocomplete="description" autofocus>
 
                                 @error('description')
@@ -57,7 +56,7 @@
                             <div class="col-md-6">
                                 <input id="url_linkedin" type="url_linkedin"
                                     class="form-control @error('url_linkedin') is-invalid @enderror" name="url_linkedin"
-                                    value="{{ old('url_linkedin') ?? $user->profile->url_linkedin }}" required
+                                    value="{{ old('url_linkedin') ?? $user->profile->url_linkedin ?? ''}}"
                                     autocomplete="url_linkedin">
 
                                 @error('url_linkedin')
@@ -74,7 +73,7 @@
                             <div class="col-md-6">
                                 <input id="url_github" type="url_github"
                                     class="form-control @error('url_github') is-invalid @enderror" name="url_github"
-                                    value="{{ old('url_github') ?? $user->profile->url_github }}" required
+                                    value="{{ old('url_github') ?? $user->profile->url_github ?? ''}}"
                                     autocomplete="url_github">
 
                                 @error('url_github')
@@ -91,7 +90,7 @@
                             <div class="col-md-6">
                                 <input id="url_website" type="url_website"
                                     class="form-control @error('url_website') is-invalid @enderror" name="url_website"
-                                    value="{{ old('url_website') ?? $user->profile->url_website }}" required
+                                    value="{{ old('url_website') ?? $user->profile->url_website ?? ''}}"
                                     autocomplete="url_website">
 
                                 @error('url_website')
@@ -106,7 +105,7 @@
                                 class="col-md-4 col-form-label text-md-right">{{ __('Pofile Image') }}</label>
                             <div class="col-md-6">
                                 <input id="image" type="file" class="form-control @error('image') is-invalid @enderror"
-                                    name="image" value="{{ old('image') ?? $user->profile->image }}"
+                                    name="image" value="{{ old('image') ?? $user->profile->image ?? ''}}"
                                     autocomplete="image" style="border:none">
 
                                 @error('image')

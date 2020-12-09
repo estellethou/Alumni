@@ -15,7 +15,7 @@ class PostControllerAdmin extends ControllerAdmin
     public function index()
     {
         //GET all the Post//
-         $posts = Post::latest()->paginate(20);
+         $posts = Post::latest()->get();
         return view('admin/posts', compact('posts'));
         
     }

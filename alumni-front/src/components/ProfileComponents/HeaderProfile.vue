@@ -41,6 +41,9 @@
             <router-link :to="`/forum`" class="dropdown-item">
               Forum
             </router-link>
+              <router-link :to="`/event`" class="dropdown-item">
+              Event
+            </router-link>
           </template>
           <template v-else>
               <router-link :to="{name: 'Login'}" class="dropdown-item">

@@ -15,7 +15,7 @@ class CommentControllerAdmin extends ControllerAdmin
     public function index()
     {
         //GET all the Comment//
-         $comments = Comment::latest()->paginate(20);
+         $comments = Comment::latest()->get();
         return view('admin/comments', compact('comments'));
         
     }
