@@ -75,3 +75,6 @@ Route::post('/checkout','App\Http\Controllers\CheckoutController@store');
 //API Directory Route to get all users and profiles information at the same place
 Route::middleware('auth')->get('/userprofiles', [UserProfileController::class, 'index']);
 
+//API SingleJob Route to get needed user information(email/firstname/lastname)
+Route::middleware('auth')->get('/userdetailsjob', [UserJobController::class, 'index']);
+

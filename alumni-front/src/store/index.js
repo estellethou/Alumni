@@ -7,6 +7,7 @@ import Profiles from "./modules/profiles"
 import Auth from "./modules/auth"
 import Users from "./modules/users"
 import UserProfiles from "./modules/userprofiles"
+import UserJob from './modules/userjob'
 import createPersistedState from "vuex-persistedstate"
 
 
@@ -21,6 +22,7 @@ export default new Vuex.Store({
     Profiles,
     Auth,
     Users,
-    UserProfiles
+    UserProfiles,
+    UserJob
   }
 })
