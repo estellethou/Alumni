@@ -11,8 +11,9 @@
             src="https://coding-academy-alumni.herokuapp.com/icons/logo.png"
             alt="logo"
           />
-
-          <h2 class="username">{{ user.firstname }} {{ user.lastname }}</h2>
+          <div v-for="myuser in filteredUser" :key="myuser.id">
+          <h2 class="username">{{ myuser.firstname }} {{ myuser.lastname }}</h2>
+          </div>
         </div>
         <div class="position-img" v-if="profile.image !== ''">
           <img
@@ -114,7 +115,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(["setAllProfiles"]),
+    ...mapActions(["setAllProfiles", "setAllUsers"]),
     initial(){
       var firstnameLetter = this.user.firstname.charAt(0);
       var lastnameLetter = this.user.lastname.charAt(0);
@@ -124,16 +125,22 @@ export default {
   },
   
   computed: {
-    ...mapGetters(["getAllProfiles", "authenticated", "user"]),
+    ...mapGetters(["getAllProfiles","getAllUsers", "authenticated", "user"]),
     filteredProfile() {
       return this.getAllProfiles.filter((profile) => {
         if (profile.user_id == this.user.id) return profile;
+      });
+    },
+     filteredUser() {
+      return this.getAllUsers.filter((myuser) => {
+        if (myuser.id == this.user.id) return myuser;
       });
     },
   },
 
   created() {
     this.setAllProfiles();
+    this.setAllUsers();
   },
 };
 </script>

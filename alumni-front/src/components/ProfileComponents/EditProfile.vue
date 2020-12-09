@@ -253,7 +253,6 @@ export default {
         this.updateProfile(newProfile);
         this.updateUser(newUser)
           .then(() => {
-             this.$router.push("/");
             this.$swal({
               title: "Profile updated",
               icon: "success",
