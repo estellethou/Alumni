@@ -1,10 +1,10 @@
 <?php
 
 namespace Database\Seeders;
-use App\Models\User;
 
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class UserSeeder extends Seeder
 {
@@ -15,12 +15,12 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::firstOrCreate(
-                ['email' => 'admin@codingalumni.com'], [
-                    'name' => 'admin',
-                    'password' => bcrypt('12345678'),
-                    'is_admin' => 1,
-                ]
-            );
+        DB::table('users')->insert([
+            'firstname' => 'admin',
+            'lastname' => 'admin',
+            'email' => 'admin@alumni.com',
+            'password' => Hash::make('12345678'),
+            'is_admin' => 1,
+        ]);
     }
 }
