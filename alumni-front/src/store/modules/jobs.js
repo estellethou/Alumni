@@ -30,12 +30,12 @@ const actions = {
     },
 
     async updateJob ({ commit }, updJob) {
-        console.log(updJob);
+        console.log(updJob, 'Data received from components');
         const response = await axios.put(
             `/job/${updJob.id}/edit`,
             updJob
         );
-        console.log(response.data);
+        console.log(response.data, 'response');
         commit('editJob', response.data);
     },
 
@@ -45,8 +45,12 @@ const mutations = {
     setJobs: (state, jobs) => (state.jobs = jobs),
     addNewJob: (state, newJob) => (state.jobs.unshift(newJob)),
     removeJob: (state, id) => state.jobs = state.jobs.filter(job => job.id != id),
-    editJob: () => { return true },
-
+    editJob: (state, updateJob) => {
+        const index = state.jobs.findIndex(job => job.id === updateJob.id)
+        if(index !== -1){
+            state.jobs.splice(index,1,updateJob)
+        }
+    },
 }; 
 
 export default {

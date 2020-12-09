@@ -3,9 +3,14 @@
          <Header/>
         <div class="Job">
             <h1>Hello from Job</h1>
-            <div>
-                <label class="label">Searching Bar</label>
-                <input :keyup="searchJob" type="text" v-model="search" name="search">
+            <div class="d-flex m-2 align-center size-input">
+                <v-icon medium> mdi-magnify </v-icon>
+                <v-text-field
+                    name="search"
+                    placeholder="Your dream Job?"
+                    v-model="search"
+                    :keyup="searchJob" 
+                ></v-text-field>
             </div>
             <ListJobsAdd />
             <ListJobs v-bind:filteredJob="searchJob" />
@@ -63,3 +68,11 @@ export default {
 
 }
 </script>
+
+<style>
+
+.size-input {
+    width: 30%;
+}
+
+</style>

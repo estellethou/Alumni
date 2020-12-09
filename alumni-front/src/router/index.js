@@ -8,6 +8,7 @@ import DetailsPost from "../views/DetailsPost"
 import Profile from '../views/Profile.vue'
 import OtherProfile from '../views/OtherProfile.vue'
 import Login from '../views/Login.vue'
+import SingleJob from '../views/SingleJob.vue'
 //import Dashboard from '../views/Dashboard.vue'
 import RecruterForm from "../views/RecruterForm"
 import PaymentForm from "../views/PaymentForm"
@@ -29,6 +30,12 @@ const routes = [
     path: '/recruter',
     name: 'RecruterForm',
     component: RecruterForm
+  },
+  {
+    path: '/job/:id',
+    name: 'SingleJob',
+    component: SingleJob,
+    props: true,
   },
   {
     path: '/recruter/payment',
