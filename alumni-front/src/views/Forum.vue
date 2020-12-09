@@ -5,7 +5,7 @@
       <div class="container-titleForumPage">
            <h1>Forum Coding Academy - Alumni</h1> 
       </div>
-      <v-text-field :keyup="searchInput" outlined type="text" v-model="search" label="Search"></v-text-field>
+      <v-text-field :keyup="searchInput" class="mr-5 ml-5" outlined type="text" v-model="search" label="Search"></v-text-field>
       <div class="container-btnModal">
           <div class="container-btnAddNewPost">
               <v-btn color="primary" @click="toggleModalPost">Add a new post</v-btn>  
