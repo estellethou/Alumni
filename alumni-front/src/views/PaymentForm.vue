@@ -44,7 +44,14 @@ export default {
     sendTokenToServer (charge) {
       // Send to charge to your backend server to be processed
       // Documentation here: https://stripe.com/docs/api/charges/create
-      axios.post("/checkout")
+      console.log(charge);
+      axios.post("/checkout", charge)
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error)
+      })
     }
   }
 }

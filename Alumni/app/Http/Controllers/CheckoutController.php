@@ -29,11 +29,10 @@ class CheckoutController extends Controller
     {
         try {
             $charge = Stripe::charges()->create([
-                'amount' => 20,
+                'amount' => $request->amount,
                 'currency' => 'EUR',
-                'source' => $request->stripeToken,
+                'source' => $request->source,
                 'description' => 'Description goes here',
-                'receipt_email' => $request->email,
                 'metadata' => [
                     'data1' => 'metadata 1',
                     'data2' => 'metadata 2',
@@ -42,7 +41,6 @@ class CheckoutController extends Controller
             ]);
     
             // save this info to your database
-    
             // SUCCESSFUL
             return back()->with('success_message', 'Thank you! Your payment has been accepted.');
         } catch (CardErrorException $e) {
