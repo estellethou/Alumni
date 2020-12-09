@@ -3,9 +3,9 @@
         <div v-for="(post,index) in paginatedData" :key="index">
             <Posts class="postsCard" v-bind:post="post"/>
         </div>
-        <div class="containerPagination">
+        <div class="containerPaginationPost">
             <v-btn class="mr-2" @click="previousPage" :disabled="pageNumber==0" color="primary">prev</v-btn>
-            <v-btn class="ml-2" @click="nextPage" :disabled="pageNumber >= pagecount -1" color="primary">next</v-btn>
+            <v-btn class="ml-2" @click="nextPage" :disabled="pageNumber >= pageCount -1" color="primary">next</v-btn>
         </div>
     </div>
 </template>
@@ -27,17 +27,15 @@ export default {
     methods:{
         
         previousPage(){
+            window.scrollTo(0,0);
             return this.pageNumber --
         },
         nextPage(){
+            window.scrollTo(0,0);
             return this.pageNumber ++
         },
 
-        pageCount(){
-            let l = this.List.length,
-            s = this.size
-            return Math.ceil(l/s)
-      }
+      
     },
 
     computed:{
@@ -45,6 +43,12 @@ export default {
         const start = this.pageNumber * this.size,
         end = start +this.size
         return this.Posts.slice(start,end)
+      },
+      
+      pageCount(){
+            let l = this.Posts.length,
+            s = this.size
+            return Math.ceil(l/s)
       },
     },
 
@@ -62,7 +66,7 @@ export default {
 .postsCard{
     margin-bottom:30px
 }
-.containerPagination{
+.containerPaginationPost{
     display: flex;
     justify-content: center;
 }
