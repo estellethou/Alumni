@@ -32,6 +32,9 @@ class CheckoutController extends Controller
                 'amount' => $request->amount,
                 'currency' => 'EUR',
                 'source' => $request->source,
+                'email' => $request->email,
+                "firstname" => $request->firstname,
+                "lastname" => $request->lastname,
                 'description' => 'Description goes here',
                 'metadata' => [
                     'data1' => 'metadata 1',
