@@ -293,7 +293,6 @@ export default {
             this.contractDuration=""
             this.company=""
             this.sector=""
-
             if(this.res > 1){
                 this.addJob(newJobOffer)
             }

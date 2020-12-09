@@ -3,11 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Post;
+use App\Http\Controllers\Admin\ControllerAdmin;
 use App\Http\Controllers\Admin\UserControllerAdmin;
 use App\Http\Controllers\Admin\ProfileControllerAdmin;
 use App\Http\Controllers\Admin\JobControllerAdmin;
 use App\Http\Controllers\Admin\PostControllerAdmin;
 use App\Http\Controllers\Admin\CommentControllerAdmin;
+use App\Http\Controllers\Admin\Auth\LoginControllerAdmin;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +26,16 @@ use App\Http\Controllers\Admin\CommentControllerAdmin;
 //     return view('welcome');
 // });
 
-
-// Route::middleware('auth')->get('users', [UserControllerAdmin::class, 'index'])->name('admin.users');
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin'], function() {
+    Route::get('/login', function () {
+        return view('admin/login');
+    });
+    Route::post('login', [LoginControllerAdmin::class, 'login'])->name('admin.login');
+});
+// Route::middleware('auth:web')->get('users', [UserControllerAdmin::class, 'index'])->name('admin.users');
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:web'], function () {
+    Route::get('/', [ControllerAdmin::class, 'indexCount']);
+    Route::get('logout', [LoginControllerAdmin::class, 'logout'])->name('admin.logout');
     Route::get('users', [UserControllerAdmin::class, 'index'])->name('admin.users');
     Route::get('users/create', function () {
         return view('admin/user_create');

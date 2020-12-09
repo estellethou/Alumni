@@ -41,7 +41,14 @@
                         @click:append="show1 = !show1"
                       ></v-text-field>
                     </v-col>
+
                     <v-col class="d-flex" cols="12" sm="6" xsm="12"> </v-col>
+                    <v-spacer></v-spacer>
+                    <v-col class="d-flex" cols="12" sm="3" xsm="12" align-end>
+                      <v-btn x-large block color="error" @click="close">
+                        Close
+                      </v-btn>
+                    </v-col>
                     <v-spacer></v-spacer>
                     <v-col class="d-flex" cols="12" sm="3" xsm="12" align-end>
                       <v-btn
@@ -54,7 +61,11 @@
                         Login
                       </v-btn>
                     </v-col>
-                    <span>Forgot your password ?  Reset it <router-link to="/resetpassword">here</router-link></span>
+
+                    <span
+                      >Forgot your password ? Reset it
+                      <router-link to="/resetpassword">here</router-link></span
+                    >
                   </v-row>
                 </v-form>
               </v-card-text>
@@ -108,14 +119,20 @@
                       <v-text-field
                         block
                         v-model="password_confirmation"
-                        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                        :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
                         :rules="[rules.required, passwordMatch]"
-                        :type="show1 ? 'text' : 'password'"
+                        :type="show2 ? 'text' : 'password'"
                         name="input-10-1"
                         label="Confirm Password"
                         counter
-                        @click:append="show1 = !show1"
+                        @click:append="show2 = !show2"
                       ></v-text-field>
+                    </v-col>
+                    <v-spacer></v-spacer>
+                    <v-col class="d-flex" cols="12" sm="3" xsm="12" align-end>
+                      <v-btn x-large block color="error" @click="close">
+                        Close
+                      </v-btn>
                     </v-col>
                     <v-spacer></v-spacer>
                     <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12">
@@ -152,11 +169,14 @@ export default {
   },
   methods: {
     ...mapActions(["signIn", "register"]),
+    close() {
+      this.$router.push("/");
+    },
     validate() {
       if (this.$refs.loginForm.validate()) {
         this.signIn({ email: this.loginEmail, password: this.loginPassword })
           .then(() => {
-            this.$router.push('/')
+            this.$router.push("/");
             this.$swal({
               title: "User Sign in",
               text: "Welcome back",
@@ -164,10 +184,10 @@ export default {
               confirmButtonText: "Ok",
             });
           })
-          .catch(() => {
+          .catch(error => {
             this.$swal({
               title: "Login Error!",
-              text: "Wrong email or bad password",
+              text: error.response.data.error + ":Wrong email or bad password",
               icon: "error",
               confirmButtonText: "Retry",
             });
@@ -183,27 +203,28 @@ export default {
           password: this.password,
           password_confirmation: this.password_confirmation,
         })
-          .then(() => {
+          .then(response => {
             this.$swal({
-              title: "User created",
+              title: response,
               text: "Welcome on board" + " " + this.firstname,
               icon: "success",
               confirmButtonText: "Ok",
             });
             this.signIn({ email: this.email, password: this.password });
-            this.$router.push('/');
+            this.$router.push("/");
           })
-          .catch(() => {
+          .catch(error => {
             this.$swal({
               title: "Register Error!",
-              text: "Email already used",
+              // text: "Email already used",
+              text: error.response.data[0].email,
               icon: "error",
               confirmButtonText: "Retry",
             });
           });
       }
     },
-    reset() {
+    reset(){
       this.$refs.form.reset();
     },
     resetValidation() {
@@ -218,7 +239,7 @@ export default {
       { name: "Register", icon: "mdi-account-outline" },
     ],
     valid: true,
-
+    error: null,
     firstname: "",
     lastname: "",
     email: "",
@@ -236,6 +257,7 @@ export default {
     ],
 
     show1: false,
+    show2: false,
     rules: {
       required: (value) => !!value || "Required.",
       min: (v) => (v && v.length >= 6) || "Min 6 characters",

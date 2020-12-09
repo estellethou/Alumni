@@ -10,7 +10,7 @@
         </div> -->
     </div>
     <div class="table-responsive-xl">
-        <table class="table table-sm table-light table-striped table-hover shadow rounded">
+        <table class="table table-sm table-light table-striped table-hover shadow rounded" id="dynamic-table">
             <thead class="table-borderless">
                 <tr>
                     <th scope="col" style="width:70px;">View</th>
@@ -56,9 +56,6 @@
                 @endforeach
             </tbody>
         </table>
-        <div>
-            {{ $jobs->links() }}
-        </div>
     </div>
 </body>
 

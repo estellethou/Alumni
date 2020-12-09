@@ -8,6 +8,7 @@ use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 
 
@@ -20,7 +21,8 @@ class UserControllerAdmin extends ControllerAdmin
      */
     public function index()
     {
-        $users = User::paginate(20);
+        // $users = User::paginate(20);
+        $users = User::all();
         return view('admin/users', compact('users'));
     }
 
@@ -55,18 +57,26 @@ class UserControllerAdmin extends ControllerAdmin
     public function show($id)
     {
         $user = User::find($id);
+        if($user->profile === null) {
+            $user->profile()->save(new Profile);
+        }
+        $profile = $user->profile;
+        if($profile && $user->profile->image !== null) {
+            $user->profile->temporaryUrl = Storage::disk('s3')->temporaryUrl($user->profile->image, now()->addMinutes(5));
+        }
         return view("admin/user_show", compact('user'));
     }
 
-    public function searchUsers(Request $request) {
-        $data = request()->validate([
-            'search-users' => 'required',
-        ]);
-         $users = User::where('firstname', 'like', '%'.$data['search-users'].'%')
-            ->orWhere('lastname', 'like', '%' . $data['search-users'] . '%')
-            ->orWhere('email', 'like', '%' . $data['search-users'] . '%')->paginate(20);
-        return view('admin/users', compact('users'));
-    }
+    //manual search, replaced with datatables
+    // public function searchUsers(Request $request) {
+    //     $data = request()->validate([
+    //         'search-users' => 'required',
+    //     ]);
+    //      $users = User::where('firstname', 'like', '%'.$data['search-users'].'%')
+    //         ->orWhere('lastname', 'like', '%' . $data['search-users'] . '%')
+    //         ->orWhere('email', 'like', '%' . $data['search-users'] . '%')->paginate(20);
+    //     return view('admin/users', compact('users'));
+    // }
 
     /**
      * Show the form for editing the specified resource.

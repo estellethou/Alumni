@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Profile;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -59,6 +60,16 @@ class ProfileController extends Controller
         //check policy first
         $this->authorize('update', $profile);
 
+        $data = request()->validate([
+            'phone' => ['nullable','string','digits_between:10,12','starts_with:0,+'],
+            'description' => ['nullable','string'],
+            'url_linkedin' => ['nullable','url'],
+            'url_github' => ['nullable','url'],
+            'url_website' => ['nullable','url'],
+            'image' => ['nullable'],
+            'resume' => ['nullable'],
+            ]);
+           
         $profile->update($request->except(['image','resume']));
             if ($request->image) {
             $exploded = explode(',', $request->image);
@@ -69,10 +80,12 @@ class ProfileController extends Controller
                 $extension = 'png';
             }
             $name = substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(10/strlen($x)))), 1, 10);
-            $filename = $name.'.'.$extension;
-            $path = public_path().'/'.$filename;
-            file_put_contents($path, $decoded); //save the decoded image to the path
-            $profile->update(['image' => $filename ?? '']);    
+            $imageName = $name.'.'.$extension;
+            Storage::disk('s3')->put('/images/' . $imageName, $decoded);
+            //$path = public_path().'/'.$filename;
+            //file_put_contents($path, $decoded); //save the decoded resume to the public path 
+            //$profile->image = Storage::disk('s3')->temporaryUrl($profile->image, now()->addMinutes(5));
+            $profile->update(['image' => $imageName ?? '']);
         }
         if ($request->resume) {
             $exploded = explode(',', $request->resume);
@@ -81,12 +94,15 @@ class ProfileController extends Controller
                 $extension = 'pdf';
             }
             $name = substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(10/strlen($x)))), 1, 10);
-            $filename = $name.'.'.$extension;
-            $path = public_path().'/'.$filename;
-            file_put_contents($path, $decoded); //save the decoded resume to the pa
-            $profile->update(['resume' => $filename ?? '']);    
+            $fileName = $name.'.'.$extension;
+            Storage::disk('s3')->put('/resumes/' . $fileName, $decoded);
+            //$path = public_path().'/'.$filename;
+            //file_put_contents($path, $decoded); //save the decoded resume to the public path 
+            $profile->update(['resume' => $fileName ?? '']);    
         }
-        return $profile;
+
+        return response()->json(['message' => 'Profile updated successfully', 'profile' => $profile]);
+        //return $profile;
     }
     
     /**

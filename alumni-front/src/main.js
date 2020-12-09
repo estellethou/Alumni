@@ -6,6 +6,32 @@ import vuetify from './plugins/vuetify'
 import axios from 'axios'
 import VueSweetalert2 from 'vue-sweetalert2';
 
+// NEED WEB PACK OR CLI3
+
+//NEW WAY TO IMPORT COMPONENT//
+
+// import UpperFirst from "lodash/upperFirst"
+// import camelCase from "lodash/camelCase"
+
+//Require in base component context//
+
+// const requireComponent = require.context('.',false, /base-[w-]+\.vue$/)
+
+// requireComponent.key().forEach(fileName => {
+//   //GET COMPONENT CONFIG//
+//   const componentConfig = requireComponent(fileName)
+
+//   //GET PASCAL NAME COMPONENT//
+//   const componentName = UpperFirst(camelCase(fileName.replace(/^\.\//, '').replace(/\.\w+$/, '')))
+
+//   //REGiSTER COMPONENT//
+
+//   Vue.component(componentName,componentConfig.defaults || componentConfig)
+// });
+
+
+
+
 import * as VueGoogleMaps from "vue2-google-maps";
 
 Vue.use(VueGoogleMaps, {

@@ -16,7 +16,7 @@ class JobControllerAdmin extends ControllerAdmin
      */
     public function index()
     {
-        $jobs = Job::orderByDesc('created_at')->paginate(20);
+        $jobs = Job::orderByDesc('created_at')->get();
         return view('admin/jobs', compact('jobs'));
     }
 
@@ -34,12 +34,12 @@ class JobControllerAdmin extends ControllerAdmin
             'content' => ['required', 'string', 'max:255'],
             'profile' => ['required', 'string', 'max:255'],
             'qualifications'  => ['required', 'string', 'max:255'],
-            'year_experiences' => ['required', 'numeric'],
+            'year_experiences' => ['string'],
             'street_address'  => ['required', 'string', 'max:255'],
             'postal_code'  => ['required', 'numeric'],
             'city'  => ['required', 'string', 'max:255'],
             'contract'  => ['required', 'string', 'max:255'],
-            'contract_duration'  => ['required', 'string', 'max:255'],
+            'contract_duration'  => ['string', 'max:255'],
             'company_name'  => ['required', 'string', 'max:255'],
             'sector'  => ['required', 'string', 'max:255'],
         ]);

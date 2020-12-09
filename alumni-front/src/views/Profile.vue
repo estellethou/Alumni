@@ -1,28 +1,35 @@
 <template>
   <div class="profile container">
-    <HeaderProfile/>
+    <HeaderProfile />
     <div v-for="profile in filteredProfile" :key="profile.id">
       <div class="background">
-        <img
-          class="profile-img"
-          width="150"
-          height="150"
-          :src="
-            'https://coding-academy-alumni.herokuapp.com/' +
-            profile.image
-          "
-          alt="profile-image"
-        />
         <div class="side-img">
           <img
             class="logo"
-            width="180"
-            height="80"
+            width="12%"
+            height="50%"
             src="https://coding-academy-alumni.herokuapp.com/icons/logo.png"
             alt="logo"
           />
 
           <h2 class="username">{{ user.firstname }} {{ user.lastname }}</h2>
+        </div>
+        <div class="position-img" v-if="profile.image !== ''">
+          <img
+            class="profile-img"
+            width="190rem"
+            height="190rem"
+            :src="
+              'https://coding-alumni-bucket.s3.eu-west-3.amazonaws.com/images/' +
+              profile.image
+            "
+            alt="profile-image"
+          />
+        </div>
+        <div v-else class="position-img">
+          <v-avatar size="150" class="profile-img" color="#2F329F">
+            <span class="white--text headline">{{initial()}}</span>
+          </v-avatar>
         </div>
       </div>
       <div class="description">
@@ -48,45 +55,43 @@
           </div>
 
           <div class="col-4">
-   <a :href="profile.url_linkedin" class="icon-url col-4"
-          ><img
-            src="https://coding-academy-alumni.herokuapp.com/icons/blo.png"
-            width="7%"
-            alt="logo-linkedin"
-        /></a>
-        <a :href="profile.url_github" class="icon-url col-4"
-          ><img
-            src="https://coding-academy-alumni.herokuapp.com/icons/git.jpg"
-            width="8%"
-            alt="logo-github"
-        /></a>
-        <a :href="profile.url_website" class="icon-url col-4"
-          ><img
-            src="https://coding-academy-alumni.herokuapp.com/icons/web.png"
-            width="8%"
-            alt="logo-web"
-        /></a>
-
-</div>
+            <a :href="profile.url_linkedin" class="icon-url col-4"
+              ><img
+                src="https://coding-academy-alumni.herokuapp.com/icons/blo.png"
+                width="7%"
+                alt="logo-linkedin"
+            /></a>
+            <a :href="profile.url_github" class="icon-url col-4"
+              ><img
+                src="https://coding-academy-alumni.herokuapp.com/icons/git.jpg"
+                width="8%"
+                alt="logo-github"
+            /></a>
+            <a :href="profile.url_website" class="icon-url col-4"
+              ><img
+                src="https://coding-academy-alumni.herokuapp.com/icons/web.png"
+                width="8%"
+                alt="logo-web"
+            /></a>
+          </div>
         </div>
-
-       
       </v-card>
-      <div class="resume">
+      <div v-if="profile.resume !== ''" class="resume">
         <embed
           :src="
-            'https://coding-academy-alumni.herokuapp.com/' +
+            'https://coding-alumni-bucket.s3.eu-west-3.amazonaws.com/resumes/' +
             profile.resume
           "
           type="application/pdf"
           width="58%"
           height="800"
         />
+  
       </div>
 
-      <div class="d-flex justify-content-between">
-        <DeleteProfile v-bind:user="user" />
+      <div class="d-flex justify-content-between buttons-profile">
         <EditProfile v-bind:profile="profile" v-bind:user="user"> </EditProfile>
+        <DeleteProfile v-bind:user="user" />
       </div>
     </div>
   </div>
@@ -102,7 +107,7 @@ export default {
   components: {
     DeleteProfile,
     EditProfile,
-    HeaderProfile
+    HeaderProfile,
   },
   data() {
     return {};
@@ -110,8 +115,14 @@ export default {
 
   methods: {
     ...mapActions(["setAllProfiles"]),
+    initial(){
+      var firstnameLetter = this.user.firstname.charAt(0);
+      var lastnameLetter = this.user.lastname.charAt(0);
+      var initales = firstnameLetter + lastnameLetter;
+      return initales.toUpperCase();
+    },
   },
-
+  
   computed: {
     ...mapGetters(["getAllProfiles", "authenticated", "user"]),
     filteredProfile() {
@@ -137,12 +148,14 @@ export default {
   background-size: 100% 300px;
   height: 240px;
 }
-
 .profile-img {
   border-radius: 50%;
   position: relative;
-  top: 70%;
   left: 45%;
+}
+.position-img {
+  position: relative;
+  top: 3rem;
 }
 
 .resume {
@@ -155,9 +168,7 @@ export default {
   flex-direction: row;
   justify-content: space-between;
 }
-.logo {
-  margin-left: 2%;
-}
+
 .username {
   color: white;
   margin-top: 1.5%;
@@ -168,8 +179,17 @@ export default {
 
 .description {
   position: relative;
-  margin-top: 6rem;
+  margin-top: 7rem;
   font-size: x-large;
   font-family: "Nunito", sans-serif;
+}
+
+.logo {
+  margin-left: 2%;
+  margin-top: 1%;
+}
+
+.buttons-profile{
+  margin-top:3%;
 }
 </style>
