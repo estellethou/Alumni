@@ -63,8 +63,8 @@ export default {
 
 <style>
 .container-posts{
-    margin-left: 25px;
-    margin-right: 25px;
+    margin-left: 35px;
+    margin-right: 35px;
 }
 .postsCard{
     margin-bottom:30px
