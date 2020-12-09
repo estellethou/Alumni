@@ -5,13 +5,13 @@
       <div class="container-titleForumPage">
            <h1>Forum Coding Academy - Alumni</h1> 
       </div>
-      <v-text-field :keyup="searchInput" outlined type="text" v-model="search" label="Search"></v-text-field>
+      <v-text-field :keyup="searchInput" class="mr-5 ml-5" outlined type="text" v-model="search" label="Search"></v-text-field>
       <div class="container-btnModal">
           <div class="container-btnAddNewPost">
               <v-btn color="primary" @click="toggleModalPost">Add a new post</v-btn>  
           </div>
           <div v-if="isOpen" class="container-AddPostModal">
-                 <AddPostModal v-on:close="updateParent(false)"/>
+                 <AddPostModal v-on:firstPage="getFirstPage(0)" v-on:close="updateParent(false)"/>
           </div>
           <div class="overlay" v-if="isOpen"></div>
       </div>
@@ -31,7 +31,7 @@ export default {
     data(){
         return{
             search:"",
-            isOpen:false
+            isOpen:false,
         }
     },
 
@@ -64,7 +64,7 @@ export default {
         },
         hideModalPost(){
             this.isOpen = false
-        }
+        },
     },
     created(){
         this.allPosts()

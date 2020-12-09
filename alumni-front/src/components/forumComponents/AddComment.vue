@@ -35,7 +35,6 @@ export default {
                 user_id:this.user.id
                 
             }
-            console.log(newComment)
             this.addComment(newComment)
             this.newComment=""
       }

@@ -1,9 +1,23 @@
 <template>
+<div>
+  <Header/> 
   <div class="container">
+    <h3 style="text-align: center">Want to reset your password ? you are at the correct place !</h3>
+    <ul>
+      <li>
+        Enter your email address below to receive your token by mail.
+      </li>
+      <li>
+        Once received copy/paste this token below in the token section.
+      </li>
+      <li>
+        If token is valid then you will be able to change your password in the form that will appear.
+      </li>
+    </ul>
     <div class="alert alert-primary">
       <form v-on:submit.prevent="send_Token">
         <div class="form-group">
-            <h3 style="text-align: center">Welcome to the reset password section</h3>
+            <!-- <h3 style="text-align: center">Welcome to the reset password section</h3> -->
           <label>Email</label>
           <input
             type="text"
@@ -77,13 +91,19 @@
       </form>
     </div>
   </div>
+</div>
 </template>
+
 
 <script>
 import { mapActions } from "vuex";
+import Header from "./../components/Header"
 
 export default {
   name: "ResetPassword",
+  components: {
+    Header
+  },
   data() {
     return {
       email: "",

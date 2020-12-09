@@ -125,7 +125,7 @@ export default {
     ...mapGetters(["user","getAllProfiles","getAllUsers"]),
 
     getImageOfUser(){
-       console.log(this.comment,"comment")
+
       return this.getAllProfiles.filter(profile =>{
         return profile.user_id === this.comment.user_id
       })
