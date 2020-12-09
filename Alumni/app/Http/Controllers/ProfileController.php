@@ -61,7 +61,7 @@ class ProfileController extends Controller
         $this->authorize('update', $profile);
 
         $data = request()->validate([
-            'phone' => ['nullable','string','digits_between:10,12','starts_with:0,+'],
+            'phone' => ['nullable'],
             'description' => ['nullable','string'],
             'url_linkedin' => ['nullable','url'],
             'url_github' => ['nullable','url'],
