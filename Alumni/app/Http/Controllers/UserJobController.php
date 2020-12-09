@@ -11,7 +11,7 @@ class UserJobController extends Controller
     {
         $data = DB::table('users')
                 ->join('jobs', 'jobs.user_id', '=','users.id')
-                ->select('users.email', 'users.lastname', 'users.firstname')
+                ->select('jobs.id', 'jobs.user_id', 'users.email', 'users.lastname', 'users.firstname')
                 ->get();
                 return $data;
     }
