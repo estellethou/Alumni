@@ -8,7 +8,7 @@
             v-model="dialog"
             width="500"
             >
-                <template v-slot:activator="{ on, attrs }" v-if="user.role == 'alumni'">
+                <template v-slot:activator="{ on, attrs }" >
                     <v-btn
                     color="primary"
                     dark
@@ -20,7 +20,7 @@
                 </template>
 
                 <div>
-                    <v-form @submit="submitRecruterForm" v-if="user.role == 'alumni'">
+                    <v-form @submit="submitRecruterForm">
                         <v-card>
                             <v-card-title>
                                 <span class="headline"> Add your Job or Internship offer </span>
@@ -41,9 +41,6 @@
                                         :rules="titleRules"
                                     ></v-text-field>
                                 <!-- </v-col> -->
-                            
-                                
-
                                 <!-- content -->
                                     <v-textarea
                                         auto-grow
@@ -89,7 +86,7 @@
                                             id="year_experiences"
                                             name="year_experiences"
                                             multiple
-                                            v-model="exp"
+                                            v-model="experience"
                                             required
                                             :items="itemsExp"
                                             :rules="generalRules"
@@ -191,7 +188,7 @@
                                     >
                                         Close
                                     </v-btn>
-                                    <router-link to="/recruter/payment">
+                                    <router-link :to="`/recruter/payment/`"> 
                                         <v-btn
                                             color="blue darken-1"
                                             text
@@ -200,12 +197,12 @@
                                         >
                                             Submit
                                         </v-btn>
-                                    </router-link>
+                             </router-link> 
                                 </v-card-actions>
                         </v-card>
                     </v-form>
 
-                    <h1 v-else>For company only... sorry</h1>
+                    <!-- <h1 v-else>For company only... sorry</h1> -->
                 </div>
             </v-dialog>
         </v-row>
@@ -218,13 +215,17 @@ import { mapActions, mapGetters } from "vuex"
 import Header from "./../components/Header"
 export default {
     name:"RecruterForm",
-
+    props: {
+        newJob: Object,
+    },
     components:{
         Header,
     },
     
     data(){
         return{
+            newJobOffer: {
+            },
             dialog: false,
             itemsExp: ['Beginner (less than 1 year)', 'First Experience (1-2 years)', 'Experienced (2-5 years)', 'Confirmed (5 years and more)'],
             itemsContract: ['Permanent Contract', 'Fixed Term Contract /Temporary Contract', 'Contractors/Freelance', 'Internship', 'Work-Study Contract'],
@@ -266,7 +267,7 @@ export default {
         ...mapActions(["addJob"]),
         submitRecruterForm(){
             event.preventDefault()
-            let newJobOffer={
+            this.newJobOffer={
                 title: this.jobTitle,
                 content: this.description,
                 profile: this.profile,
@@ -293,9 +294,10 @@ export default {
             this.contractDuration=""
             this.company=""
             this.sector=""
-            if(this.res > 1){
-                this.addJob(newJobOffer)
-            }
+            return(this.newJobOffer);
+            //if(this.res > 1){
+            //    this.addJob(newJobOffer)
+            //}
         },
     },
 

@@ -38,9 +38,10 @@ const routes = [
     props: true,
   },
   {
-    path: '/recruter/payment',
+    path: '/recruter/payment/:newJob',
     name: 'PaymentForm',
-    component: PaymentForm
+    component: PaymentForm,
+    props: true,
   },
   
   {

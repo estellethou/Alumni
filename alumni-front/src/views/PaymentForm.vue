@@ -1,5 +1,6 @@
 <template>
   <div>
+          <Header/>
     <v-container class="payment">
       <!-- <div class="d-flex col-12">
       <v-text-field label="Email" v-model="email"></v-text-field>
@@ -20,16 +21,22 @@
       <div class="d-flex justify-content-center">
       <v-btn color="primary" @click="submit">Pay {{ amount }}€</v-btn>
       </div>
+      <h1>{{sucessMsg}}</h1>
+       <router-link :to="`/`">
+           <v-btn>HOME</v-btn>
+       </router-link>
     </v-container>
   </div>
 </template>
 
 <script>
 import { StripeElements } from "vue-stripe-checkout";
+import Header from "./../components/Header"
 import axios from "axios";
 export default {
   components: {
     StripeElements,
+    Header
   },
   data: () => ({
     loading: false,
@@ -38,6 +45,8 @@ export default {
       "pk_test_51HwTLSBi6kcWeMI4Dhz1quF7Ewmu5YJkqOs6jdjSlsZYETAVPVOnn3YtqH4WoAgxh4Khw1cz5T6mtbHpYuHUmnuP00gIIrkx2D",
     token: null,
     charge: null,
+    sucessMsg: null,
+    bool: false,
     //email: null,
     //firstname: null,
     //lastname: null,
@@ -60,13 +69,10 @@ export default {
       this.sendTokenToServer(this.charge);
     },
     sendTokenToServer(charge) {
-      // Send to charge to your backend server to be processed
-      // Documentation here: https://stripe.com/docs/api/charges/create
-      console.log(charge);
       axios
         .post("/checkout", charge)
         .then((response) => {
-          console.log(response);
+          this.sucessMsg = response.data;
         })
         .catch((error) => {
           console.log(error);
@@ -78,6 +84,7 @@ export default {
 
 <style>
 .payment {
+  margin-top: 100px;
   width: 50%;
 }
 </style>

@@ -45,7 +45,7 @@ class CheckoutController extends Controller
     
             // save this info to your database
             // SUCCESSFUL
-            return response('successfull', 200);
+            return response('The payment was process successfully', 200);
             //return back()->with('success_message', 'Thank you! Your payment has been accepted.');
         } catch (CardErrorException $e) {
             // save info to database for failed
