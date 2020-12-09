@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Post;
+use App\Http\Controllers\Admin\ControllerAdmin;
 use App\Http\Controllers\Admin\UserControllerAdmin;
 use App\Http\Controllers\Admin\ProfileControllerAdmin;
 use App\Http\Controllers\Admin\JobControllerAdmin;
@@ -33,9 +34,7 @@ Route::group(['prefix' => 'admin'], function() {
 });
 // Route::middleware('auth:web')->get('users', [UserControllerAdmin::class, 'index'])->name('admin.users');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:web'], function () {
-    Route::get('/', function () {
-        return view('admin/admin');
-    });
+    Route::get('/', [ControllerAdmin::class, 'indexCount']);
     Route::get('logout', [LoginControllerAdmin::class, 'logout'])->name('admin.logout');
     Route::get('users', [UserControllerAdmin::class, 'index'])->name('admin.users');
     Route::get('users/create', function () {
