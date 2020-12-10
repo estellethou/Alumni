@@ -127,8 +127,10 @@
             </div>
           </v-form>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false"> Close </v-btn>
-          <v-btn :disabled="!valid" color="success" @click="saveForm"> Save </v-btn>
+          <div class="d-flex justify-content-between">
+          <v-btn color="blue darken-1" class="btn-close" text @click="dialog = false"> Close </v-btn>
+          <v-btn :disabled="!valid" class="btn-save" @click="saveForm"> Save </v-btn>
+          </div>
         </v-card>
       </v-dialog>
     </v-row>
@@ -291,7 +293,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .btn-modal {
   color: white !important;
   background-color: rgb(0, 118, 253) !important;
@@ -302,4 +304,22 @@ export default {
   font-size: small;
   text-align: center;
 }
+
+.v-btn--contained{
+  box-shadow: 0px, 0px, 0px, 0px!important;
+  background-color: rgb(210, 231, 210) !important;
+}
+.btn-save{
+  margin-right: 20px;
+  margin-bottom: 20px;
+  color: rgb(24, 163, 24)
+}
+
+.btn-close{
+  margin-left: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  background-color: #d5def8;
+}
+
 </style>
