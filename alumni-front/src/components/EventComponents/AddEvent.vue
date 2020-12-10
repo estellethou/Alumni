@@ -33,7 +33,7 @@
               </div>
               <!-- ATTENDEES -->
               <div class="form-group col-md-4">
-                <label for="url-perso">Attendees</label>
+                <label for="attendees">Max Attendees</label>
                 <input type="number" class="form-control" v-model="attendees" />
               </div>
 
@@ -141,9 +141,9 @@ export default {
             end_date: this.end_date,
         }
       }
+        this.dialog = false;
         this.addEvent(newEvent)
           .then(() => {
-            this.dialog = false;
             this.$swal({
               title: "Event created",
               icon: "success",
