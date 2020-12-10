@@ -22,8 +22,8 @@ class CreateEventsTable extends Migration
             $table->string('description');
             $table->string('picture');
             $table->string('location');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->datetime('start_date');
+            $table->datetime('end_date');
             $table->unsignedInteger('views')->default('0');
             $table->unsignedInteger('status')->default('1');
             $table->unsignedInteger('max_attendees');

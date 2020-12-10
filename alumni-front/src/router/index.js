@@ -10,14 +10,16 @@ import OtherProfile from "../views/OtherProfile.vue";
 import Login from "../views/Login.vue";
 import SingleJob from "../views/SingleJob.vue";
 //import Dashboard from '../views/Dashboard.vue'
-import RecruterForm from "../views/RecruterForm";
-import PaymentForm from "../views/PaymentForm";
-import ResetPassword from "../views/ResetPassword.vue";
-import Directory from "../views/Directory.vue";
-import Event from "../views/Event.vue";
-import store from "../store";
 
-Vue.use(VueRouter);
+
+import RecruterForm from "../views/RecruterForm"
+import ResetPassword from '../views/ResetPassword.vue'
+import Directory from '../views/Directory.vue'
+import Event from '../views/Event.vue'
+import store from '../store'
+import SingleJobRecruter from "../views/SingleJobRecruter"
+
+Vue.use(VueRouter)
 
 const routes = [
   {
@@ -31,21 +33,22 @@ const routes = [
     component: RecruterForm,
   },
   {
-    path: "/job/:id",
-    name: "SingleJob",
+
+    path: '/recruter/newjob/:job',
+    name: 'SingleJobRecruter',
+    component: SingleJobRecruter,
+    props:true
+  },
+  {
+    path: '/job/:id',
+    name: 'SingleJob',
+
     component: SingleJob,
     props: true,
   },
   {
-    path: "/recruter/payment/:newJob",
-    name: "PaymentForm",
-    component: PaymentForm,
-    props: true,
-  },
-
-  {
-    path: "/job",
-    name: "Job",
+    path: '/job',
+    name: 'Job',
     component: Job,
     // USED TO PROTECT ROUTE
     beforeEnter: (to, from, next) => {

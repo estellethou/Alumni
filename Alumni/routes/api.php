@@ -68,7 +68,7 @@ Route::middleware('auth')->post('/profile', [App\Http\Controllers\ProfileControl
 // API JOBS/INTERSHIPS //
 Route::middleware('auth')->get('/jobs', [App\Http\Controllers\JobController::class, 'index']);
 Route::middleware('auth')->get('/job/{id}', [App\Http\Controllers\JobController::class, 'show']);
-Route::middleware('auth')->post('/jobs/post', [App\Http\Controllers\JobController::class, 'store']);
+Route::post('/jobs/post', [App\Http\Controllers\JobController::class, 'store']);
 Route::middleware('auth')->put('/job/{id}/edit', [App\Http\Controllers\JobController::class, 'update']);
 Route::middleware('auth')->delete('/job/{id}', [App\Http\Controllers\JobController::class, 'destroy']);
 // Route::resource('jobs', 'App\Http\Controllers\JobController');

@@ -1,42 +1,44 @@
 <template>
   <div>
-          <Header/>
     <v-container class="payment">
-      <!-- <div class="d-flex col-12">
-      <v-text-field label="Email" v-model="email"></v-text-field>
-      </div>
-      <div class="d-flex justify-content-between">
-        <v-text-field class="col-6" label="Firstname" v-model="firstname"></v-text-field>
-        <v-text-field class="col-6" label="Lastname" v-model="lastname"></v-text-field>
-      </div> -->
-      <stripe-elements
-        ref="elementsRef"
-        :pk="publishableKey"
-        :amount="amount"
-        locale="fr"
-        @token="tokenCreated"
-        @loading="loading = $event"
+      <div v-if="showPayment">
+        <stripe-elements
+          ref="elementsRef"
+          :pk="publishableKey"
+          :amount="amount"
+          locale="fr"
+          @token="tokenCreated"
+          @loading="loading = $event"
       >
       </stripe-elements>
       <div class="d-flex justify-content-center">
       <v-btn color="primary" @click="submit">Pay {{ amount }}€</v-btn>
       </div>
-      <h1>{{sucessMsg}}</h1>
-       <router-link :to="`/`">
-           <v-btn>HOME</v-btn>
-       </router-link>
+      </div>
+      <div v-if="sucessMsg">
+        <v-alert dense text type="success">{{sucessMsg}}</v-alert>
+        <div class="d-flex justify-content-center">
+          <router-link :to="`/recruter/newjob/${job=JSON.stringify(this.jobOffer)}`">
+            <v-btn color="primary" >Check your job offer</v-btn>
+          </router-link>
+        </div>
+      </div>
     </v-container>
   </div>
 </template>
 
 <script>
 import { StripeElements } from "vue-stripe-checkout";
-import Header from "./../components/Header"
+import {mapActions} from "vuex"
 import axios from "axios";
 export default {
+  name:"PaymentForm",
   components: {
     StripeElements,
-    Header
+  },
+
+  props:{
+    jobOffer:Object
   },
   data: () => ({
     loading: false,
@@ -47,11 +49,16 @@ export default {
     charge: null,
     sucessMsg: null,
     bool: false,
-    //email: null,
-    //firstname: null,
-    //lastname: null,
+    showPayment:true
   }),
   methods: {
+
+    ...mapActions(["addJob"]),
+
+    paymentSucess(){
+      this.addJob(this.jobOffer)
+      this.showPayment = false
+    },
     submit() {
       this.$refs.elementsRef.submit();
     },
@@ -73,6 +80,9 @@ export default {
         .post("/checkout", charge)
         .then((response) => {
           this.sucessMsg = response.data;
+          if(response.data !== null){
+             this.paymentSucess()
+          }
         })
         .catch((error) => {
           console.log(error);
