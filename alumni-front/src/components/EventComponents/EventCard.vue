@@ -12,7 +12,7 @@
       <v-btn
         class="mr-4 white--text pl-2"
         :color="attending ? 'green' : 'blue'"
-        @click="attendEvent"
+        @click="attendEvent(event.max_attendees)"
       >
         <v-icon>{{ attending ? 'mdi-check' : 'mdi-plus' }}</v-icon>
         {{ attending ? 'Attending' : 'Attend' }}
@@ -31,13 +31,18 @@
 
     <v-expand-transition>
       <div v-show="show">
-        <v-divider></v-divider>
+        <v-divider class="my-0"></v-divider>
 
         <v-card-text>{{ event.description }}</v-card-text>
-        <v-divider></v-divider>
-        <v-card-text>
-          <strong>Attending this event:</strong>
-          {{ participantCount }}
+        <v-divider class="my-0"></v-divider>
+        <v-card-text v-if="participantCount == 0">
+          Nobody is attending this event
+        </v-card-text>
+        <v-card-text v-else-if="participantCount <= 1">
+          <strong>{{ participantCount }} / {{ event.max_attendees }}</strong> people is attending this event
+        </v-card-text>
+        <v-card-text v-else>
+          <strong>{{ participantCount }} / {{ event.max_attendees }}</strong> people are attending this event
         </v-card-text>
       </div>
     </v-expand-transition>
@@ -51,16 +56,21 @@ export default {
   data: () => ({
     show: false,
     attending: false,
-    participantCount: Math.floor(Math.random() * 3 + 1),
+    participantCount: Math.floor(Math.random() * 3),
   }),
   methods: {
-    attendEvent: function () {
-      this.attending = !this.attending;
-      if(this.attending){
-        this.participantCount++;
+    attendEvent: function (max_attendees) {
+      if(this.participantCount <= max_attendees){
+        this.attending = !this.attending;
+        if(this.attending){
+          this.participantCount++;
+        }
+        else {
+          this.participantCount--;
+        }
       }
       else {
-        this.participantCount--;
+        alert("Sorry, this event is fully booked")
       }
     },
   },
