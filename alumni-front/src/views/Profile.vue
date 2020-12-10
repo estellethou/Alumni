@@ -94,7 +94,7 @@
         <DeleteProfile v-bind:user="user" />
         <v-btn @click="openModal" color="error">DELETE TEST</v-btn>
         <div v-if="isOpen" class="container-modal-delete-profile">
-          <DeleteModal v-on:close="updateValueIsOpen(false)" />
+          <DeleteModal v-bind:user="user" v-on:close="updateValueIsOpen(false)" />
         </div>
         <div v-if="isOpen" class="overlay-delete"></div>
       </div>
