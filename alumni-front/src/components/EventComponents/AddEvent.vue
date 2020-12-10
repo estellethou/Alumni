@@ -18,7 +18,7 @@
                 <v-text-field
                   v-model="title"
                   label="Event Title"
-                  required
+                  :rules="[rules.required]"
                 ></v-text-field>
               </div>
             </div>
@@ -28,7 +28,7 @@
                 <v-text-field
                   v-model="location"
                   label="Location"
-                  required
+                  :rules="[rules.required]"
                 ></v-text-field>
               </div>
               <!-- ATTENDEES -->
@@ -46,25 +46,20 @@
                 class="form-control"
                 v-model="description"
                 placeholder="Please enter the Event description"
+                :rules="[rules.required]"
               ></textarea>
             </div>
             <!-- START DATE -->
             <!-- <div class="form-row"> -->
               <div class="form-group col-md-4">
                 <label for="Start Date">Start Date</label>
-                <input type="datetime-local" v-model="start_date" />
+                <input :rules="[rules.required]" type="date" v-model="start_date" />
               </div>
               <!-- END DATE  -->
               <div class="form-group col-md-4">
                 <label for="End date">End date</label>
-                <input type="datetime-local" v-model="end_date" />
+                <input :rules="[rules.required]" type="date" v-model="end_date" />
               </div>
-              <!-- ATTENDEES -->
-              <!-- <div class="form-group col-md-4">
-                <label for="url-perso">Attendees</label>
-                <input type="number" class="form-control" v-model="attendees" />
-              </div> -->
-            <!-- </div> -->
             <!-- IMAGE -->
               <!-- <div class="form-group col-md-6">
                 <label for="image">Select your Event image</label>
@@ -77,7 +72,7 @@
             </div> -->
           </v-form>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false">
+          <v-btn color="blue darken-1" text @click="close">
             Close
           </v-btn>
           <v-btn :disabled="!valid" color="success" @click="saveForm">
@@ -105,18 +100,32 @@ export default {
           start_date:'',
           end_date:'',
           attendees:'',
+
+        rules: {
+        required: (value) => !!value || "Required.",
+      },
       }
   },
   methods: {
     ...mapActions(["addEvent"]),
+    close(e){
+        e.preventDefault();
+        this.dialog = false;
+        this.title='';
+        this.image='';
+        this.location='';
+        this.description='';
+        this.start_date='';
+        this.end_date='';
+        this.attendees='';
+    },
     saveForm(e){
       e.preventDefault();
-      if (this.image !== ''){
+      if (this.attendees !== ''){
         var newEvent = {
             organiser_user_id : this.user.id,
             title : this.title,
             description: this.description,
-            picture : this.image,
             location : this.location,
             start_date: this.start_date,
             end_date: this.end_date,
@@ -130,7 +139,6 @@ export default {
             location : this.location,
             start_date: this.start_date,
             end_date: this.end_date,
-            max_attendees : this.attendees,
         }
       }
         this.addEvent(newEvent)
@@ -166,7 +174,6 @@ export default {
 </script>
 
 <style scoped>
-#image{
-    width: 30em;
-}
+
+
 </style>
