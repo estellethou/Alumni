@@ -15,7 +15,7 @@ class EventController extends Controller
     public function index()
     {
         //get all Events
-        return Event::all();
+        return Event::orderBy('start_date', 'asc')->get();
     }
 
     /**
