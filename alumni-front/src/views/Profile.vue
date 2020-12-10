@@ -11,8 +11,9 @@
             src="https://coding-academy-alumni.herokuapp.com/icons/logo.png"
             alt="logo"
           />
-
-          <h2 class="username">{{ user.firstname }} {{ user.lastname }}</h2>
+          <div v-for="myuser in filteredUser" :key="myuser.id">
+            <h2 class="username">{{ myuser.firstname }} {{ myuser.lastname }}</h2>
+          </div>
         </div>
         <div class="position-img" v-if="profile.image !== ''">
           <img
@@ -28,7 +29,7 @@
         </div>
         <div v-else class="position-img">
           <v-avatar size="150" class="profile-img" color="#2F329F">
-            <span class="white--text headline">{{initial()}}</span>
+            <span class="white--text headline">{{ initial() }}</span>
           </v-avatar>
         </div>
       </div>
@@ -86,12 +87,15 @@
           width="58%"
           height="800"
         />
-  
       </div>
 
       <div class="d-flex justify-content-between buttons-profile">
         <EditProfile v-bind:profile="profile" v-bind:user="user"> </EditProfile>
-        <DeleteProfile v-bind:user="user" />
+        <v-btn @click="openModal" color="error">DELETE</v-btn>
+        <div v-if="isOpen" class="container-modal-delete-profile">
+          <DeleteModal v-on:close="updateValueIsOpen(false)" />
+        </div>
+        <div v-if="isOpen" class="overlay-delete"></div>
       </div>
     </div>
   </div>
@@ -99,41 +103,55 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import DeleteProfile from "@/components/ProfileComponents/DeleteProfile";
+import DeleteModal from "@/components/ProfileComponents/DeleteModal";
 import EditProfile from "@/components/ProfileComponents/EditProfile";
 import HeaderProfile from "@/components/ProfileComponents/HeaderProfile";
 export default {
   name: "Profile",
   components: {
-    DeleteProfile,
     EditProfile,
     HeaderProfile,
+    DeleteModal,
   },
   data() {
-    return {};
+    return {
+      isOpen: false,
+    };
   },
 
   methods: {
-    ...mapActions(["setAllProfiles"]),
-    initial(){
+    ...mapActions(["setAllProfiles", "setAllUsers"]),
+    initial() {
       var firstnameLetter = this.user.firstname.charAt(0);
       var lastnameLetter = this.user.lastname.charAt(0);
       var initales = firstnameLetter + lastnameLetter;
       return initales.toUpperCase();
     },
+    openModal() {
+      this.isOpen = true;
+    },
+    updateValueIsOpen(isClose) {
+      this.isOpen = isClose;
+    },
   },
-  
-  computed: {
-    ...mapGetters(["getAllProfiles", "authenticated", "user"]),
+
+  computed:{
+    ...mapGetters(["getAllProfiles", "getAllUsers", "authenticated", "user"]),
     filteredProfile() {
       return this.getAllProfiles.filter((profile) => {
         if (profile.user_id == this.user.id) return profile;
       });
     },
+    filteredUser(){
+      return this.getAllUsers.filter((myuser) => {
+        if (myuser.id == this.user.id) return myuser;
+      });
+    },
   },
 
-  created() {
+  created(){
     this.setAllProfiles();
+    this.setAllUsers();
   },
 };
 </script>
@@ -189,7 +207,29 @@ export default {
   margin-top: 1%;
 }
 
-.buttons-profile{
-  margin-top:3%;
+.buttons-profile {
+  margin-top: 3%;
+}
+
+.container-modal-delete-profile {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background: white;
+  transform: translate(-50%, -50%);
+  z-index: 1010;
+  height: 420px;
+  width: 600px;
+}
+
+.overlay-delete {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.4;
 }
 </style>

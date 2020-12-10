@@ -35,7 +35,8 @@ const actions = {
     },
 
     async updateUser({commit}, newUser){
-        var response = await axios.put(`/user/${newUser.id}/edit`, newUser)
+        let response = await axios.put(`/user/${newUser.id}/edit`, newUser)
+        response = await axios.get(`/users`)
         commit("updateMyUser", response.data)
     },
 }
@@ -45,7 +46,7 @@ const mutations = {
     setMyAllUsers:(state, users) => (state.users = users),
     addMyUser:(state, newUser) => (state.users.push(newUser)),
     deleteMyUser:(state, id) => (state.users = state.users.filter(users => users.id !== id)),
-    updateMyUser:() => {return true} 
+    updateMyUser: (state, users) => (state.users = users), //response.data == profiles 
 };
 
 export default{

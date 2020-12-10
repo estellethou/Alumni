@@ -8,6 +8,7 @@ import Auth from "./modules/auth"
 import Users from "./modules/users"
 import UserProfiles from "./modules/userprofiles"
 import Events from "./modules/events"
+import UserJob from './modules/userjob'
 import createPersistedState from "vuex-persistedstate"
 
 
@@ -23,6 +24,7 @@ export default new Vuex.Store({
     Auth,
     Users,
     UserProfiles,
-    Events
+    Events,
+    UserJob
   }
 })
