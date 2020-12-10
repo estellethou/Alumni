@@ -40,8 +40,7 @@ class EventController extends Controller
             'status' => 'nullable | integer',
             'max_attendees' => 'nullable | integer',
         ]);
-        $picturePath = request()->picture->store('/images', 's3');
-        $validate['picture'] = $picturePath;
+        
 
         $event = Event::create($validate);
         $event->refresh();
@@ -71,7 +70,7 @@ class EventController extends Controller
     {
 
         //Check Policy first
-        // $this->authorize('update', $event);
+        $this->authorize('update', $event);
         $event = Event::find($id);
         // dd($request);
         $validate = $request->validate([
@@ -86,9 +85,7 @@ class EventController extends Controller
             'status' => 'nullable | integer',
             'max_attendees' => 'nullable | integer',
         ]);
-        $picturePath = request()->picture->store('/images', 's3');
-        $validate['picture'] = $picturePath;    
- 
+         
         $event->update($validate);
  
         return $event;

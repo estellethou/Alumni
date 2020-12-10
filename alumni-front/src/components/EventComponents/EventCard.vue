@@ -17,8 +17,11 @@
         <v-icon>{{ attending ? 'mdi-check' : 'mdi-plus' }}</v-icon>
         {{ attending ? 'Attending' : 'Attend' }}
       </v-btn>
+      
     </div>
-
+    <div v-if="user.id == event.organiser_user_id">
+      <EditEvent :event="event"></EditEvent>
+    </div>
     <v-card-actions>
       <v-btn color="orange lighten-1" text>See details</v-btn>
 
@@ -45,9 +48,14 @@
 </template>
 
 <script>
+import EditEvent from '@/components/EventComponents/EditEvent'
+
 export default {
   name: "EventCard",
-  props: ["event"],
+  props: ["event", "user"],
+  components:{
+    EditEvent,
+  },
   data: () => ({
     show: false,
     attending: false,
