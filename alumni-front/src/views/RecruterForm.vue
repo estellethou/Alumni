@@ -46,9 +46,11 @@
                                         auto-grow
                                         clearable
                                         counter
-                                        label="Job Description *"
+                                        label="Job Description *
+                                        (contact details must be included in this section.)"
                                         id="content"
                                         name="content"
+                                        placeholder="Please add your contact details in this section."
                                         required
                                         v-model="description"
                                         :rules="descriptionRules"
