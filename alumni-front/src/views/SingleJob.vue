@@ -97,12 +97,12 @@ export default {
                 {
                 text: 'Homepage',
                 disabled: false,
-                href: 'http://localhost:8080',
+                href: 'https://coding-academy-app.herokuapp.com/',
                 },
                 {
                 text: 'Jobs/Interships',
                 disabled: false,
-                href: 'http://localhost:8080/job',
+                href: 'https://coding-academy-app.herokuapp.com/job',
                 },
             ],
             isOpen: false,
