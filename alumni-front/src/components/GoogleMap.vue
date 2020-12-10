@@ -20,7 +20,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-// import axios from 'axios';
+import axios from 'axios';
 
 export default {
     name: "GoogleMap",
@@ -60,18 +60,12 @@ export default {
             this.getAllJobs.forEach(job => {
                 const fullAddress = [];
                 fullAddress.push(job.street_address, job.city, job.postal_code);
+                console.log("ici", fullAddress);
                 const strFullAddress = fullAddress.toString();
+                console.log("str", strFullAddress);
 
                 // axios.get or fetch
-                fetch(
-                    'https://maps.googleapis.com/maps/api/geocode/json',
-                    // {
-                    //     "Authorization": {
-                    //         "token": 
-                    //         // change token
-                    //         "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9jb2RpbmctYWNhZGVteS1hbHVtbmkuaGVyb2t1YXBwLmNvbVwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYwNzM0ODc3NSwiZXhwIjoxNjA3NDM1MTc1LCJuYmYiOjE2MDczNDg3NzUsImp0aSI6Ilp3OGVLSWRLQzNXRGJOdk8iLCJzdWIiOjkxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.hNziAZFwXlxT3CjzMYH8Jpsu3jD09YZCvFZBRAyXJIY",
-                    //     },
-                    // }, 
+                axios.get('https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json',
                     {
                         params: {
                             address: strFullAddress,
@@ -91,18 +85,6 @@ export default {
                 })
             })
         },
-
-        
-
-        // getJobFullAddress(){
-        //     this.getAllJobs.forEach(job => {
-        //         const fullAddress = [];
-        //         fullAddress.push(job.street_address, job.city, job.postal_code);
-        //         const strFullAddress = fullAddress.toString();
-        //         console.log(strFullAddress);
-        //     });
-        // },
-
     },
 
     computed: {
