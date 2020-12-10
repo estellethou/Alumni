@@ -3,55 +3,41 @@
     <div class="header">
       <!----- MENU BUTTON (Left) ----->
       <div class="dropdown menu1">
-        <img
-          src="https://coding-academy-alumni.herokuapp.com/icons/menu.png"
+        <v-icon
           alt="menu"
-          width="2%"
           data-toggle="dropdown"
+          large
           aria-haspopup="true"
           aria-expanded="false"
           class="hamburger"
-        />
+          color="white"
+        >{{ 'mdi-menu' }}</v-icon>
         <template v-if="authenticated">
-        <!----- EXIT BUTTON (Right) ----->
-        <a href="#" @click.prevent="signOutButton">
-          <img
-            src="https://coding-academy-alumni.herokuapp.com/icons/log-out.png"
-            alt="logout"
-            width="40px"
-            height="40px"
-            class="logout"
-          />
-        </a>
+          <!----- EXIT BUTTON (Right) ----->
+          <a href="#" @click.prevent="signOutButton">
+            <img
+              src="https://coding-academy-alumni.herokuapp.com/icons/log-out.png"
+              alt="logout"
+              width="40px"
+              height="40px"
+              class="logout"
+            />
+          </a>
         </template>
         <div class="title">CODING ACADEMY - ALUMNI</div>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <router-link :to="`/`" class="dropdown-item"> Home </router-link>
-          <router-link :to="`/recruter`" class="dropdown-item">
-            Buisiness Section
-          </router-link>
+          <router-link :to="`/`" class="dropdown-item">Home</router-link>
+          <router-link :to="`/recruter`" class="dropdown-item">Buisiness Section</router-link>
           <template v-if="authenticated">
-            <router-link :to="`/directory`" class="dropdown-item">
-              Directory
-            </router-link>
-            <router-link :to="`/profile`" class="dropdown-item">
-              Profile
-            </router-link>
-            <router-link :to="`/job`" class="dropdown-item">
-              Job / Internship
-            </router-link>
-            <router-link :to="`/forum`" class="dropdown-item">
-              Forum
-            </router-link>
-             <router-link :to="`/event`" class="dropdown-item">
-              Event
-            </router-link>
+            <router-link :to="`/directory`" class="dropdown-item">Directory</router-link>
+            <router-link :to="`/profile`" class="dropdown-item">Profile</router-link>
+            <router-link :to="`/job`" class="dropdown-item">Job / Internship</router-link>
+            <router-link :to="`/forum`" class="dropdown-item">Forum</router-link>
+            <router-link :to="`/event`" class="dropdown-item">Event</router-link>
           </template>
           <template v-else>
-              <router-link :to="{name: 'Login'}" class="dropdown-item">
-                Login / Register
-              </router-link>
+            <router-link :to="{name: 'Login'}" class="dropdown-item">Login / Register</router-link>
           </template>
         </div>
       </div>
@@ -71,19 +57,17 @@ export default {
     ...mapActions(["signOut"]),
 
     signOutButton() {
-      this.signOut()
-      .then(() => {
-        if(this.$route.path !== ('/')){
-          this.$router.push('/')
-          
+      this.signOut().then(() => {
+        if (this.$route.path !== "/") {
+          this.$router.push("/");
         }
         this.$swal({
-              title: "You have successfully logged out",
-              text: "See you soon",
-              icon: "success",
-              confirmButtonText: "Ok",
-            });
-      })
+          title: "You have successfully logged out",
+          text: "See you soon",
+          icon: "success",
+          confirmButtonText: "Ok",
+        });
+      });
     },
   },
 };
@@ -97,7 +81,7 @@ export default {
   height: 300px;
 }
 
-.title{
+.title {
   font-family: "Nunito", sans-serif;
   color: white;
   margin-top: 1%;
@@ -106,7 +90,7 @@ export default {
 }
 
 .header {
-  height: 280px;
+  height: 250px;
   background-image: url("https://coding-academy-alumni.herokuapp.com/icons/home.jpg");
 }
 

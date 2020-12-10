@@ -3,8 +3,13 @@
     <v-row justify="center">
       <v-dialog v-model="dialog" persistent max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn depressed class="btn-modal" v-bind="attrs" v-on="on">
-            Edit Event
+          <v-btn
+            class="mr-4 white--text px-5 mb-2"
+            color="blue-grey darken-1"
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-icon class="pr-2" dark>mdi-pencil</v-icon>Edit
           </v-btn>
         </template>
         <v-card>
@@ -55,22 +60,12 @@
             <!-- <div class="form-row"> -->
             <div class="form-group col-md-4">
               <label for="Start Date">Start Date</label>
-              <input
-                required
-                :rules="[rules.required]"
-                type="datetime-local"
-                v-model="start_date"
-              />
+              <input required :rules="[rules.required]" type="datetime-local" v-model="start_date" />
             </div>
             <!-- END DATE  -->
             <div class="form-group col-md-4">
               <label for="End date">End date</label>
-              <input
-                required
-                :rules="[rules.required]"
-                type="datetime-local"
-                v-model="end_date"
-              />
+              <input required :rules="[rules.required]" type="datetime-local" v-model="end_date" />
             </div>
             <!-- IMAGE -->
             <!-- <div class="form-group col-md-6">
@@ -81,13 +76,11 @@
                   id="image"
                   accept="image/png, image/jpeg"
                 />
-            </div> -->
+            </div>-->
           </v-form>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="close"> Close </v-btn>
-          <v-btn :disabled="!valid" color="success" @click="saveForm">
-            Save
-          </v-btn>
+          <v-btn color="blue darken-1" text @click="close">Close</v-btn>
+          <v-btn :disabled="!valid" color="success" @click="saveForm">Save</v-btn>
         </v-card>
       </v-dialog>
     </v-row>
@@ -104,7 +97,7 @@ export default {
     return {
       dialog: false,
       valid: true,
-      id : this.event.id,
+      id: this.event.id,
       title: this.event.title,
       location: this.event.location,
       description: this.event.description,
@@ -122,11 +115,11 @@ export default {
       e.preventDefault();
       this.dialog = false;
     },
-    formatDate(date){
-      var debut_date = date.slice(0,10)
-      var heure = date.slice(11,19)
-      return (debut_date + "T" + heure)
-  },
+    formatDate(date) {
+      var debut_date = date.slice(0, 10);
+      var heure = date.slice(11, 19);
+      return debut_date + "T" + heure;
+    },
     saveForm(e) {
       e.preventDefault();
         var newEvent = {
@@ -146,7 +139,7 @@ export default {
             title: "Event modified",
             icon: "success",
             confirmButtonText: "Ok",
-          })
+          });
         })
         .catch(() => {
           this.$swal({
@@ -156,15 +149,12 @@ export default {
             confirmButtonText: "Retry",
           });
         });
-    }
     },
+  },
   computed: {
     ...mapGetters(["getAllEvents", "authenticated", "user"]),
   },
-  
 };
-
-
 </script>
 
 <style scoped>

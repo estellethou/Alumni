@@ -1,9 +1,10 @@
 <template>
   <div data-app class="add">
-    <v-row justify="center">
+    <v-row justify="start ml-2 my-3">
       <v-dialog v-model="dialog" persistent max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn depressed class="btn-modal" v-bind="attrs" v-on="on">
+          <v-btn class="btn-modal white--text" color="green" v-bind="attrs" v-on="on">
+            <v-icon>{{ 'mdi-plus' }}</v-icon>
             Add Event
           </v-btn>
         </template>
