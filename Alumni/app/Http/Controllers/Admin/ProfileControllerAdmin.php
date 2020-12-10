@@ -73,7 +73,7 @@ class ProfileControllerAdmin extends ControllerAdmin
             'url_linkedin' =>  ['nullable', 'url'],
             'url_github' => ['nullable', 'url'],
             'url_website' => ['nullable', 'url'],
-            'image' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ]);
         if($user->profile === null) {
             $user->profile()->save(new Profile);
