@@ -155,7 +155,7 @@ const routes = [
     component: Login
   },
   {
-    path: '/events',
+    path: '/event',
     name: 'Event',
     component: Event
   },
