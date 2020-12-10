@@ -42,7 +42,6 @@ const routes = [
   {
     path: '/job/:id',
     name: 'SingleJob',
-
     component: SingleJob,
     props: true,
   },
@@ -161,6 +160,14 @@ const routes = [
     path: "/event",
     name: "Event",
     component: Event,
+    beforeEnter: (to, from, next) => {
+      if (!store.getters["authenticated"]) {
+        return next({
+          name: "Login",
+        });
+      }
+      next();
+    },
   },
 ];
 

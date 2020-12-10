@@ -26,7 +26,6 @@
         <span>Sorry, this event is fully booked</span>
       </v-tooltip>
     </div>
-
     <v-card-actions>
       <v-btn @click="show = !show" color="orange lighten-1" text>See details</v-btn>
 
@@ -56,9 +55,14 @@
 </template>
 
 <script>
+import EditEvent from '@/components/EventComponents/EditEvent'
+
 export default {
   name: "EventCard",
-  props: ["event"],
+  props: ["event", "user"],
+  components:{
+    EditEvent,
+  },
   data: () => ({
     show: false,
     attending: false,
