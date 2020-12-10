@@ -53,12 +53,12 @@
             <!-- <div class="form-row"> -->
               <div class="form-group col-md-4">
                 <label for="Start Date">Start Date</label>
-                <input :rules="[rules.required]" type="date" v-model="start_date" />
+                <input :rules="[rules.required]" type="datetime-local" v-model="start_date" />
               </div>
               <!-- END DATE  -->
               <div class="form-group col-md-4">
                 <label for="End date">End date</label>
-                <input :rules="[rules.required]" type="date" v-model="end_date" />
+                <input :rules="[rules.required]" type="datetime-local" v-model="end_date" />
               </div>
             <!-- IMAGE -->
               <!-- <div class="form-group col-md-6">
