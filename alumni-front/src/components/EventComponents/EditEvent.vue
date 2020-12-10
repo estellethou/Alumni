@@ -108,8 +108,8 @@ export default {
       title: this.event.title,
       location: this.event.location,
       description: this.event.description,
-      start_date: this.event.start_date,
-      end_date: this.event.end_date,
+      start_date: this.formatDate(this.event.start_date),
+      end_date: this.formatDate(this.event.end_date),
       attendees: this.event.max_attendees,
       rules: {
         required: (value) => !!value || "Required.",
@@ -122,6 +122,11 @@ export default {
       e.preventDefault();
       this.dialog = false;
     },
+    formatDate(date){
+      var debut_date = date.slice(0,10)
+      var heure = date.slice(11,19)
+      return (debut_date + "T" + heure)
+  },
     saveForm(e) {
       e.preventDefault();
     //   console.log(this.event.start_date)
@@ -159,7 +164,10 @@ export default {
   computed: {
     ...mapGetters(["getAllEvents", "authenticated", "user"]),
   },
+  
 };
+
+
 </script>
 
 <style scoped>
