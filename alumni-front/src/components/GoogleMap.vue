@@ -29,7 +29,7 @@ export default {
         return {
             // default to Paris
             center: { lat: 48.866667, lng: 2.333333 },
-            markers: [{position: { lat:48.866667, lng:2.333333}}],
+            markers: [],
         };
     },
 
@@ -68,6 +68,7 @@ export default {
                         params: {
                             address: strFullAddress,
                             key: 'AIzaSyCcQF8GcEbw96HCPndWKyX9fjgIk1N38M0'
+                            //key: 'AIzaSyAp-7Mk1xOIsRz13i5jwy8UKMBXhkjumXc'
                         }
                     })
                 .then(response => {
@@ -75,7 +76,6 @@ export default {
                     console.log(response.data)
                         const addressCoord = response.data.results[0].geometry.location;
                         const marker = { position: addressCoord };
-                        console.log(marker);
                         this.markers.push(marker);
                     // }
                 })
