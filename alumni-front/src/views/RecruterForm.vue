@@ -42,13 +42,14 @@
                                     ></v-text-field>
                                 <!-- </v-col> -->
                                 <!-- content -->
+                                <p>Job Description * <br> <v-icon class="red--text"> mdi-alert </v-icon> <span style="color:red">contact details must be included in this section.</span></p>
                                     <v-textarea
                                         auto-grow
                                         clearable
                                         counter
-                                        label="Job Description *"
                                         id="content"
                                         name="content"
+                                        placeholder="Please add your contact details in this section."
                                         required
                                         v-model="description"
                                         :rules="descriptionRules"
