@@ -122,19 +122,16 @@ export default {
     },
     saveForm(e) {
       e.preventDefault();
-      //   console.log(this.event.start_date)
-      //   console.log(this.event.end_date)
-      var newEvent = {
-        id: this.event.id,
-        organiser_user_id: this.event.organiser_user_id,
-        title: this.title,
-        description: this.description,
-        location: this.location,
-        start_date: this.start_date,
-        end_date: this.end_date,
-        max_attendees: this.attendees,
-      };
-      console.log(newEvent);
+        var newEvent = {
+            id: this.event.id,
+            organiser_user_id: this.event.organiser_user_id,  
+            title: this.title,
+            description: this.description,
+            location: this.location,
+            start_date: this.start_date,
+            end_date: this.end_date,
+            max_attendees: this.attendees,
+        }
       this.dialog = false;
       this.editEvent(newEvent)
         .then(() => {

@@ -66,7 +66,8 @@
 </template>
 
 <script>
-import EditEvent from "@/components/EventComponents/EditEvent";
+import EditEvent from '@/components/EventComponents/EditEvent'
+import { mapActions} from "vuex";
 
 export default {
   name: "EventCard",
@@ -81,6 +82,7 @@ export default {
     participantCount: Math.floor(Math.random() * 3),
   }),
   methods: {
+    ...mapActions(["deleteEvent"]),
     attendEvent: function (max_attendees) {
       if (this.participantCount <= max_attendees) {
         this.attending = !this.attending;
