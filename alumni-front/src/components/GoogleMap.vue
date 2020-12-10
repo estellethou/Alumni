@@ -29,7 +29,7 @@ export default {
         return {
             // default to Paris
             center: { lat: 48.866667, lng: 2.333333 },
-            markers: [],
+            markers: [{position: { lat:48.866667, lng:2.333333}}],
         };
     },
 
@@ -60,25 +60,24 @@ export default {
             this.getAllJobs.forEach(job => {
                 const fullAddress = [];
                 fullAddress.push(job.street_address, job.city, job.postal_code);
-                console.log("ici", fullAddress);
                 const strFullAddress = fullAddress.toString();
-                console.log("str", strFullAddress);
 
                 // axios.get or fetch
                 axios.get('https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json',
                     {
                         params: {
                             address: strFullAddress,
-                            key: 'AIzaSyAp-7Mk1xOIsRz13i5jwy8UKMBXhkjumXc'
+                            key: 'AIzaSyCcQF8GcEbw96HCPndWKyX9fjgIk1N38M0'
                         }
                     })
                 .then(response => {
-                    if(response.data.results.length !== 0 && Array.isArray(response.data.results)) {
+                    // if(response.data.results.length !== 0 && Array.isArray(response.data.results)) {
+                    console.log(response.data)
                         const addressCoord = response.data.results[0].geometry.location;
                         const marker = { position: addressCoord };
                         console.log(marker);
                         this.markers.push(marker);
-                    }
+                    // }
                 })
                 .catch(error => {
                     console.log(error)
