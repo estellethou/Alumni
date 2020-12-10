@@ -15,7 +15,7 @@
             <div class="form-row">
               <div class="form-group col-md-6">
                 <v-text-field
-                  ref="loginForm" 
+                  ref="loginForm"
                   placeholder="Lastname"
                   v-model="newLastName"
                   id="lastname"
@@ -27,7 +27,7 @@
               </div>
               <div class="form-group col-md-6">
                 <v-text-field
-                  ref="loginForm" 
+                  ref="loginForm"
                   placeholder="Firstname"
                   v-model="newFirstName"
                   id="firstname"
@@ -86,12 +86,7 @@
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="url-git">URL GitHub</label>
-                <input
-                  type="url"
-                  class="form-control"
-                  v-model="newGithub"
-                  id="url-git"
-                />
+                <input type="url" class="form-control" v-model="newGithub" id="url-git" />
               </div>
               <div class="form-group col-md-4">
                 <label for="url-linkedin">URL LinkedIn</label>
@@ -104,12 +99,7 @@
               </div>
               <div class="form-group col-md-4">
                 <label for="url-perso">URL personal website</label>
-                <input
-                  type="url"
-                  class="form-control"
-                  v-model="newSite"
-                  id="url-perso"
-                />
+                <input type="url" class="form-control" v-model="newSite" id="url-perso" />
               </div>
             </div>
             <div class="form-row">
@@ -122,6 +112,7 @@
                   accept="image/png, image/jpeg"
                   @change="imageChanged"
                 />
+                <p style="display: none" id="error-img">Image too big, please choose another one </p>
               </div>
               <div class="form-group col-md-6">
                 <label for="image">Select your resume</label>
@@ -136,12 +127,8 @@
             </div>
           </v-form>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false">
-            Close
-          </v-btn>
-          <v-btn :disabled="!valid" color="success" @click="saveForm">
-            Save
-          </v-btn>
+          <v-btn color="blue darken-1" text @click="dialog = false"> Close </v-btn>
+          <v-btn :disabled="!valid" color="success" @click="saveForm"> Save </v-btn>
         </v-card>
       </v-dialog>
     </v-row>
@@ -180,7 +167,11 @@ export default {
       },
       firstnameRule: [(v) => (v && v.length >= 2) || "Firstname must be valid"],
       emailRules: [(v) => /.+@.+\..+/.test(v) || "E-mail must be valid"],
-      phoneRule: [(v) => !isNaN(parseFloat(v)) && v >= 0 && v <= 9999999999|| "Phone number must be valid"],
+      phoneRule: [
+        (v) =>
+          (!isNaN(parseFloat(v)) && v >= 0 && v <= 9999999999) ||
+          "Phone number must be valid",
+      ],
       valid: true,
       show1: false,
     };
@@ -268,14 +259,22 @@ export default {
             });
           });
       }
+      document.getElementById("error-img").style.display = "none";
     },
 
     imageChanged(e) {
-      var fileReader = new FileReader();
-      fileReader.readAsDataURL(e.target.files[0]);
-      fileReader.onload = (e) => {
-        this.newImage = e.target.result;
-      };
+      var imgpath=document.getElementById('image');
+      if ( !imgpath.value=="" && imgpath.files[0].size<2000000){
+        document.getElementById("error-img").style.display = "none";
+        var fileReader = new FileReader();
+        fileReader.readAsDataURL(e.target.files[0]);
+        fileReader.onload = (e) => {
+          this.newImage = e.target.result;
+        }
+      }
+      else {
+        document.getElementById("error-img").style.display = "block";
+      }
     },
     resumeChanged(e) {
       var fileReader = new FileReader();
@@ -297,5 +296,10 @@ export default {
   color: white !important;
   background-color: rgb(0, 118, 253) !important;
 }
-</style>
 
+#error-img {
+  color: rgb(168, 0, 0);
+  font-size: small;
+  text-align: center;
+}
+</style>
