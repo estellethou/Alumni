@@ -18,7 +18,7 @@
           class="row-pointer"
           :headers="headers"
           :search="search"
-          :items="getAllUserProfiles"
+          :items="filterUserprofile"
           @click:row="goToProfile"
         >
           <template v-slot:[`item.image`]="{ item }">
@@ -52,7 +52,6 @@ export default {
   name: "Directory",
   data() {
     return {
-      // profimage:'https://coding-alumni-bucket.s3.eu-west-3.amazonaws.com/images/' + 'image',
       search: "",
       headers: [
         {
@@ -88,6 +87,12 @@ export default {
 
   computed: {
     ...mapGetters(["getAllUserProfiles", "authenticated", "user"]),
+
+    filterUserprofile(){
+        return this.getAllUserProfiles.filter(userprofile =>{
+          return userprofile.email !== "admin@alumni.com"
+        })
+      },
   },
 
   created() {
