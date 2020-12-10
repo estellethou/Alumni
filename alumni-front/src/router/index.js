@@ -11,12 +11,11 @@ import Login from '../views/Login.vue'
 import SingleJob from '../views/SingleJob.vue'
 //import Dashboard from '../views/Dashboard.vue'
 import RecruterForm from "../views/RecruterForm"
-import PaymentForm from "../views/PaymentForm"
 import ResetPassword from '../views/ResetPassword.vue'
 import Directory from '../views/Directory.vue'
 import Event from '../views/Event.vue'
 import store from '../store'
-
+import SingleJobRecruter from "../views/SingleJobRecruter"
 
 Vue.use(VueRouter)
 
@@ -32,18 +31,17 @@ const routes = [
     component: RecruterForm
   },
   {
+    path: '/recruter/newjob/:job',
+    name: 'SingleJobRecruter',
+    component: SingleJobRecruter,
+    props:true
+  },
+  {
     path: '/job/:id',
     name: 'SingleJob',
     component: SingleJob,
     props: true,
   },
-  {
-    path: '/recruter/payment/:newJob',
-    name: 'PaymentForm',
-    component: PaymentForm,
-    props: true,
-  },
-  
   {
     path: '/job',
     name: 'Job',
