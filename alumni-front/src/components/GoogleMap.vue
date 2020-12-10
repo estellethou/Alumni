@@ -14,7 +14,6 @@
             ></gmap-marker>
             </gmap-map>
         </div>
-        <div>{{ markers }}</div>
     </div>
 </template>
 
@@ -62,22 +61,19 @@ export default {
                 fullAddress.push(job.street_address, job.city, job.postal_code);
                 const strFullAddress = fullAddress.toString();
 
-                // axios.get or fetch
                 axios.get('https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json',
                     {
                         params: {
                             address: strFullAddress,
                             key: 'AIzaSyCcQF8GcEbw96HCPndWKyX9fjgIk1N38M0'
-                            //key: 'AIzaSyAp-7Mk1xOIsRz13i5jwy8UKMBXhkjumXc'
                         }
                     })
                 .then(response => {
-                    // if(response.data.results.length !== 0 && Array.isArray(response.data.results)) {
-                    console.log(response.data)
+                    if(response.data.results.length !== 0 && Array.isArray(response.data.results)) {
                         const addressCoord = response.data.results[0].geometry.location;
                         const marker = { position: addressCoord };
                         this.markers.push(marker);
-                    // }
+                    }
                 })
                 .catch(error => {
                     console.log(error)
