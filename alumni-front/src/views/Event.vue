@@ -1,18 +1,21 @@
 <template>
   <div class="event">
        <Header/> 
-    <h1>
-      EVENT PAGE IN PROGRESS
-    </h1>
+    <AddEvent></AddEvent>
+    <EventList></EventList>
   </div>
 </template>
 
 <script>
 import Header from "./../components/Header"
+import AddEvent from "./../components/EventComponents/AddEvent"
+import EventList from "./../components/EventComponents/EventList"
+
 export default {
-  name: "Event",
   components: {
-    Header
+    Header,
+    AddEvent,
+    EventList
   },
   data() {
     return {};

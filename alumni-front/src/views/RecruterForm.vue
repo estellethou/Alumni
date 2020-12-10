@@ -1,15 +1,20 @@
 <template>
 <div>
     <Header/>
-    <h1>Recruiter form to post new job offer </h1>
     <v-container>
-        <v-row class="m-3">
+        <h1>Recruiter form to post new job offer </h1>
+        <div v-if="checkout">
+            <PaymentForm v-bind:jobOffer="this.newJobOffer"/>
+        </div>
+    </v-container>
+    <v-container>
+        <v-row class="m-3 justify-content-center">
             <v-dialog
             v-model="dialog"
             width="500"
             >
-                <template v-slot:activator="{ on, attrs }" >
-                    <v-btn
+                <template v-slot:activator="{ on, attrs }">
+                    <v-btn v-if="!checkout"
                     color="primary"
                     dark
                     v-bind="attrs"
@@ -189,16 +194,14 @@
                                     >
                                         Close
                                     </v-btn>
-                                    <router-link :to="`/recruter/payment/`"> 
                                         <v-btn
                                             color="blue darken-1"
                                             text
                                             type="submit"
-                                            @click="dialog = false"
+                                            @click="openCheckout"
                                         >
-                                            Submit
+                                            Proceed checkout
                                         </v-btn>
-                             </router-link> 
                                 </v-card-actions>
                         </v-card>
                     </v-form>
@@ -212,15 +215,14 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex"
+import {mapGetters } from "vuex"
 import Header from "./../components/Header"
+import PaymentForm from "../components/PaymentComponent/PaymentForm"
 export default {
     name:"RecruterForm",
-    props: {
-        newJob: Object,
-    },
     components:{
         Header,
+        PaymentForm
     },
     
     data(){
@@ -260,12 +262,16 @@ export default {
             generalRules: [
                 v => !!v || 'Field is required',
             ],
+
+            checkout:false
         }
     },
 
     methods:{
-
-        ...mapActions(["addJob"]),
+        openCheckout(){
+            this.dialog = false
+            this.checkout = true
+        },
         submitRecruterForm(){
             event.preventDefault()
             this.newJobOffer={
@@ -281,7 +287,6 @@ export default {
                 contract_duration: this.contractDuration,
                 company_name: this.company,
                 sector: this.sector.join(', '),
-                user_id: this.user.id,
             }
             this.jobTitle=""
             this.description=""
@@ -295,10 +300,6 @@ export default {
             this.contractDuration=""
             this.company=""
             this.sector=""
-            return(this.newJobOffer);
-            //if(this.res > 1){
-            //    this.addJob(newJobOffer)
-            //}
         },
     },
 

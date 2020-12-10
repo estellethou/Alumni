@@ -14,13 +14,12 @@
             ></gmap-marker>
             </gmap-map>
         </div>
-        <div>{{ markers }}</div>
     </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-// import axios from 'axios';
+import axios from 'axios';
 
 export default {
     name: "GoogleMap",
@@ -62,20 +61,17 @@ export default {
                 fullAddress.push(job.street_address, job.city, job.postal_code);
                 const strFullAddress = fullAddress.toString();
 
-                // axios.get or fetch
-                fetch(
-                    'https://maps.googleapis.com/maps/api/geocode/json',
+                axios.get('https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json',
                     {
                         params: {
                             address: strFullAddress,
-                            key: 'AIzaSyAp-7Mk1xOIsRz13i5jwy8UKMBXhkjumXc'
+                            key: 'AIzaSyCcQF8GcEbw96HCPndWKyX9fjgIk1N38M0'
                         }
                     })
                 .then(response => {
                     if(response.data.results.length !== 0 && Array.isArray(response.data.results)) {
                         const addressCoord = response.data.results[0].geometry.location;
                         const marker = { position: addressCoord };
-                        console.log(marker);
                         this.markers.push(marker);
                     }
                 })
@@ -84,7 +80,6 @@ export default {
                 })
             })
         },
-
     },
 
     computed: {

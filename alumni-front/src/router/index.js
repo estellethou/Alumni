@@ -1,35 +1,43 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Job from '../views/Job.vue'
-import JobEdit from '../views/JobEdit.vue'
-import Forum from "../views/Forum.vue"
-import DetailsPost from "../views/DetailsPost"
-import Profile from '../views/Profile.vue'
-import OtherProfile from '../views/OtherProfile.vue'
-import Login from '../views/Login.vue'
-import SingleJob from '../views/SingleJob.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "../views/Home.vue";
+import Job from "../views/Job.vue";
+import JobEdit from "../views/JobEdit.vue";
+import Forum from "../views/Forum.vue";
+import DetailsPost from "../views/DetailsPost";
+import Profile from "../views/Profile.vue";
+import OtherProfile from "../views/OtherProfile.vue";
+import Login from "../views/Login.vue";
+import SingleJob from "../views/SingleJob.vue";
 //import Dashboard from '../views/Dashboard.vue'
+
+
 import RecruterForm from "../views/RecruterForm"
-import PaymentForm from "../views/PaymentForm"
 import ResetPassword from '../views/ResetPassword.vue'
 import Directory from '../views/Directory.vue'
 import Event from '../views/Event.vue'
 import store from '../store'
-
+import SingleJobRecruter from "../views/SingleJobRecruter"
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
+    path: "/",
+    name: "Home",
     component: Home,
   },
   {
-    path: '/recruter',
-    name: 'RecruterForm',
-    component: RecruterForm
+    path: "/recruter",
+    name: "RecruterForm",
+    component: RecruterForm,
+  },
+  {
+
+    path: '/recruter/newjob/:job',
+    name: 'SingleJobRecruter',
+    component: SingleJobRecruter,
+    props:true
   },
   {
     path: '/job/:id',
@@ -38,135 +46,135 @@ const routes = [
     props: true,
   },
   {
-    path: '/recruter/payment/:newJob',
-    name: 'PaymentForm',
-    component: PaymentForm,
-    props: true,
-  },
-  
-  {
     path: '/job',
     name: 'Job',
     component: Job,
-     // USED TO PROTECT ROUTE
+    // USED TO PROTECT ROUTE
     beforeEnter: (to, from, next) => {
-      if (!store.getters['authenticated']){
+      if (!store.getters["authenticated"]) {
         return next({
-          name:'Login'
-        })
+          name: "Login",
+        });
       }
-      next()
-      }
+      next();
+    },
   },
-  
+
   {
     // path: '/job/edit/:id/:jobData',
-    path: '/job/edit/:id',
-    name: 'JobEdit',
+    path: "/job/edit/:id",
+    name: "JobEdit",
     component: JobEdit,
     beforeEnter: (to, from, next) => {
-      if (!store.getters['authenticated']){
+      if (!store.getters["authenticated"]) {
         return next({
-          name:'Login'
-        })
+          name: "Login",
+        });
       }
-      next()
-      },
+      next();
+    },
     props: true,
   },
 
   {
-    path: '/resetpassword',
-    name: 'ResetPassword',
-    component: ResetPassword
+    path: "/resetpassword",
+    name: "ResetPassword",
+    component: ResetPassword,
   },
-  
+
   {
-    path: '/forum',
-    name: 'Forum',
+    path: "/forum",
+    name: "Forum",
     component: Forum,
     beforeEnter: (to, from, next) => {
-      if (!store.getters['authenticated']){
+      if (!store.getters["authenticated"]) {
         return next({
-          name:'Login'
-        })
+          name: "Login",
+        });
       }
-      next()
-      }
+      next();
+    },
   },
 
   {
-    path: '/post/:id',
-    name: 'DetailPost',
+    path: "/post/:id",
+    name: "DetailPost",
     component: DetailsPost,
-    props:true,
+    props: true,
     beforeEnter: (to, from, next) => {
-      if (!store.getters['authenticated']){
+      if (!store.getters["authenticated"]) {
         return next({
-          name:'Login'
-        })
+          name: "Login",
+        });
       }
-      next()
-      }
+      next();
+    },
   },
 
   {
-    path: '/profile', //profile of user connected 
-    name: 'Profile',
+    path: "/profile", //profile of user connected
+    name: "Profile",
     component: Profile,
     beforeEnter: (to, from, next) => {
-      if (!store.getters['authenticated']){
+      if (!store.getters["authenticated"]) {
         return next({
-          name:'Login'
-        })
+          name: "Login",
+        });
       }
-      next()
-      }
+      next();
+    },
   },
   {
-    path: '/directory',
-    name: 'Directory',
+    path: "/directory",
+    name: "Directory",
     component: Directory,
     beforeEnter: (to, from, next) => {
-      if (!store.getters['authenticated']){
+      if (!store.getters["authenticated"]) {
         return next({
-          name:'Login'
-        })
+          name: "Login",
+        });
       }
-      next()
-      }
+      next();
+    },
   },
   {
-    path: '/profile/:profileId/:userId',
-    name: 'OtherProfile',
+    path: "/profile/:profileId/:userId",
+    name: "OtherProfile",
     component: OtherProfile,
     props: true,
     beforeEnter: (to, from, next) => {
-      if (!store.getters['authenticated']){
+      if (!store.getters["authenticated"]) {
         return next({
-          name:'Login'
-        })
+          name: "Login",
+        });
       }
-      next()
-      }
-
+      next();
+    },
   },
   {
-    path: '/signin',
-    name: 'Login',
-    component: Login
+    path: "/signin",
+    name: "Login",
+    component: Login,
   },
   {
-    path: '/event',
-    name: 'Event',
-    component: Event
+    path: "/event",
+    name: "Event",
+    component: Event,
+    beforeEnter: (to, from, next) => {
+      if (!store.getters["authenticated"]) {
+        return next({
+          name: "Login",
+        });
+      }
+      next();
+    },
   },
-]
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;

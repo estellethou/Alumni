@@ -69,10 +69,8 @@
 
                         <div class="form-group row">
                             <label for="is_admin" class="col-md-4 col-form-label text-md-right">Admin</label>
-
                             <div class="col-md-6">
-                                <select class="form-control" name="is_admin"
-                                    value="{{ old('is_admin') ?? $user->is_admin }}">
+                                <select class="form-control" name="is_admin">
                                     <option>0</option>
                                     <option>1</option>
                                 </select>
@@ -87,9 +85,8 @@
 
                         <div class="form-group row">
                             <label for="role" class="col-md-4 col-form-label text-md-right">Role</label>
-
                             <div class="col-md-6">
-                                <select class="form-control" name="role" value="{{ old('role') ?? $user->role }}">
+                                <select class="form-control" name="role">
                                     <option value="student">Student</option>
                                     <option value="alumni">Alumni</option>
                                     <option value="recruiter">Recruiter</option>

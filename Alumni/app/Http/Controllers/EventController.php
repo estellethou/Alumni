@@ -15,7 +15,7 @@ class EventController extends Controller
     public function index()
     {
         //get all Events
-        return Event::all();
+        return Event::orderBy('start_date', 'asc')->get();
     }
 
     /**
@@ -40,6 +40,7 @@ class EventController extends Controller
             'status' => 'nullable | integer',
             'max_attendees' => 'nullable | integer',
         ]);
+        
 
         $event = Event::create($validate);
         $event->refresh();
@@ -68,23 +69,23 @@ class EventController extends Controller
     public function update(Request $request, $id)
     {
 
-          //Check Policy first
-            // $this->authorize('update', $event);
-            $event = Event::find($id);
-            // dd($request);
-            $validate = $request->validate([
-                'organiser_user_id' => 'nullable | integer',
-                'title' => 'nullable | string',
-                'description' => 'nullable | string',
-                'picture' => 'nullable | string',
-                'location' => 'nullable | string',
-                'start_date' => 'nullable | date',
-                'end_date' => 'nullable | date | after:start_date',
-                'views' => 'nullable | integer',
-                'status' => 'nullable | integer',
-                'max_attendees' => 'nullable | integer',
-            ]);
- 
+        //Check Policy first
+        $event = Event::find($id);
+        $this->authorize('update', $event);
+        // dd($request);
+        $validate = $request->validate([
+            'organiser_user_id' => 'nullable | integer',
+            'title' => 'nullable | string',
+            'description' => 'nullable | string',
+            'picture' => 'nullable | string',
+            'location' => 'nullable | string',
+            'start_date' => 'nullable | date',
+            'end_date' => 'nullable | date | after:start_date',
+            'views' => 'nullable | integer',
+            'status' => 'nullable | integer',
+            'max_attendees' => 'nullable | integer',
+        ]);
+         
         $event->update($validate);
  
         return $event;
