@@ -21,6 +21,9 @@
     </div>
     <div v-if="user.id == event.organiser_user_id">
       <EditEvent :event="event"></EditEvent>
+      <v-btn x-small fab @click="deleteEvent(event.id)"
+                  ><v-icon>mdi-trash-can-outline</v-icon></v-btn
+                >
     </div>
     <v-card-actions>
       <v-btn color="orange lighten-1" text>See details</v-btn>
@@ -54,6 +57,7 @@
 
 <script>
 import EditEvent from '@/components/EventComponents/EditEvent'
+import { mapActions} from "vuex";
 
 export default {
   name: "EventCard",
@@ -67,6 +71,7 @@ export default {
     participantCount: Math.floor(Math.random() * 3),
   }),
   methods: {
+    ...mapActions(["deleteEvent"]),
     attendEvent: function (max_attendees) {
       if(this.participantCount <= max_attendees){
         this.attending = !this.attending;
