@@ -135,21 +135,21 @@ export default {
     },
   },
 
-  computed: {
+  computed:{
     ...mapGetters(["getAllProfiles", "getAllUsers", "authenticated", "user"]),
     filteredProfile() {
       return this.getAllProfiles.filter((profile) => {
         if (profile.user_id == this.user.id) return profile;
       });
     },
-    filteredUser() {
+    filteredUser(){
       return this.getAllUsers.filter((myuser) => {
         if (myuser.id == this.user.id) return myuser;
       });
     },
   },
 
-  created() {
+  created(){
     this.setAllProfiles();
     this.setAllUsers();
   },
