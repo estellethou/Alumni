@@ -1,7 +1,7 @@
 <template>
-  <div class="d-flex flex-wrap container">
+  <div class="d-flex flex-wrap">
     <div class="ma-2" v-for="event in getAllEvents" :key="event.id">
-      <event-card :event="event"></event-card>
+      <event-card :event="event" :user="user"></event-card>
     </div>
   </div>
 </template>
@@ -16,7 +16,7 @@ export default {
   },
   name: "EventList",
   computed: {
-    ...mapGetters(["getAllEvents"]),
+    ...mapGetters(["getAllEvents", "user"]),
   },
   methods: {
     ...mapActions(["setAllEvents"]),
