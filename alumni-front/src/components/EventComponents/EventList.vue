@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-wrap">
+  <div class="d-flex flex-wrap container">
     <div class="ma-2" v-for="event in getAllEvents" :key="event.id">
       <event-card :event="event"></event-card>
     </div>
