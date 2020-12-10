@@ -125,6 +125,6 @@ class UserControllerAdmin extends ControllerAdmin
     public function destroy($id)
     {
         User::destroy($id);
-        return redirect("/admin/users")->with('success','Post successfully deleted.');
+        return redirect("/admin/users")->with('success','User successfully deleted.');
     }
 }
