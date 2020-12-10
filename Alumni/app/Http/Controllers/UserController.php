@@ -95,7 +95,7 @@ class UserController extends Controller
         //Find User
         $user = User::find($id);
         //check policy first
-        $this->authorize('destroy', $user);
+        $this->authorize('update', $user);
         //Delete user
         Profile::destroy($id);
         Comment::destroy($id);

@@ -91,10 +91,9 @@
 
       <div class="d-flex justify-content-between buttons-profile">
         <EditProfile v-bind:profile="profile" v-bind:user="user"> </EditProfile>
-        <DeleteProfile v-bind:user="user" />
-        <v-btn @click="openModal" color="error">DELETE TEST</v-btn>
+        <v-btn @click="openModal" color="error">DELETE</v-btn>
         <div v-if="isOpen" class="container-modal-delete-profile">
-          <DeleteModal v-bind:user="user" v-on:close="updateValueIsOpen(false)" />
+          <DeleteModal v-on:close="updateValueIsOpen(false)" />
         </div>
         <div v-if="isOpen" class="overlay-delete"></div>
       </div>
@@ -104,14 +103,12 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import DeleteProfile from "@/components/ProfileComponents/DeleteProfile";
 import DeleteModal from "@/components/ProfileComponents/DeleteModal";
 import EditProfile from "@/components/ProfileComponents/EditProfile";
 import HeaderProfile from "@/components/ProfileComponents/HeaderProfile";
 export default {
   name: "Profile",
   components: {
-    DeleteProfile,
     EditProfile,
     HeaderProfile,
     DeleteModal,
@@ -221,7 +218,7 @@ export default {
   background: white;
   transform: translate(-50%, -50%);
   z-index: 1010;
-  height: 300px;
+  height: 420px;
   width: 600px;
 }
 
