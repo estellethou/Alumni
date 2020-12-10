@@ -5,7 +5,7 @@
             v-model="dialog"
             width="500"
             >
-                <template v-slot:activator="{ on, attrs }" v-if="user.role == 'alumni'">
+                <template v-slot:activator="{ on, attrs }">
                     <v-btn
                     color="info"
                     elevation="12"
@@ -89,7 +89,6 @@
                                             chips
                                             id="year_experiences"
                                             name="year_experiences"
-                                            multiple
                                             v-model="exp"
                                             required
                                             :items="itemsExp"
@@ -175,7 +174,6 @@
                                             chips
                                             id="sector"
                                             name="sector"
-                                            multiple
                                             required
                                             v-model="sector"
                                             :items="itemsSector"
@@ -224,6 +222,8 @@ export default {
         return {
             // jobDataProps: JSON.parse(this.$route.params.jobData),
             // jobTitle: JSON.parse(this.$route.params.jobData.title),
+            arrExp: "",
+            // arrSector: [],
             dialog: false,
             itemsExp: ['Beginner (less than 1 year)', 'First Experience (1-2 years)', 'Experienced (2-5 years)', 'Confirmed (5 years and more)'],
             itemsContract: ['Permanent Contract', 'Fixed Term Contract /Temporary Contract', 'Contractors/Freelance', 'Internship', 'Work-Study Contract'],
@@ -233,6 +233,7 @@ export default {
             profile: this.job.profile,
             qualifications: this.job.qualifications,
             exp: this.job.year_experiences,
+            // exp: this.convertStrExp(),
             address: this.job.street_address,
             postalCode: this.job.postal_code,
             city: this.job.city,
@@ -282,7 +283,14 @@ export default {
                 user_id: this.user.id,
             };
             this.updateJob(editJob);
-        }
+        },
+
+        // add multiple to sector and year_exp
+        // convertStrExp() {
+        //     this.arrExp = this.expConvert.split(",") ;
+        //     console.log(this.arrExp)
+        //     return this.arrExp;
+        // }
     },
 
 }
