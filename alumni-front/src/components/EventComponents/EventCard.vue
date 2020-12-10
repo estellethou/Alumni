@@ -11,6 +11,12 @@
           <v-card-subtitle class="d-flex flex-column">
             <div>{{ new Date(event.start_date).toLocaleString() }}</div>
             <div class="green--text text--darken-1">{{ event.location }}</div>
+            <div v-if="user.id == event.organiser_user_id">
+              <v-btn x-small fab @click="deleteEvent(event.id)"
+                  ><v-icon>mdi-trash-can-outline</v-icon></v-btn
+                >
+            </div>
+            
           </v-card-subtitle>
         </div>
       </div>
@@ -18,6 +24,7 @@
         <template v-slot:activator="{ on }">
           <div v-on="on" class="d-inline-block">
             <div v-if="user.id == event.organiser_user_id">
+              
               <EditEvent :event="event"></EditEvent>
             </div>
             <v-btn
