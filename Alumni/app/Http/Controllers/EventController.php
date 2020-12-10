@@ -70,8 +70,8 @@ class EventController extends Controller
     {
 
         //Check Policy first
-        $this->authorize('update', $event);
         $event = Event::find($id);
+        $this->authorize('update', $event);
         // dd($request);
         $validate = $request->validate([
             'organiser_user_id' => 'nullable | integer',
