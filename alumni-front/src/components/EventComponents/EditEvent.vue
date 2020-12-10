@@ -129,8 +129,6 @@ export default {
   },
     saveForm(e) {
       e.preventDefault();
-    //   console.log(this.event.start_date)
-    //   console.log(this.event.end_date)
         var newEvent = {
             id: this.event.id,
             organiser_user_id: this.event.organiser_user_id,  
@@ -141,7 +139,6 @@ export default {
             end_date: this.end_date,
             max_attendees: this.attendees,
         }
-      console.log(newEvent);
       this.dialog = false;
       this.editEvent(newEvent)
         .then(() => {
