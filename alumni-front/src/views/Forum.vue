@@ -41,7 +41,7 @@ export default {
     components:{
         ListPosts,
         AddPostModal,
-        Header
+        Header,
     },
 
     computed:{
