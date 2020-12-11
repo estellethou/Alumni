@@ -27,8 +27,10 @@
         <div class="title">CODING ACADEMY - ALUMNI</div>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <router-link :to="`/`" class="dropdown-item">Home</router-link>
-          <router-link :to="`/recruter`" class="dropdown-item">Buisiness Section</router-link>
+          <router-link :to="`/`" class="dropdown-item"> Home </router-link>
+          <router-link :to="`/recruter`" class="dropdown-item">
+            Business Section
+          </router-link>
           <template v-if="authenticated">
             <router-link :to="`/directory`" class="dropdown-item">Directory</router-link>
             <router-link :to="`/profile`" class="dropdown-item">Profile</router-link>
