@@ -13,7 +13,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" type="text/css" rel="stylesheet">
@@ -69,14 +69,13 @@
     <script>
     $(document).ready(function() {
         $('li.active').removeClass('active');
-        $('li > a[href="http://localhost:8899' + location.pathname + '"]').addClass('active');
+        $('li > a[href="http://coding-academy-alumni.herokuapp.com' + location.pathname + '"]').addClass(
+            'active');
     });
-    $(document).ready( function () {
-        $('#dynamic-table').DataTable(
-            {
-                "pageLength": 25
-            }
-        );
+    $(document).ready(function() {
+        $('#dynamic-table').DataTable({
+            "pageLength": 25
+        });
     });
     </script>
 
