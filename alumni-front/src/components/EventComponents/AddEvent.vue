@@ -1,43 +1,66 @@
 <template>
   <div data-app class="add">
-    <v-row justify="start ml-2 my-3">
-      <v-dialog v-model="dialog" persistent max-width="600px">
+    <v-row justify="start" class="ml-2 my-3">
+      <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
           <v-btn class="btn-modal white--text" color="green" v-bind="attrs" v-on="on">
-            <v-icon>{{ 'mdi-plus' }}</v-icon>
-            Add Event
+            <v-icon>{{ 'mdi-plus' }}</v-icon>Add Event
           </v-btn>
         </template>
-        <v-card>
+        <v-card class="pa-4">
           <v-card-title>
-            <span class="headline">Add Event</span>
+            <span class="headline mx-auto">Add Event</span>
           </v-card-title>
-          <v-form class="container" v-model="valid" lazy-validation>
+          <v-form class="container pb-0" v-model="valid" lazy-validation>
             <div class="form-row">
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-6 mb-0 py-1">
                 <!-- TITLE -->
                 <v-text-field
                   v-model="title"
                   label="Event Title"
                   :rules="[rules.required]"
                   required
+                  clearable
+                ></v-text-field>
+              </div>
+              <div class="form-group col-md-6 mb-0 py-1">
+                <v-text-field
+                  v-model="location"
+                  label="Event Location"
+                  :rules="[rules.required]"
+                  required
+                  clearable
                 ></v-text-field>
               </div>
             </div>
             <!-- LOCATION -->
             <div class="form-row">
-              <div class="form-group col-md-6">
+              <!-- ATTENDEES -->
+              <div class="form-group col-md-6 py-1">
                 <v-text-field
-                  v-model="location"
-                  label="Location"
-                  :rules="[rules.required]"
+                  v-model="attendees"
+                  type="number"
+                  label="Max Attendees"
                   required
+                  clearable
                 ></v-text-field>
               </div>
-              <!-- ATTENDEES -->
-              <div class="form-group col-md-4">
-                <label for="attendees">Max Attendees</label>
-                <input type="number" class="form-control" v-model="attendees" />
+            </div>
+            <!-- START DATE -->
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="Start Date">Start Date</label>
+                <input
+                  required
+                  :rules="[rules.required]"
+                  type="datetime-local"
+                  v-model="start_date"
+                />
+              </div>
+              <!-- END DATE  -->
+              <div class="form-group col-md-6">
+                <label for="End date">End date</label>
+                <input required :rules="[rules.required]" type="datetime-local" v-model="end_date" />
               </div>
             </div>
             <!-- DESCRIPTION -->
@@ -47,32 +70,12 @@
                 type="text"
                 class="form-control"
                 v-model="description"
-                placeholder="Please enter the Event description"
+                placeholder="Tell us what you are planning here"
                 :rules="[rules.required]"
                 required
               ></textarea>
             </div>
-            <!-- START DATE -->
             <!-- <div class="form-row"> -->
-            <div class="form-group col-md-4">
-              <label for="Start Date">Start Date</label>
-              <input
-                required
-                :rules="[rules.required]"
-                type="datetime-local"
-                v-model="start_date"
-              />
-            </div>
-            <!-- END DATE  -->
-            <div class="form-group col-md-4">
-              <label for="End date">End date</label>
-              <input
-                required
-                :rules="[rules.required]"
-                type="datetime-local"
-                v-model="end_date"
-              />
-            </div>
             <!-- IMAGE -->
             <!-- <div class="form-group col-md-6">
                 <label for="image">Select your Event image</label>
@@ -82,13 +85,11 @@
                   id="image"
                   accept="image/png, image/jpeg"
                 />
-            </div> -->
+            </div>-->
           </v-form>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="close"> Close </v-btn>
-          <v-btn :disabled="!valid" color="success" @click="saveForm">
-            Save
-          </v-btn>
+          <v-btn :disabled="!valid" color="success" @click="saveForm" class="ml-3">Save</v-btn>
+          <v-btn color="blue darken-1" text @click="close">Close</v-btn>
         </v-card>
       </v-dialog>
     </v-row>

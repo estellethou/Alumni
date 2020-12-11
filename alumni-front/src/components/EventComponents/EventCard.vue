@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" max-width="344">
+  <v-card class="ma-2" max-width="340">
     <v-img
       src="https://i.picsum.photos/id/76/350/165.jpg?hmac=ZjK8NEtD9P2HV5RJN2IS6WEqWj17QZp3nYSiBMITRO0"
       height="150px"
@@ -11,12 +11,16 @@
           <v-card-subtitle class="d-flex flex-column">
             <div>{{ new Date(event.start_date).toLocaleString() }}</div>
             <div class="green--text text--darken-1">{{ event.location }}</div>
-            <div v-if="user.id == event.organiser_user_id">
-              <v-btn x-small fab @click="deleteEvent(event.id)"
-                  ><v-icon>mdi-trash-can-outline</v-icon></v-btn
-                >
+            <div v-if="user.id == event.organiser_user_id" id="delete-icon">
+              <v-tooltip left color="red">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn x-small fab @click="deleteEvent(event.id)">
+                    <v-icon color="red darken-2" v-bind="attrs" v-on="on">mdi-trash-can-outline</v-icon>
+                  </v-btn>
+                </template>
+                <span>Delete Event</span>
+              </v-tooltip>
             </div>
-            
           </v-card-subtitle>
         </div>
       </div>
@@ -24,7 +28,6 @@
         <template v-slot:activator="{ on }">
           <div v-on="on" class="d-inline-block">
             <div v-if="user.id == event.organiser_user_id">
-              
               <EditEvent :event="event"></EditEvent>
             </div>
             <v-btn
@@ -73,8 +76,8 @@
 </template>
 
 <script>
-import EditEvent from '@/components/EventComponents/EditEvent'
-import { mapActions} from "vuex";
+import EditEvent from "@/components/EventComponents/EditEvent";
+import { mapActions } from "vuex";
 
 export default {
   name: "EventCard",
@@ -104,5 +107,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+#delete-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
 </style>
