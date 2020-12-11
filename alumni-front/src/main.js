@@ -43,7 +43,10 @@ Vue.use(VueGoogleMaps, {
 
 require('@/store/modules/subscriber')
 
+// FOR LOCAL USAGE
 // axios.defaults.baseURL = 'http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api'
+
+//FOR REMOTE USAGE ON HEROKU
 axios.defaults.baseURL = 'https://coding-academy-alumni.herokuapp.com/api'
 
 Vue.config.productionTip = false
