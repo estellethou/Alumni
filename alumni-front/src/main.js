@@ -37,13 +37,16 @@ import * as VueGoogleMaps from "vue2-google-maps";
 Vue.use(VueGoogleMaps, {
   load: {
     key: "AIzaSyCXaGI13RmSNQlSPlrtI3hcD3eP5KbiYn0",
-    //key: "AIzaSyDndDaolrwHtlPleRoqYH2b0KUGSkKukCs"
+    // key: "AIzaSyDndDaolrwHtlPleRoqYH2b0KUGSkKukCs"
   }
 });
 
 require('@/store/modules/subscriber')
 
+// FOR LOCAL USAGE
 // axios.defaults.baseURL = 'http://localhost:8899/C-DEV-130-PAR-1-1-ecp-estelle.thou/Alumni/public/api'
+
+//FOR REMOTE USAGE ON HEROKU
 axios.defaults.baseURL = 'https://coding-academy-alumni.herokuapp.com/api'
 
 Vue.config.productionTip = false

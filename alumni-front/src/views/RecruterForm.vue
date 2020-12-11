@@ -7,11 +7,11 @@
             <PaymentForm v-bind:jobOffer="this.newJobOffer"/>
         </div>
     </v-container>
-    <v-container>
+    <v-container v-if="!authenticated">
         <v-row class="m-3 justify-content-center">
             <v-dialog
             v-model="dialog"
-            width="500"
+            width="750"
             >
                 <template v-slot:activator="{ on, attrs }">
                     <v-btn v-if="!checkout"
@@ -206,11 +206,13 @@
                         </v-card>
                     </v-form>
 
-                    <!-- <h1 v-else>For company only... sorry</h1> -->
                 </div>
             </v-dialog>
         </v-row>
     </v-container>
+    
+    <h1 class="ml-13" v-else>For company only... sorry</h1>
+
 </div>
 </template>
 
@@ -304,7 +306,7 @@ export default {
     },
 
     computed: {
-        ...mapGetters(["user"])
+        ...mapGetters(["user", "authenticated"])
     },
 }
 </script>
