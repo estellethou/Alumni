@@ -74,7 +74,6 @@ export default {
                     const addressCoord = response.data.results[0].geometry.location;
                     const marker = { position: addressCoord };
                     this.markers.push(marker);
-                    console.log(this.markers)
                 }
             })
             .catch(error => {
