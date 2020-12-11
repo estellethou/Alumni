@@ -2,26 +2,16 @@
     <div>
         <div>
             <gmap-map
-            :center="markers[0].position"
-            :zoom="12"
-            style="width:100%;  height: 400px;" 
+                :center="markers[0].position"
+                :zoom="12"
+                style="width:100%;  height: 400px;" 
             >
-            <gmap-marker
-                :key="index"
-                v-for="(m, index) in markers"
-                :position="m.position"
-                @click="center=m.position"
-            ></gmap-marker>
-
-            <gmap-info-window
-                :options="infoOptions"
-                :position="infoWindowPos"
-                :opened="infoWinOpen"
-                @closeclick="infoWinOpen=false"
-                >
-                <!-- <div v-html="infoContent"></div> -->
-            </gmap-info-window>
-
+                <gmap-marker
+                    :key="index"
+                    v-for="(m, index) in markers"
+                    :position="m.position"
+                    @click="center=m.position"
+                ></gmap-marker>
             </gmap-map>
         </div>
     </div>
@@ -39,17 +29,6 @@ export default {
         return {
             // default to Paris
             center: { lat: 48.866667, lng: 2.333333 },
-            infoWinOpen: false,
-            infoWindowPos: {
-                lat: 0,
-                lng: 0
-            },
-            infoOptions: {
-                pixelOffset: {
-                    width: 0,
-                    height: -35
-                },
-            },
             markers: []
         }
     },
