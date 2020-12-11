@@ -9,6 +9,7 @@ import Profile from "../views/Profile.vue";
 import OtherProfile from "../views/OtherProfile.vue";
 import Login from "../views/Login.vue";
 import SingleJob from "../views/SingleJob.vue";
+import About from "../views/About";
 //import Dashboard from '../views/Dashboard.vue'
 
 
@@ -26,6 +27,11 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
+  },
+  {
+    path: "/about",
+    name: "About",
+    component: About,
   },
   {
     path: "/recruter",
