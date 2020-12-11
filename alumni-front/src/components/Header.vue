@@ -29,7 +29,7 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <router-link :to="`/`" class="dropdown-item"> Home </router-link>
           <router-link :to="`/recruter`" class="dropdown-item">
-            Buisiness Section
+            Business Section
           </router-link>
           <template v-if="authenticated">
             <router-link :to="`/directory`" class="dropdown-item">
