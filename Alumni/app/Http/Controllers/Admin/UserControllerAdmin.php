@@ -61,9 +61,6 @@ class UserControllerAdmin extends ControllerAdmin
             $user->profile()->save(new Profile);
         }
         $profile = $user->profile;
-        if($profile && $user->profile->image !== null) {
-            $user->profile->temporaryUrl = Storage::disk('s3')->temporaryUrl($user->profile->image, now()->addMinutes(5));
-        }
         return view("admin/user_show", compact('user'));
     }
 
