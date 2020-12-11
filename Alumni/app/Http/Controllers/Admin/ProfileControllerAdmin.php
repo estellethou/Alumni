@@ -78,8 +78,6 @@ class ProfileControllerAdmin extends ControllerAdmin
         if($user->profile === null) {
             $user->profile()->save(new Profile);
         }
-        $imagePath = request()->image->store('/images', 's3');
-        $data['image'] = $imagePath;
         $user->profile->update($data);
         
         //$profile->update($request->all()); // ???

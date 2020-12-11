@@ -33,7 +33,7 @@
             <v-btn
               class="mr-4 white--text pl-2"
               :color="attending ? 'green' : 'blue'"
-              :disabled="participantCount >= event.max_attendees"
+              :disabled="participantCount >= event.max_attendees && !attending"
               @click="attendEvent(event.max_attendees)"
             >
               <v-icon>{{ attending ? 'mdi-check' : 'mdi-plus' }}</v-icon>

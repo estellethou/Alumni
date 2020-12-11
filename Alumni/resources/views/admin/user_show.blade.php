@@ -65,22 +65,24 @@
             <tr>
                 <th>LinkedIn</th>
                 <td>
-                    <a href='{{ $user->profile->url_linkedin ?? "" }}' target="_blank">{{ $user->profile->url_linkedin ?? '' }}</a>
+                    <a href='{{ $user->profile->url_linkedin ?? "" }}'
+                        target="_blank">{{ $user->profile->url_linkedin ?? '' }}</a>
                 </td>
             </tr>
             <tr>
                 <th>GitHub</th>
-                <td><a href='{{ $user->profile->url_github ?? "" }}' target="_blank">{{ $user->profile->url_github ?? '' }}</a></td>
+                <td><a href='{{ $user->profile->url_github ?? "" }}'
+                        target="_blank">{{ $user->profile->url_github ?? '' }}</a></td>
             </tr>
             <tr>
                 <th>Website</th>
-                <td><a href='{{ $user->profile->url_website ?? "" }}' target="_blank">{{ $user->profile->url_website ?? '' }}</a>
+                <td><a href='{{ $user->profile->url_website ?? "" }}'
+                        target="_blank">{{ $user->profile->url_website ?? '' }}</a>
                 </td>
             </tr>
             <tr>
                 <th>Profile Image</th>
                 <td>
-                    <img class="avatar" src="{{ $user->profile->temporaryUrl ?? '' }}" alt="Profile">
                     {{ $user->profile->image ?? '' }}
                 </td>
             </tr>
