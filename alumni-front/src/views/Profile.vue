@@ -46,13 +46,13 @@
             />
             {{ profile.phone }}
           </div>
-          <div class="col-4">
+          <div class="col-4" v-for="myuser in filteredUser" :key="myuser.id">
             <img
               width="10%"
               src="https://coding-academy-alumni.herokuapp.com/icons/email.png"
               alt="logo"
             />
-            {{ user.email }}
+            {{ myuser.email }}
           </div>
 
           <div class="col-4">
