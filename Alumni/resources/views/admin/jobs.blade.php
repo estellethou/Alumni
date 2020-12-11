@@ -29,7 +29,7 @@
                 @foreach($jobs as $job)
                 <tr>
                     <td>
-                        <a href="#" class="btn btn-success py-0">
+                        <a href="{{ route('admin.job.show', [ $job->id ]) }}" class="btn btn-success py-0">
                             View
                         </a>
                     </td>
