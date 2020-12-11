@@ -2,7 +2,6 @@
   <div>
     <Header />
     <v-container>
-      <h2>Recruiter form to post new job offer</h2>
       <div v-if="checkout">
         <PaymentForm v-bind:jobOffer="this.newJobOffer" />
       </div>
