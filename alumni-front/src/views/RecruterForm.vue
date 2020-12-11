@@ -1,6 +1,28 @@
 <template>
   <div>
     <Header />
+        <div class="d-flex flex-column align-items-center alumni-redirect" v-if="!authenticated">
+              <div class="mb-8 mt-5 image-coding">
+                <v-img
+                    src="../assets/logoCodingAcademy.png"
+                    max-height="350"
+                    max-width="150"
+                ></v-img>
+            </div>
+            <h5 class="explication">Dear Recruiters, <br/>
+            <br/>
+                Coding Academy is an intensive bootcamp project-based learning. During 6 months, Coding Academy graduates have learned the fundamentals of web development.
+                <br/>
+                 <br/> <strong>Basic languages </strong>: HTML, CSS, PHP, Javascript
+                 <br/> <strong>Sophisticate Framework </strong>: Laravel, ExpressJS, VueJS
+                 <br/> <strong>Database </strong>: MySQL
+                 <br/> <strong>Others basic informatic tools </strong>: Git, Bash, Docker, AJAX, Heroku...
+                <br/>
+                 <br/>In this page, you can post your job/internship offers and they will be displayed to all of our graduates.
+                <br/>
+                 <br/>Please fill the form below and pay 50€ to register your ads 
+            </h5>
+        </div>
     <v-container>
       <div v-if="checkout">
         <PaymentForm v-bind:jobOffer="this.newJobOffer" />
