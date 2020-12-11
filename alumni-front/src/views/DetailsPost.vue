@@ -1,6 +1,7 @@
 <template>
-  <v-container>
+  <div>
     <Header/>
+      <v-container>
     <div v-for="(detail,index) in List" :key="index">
         <div class="detailsPost-title">
           <h1>{{detail.title}}</h1>
@@ -18,6 +19,7 @@
       <v-btn class="ml-2" @click="nextPage" :disabled="pageNumber >= pageCount -1" color="primary">next</v-btn>
     </div>
   </v-container>
+  </div>
 </template>
 
 <script>
