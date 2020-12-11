@@ -3,7 +3,7 @@
         <v-row class="m-3">
             <v-dialog
             v-model="dialog"
-            width="500"
+            width="750"
             >
                 <template v-slot:activator="{ on, attrs }">
                     <v-btn
