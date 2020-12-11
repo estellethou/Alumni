@@ -68,9 +68,15 @@ export default {
     ...mapActions(["signOut"]),
 
     signOutButton() {
+      if (this.$route.path !== "/") {
+          this.$router.push("/");
+        }
       this.signOut().then(() => {
-        this.$router.replace({
-          name: "Home",
+        this.$swal({
+          title: "You have successfully logged out",
+          text: "See you soon",
+          icon: "success",
+          confirmButtonText: "Ok",
         });
       });
     },

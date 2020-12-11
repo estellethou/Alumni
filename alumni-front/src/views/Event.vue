@@ -29,5 +29,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+@media (max-width: 1120px) {
+   .container {
+      max-width: 100%;
+   }
+}
 </style>

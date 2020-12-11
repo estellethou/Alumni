@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="d-flex flex-wrap justify-center">
         <div class="container-link" v-for="job in filteredJob" :key="job.id">
-            <v-card class="m-3" width=400>
+            <v-card class="m-3" width=350 min-height=250>
                 <router-link v-bind:to="`/job/${job.id}`">
                     <v-card-title class="title-rendering"> {{ job.title }}</v-card-title>
                     <v-card-subtitle><v-icon></v-icon> at {{ job.company_name }} </v-card-subtitle>

@@ -15,7 +15,7 @@ class CommentController extends Controller
     public function index()
     {
         //GET all the comment
-        return Comment::all();
+        return Comment::latest()->get();
     }
 
     /**

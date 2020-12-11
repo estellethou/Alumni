@@ -2,16 +2,16 @@
     <div>
         <div>
             <gmap-map
-            :center="center"
-            :zoom="12"
-            style="width:100%;  height: 400px;" 
+                :center="markers[0].position"
+                :zoom="12"
+                style="width:100%;  height: 400px;" 
             >
-            <gmap-marker
-                :key="index"
-                v-for="(m, index) in markers"
-                :position="m.position"
-                @click="center=m.position"
-            ></gmap-marker>
+                <gmap-marker
+                    :key="index"
+                    v-for="(m, index) in markers"
+                    :position="m.position"
+                    @click="center=m.position"
+                ></gmap-marker>
             </gmap-map>
         </div>
     </div>
@@ -22,14 +22,15 @@ import { mapActions, mapGetters } from 'vuex';
 import axios from 'axios';
 
 export default {
+    props: ["marker"],
     name: "GoogleMap",
     
     data() {
         return {
             // default to Paris
             center: { lat: 48.866667, lng: 2.333333 },
-            markers: [],
-        };
+            markers: []
+        }
     },
 
     mounted() {
@@ -56,28 +57,27 @@ export default {
         },
 
         geocode() {
-            this.getAllJobs.forEach(job => {
-                const fullAddress = [];
-                fullAddress.push(job.street_address, job.city, job.postal_code);
-                const strFullAddress = fullAddress.toString();
+            const fullAddress = [];
+            fullAddress.push(this.marker.street_address, this.marker.city, this.marker.postal_code);
+            const strFullAddress = fullAddress.toString();
 
-                axios.get('https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json',
-                    {
-                        params: {
-                            address: strFullAddress,
-                            key: 'AIzaSyCcQF8GcEbw96HCPndWKyX9fjgIk1N38M0'
-                        }
-                    })
-                .then(response => {
-                    if(response.data.results.length !== 0 && Array.isArray(response.data.results)) {
-                        const addressCoord = response.data.results[0].geometry.location;
-                        const marker = { position: addressCoord };
-                        this.markers.push(marker);
+            axios.get('https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json',
+                {
+                    params: {
+                        address: strFullAddress,
+                        key: 'AIzaSyCcQF8GcEbw96HCPndWKyX9fjgIk1N38M0'
                     }
                 })
-                .catch(error => {
-                    console.log(error)
-                })
+            .then(response => {
+                console.log(response.data)
+                if(response.data.results.length !== 0 && Array.isArray(response.data.results)) {
+                    const addressCoord = response.data.results[0].geometry.location;
+                    const marker = { position: addressCoord };
+                    this.markers.push(marker);
+                }
+            })
+            .catch(error => {
+                console.log(error)
             })
         },
     },

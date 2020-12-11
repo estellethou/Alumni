@@ -15,7 +15,7 @@ class JobController extends Controller
     public function index()
     {
         // get all jobs
-        return Job::all();
+        return Job::latest()->get();
 
     }
 
