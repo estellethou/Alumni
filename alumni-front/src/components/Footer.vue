@@ -17,6 +17,7 @@ export default {
 <style>
 .footer {
     height: 50px;
+    margin-top: 20px;
     background-image: url("https://coding-academy-alumni.herokuapp.com/icons/home.jpg");
 }
 
