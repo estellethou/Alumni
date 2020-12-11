@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-wrap">
-    <div class="ma-2" v-for="event in getAllEvents" :key="event.id">
-      <event-card :event="event" :user="user"></event-card>
+    <div v-for="event in getAllEvents" :key="event.id">
+      <event-card :event="event" :user="user" v-if="new Date(event.start_date) >= Date.now()"></event-card>
     </div>
   </div>
 </template>

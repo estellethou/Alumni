@@ -26,6 +26,7 @@
                         :rules="loginEmailRules"
                         label="E-mail"
                         required
+                        autocomplete="username"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12">
@@ -39,6 +40,7 @@
                         hint="At least 6 characters"
                         counter
                         @click:append="show1 = !show1"
+                        autocomplete="current-password"
                       ></v-text-field>
                     </v-col>
 
@@ -100,6 +102,7 @@
                         :rules="emailRules"
                         label="E-mail"
                         required
+                        autocomplete="username"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12">
@@ -113,6 +116,7 @@
                         hint="At least 6 characters"
                         counter
                         @click:append="show1 = !show1"
+                        autocomplete="new-password"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12">
@@ -126,6 +130,7 @@
                         label="Confirm Password"
                         counter
                         @click:append="show2 = !show2"
+                        autocomplete="new-password"
                       ></v-text-field>
                     </v-col>
                     <v-spacer></v-spacer>
