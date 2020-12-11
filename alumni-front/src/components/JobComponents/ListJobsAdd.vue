@@ -19,7 +19,7 @@
 
                 <div>
                     <!-- new job/intership form ===================== -->
-                    <v-form @submit="submitNewJob"> 
+                    <v-form ref="newJobForm" v-model="valid" lazy-validation> 
                         <v-card>
 
                             <v-card-title>
@@ -193,9 +193,10 @@
                                     </v-btn>
                                     <v-btn
                                         color="blue darken-1"
+                                        :disabled="!valid"
                                         text
                                         type="submit"
-                                        @click="dialog = false"
+                                        @click="submitNewJob"
                                     >
                                         Create
                                     </v-btn>
@@ -221,6 +222,7 @@ export default {
 
     data() {
         return {
+            valid: true,
             dialog: false,
             itemsExp: ['Beginner (less than 1 year)', 'First Experience (1-2 years)', 'Experienced (2-5 years)', 'Confirmed (5 years and more)'],
             itemsContract: ['Permanent Contract', 'Fixed Term Contract /Temporary Contract', 'Contractors/Freelance', 'Internship', 'Work-Study Contract'],
@@ -262,34 +264,57 @@ export default {
 
         submitNewJob() {
             event.preventDefault();
-            let newJob = {
-                title: this.jobTitle,
-                content: this.description,
-                profile: this.profile,
-                qualifications: this.qualifications,
-                year_experiences: this.exp.join(', '),
-                street_address: this.address,
-                postal_code: this.postalCode,
-                city: this.city,
-                contract: this.contract,
-                contract_duration: this.contractDuration,
-                company_name: this.company,
-                sector: this.sector.join(', '),
-                user_id: this.user.id,
-            };
-            this.addJob(newJob);
-            this.jobTitle = "";
-            this.description = "";
-            this.profile = "";
-            this.qualifications = "";
-            this.exp = "";
-            this.address = "";
-            this.postalCode = "";
-            this.city = "";
-            this.contract = "";
-            this.contractDuration = "";
-            this.company = "";
-            this.sector = "";
+            if (this.$refs.newJobForm.validate()) {
+
+                if (this.sector != []) {
+                    let newJob = {
+                        title: this.jobTitle,
+                        content: this.description,
+                        profile: this.profile,
+                        qualifications: this.qualifications,
+                        year_experiences: this.exp.join(', '),
+                        street_address: this.address,
+                        postal_code: this.postalCode,
+                        city: this.city,
+                        contract: this.contract,
+                        contract_duration: this.contractDuration,
+                        company_name: this.company,
+                        sector: this.sector.join(', '),
+                        user_id: this.user.id,
+                    }
+                    this.addJob(newJob);
+                    this.dialog = false;
+                } else {
+                    let newJob = {
+                        title: this.jobTitle,
+                        content: this.description,
+                        profile: this.profile,
+                        qualifications: this.qualifications,
+                        year_experiences: this.exp.join(', '),
+                        street_address: this.address,
+                        postal_code: this.postalCode,
+                        city: this.city,
+                        contract: this.contract,
+                        contract_duration: this.contractDuration,
+                        company_name: this.company,
+                        user_id: this.user.id,
+                    }
+                    this.addJob(newJob);
+                    this.dialog = false;
+                }
+                this.jobTitle = "";
+                this.description = "";
+                this.profile = "";
+                this.qualifications = "";
+                this.exp = "";
+                this.address = "";
+                this.postalCode = "";
+                this.city = "";
+                this.contract = "";
+                this.contractDuration = "";
+                this.company = "";
+                this.sector = "";
+            }
         },
     }
 
