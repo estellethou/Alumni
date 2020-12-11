@@ -21,4 +21,5 @@ export default {
     background-image: url("https://coding-academy-alumni.herokuapp.com/icons/home.jpg");
 }
 
+
 </style>

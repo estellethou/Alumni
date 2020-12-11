@@ -2,6 +2,7 @@
   <div class="home">
         <Header/> 
         <Grid/>
+        <Footer/>
   </div>
 </template>
 
@@ -9,12 +10,14 @@
 <script>
 import Header from "./../components/Header"
 import Grid from "./../components/Grid"
+import Footer from "../components/Footer"
 export default {
   name:"Home",
   
   components:{
    Header,
    Grid,
+    Footer,
   }
 }
 </script>
