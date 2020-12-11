@@ -84,13 +84,24 @@ export default {
 .title {
   font-family: "Nunito", sans-serif;
   color: white;
-  margin-top: 1%;
+  margin-left: 6%;
   text-align: center;
   font-size: 30rem;
 }
 
+@media (max-width: 1120px) {
+  .header {
+    height: 150px !important;
+  }
+}
+@media (max-width: 900px) {
+  .header {
+    height: 100px !important;
+  }
+}
+
 .header {
-  height: 250px;
+  height: 200px;
   background-image: url("https://coding-academy-alumni.herokuapp.com/icons/home.jpg");
 }
 
