@@ -1,7 +1,8 @@
 <template>
-  <v-container class="container-forum">
-  <div class="container-forum">
-      <Header/>
+    <div>
+        <Header/>
+        <v-container class="container-forum">
+            <div class="container-forum">
       <div class="container-titleForumPage">
            <h1>Forum Coding Academy - Alumni</h1> 
       </div>
@@ -18,6 +19,8 @@
       <ListPosts v-bind:Posts="searchInput"/>
     </div> 
   </v-container>
+    </div>
+
 </template>
 
 <script>
