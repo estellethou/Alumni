@@ -9,7 +9,7 @@
             ></v-breadcrumbs>
         </div>
         <v-container v-for="(detail, index) in filterJob" :key="index">
-            <v-card outlined>
+            <v-card class="mb-3" outlined>
                 <v-card-title>
                     {{ detail.title }}
                 </v-card-title>
@@ -58,6 +58,10 @@
                 </div>
             </v-card>
 
+            <div> 
+                <GoogleMap />
+            </div>
+
             <div v-for="(userDetails, index) in getUserDetails" :key="index" >
                 <div v-if="detail.id == userDetails.id">
                     <a v-bind:href=" `mailto:${userDetails.email}?subject=Application for ${detail.title} from Coding Academy Alumni job portal!` ">
@@ -79,6 +83,7 @@
 <script>
 import Header from '../components/Header'
 import ModalJob from '../components/JobComponents/ModalJob'
+import GoogleMap from "@/components/GoogleMap.vue"
 import { mapActions, mapGetters } from 'vuex';
 
 
@@ -88,6 +93,7 @@ export default {
     components: {
         Header,
         ModalJob,
+        GoogleMap,
     },
 
     data () {
