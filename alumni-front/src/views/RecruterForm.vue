@@ -320,7 +320,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap");
 
 .alumni-redirect{
