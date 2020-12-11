@@ -35,7 +35,7 @@ export default {
         return {
             search: "",
             pageNumber:0,
-            size:4
+            size:10
         }
     },
 
