@@ -3,7 +3,7 @@
         <v-row class="m-3">
             <v-dialog
             v-model="dialog"
-            width="500"
+            width="750"
             >
                 <template v-slot:activator="{ on, attrs }">
                     <v-btn
@@ -19,8 +19,8 @@
                 </template>
 
                 <div>
-                    <!-- new job/intership form ===================== -->
-                    <v-form @submit="submitEditJob"> 
+                    <!-- edit job/intership form ===================== -->
+                    <v-form ref="editJobForm" v-model="valid" lazy-validation> 
                         <v-card>
 
                             <v-card-title>
@@ -192,9 +192,10 @@
                                     </v-btn>
                                     <v-btn
                                         color="blue darken-1"
+                                        :disabled="!valid"
                                         text
                                         type="submit"
-                                        @click="dialog = false"
+                                        @click="submitEditJob"
                                     >
                                         Edit
                                     </v-btn>
@@ -222,6 +223,7 @@ export default {
         return {
             // jobDataProps: JSON.parse(this.$route.params.jobData),
             // jobTitle: JSON.parse(this.$route.params.jobData.title),
+            valid: true,
             arrExp: "",
             // arrSector: [],
             dialog: false,
@@ -266,23 +268,26 @@ export default {
 
         submitEditJob(event) {
             event.preventDefault();
-            let editJob = {
-                id: this.job.id,
-                title: this.jobTitle,
-                content: this.description,
-                profile: this.profile,
-                qualifications: this.qualifications,
-                year_experiences: this.exp,
-                street_address: this.address,
-                postal_code: this.postalCode,
-                city: this.city,
-                contract: this.contract,
-                contract_duration: this.contractDuration,
-                company_name: this.company,
-                sector: this.sector,
-                user_id: this.user.id,
-            };
-            this.updateJob(editJob);
+            if (this.$refs.editJobForm.validate()) {
+                let editJob = {
+                    id: this.job.id,
+                    title: this.jobTitle,
+                    content: this.description,
+                    profile: this.profile,
+                    qualifications: this.qualifications,
+                    year_experiences: this.exp,
+                    street_address: this.address,
+                    postal_code: this.postalCode,
+                    city: this.city,
+                    contract: this.contract,
+                    contract_duration: this.contractDuration,
+                    company_name: this.company,
+                    sector: this.sector,
+                    user_id: this.user.id,
+                };
+                this.updateJob(editJob);
+                this.dialog = false;
+            }
         },
 
         // add multiple to sector and year_exp

@@ -30,12 +30,10 @@ const actions = {
     },
 
     async updateJob ({ commit }, updJob) {
-        console.log(updJob, 'Data received from components');
         const response = await axios.put(
             `/job/${updJob.id}/edit`,
             updJob
         );
-        console.log(response.data, 'response');
         commit('editJob', response.data);
     },
 
