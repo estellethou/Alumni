@@ -59,7 +59,7 @@
             </v-card>
 
             <div> 
-                <GoogleMap />
+                <GoogleMap v-bind:marker="detail"/>
             </div>
 
             <div v-for="(userDetails, index) in getUserDetails" :key="index" >
