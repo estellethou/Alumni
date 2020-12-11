@@ -12,12 +12,12 @@
               height="85%"
               class="profile-item img-item"
             />
-            <div class="subtitle hoverText">
+            <div class="subtitle-home hoverText">
               <div class="caption">
 
                    <router-link :to="`/profile`" style="color: inherit">
 
-                <h5 class="subtitle">MY PROFILE</h5>
+                <h5 class="subtitle-home">MY PROFILE</h5>
                  </router-link>
               </div>
             </div>
@@ -33,10 +33,10 @@
               height="85%"
               class="buisiness-item img-item"
             />
-            <div class="subtitle hoverText">
+            <div class="subtitle-home hoverText">
               <div class="caption">
                    <router-link :to="`/recruter`" style="color: inherit">
-                <h5 class="subtitle">BUSINESS SECTION</h5>
+                <h5 class="subtitle-home">BUSINESS SECTION</h5>
                           </router-link>
               </div>
             </div>
@@ -52,12 +52,12 @@
               height="85%"
               class="directory-item img-item"
             />
-               <div class="subtitle hoverText">
+               <div class="subtitle-home hoverText">
               <div class="caption">
 
                    <router-link :to="`/directory`" style="color: inherit">
 
-                   <h5 class="subtitle">DIRECTORY</h5>
+                   <h5 class="subtitle-home">DIRECTORY</h5>
                     </router-link>
               </div>
             </div>
@@ -76,12 +76,12 @@
               height="85%"
               class="job-item img-item"
             />
-                <div class="subtitle hoverText">
+                <div class="subtitle-home hoverText">
               <div class="caption">
 
                   <router-link :to="`/job`" style="color: inherit">
 
-                 <h5 class="subtitle">JOB & INTERNSHIP</h5>
+                 <h5 class="subtitle-home">JOB & INTERNSHIP</h5>
                   </router-link>
               </div>
             </div>
@@ -97,12 +97,12 @@
               height="85%"
               class="forum-item img-item"
             />
-                <div class="subtitle hoverText">
+                <div class="subtitle-home hoverText">
               <div class="caption">
 
                   <router-link :to="`/forum`" style="color: inherit">
 
-                <h5 class="subtitle">FORUM</h5>
+                <h5 class="subtitle-home">FORUM</h5>
                  </router-link>
               </div>
             </div>
@@ -118,12 +118,12 @@
               height="85%"
               class="event-item img-item"
             />
-                <div class="subtitle hoverText">
+                <div class="subtitle-home hoverText">
               <div class="caption">
 
                    <router-link :to="`/event`" style="color: inherit">
 
-                <h5 class="subtitle">EVENT</h5>
+                <h5 class="subtitle-home">EVENT</h5>
                  </router-link>
               </div>
             </div>
@@ -205,7 +205,7 @@ export default {
   backface-visibility: hidden;
 }
 
-.subtitle {
+.subtitle-home {
   text-align: center;
 }
 

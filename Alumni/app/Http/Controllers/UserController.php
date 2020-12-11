@@ -71,7 +71,7 @@ class UserController extends Controller
             'firstname' => '',
             'lastname' => '',
             'email' => 'email | unique:users,email,',
-            'password' => ['nullable', 'confirmed'],
+            'password' => ['nullable'],
         ]);
         
         $user->update($request->only(['firstname', 'lastname', 'email']));
