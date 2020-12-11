@@ -17,167 +17,176 @@
           </template>
 
           <div>
-            <v-form @submit="submitRecruterForm">
+            <!-- new job/intership form for Recruiter ===================== -->
+            <v-form @submit="submitRecruterForm" ref="newJobRecruiterForm" lazy-validation v-model="valid" > 
               <v-card>
+
                 <v-card-title>
-                  <span class="headline"> Add your Job or Internship offer </span>
+                    <span class="headline"> Add your Job or Internship offer </span>
                 </v-card-title>
 
-                <v-card-text class="ml-1"> * Mandatory fields </v-card-text>
+                  <v-card-text class="ml-1">
+                      * Mandatory fields
+                  </v-card-text>
 
-                <v-card-text>
+                  <v-card-text>
                   <!-- Title -->
-                  <v-text-field
-                    label="Title *"
-                    id="title"
-                    name="title"
-                    required
-                    v-model="jobTitle"
-                    :rules="titleRules"
-                  ></v-text-field>
+                      <v-text-field
+                          label="Title *"
+                          id="title"
+                          name="title"
+                          required
+                          v-model="jobTitle"
+                          :rules="titleRules"
+                      ></v-text-field>
                   <!-- </v-col> -->
+              
+                  
+
                   <!-- content -->
-                  <p>
-                    Job Description * <br />
-                    <v-icon class="red--text"> mdi-alert </v-icon>
-                    <span style="color: red"
-                      >contact details must be included in this section.</span
-                    >
-                  </p>
-                  <v-textarea
-                    auto-grow
-                    clearable
-                    counter
-                    id="content"
-                    name="content"
-                    placeholder="Please add your contact details in this section."
-                    required
-                    v-model="description"
-                    :rules="descriptionRules"
-                  ></v-textarea>
+                      <v-textarea
+                          auto-grow
+                          clearable
+                          counter
+                          label="Job Description *"
+                          id="content"
+                          name="content"
+                          required
+                          v-model="description"
+                          :rules="descriptionRules"
+                      ></v-textarea>
 
                   <!-- Profile -->
-                  <v-text-field
-                    label="Candidate Profile *"
-                    id="profile"
-                    name="profile"
-                    required
-                    v-model="profile"
-                    :rules="generalRules"
-                  ></v-text-field>
+                      <v-text-field
+                          label="Candidate Profile *"
+                          id="profile"
+                          name="profile"
+                          required
+                          v-model="profile"
+                          :rules="generalRules"
+                      ></v-text-field>
 
                   <!-- Qualifications -->
-                  <v-text-field
-                    label="Qualifications/Skills *"
-                    id="qualifications"
-                    name="qualifications"
-                    required
-                    v-model="qualifications"
-                    :rules="generalRules"
-                  ></v-text-field>
+                      <v-text-field
+                          label="Qualifications/Skills *"
+                          id="qualifications"
+                          name="qualifications"
+                          required
+                          v-model="qualifications"
+                          :rules="generalRules"
+                      ></v-text-field>
 
                   <!-- Experience -->
-                  <v-col cols="12" md="10">
-                    <v-select
-                      label="Years of Experience *"
-                      attach
-                      chips
-                      id="year_experiences"
-                      name="year_experiences"
-                      multiple
-                      v-model="experience"
-                      required
-                      :items="itemsExp"
-                      :rules="generalRules"
-                    ></v-select>
-                  </v-col>
+                      <v-col
+                          cols="12"
+                          md="10"
+                      >
+                          <v-select
+                              label="Years of Experience *"
+                              attach
+                              chips
+                              id="year_experiences"
+                              name="year_experiences"
+                              multiple
+                              v-model="experience"
+                              required
+                              :items="itemsExp"
+                              :rules="generalRules"
+                          ></v-select>
+                      </v-col>
 
                   <!-- Address -->
-                  <v-text-field
-                    label="Address *"
-                    id="street_address"
-                    name="street_address"
-                    required
-                    v-model="address"
-                    :rules="generalRules"
-                  ></v-text-field>
+                      <v-text-field
+                          label="Address *"
+                          id="street_address"
+                          name="street_address"
+                          required
+                          v-model="address"
+                          :rules="generalRules"
+                      ></v-text-field>
 
                   <!-- Postal Code -->
-                  <v-text-field
-                    label="Postal Code *"
-                    id="postal_code"
-                    name="postal_code"
-                    required
-                    v-model="postalCode"
-                    :rules="postalCodeRules"
-                  ></v-text-field>
+                      <v-text-field
+                          label="Postal Code *"
+                          id="postal_code"
+                          name="postal_code"
+                          required
+                          v-model="postalCode"
+                          :rules="postalCodeRules"
+                      ></v-text-field>
 
                   <!-- City -->
-                  <v-text-field
-                    label="City *"
-                    id="city"
-                    name="city"
-                    required
-                    v-model="city"
-                    :rules="generalRules"
-                  ></v-text-field>
+                      <v-text-field
+                          label="City *"
+                          id="city"
+                          name="city"
+                          required
+                          v-model="city"
+                          :rules="generalRules"
+                      ></v-text-field>
 
                   <!-- Contract -->
-                  <v-col cols="12" md="10">
-                    <v-select
-                      label="Type of Contract *"
-                      attach
-                      chips
-                      id="contract"
-                      name="contract"
-                      v-model="contract"
-                      required
-                      :items="itemsContract"
-                      :rules="generalRules"
-                    ></v-select>
-                  </v-col>
+                      <v-col
+                          cols="12"
+                          md="10"
+                      >
+                          <v-select
+                              label="Type of Contract *"
+                              attach
+                              chips
+                              id="contract"
+                              name="contract"
+                              v-model="contract"
+                              required
+                              :items="itemsContract"
+                              :rules="generalRules"
+                          ></v-select>
+                      </v-col>
 
                   <!-- Contract Duration -->
-                  <v-text-field
-                    label="Duraction of Contract (optional)"
-                    id="contract_duration"
-                    name="contract_duration"
-                    required
-                    v-model="contractDuration"
-                  ></v-text-field>
+                      <v-text-field
+                          label="Duraction of Contract (optional)"
+                          id="contract_duration"
+                          name="contract_duration"
+                          required
+                          v-model="contractDuration"
+                      ></v-text-field>
 
                   <!-- Company Name -->
-                  <v-text-field
-                    label="Company Name *"
-                    id="company_name"
-                    name="company_name"
-                    required
-                    v-model="company"
-                    :rules="generalRules"
-                  ></v-text-field>
+                      <v-text-field
+                          label="Company Name *"
+                          id="company_name"
+                          name="company_name"
+                          required
+                          v-model="company"
+                          :rules="generalRules"
+                      ></v-text-field>
 
                   <!-- Sector -->
-                  <v-col cols="12" md="10">
-                    <v-select
-                      label="Sector (optional)"
-                      attach
-                      chips
-                      id="sector"
-                      name="sector"
-                      multiple
-                      required
-                      v-model="sector"
-                      :items="itemsSector"
-                    ></v-select>
-                  </v-col>
-                </v-card-text>
+                      <v-col
+                          cols="12"
+                          md="10"
+                      >
+                          <v-select
+                              label="Sector (optional)"
+                              attach
+                              chips
+                              id="sector"
+                              name="sector"
+                              multiple
+                              required
+                              v-model="sector"
+                              :items="itemsSector"
+                          ></v-select>
+                        </v-col>
+                      </v-card-text>
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn color="blue darken-1" text @click="dialog = false">
                     Close
                   </v-btn>
-                  <v-btn color="blue darken-1" text type="submit" @click="openCheckout">
+                  <v-btn color="blue darken-1" :disabled="!valid" text type="submit" @click="openCheckout">
                     Proceed checkout
                   </v-btn>
                 </v-card-actions>
@@ -231,6 +240,7 @@ export default {
 
   data() {
     return {
+      valid: true,
       newJobOffer: {},
       dialog: false,
       itemsExp: [
@@ -286,31 +296,33 @@ export default {
     },
     submitRecruterForm() {
       event.preventDefault();
-      this.newJobOffer = {
-        title: this.jobTitle,
-        content: this.description,
-        profile: this.profile,
-        qualifications: this.qualifications,
-        year_experiences: this.experience.join(", "),
-        street_address: this.address,
-        postal_code: this.postalCode,
-        city: this.city,
-        contract: this.contract,
-        contract_duration: this.contractDuration,
-        company_name: this.company,
-        sector: this.sector.join(", "),
-      };
-      this.jobTitle = "";
-      this.description = "";
-      (this.profile = ""), (this.qualifications = "");
-      this.experience = "";
-      this.address = "";
-      this.postalCode = "";
-      this.city = "";
-      this.contract = "";
-      this.contractDuration = "";
-      this.company = "";
-      this.sector = "";
+      if (this.$refs.newJobRecruiterForm.validate()) {
+        this.newJobOffer = {
+          title: this.jobTitle,
+          content: this.description,
+          profile: this.profile,
+          qualifications: this.qualifications,
+          year_experiences: this.experience.join(", "),
+          street_address: this.address,
+          postal_code: this.postalCode,
+          city: this.city,
+          contract: this.contract,
+          contract_duration: this.contractDuration,
+          company_name: this.company,
+          sector: this.sector.join(", "),
+        };
+        this.jobTitle = "";
+        this.description = "";
+        (this.profile = ""), (this.qualifications = "");
+        this.experience = "";
+        this.address = "";
+        this.postalCode = "";
+        this.city = "";
+        this.contract = "";
+        this.contractDuration = "";
+        this.company = "";
+        this.sector = "";
+      }
     },
   },
 
